@@ -1,6 +1,6 @@
 # pterodactyl-ts
 
-[![CI](https://github.com/YOUR_USERNAME/pterodactyl-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/pterodactyl-ts/actions/workflows/ci.yml)
+[![CI](https://github.com/Ho3einWave/pterodactyl-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/Ho3einWave/pterodactyl-ts/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/pterodactyl-ts)](https://www.npmjs.com/package/pterodactyl-ts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
