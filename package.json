@@ -5,6 +5,10 @@
   "description": "Type-safe TypeScript library for the Pterodactyl Panel API. Covers Client API, Application API, and WebSocket API with zero dependencies.",
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ho3einWave/pterodactyl-ts"
+  },
   "keywords": [
     "pterodactyl",
     "panel",
