@@ -139,11 +139,11 @@ export class WebSocketManager {
 
   /** Whether the WebSocket is currently connected. */
   get connected(): boolean {
-    return this.ws?.readyState === WebSocket.OPEN;
+    return this.ws?.readyState === 1;
   }
 
   private send(event: string, args: string[]): void {
-    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+    if (!this.ws || this.ws.readyState !== 1) {
       return;
     }
     this.ws.send(JSON.stringify({ event, args }));
