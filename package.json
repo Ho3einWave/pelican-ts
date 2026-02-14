@@ -1,17 +1,22 @@
 {
-  "name": "tsdown-starter",
+  "name": "pterodactyl-ts",
   "type": "module",
-  "version": "0.0.0",
-  "description": "A starter for creating a TypeScript package.",
-  "author": "Author Name <author.name@mail.com>",
+  "version": "0.1.0",
+  "description": "Type-safe TypeScript library for the Pterodactyl Panel API. Covers Client API, Application API, and WebSocket API with zero dependencies.",
+  "author": "",
   "license": "MIT",
-  "homepage": "https://github.com/author/library#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/author/library.git"
-  },
-  "bugs": {
-    "url": "https://github.com/author/library/issues"
+  "keywords": [
+    "pterodactyl",
+    "panel",
+    "api",
+    "typescript",
+    "game-server",
+    "websocket",
+    "pterodactyl-api",
+    "pterodactyl-panel"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
   },
   "exports": {
     ".": "./dist/index.mjs",
