@@ -1,5 +1,5 @@
 {
-  "name": "pterodactyl-ts",
+  "name": "@ho3einwave/pterodactyl-ts",
   "type": "module",
   "version": "0.1.0",
   "description": "Type-safe TypeScript library for the Pterodactyl Panel API. Covers Client API, Application API, and WebSocket API with zero dependencies.",

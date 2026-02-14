@@ -1,7 +1,7 @@
 # pterodactyl-ts
 
 [![CI](https://github.com/Ho3einWave/pterodactyl-ts/actions/workflows/ci.yml/badge.svg)](https://github.com/Ho3einWave/pterodactyl-ts/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/pterodactyl-ts)](https://www.npmjs.com/package/pterodactyl-ts)
+[![npm](https://img.shields.io/npm/v/@ho3einwave/pterodactyl-ts)](https://www.npmjs.com/package/@ho3einwave/pterodactyl-ts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 Type-safe TypeScript library for the [Pterodactyl Panel](https://pterodactyl.io/) API. Zero dependencies.
@@ -13,13 +13,13 @@ Type-safe TypeScript library for the [Pterodactyl Panel](https://pterodactyl.io/
 ## Install
 
 ```bash
-npm install pterodactyl-ts
+npm install @ho3einwave/pterodactyl-ts
 ```
 
 ## Client API
 
 ```ts
-import { PteroClient } from 'pterodactyl-ts';
+import { PteroClient } from '@ho3einwave/pterodactyl-ts';
 
 const client = new PteroClient({
   baseUrl: 'https://panel.example.com',
@@ -61,7 +61,7 @@ const schedules = await srv.schedules.list();
 ## Application API
 
 ```ts
-import { PteroApplication } from 'pterodactyl-ts';
+import { PteroApplication } from '@ho3einwave/pterodactyl-ts';
 
 const app = new PteroApplication({
   baseUrl: 'https://panel.example.com',
@@ -96,7 +96,7 @@ const { data: eggs } = await app.nests.listEggs(1);
 ## WebSocket
 
 ```ts
-import { PteroClient, WebSocketManager } from 'pterodactyl-ts';
+import { PteroClient, WebSocketManager } from '@ho3einwave/pterodactyl-ts';
 
 const client = new PteroClient({
   baseUrl: 'https://panel.example.com',
@@ -131,7 +131,7 @@ ws.disconnect();
 ## Error Handling
 
 ```ts
-import { PteroError, PteroValidationError, PteroRateLimitError } from 'pterodactyl-ts';
+import { PteroError, PteroValidationError, PteroRateLimitError } from '@ho3einwave/pterodactyl-ts';
 
 try {
   await app.users.create({ /* ... */ });
