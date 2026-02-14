@@ -33,7 +33,7 @@
     "dev": "tsdown --watch",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "bun run build"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
