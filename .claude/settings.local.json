@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:pterodactyl-api-docs.netvpx.com)",
+      "WebSearch"
+    ]
+  }
+}
