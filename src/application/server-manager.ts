@@ -64,15 +64,25 @@ export class ServerManager {
 
   // Database sub-operations
 
-  async listDatabases(serverId: number, options?: RequestOptions): Promise<PaginatedResult<AdminDatabase>> {
+  async listDatabases(
+    serverId: number,
+    options?: RequestOptions,
+  ): Promise<PaginatedResult<AdminDatabase>> {
     return this.http.getList<AdminDatabase>(`${BASE}/${serverId}/databases`, options);
   }
 
-  async getDatabase(serverId: number, databaseId: number, options?: RequestOptions): Promise<AdminDatabase> {
+  async getDatabase(
+    serverId: number,
+    databaseId: number,
+    options?: RequestOptions,
+  ): Promise<AdminDatabase> {
     return this.http.get<AdminDatabase>(`${BASE}/${serverId}/databases/${databaseId}`, options);
   }
 
-  async createDatabase(serverId: number, params: CreateAdminDatabaseParams): Promise<AdminDatabase> {
+  async createDatabase(
+    serverId: number,
+    params: CreateAdminDatabaseParams,
+  ): Promise<AdminDatabase> {
     return this.http.post<AdminDatabase>(`${BASE}/${serverId}/databases`, params);
   }
 

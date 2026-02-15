@@ -22,36 +22,37 @@ Retrieve a list of all servers you have access to.
 **`GET /api/client`**
 
 ### Source Reference
+
 - **Method**: [`ClientController@index`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/ClientController.php#L47)
 - **Route**: [`GET /api/client`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php#L45)
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client" \\
+endpoint="/api/client"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/client', {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get('https://your-panel.com/api/client', headers=headers)
@@ -63,9 +64,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'https://your-panel.com/api/client');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -77,24 +78,25 @@ print_r($data);
     go: `package main
 
 import (
-    "fmt"
-    "io"
-    "net/http"
+"fmt"
+"io"
+"net/http"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://your-panel.com/api/client", nil)
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://your-panel.com/api/client", nil)
+
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -103,15 +105,15 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/client"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
     csharp: `using System;
 using System.Net.Http;
@@ -139,7 +141,7 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts data`
-  }}
+}}
 />
 
 ### Example Response
@@ -168,22 +170,13 @@ puts data`
         },
         "invocation": "java -Xms128M -Xmx1024M -jar server.jar",
         "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
-        "egg_features": [
-          "eula",
-          "java_version",
-          "pid_limit"
-        ],
+        "egg_features": ["eula", "java_version", "pid_limit"],
         "feature_limits": {
           "databases": 2,
           "allocations": 1,
           "backups": 10
         },
-        "user_permissions": [
-          "control.console",
-          "control.start",
-          "control.stop",
-          "control.restart"
-        ],
+        "user_permissions": ["control.console", "control.start", "control.stop", "control.restart"],
         "limits": {
           "memory": 1024,
           "swap": 0,
@@ -245,11 +238,11 @@ puts data`
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `include` | string | Comma-separated list of relationships to include (`allocations`, `variables`) |
-| `page` | integer | Page number for pagination |
-| `per_page` | integer | Number of servers per page (max 100) |
+| Parameter  | Type    | Description                                                                   |
+| ---------- | ------- | ----------------------------------------------------------------------------- |
+| `include`  | string  | Comma-separated list of relationships to include (`allocations`, `variables`) |
+| `page`     | integer | Page number for pagination                                                    |
+| `per_page` | integer | Number of servers per page (max 100)                                          |
 
 ---
 
@@ -262,30 +255,30 @@ Get a list of all available permissions that can be assigned to users.
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/permissions"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/permissions" \\
+endpoint="/api/client/permissions"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/permissions" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/client/permissions', {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Available permissions:', response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get('https://your-panel.com/api/client/permissions', headers=headers)
@@ -296,9 +289,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'https://your-panel.com/api/client/permissions');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -310,24 +303,25 @@ print_r($data);
     go: `package main
 
 import (
-    "fmt"
-    "io"
-    "net/http"
+"fmt"
+"io"
+"net/http"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://your-panel.com/api/client/permissions", nil)
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://your-panel.com/api/client/permissions", nil)
+
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -336,15 +330,15 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/permissions"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/permissions"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
     csharp: `using System;
 using System.Net.Http;
@@ -372,7 +366,7 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts data`
-  }}
+}}
 />
 
 ### Example Response
@@ -491,29 +485,29 @@ Retrieve detailed information about a specific server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109" \\
+endpoint="/api/client/servers/{server}"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);`,
@@ -521,9 +515,9 @@ console.log(response.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}', headers=headers)
@@ -536,9 +530,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serverId}");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -550,28 +544,29 @@ print_r($data);
     go: `package main
 
 import (
-    "fmt"
-    "io"
-    "net/http"
+"fmt"
+"io"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    client := &http.Client{}
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s", serverId)
-    req, _ := http.NewRequest("GET", url, nil)
-    
+serverId := "d3aac109"
+client := &http.Client{}
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s", serverId)
+req, \_ := http.NewRequest("GET", url, nil)
+
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
+
 }`
-  }}
+}}
 />
 
 ### Example Response
@@ -603,11 +598,7 @@ func main() {
     },
     "invocation": "java -Xms128M -Xmx1024M -jar server.jar",
     "docker_image": "ghcr.io/pterodactyl/yolks:java_17",
-    "egg_features": [
-      "eula",
-      "java_version",
-      "pid_limit"
-    ],
+    "egg_features": ["eula", "java_version", "pid_limit"],
     "feature_limits": {
       "databases": 2,
       "allocations": 1,
@@ -630,9 +621,7 @@ func main() {
   },
   "meta": {
     "is_server_owner": true,
-    "user_permissions": [
-      "*"
-    ]
+    "user_permissions": ["*"]
   }
 }
 ```
@@ -648,22 +637,22 @@ Get real-time resource usage statistics for a server.
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/resources"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/resources" \\
+endpoint="/api/client/servers/{server}/resources"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/resources" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/resources\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const stats = response.data.attributes.resources;
@@ -673,9 +662,9 @@ console.log(\`CPU: \${stats.cpu_absolute.toFixed(2)}%\`);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/resources', headers=headers)
@@ -691,9 +680,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serverId}/resources");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -704,7 +693,7 @@ $stats = $data['attributes']['resources'];
 echo "Memory: " . round($stats['memory_bytes'] / 1024 / 1024, 2) . " MB\\n";
 echo "CPU: " . round($stats['cpu_absolute'], 2) . "%\\n";
 ?>`
-  }}
+}}
 />
 
 ### Example Response
@@ -730,15 +719,15 @@ echo "CPU: " . round($stats['cpu_absolute'], 2) . "%\\n";
 
 ### Resource Fields
 
-| Field | Description |
-|-------|-------------|
-| `memory_bytes` | Current memory usage in bytes |
+| Field                | Description                     |
+| -------------------- | ------------------------------- |
+| `memory_bytes`       | Current memory usage in bytes   |
 | `memory_limit_bytes` | Maximum memory allowed in bytes |
-| `cpu_absolute` | Current CPU usage percentage |
-| `disk_bytes` | Current disk usage in bytes |
-| `network_rx_bytes` | Total bytes received |
-| `network_tx_bytes` | Total bytes transmitted |
-| `uptime` | Server uptime in milliseconds |
+| `cpu_absolute`       | Current CPU usage percentage    |
+| `disk_bytes`         | Current disk usage in bytes     |
+| `network_rx_bytes`   | Total bytes received            |
+| `network_tx_bytes`   | Total bytes transmitted         |
+| `uptime`             | Server uptime in milliseconds   |
 
 ---
 
@@ -747,6 +736,7 @@ echo "CPU: " . round($stats['cpu_absolute'], 2) . "%\\n";
 Control server power states including start, stop, restart, and kill operations.
 
 ### Source Reference
+
 - **Controller**: [`PowerController`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/PowerController.php)
 - **Route**: [`POST /api/client/servers/{server}/power`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php#L75)
 - **Service**: [`DaemonPowerRepository`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Repositories/Wings/DaemonPowerRepository.php)
@@ -757,34 +747,34 @@ Control server power states including start, stop, restart, and kill operations.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `signal` | string | Yes | Power action: `start`, `stop`, `restart`, `kill` |
+| Field    | Type   | Required | Description                                      |
+| -------- | ------ | -------- | ------------------------------------------------ |
+| `signal` | string | Yes      | Power action: `start`, `stop`, `restart`, `kill` |
 
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/power"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/power" \\
+endpoint="/api/client/servers/{server}/power"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/power" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
   -d '{
     "signal": "restart"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/power\`, {
-  signal: 'restart'
+signal: 'restart'
 }, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server restart initiated');`,
@@ -792,20 +782,20 @@ console.log('Server restart initiated');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 data = {
-    'signal': 'restart'
+'signal': 'restart'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/power', 
-                        json=data, headers=headers)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/power',
+json=data, headers=headers)
 
 if response.status_code == 204:
-    print('Server restart initiated')`,
+print('Server restart initiated')`,
     php: `<?php
 $serverId = 'd3aac109';
 $ch = curl_init();
@@ -815,9 +805,9 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['signal' => 'restart']));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -825,10 +815,10 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode === 204) {
-    echo "Server restart initiated\\n";
+echo "Server restart initiated\\n";
 }
 ?>`
-  }}
+}}
 />
 
 #### Success Response (204)
@@ -837,16 +827,17 @@ Returns empty response body with status code 204.
 
 #### Power Actions
 
-| Action | Description |
-|--------|-------------|
-| `start` | Start the server |
-| `stop` | Gracefully stop the server |
-| `restart` | Restart the server |
-| `kill` | Force kill the server process |
+| Action    | Description                   |
+| --------- | ----------------------------- |
+| `start`   | Start the server              |
+| `stop`    | Gracefully stop the server    |
+| `restart` | Restart the server            |
+| `kill`    | Force kill the server process |
 
 #### Error Responses
 
 **Server Already Running (400)**
+
 ```json
 {
   "errors": [
@@ -860,6 +851,7 @@ Returns empty response body with status code 204.
 ```
 
 **Server Installing (400)**
+
 ```json
 {
   "errors": [
@@ -887,57 +879,58 @@ This endpoint returns authentication details for establishing a WebSocket connec
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/websocket"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/websocket" \\
+endpoint="/api/client/servers/{server}/websocket"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/websocket" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 const WebSocket = require('ws');
 
 // Get WebSocket credentials
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/websocket\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const { token, socket } = response.data.data;
 
 // Connect to WebSocket
 const ws = new WebSocket(socket, {
-  headers: {
-    'Origin': 'https://your-panel.com'
-  }
+headers: {
+'Origin': 'https://your-panel.com'
+}
 });
 
 ws.on('open', () => {
-  // Authenticate
-  ws.send(JSON.stringify({
-    event: 'auth',
-    args: [token]
-  }));
+// Authenticate
+ws.send(JSON.stringify({
+event: 'auth',
+args: [token]
+}));
 });
 
 ws.on('message', (data) => {
-  const message = JSON.parse(data);
-  console.log('Console:', message);
+const message = JSON.parse(data);
+console.log('Console:', message);
 });`,
     python: `import requests
 import websocket
 import json
 
 # Get WebSocket credentials
+
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/websocket', headers=headers)
@@ -947,22 +940,23 @@ token = data['data']['token']
 socket_url = data['data']['socket']
 
 # Connect to WebSocket
+
 def on_open(ws):
-    auth_message = json.dumps({
-        'event': 'auth',
-        'args': [token]
-    })
-    ws.send(auth_message)
+auth_message = json.dumps({
+'event': 'auth',
+'args': [token]
+})
+ws.send(auth_message)
 
 def on_message(ws, message):
-    data = json.loads(message)
-    print('Console:', data)
+data = json.loads(message)
+print('Console:', data)
 
 ws = websocket.WebSocketApp(socket_url,
-                          on_open=on_open,
-                          on_message=on_message)
+on_open=on_open,
+on_message=on_message)
 ws.run_forever()`
-  }}
+}}
 />
 
 #### Example Response
@@ -981,36 +975,41 @@ ws.run_forever()`
 Use the returned token and socket URL to establish a WebSocket connection:
 
 ```javascript
-const socket = new WebSocket('wss://node.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e136dc/ws', {
-  headers: {
-    'Origin': 'https://your-panel.com'
-  }
-});
+const socket = new WebSocket(
+  'wss://node.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e136dc/ws',
+  {
+    headers: {
+      Origin: 'https://your-panel.com',
+    },
+  },
+);
 
 socket.addEventListener('open', function (event) {
-    // Authenticate with the WebSocket
-    socket.send(JSON.stringify({
-        event: 'auth',
-        args: ['eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...']
-    }));
+  // Authenticate with the WebSocket
+  socket.send(
+    JSON.stringify({
+      event: 'auth',
+      args: ['eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'],
+    }),
+  );
 });
 
 socket.addEventListener('message', function (event) {
-    const data = JSON.parse(event.data);
-    console.log('Console output:', data);
+  const data = JSON.parse(event.data);
+  console.log('Console output:', data);
 });
 ```
 
 #### WebSocket Events
 
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `auth` | Send | Authenticate with the token |
-| `send command` | Send | Execute a command on the server |
-| `set state` | Send | Request server state updates |
-| `console output` | Receive | Real-time console output |
-| `status` | Receive | Server status changes |
-| `stats` | Receive | Resource usage updates |
+| Event            | Direction | Description                     |
+| ---------------- | --------- | ------------------------------- |
+| `auth`           | Send      | Authenticate with the token     |
+| `send command`   | Send      | Execute a command on the server |
+| `set state`      | Send      | Request server state updates    |
+| `console output` | Receive   | Real-time console output        |
+| `status`         | Receive   | Server status changes           |
+| `stats`          | Receive   | Resource usage updates          |
 
 ---
 
@@ -1022,36 +1021,36 @@ Execute a command on the server console.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `command` | string | Yes | Command to execute on the server |
+| Field     | Type   | Required | Description                      |
+| --------- | ------ | -------- | -------------------------------- |
+| `command` | string | Yes      | Command to execute on the server |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/command"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/command" \\
+endpoint="/api/client/servers/{server}/command"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/command" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
   -d '{
     "command": "say Hello from the API!"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const command = 'say Hello from the API!';
 
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/command\`, {
-  command: command
+command: command
 }, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Command executed successfully');`,
@@ -1061,20 +1060,20 @@ server_id = 'd3aac109'
 command = 'say Hello from the API!'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 data = {
-    'command': command
+'command': command
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/command', 
-                        json=data, headers=headers)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/command',
+json=data, headers=headers)
 
 if response.status_code == 204:
-    print('Command executed successfully')`,
+print('Command executed successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $command = 'say Hello from the API!';
@@ -1085,9 +1084,9 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['command' => $command]));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -1095,10 +1094,10 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode === 204) {
-    echo "Command executed successfully\\n";
+echo "Command executed successfully\\n";
 }
 ?>`
-  }}
+}}
 />
 
 ### Success Response (204)
@@ -1108,6 +1107,7 @@ Returns empty response body with status code 204.
 ### Error Responses
 
 **Server Offline (400)**
+
 ```json
 {
   "errors": [
@@ -1121,6 +1121,7 @@ Returns empty response body with status code 204.
 ```
 
 **Missing Permissions (403)**
+
 ```json
 {
   "errors": [
@@ -1145,10 +1146,10 @@ Update basic server information like name and description.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | Yes | New server name (max 255 characters) |
-| `description` | string | No | New server description (max 500 characters) |
+| Field         | Type   | Required | Description                                 |
+| ------------- | ------ | -------- | ------------------------------------------- |
+| `name`        | string | Yes      | New server name (max 255 characters)        |
+| `description` | string | No       | New server description (max 500 characters) |
 
 #### Example Request
 
@@ -1198,34 +1199,34 @@ Change the Docker image used by the server.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `docker_image` | string | Yes | New Docker image to use for the server |
+| Field          | Type   | Required | Description                            |
+| -------------- | ------ | -------- | -------------------------------------- |
+| `docker_image` | string | Yes      | New Docker image to use for the server |
 
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/settings/docker-image"
-  method="PUT"
-  examples={{
-    curl: `curl -X PUT "https://your-panel.com/api/client/servers/d3aac109/settings/docker-image" \\
+endpoint="/api/client/servers/{server}/settings/docker-image"
+method="PUT"
+examples={{
+curl: `curl -X PUT "https://your-panel.com/api/client/servers/d3aac109/settings/docker-image" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
   -d '{
     "docker_image": "ghcr.io/pterodactyl/yolks:java_17"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.put(\`https://your-panel.com/api/client/servers/\${serverId}/settings/docker-image\`, {
-  docker_image: 'ghcr.io/pterodactyl/yolks:java_17'
+docker_image: 'ghcr.io/pterodactyl/yolks:java_17'
 }, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Docker image updated successfully');`,
@@ -1233,20 +1234,20 @@ console.log('Docker image updated successfully');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 data = {
-    'docker_image': 'ghcr.io/pterodactyl/yolks:java_17'
+'docker_image': 'ghcr.io/pterodactyl/yolks:java_17'
 }
 
-response = requests.put(f'https://your-panel.com/api/client/servers/{server_id}/settings/docker-image', 
-                       json=data, headers=headers)
+response = requests.put(f'https://your-panel.com/api/client/servers/{server_id}/settings/docker-image',
+json=data, headers=headers)
 
 if response.status_code == 204:
-    print('Docker image updated successfully')`,
+print('Docker image updated successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $ch = curl_init();
@@ -1258,9 +1259,9 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     'docker_image' => 'ghcr.io/pterodactyl/yolks:java_17'
 ]));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -1268,10 +1269,10 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode === 204) {
-    echo "Docker image updated successfully\\n";
+echo "Docker image updated successfully\\n";
 }
 ?>`
-  }}
+}}
 />
 
 #### Success Response (204)
@@ -1281,6 +1282,7 @@ Returns empty response body with status code 204.
 #### Error Responses
 
 **Invalid Docker Image (422)**
+
 ```json
 {
   "errors": [
@@ -1297,6 +1299,7 @@ Returns empty response body with status code 204.
 ```
 
 **Missing Permissions (403)**
+
 ```json
 {
   "errors": [
@@ -1317,31 +1320,31 @@ The available Docker images are defined by the server's egg configuration. Use t
 
 ## Common Error Codes
 
-| Status | Code | Description |
-|--------|------|-------------|
-| 400 | `ConflictingServerStateException` | Server is in a state that prevents the action |
-| 401 | `InvalidCredentialsException` | Invalid API key |
-| 403 | `InsufficientPermissionsException` | Missing required permissions |
-| 404 | `NotFoundHttpException` | Server not found or no access |
-| 409 | `TooManyRequestsHttpException` | Rate limit exceeded |
+| Status | Code                               | Description                                   |
+| ------ | ---------------------------------- | --------------------------------------------- |
+| 400    | `ConflictingServerStateException`  | Server is in a state that prevents the action |
+| 401    | `InvalidCredentialsException`      | Invalid API key                               |
+| 403    | `InsufficientPermissionsException` | Missing required permissions                  |
+| 404    | `NotFoundHttpException`            | Server not found or no access                 |
+| 409    | `TooManyRequestsHttpException`     | Rate limit exceeded                           |
 
 ## Required Permissions
 
 Different server actions require specific permissions:
 
-| Permission | Description |
-|------------|-------------|
-| `control.console` | View console output and send commands |
-| `control.start` | Start the server |
-| `control.stop` | Stop the server |
-| `control.restart` | Restart the server |
-| `control.kill` | Force kill server process |
-| `admin.websocket` | Access WebSocket console |
-| `settings.rename` | Update server name and description |
-| `settings.reinstall` | Reinstall the server |
-| `startup.read` | View startup configuration and variables |
-| `startup.update` | Modify startup variables |
-| `startup.docker-image` | Change Docker image |
+| Permission             | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `control.console`      | View console output and send commands    |
+| `control.start`        | Start the server                         |
+| `control.stop`         | Stop the server                          |
+| `control.restart`      | Restart the server                       |
+| `control.kill`         | Force kill server process                |
+| `admin.websocket`      | Access WebSocket console                 |
+| `settings.rename`      | Update server name and description       |
+| `settings.reinstall`   | Reinstall the server                     |
+| `startup.read`         | View startup configuration and variables |
+| `startup.update`       | Modify startup variables                 |
+| `startup.docker-image` | Change Docker image                      |
 
 ## Startup Configuration
 
@@ -1356,22 +1359,22 @@ Retrieve the current startup configuration and environment variables for a serve
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/startup"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/startup" \\
+endpoint="/api/client/servers/{server}/startup"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/startup" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/startup\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Startup config:', response.data);`,
@@ -1379,9 +1382,9 @@ console.log('Startup config:', response.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/startup', headers=headers)
@@ -1394,9 +1397,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serverId}/startup");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -1405,7 +1408,7 @@ curl_close($ch);
 
 print_r($data);
 ?>`
-  }}
+}}
 />
 
 #### Example Response
@@ -1459,18 +1462,18 @@ Update a specific environment variable for the server startup configuration.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `key` | string | Yes | Environment variable name |
-| `value` | string | Yes | New value for the variable |
+| Field   | Type   | Required | Description                |
+| ------- | ------ | -------- | -------------------------- |
+| `key`   | string | Yes      | Environment variable name  |
+| `value` | string | Yes      | New value for the variable |
 
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/startup/variable"
-  method="PUT"
-  examples={{
-    curl: `curl -X PUT "https://your-panel.com/api/client/servers/d3aac109/startup/variable" \\
+endpoint="/api/client/servers/{server}/startup/variable"
+method="PUT"
+examples={{
+curl: `curl -X PUT "https://your-panel.com/api/client/servers/d3aac109/startup/variable" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -1478,18 +1481,18 @@ Update a specific environment variable for the server startup configuration.
     "key": "MINECRAFT_VERSION",
     "value": "1.20.1"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.put(\`https://your-panel.com/api/client/servers/\${serverId}/startup/variable\`, {
-  key: 'MINECRAFT_VERSION',
-  value: '1.20.1'
+key: 'MINECRAFT_VERSION',
+value: '1.20.1'
 }, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Variable updated:', response.data);`,
@@ -1497,18 +1500,18 @@ console.log('Variable updated:', response.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 data = {
-    'key': 'MINECRAFT_VERSION',
-    'value': '1.20.1'
+'key': 'MINECRAFT_VERSION',
+'value': '1.20.1'
 }
 
-response = requests.put(f'https://your-panel.com/api/client/servers/{server_id}/startup/variable', 
-                       json=data, headers=headers)
+response = requests.put(f'https://your-panel.com/api/client/servers/{server_id}/startup/variable',
+json=data, headers=headers)
 result = response.json()
 print('Variable updated:', result)`,
     php: `<?php
@@ -1523,9 +1526,9 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     'value' => '1.20.1'
 ]));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -1534,7 +1537,7 @@ curl_close($ch);
 
 print_r($data);
 ?>`
-  }}
+}}
 />
 
 #### Example Response
@@ -1556,19 +1559,20 @@ print_r($data);
 
 #### Variable Field Descriptions
 
-| Field | Description |
-|-------|-------------|
-| `name` | Human-readable variable name |
-| `description` | Description of what the variable controls |
-| `env_variable` | Environment variable name used in startup command |
-| `default_value` | Default value defined by the egg |
-| `server_value` | Current value set for this server |
-| `is_editable` | Whether the variable can be modified by users |
-| `rules` | Validation rules for the variable value |
+| Field           | Description                                       |
+| --------------- | ------------------------------------------------- |
+| `name`          | Human-readable variable name                      |
+| `description`   | Description of what the variable controls         |
+| `env_variable`  | Environment variable name used in startup command |
+| `default_value` | Default value defined by the egg                  |
+| `server_value`  | Current value set for this server                 |
+| `is_editable`   | Whether the variable can be modified by users     |
+| `rules`         | Validation rules for the variable value           |
 
 #### Error Responses
 
 **Variable Not Found (422)**
+
 ```json
 {
   "errors": [
@@ -1585,6 +1589,7 @@ print_r($data);
 ```
 
 **Invalid Value (422)**
+
 ```json
 {
   "errors": [
@@ -1601,6 +1606,7 @@ print_r($data);
 ```
 
 **Variable Not Editable (400)**
+
 ```json
 {
   "errors": [
@@ -1625,29 +1631,29 @@ Retrieve server activity logs including recent events and actions.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/activity"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/activity" \\
+endpoint="/api/client/servers/{server}/activity"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/activity" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/activity\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server activity:', response.data);`,
@@ -1655,9 +1661,9 @@ console.log('Server activity:', response.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/activity', headers=headers)
@@ -1669,9 +1675,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serverId}/activity");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -1683,25 +1689,26 @@ print_r($data);
     go: `package main
 
 import (
-    "fmt"
-    "io"
-    "net/http"
+"fmt"
+"io"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/activity", serverId), nil)
-    
+serverId := "d3aac109"
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/activity", serverId), nil)
+
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1711,15 +1718,15 @@ import java.net.URI;
 String serverId = "d3aac109";
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/activity"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/activity"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
     csharp: `using System;
 using System.Net.Http;
@@ -1749,7 +1756,7 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts data`
-  }}
+}}
 />
 
 ### Example Response
@@ -1818,24 +1825,24 @@ Change the display name of a server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | Yes | New server name (1-255 characters) |
-| `description` | string | No | Server description |
+| Field         | Type   | Required | Description                        |
+| ------------- | ------ | -------- | ---------------------------------- |
+| `name`        | string | Yes      | New server name (1-255 characters) |
+| `description` | string | No       | Server description                 |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/settings/rename"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/settings/rename" \\
+endpoint="/api/client/servers/{server}/settings/rename"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/settings/rename" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -1843,20 +1850,20 @@ Change the display name of a server.
     "name": "Production Server",
     "description": "Main production Minecraft server"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const renameData = {
-  name: 'Production Server',
-  description: 'Main production Minecraft server'
+name: 'Production Server',
+description: 'Main production Minecraft server'
 };
 
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/settings/rename\`, renameData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server renamed successfully');`,
@@ -1864,35 +1871,35 @@ console.log('Server renamed successfully');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 rename_data = {
-    'name': 'Production Server',
-    'description': 'Main production Minecraft server'
+'name': 'Production Server',
+'description': 'Main production Minecraft server'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/settings/rename', 
-                        headers=headers, json=rename_data)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/settings/rename',
+headers=headers, json=rename_data)
 print('Server renamed successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $renameData = [
-    'name' => 'Production Server',
-    'description' => 'Main production Minecraft server'
+'name' => 'Production Server',
+'description' => 'Main production Minecraft server'
 ];
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/settings/rename", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $renameData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $renameData
 ]);
 
 echo "Server renamed successfully";
@@ -1900,31 +1907,32 @@ echo "Server renamed successfully";
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    renameData := map[string]interface{}{
-        "name": "Production Server",
-        "description": "Main production Minecraft server",
-    }
-    
+serverId := "d3aac109"
+renameData := map[string]interface{}{
+"name": "Production Server",
+"description": "Main production Minecraft server",
+}
+
     jsonData, _ := json.Marshal(renameData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/settings/rename", serverId), bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("Server renamed successfully")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1934,22 +1942,22 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "name": "Production Server",
-  "description": "Main production Minecraft server"
+"name": "Production Server",
+"description": "Main production Minecraft server"
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/settings/rename"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/settings/rename"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println("Server renamed successfully");`,
     csharp: `using System.Net.Http;
 using System.Text;
@@ -1962,8 +1970,8 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var renameData = new {
-    name = "Production Server",
-    description = "Main production Minecraft server"
+name = "Production Server",
+description = "Main production Minecraft server"
 };
 
 var json = JsonSerializer.Serialize(renameData);
@@ -1976,8 +1984,8 @@ require 'json'
 
 server_id = 'd3aac109'
 rename_data = {
-  name: 'Production Server',
-  description: 'Main production Minecraft server'
+name: 'Production Server',
+description: 'Main production Minecraft server'
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/settings/rename")
@@ -1992,7 +2000,7 @@ request.body = rename_data.to_json
 
 response = http.request(request)
 puts "Server renamed successfully"`
-  }}
+}}
 />
 
 ### Success Response (204)
@@ -2011,29 +2019,29 @@ Reinstalling a server will just **rerun the install script** with all files stil
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/settings/reinstall"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/settings/reinstall" \\
+endpoint="/api/client/servers/{server}/settings/reinstall"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/settings/reinstall" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/settings/reinstall\`, {}, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server reinstall initiated');`,
@@ -2041,24 +2049,24 @@ console.log('Server reinstall initiated');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/settings/reinstall', 
-                        headers=headers)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/settings/reinstall',
+headers=headers)
 print('Server reinstall initiated')`,
     php: `<?php
 $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/settings/reinstall", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 echo "Server reinstall initiated";
@@ -2066,22 +2074,23 @@ echo "Server reinstall initiated";
     go: `package main
 
 import (
-    "fmt"
-    "net/http"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    client := &http.Client{}
-    req, _ := http.NewRequest("POST", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/settings/reinstall", serverId), nil)
-    req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    req.Header.Add("Content-Type", "application/json")
-    
+serverId := "d3aac109"
+client := &http.Client{}
+req, \_ := http.NewRequest("POST", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/settings/reinstall", serverId), nil)
+req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
+req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("Server reinstall initiated")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -2091,15 +2100,15 @@ import java.net.URI;
 String serverId = "d3aac109";
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/settings/reinstall"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.noBody())
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/settings/reinstall"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.noBody())
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println("Server reinstall initiated");`,
     csharp: `using System.Net.Http;
 using System.Threading.Tasks;
@@ -2126,7 +2135,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 puts "Server reinstall initiated"`
-  }}
+}}
 />
 
 ### Success Response (202)
@@ -2139,4 +2148,4 @@ Returns empty response body with status code 202 (Accepted).
 
 - Explore [File Management](./files) for server file operations
 - Check [Database Management](./databases) for server databases
-- Review [Network Management](./network) for allocation management 
+- Review [Network Management](./network) for allocation management

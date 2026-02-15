@@ -31,10 +31,7 @@ export class ScheduleManager {
     return this.http.post<Schedule>(this.base, params);
   }
 
-  async update(
-    scheduleId: number,
-    params: UpdateScheduleParams,
-  ): Promise<void> {
+  async update(scheduleId: number, params: UpdateScheduleParams): Promise<void> {
     await this.http.post<void>(`${this.base}/${scheduleId}`, params);
   }
 
@@ -46,14 +43,8 @@ export class ScheduleManager {
     await this.http.post<void>(`${this.base}/${scheduleId}/execute`);
   }
 
-  async createTask(
-    scheduleId: number,
-    params: CreateScheduleTaskParams,
-  ): Promise<ScheduleTask> {
-    return this.http.post<ScheduleTask>(
-      `${this.base}/${scheduleId}/tasks`,
-      params,
-    );
+  async createTask(scheduleId: number, params: CreateScheduleTaskParams): Promise<ScheduleTask> {
+    return this.http.post<ScheduleTask>(`${this.base}/${scheduleId}/tasks`, params);
   }
 
   async updateTask(
@@ -61,10 +52,7 @@ export class ScheduleManager {
     taskId: number,
     params: UpdateScheduleTaskParams,
   ): Promise<ScheduleTask> {
-    return this.http.post<ScheduleTask>(
-      `${this.base}/${scheduleId}/tasks/${taskId}`,
-      params,
-    );
+    return this.http.post<ScheduleTask>(`${this.base}/${scheduleId}/tasks/${taskId}`, params);
   }
 
   async deleteTask(scheduleId: number, taskId: number): Promise<void> {

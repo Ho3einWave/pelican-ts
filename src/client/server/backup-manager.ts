@@ -26,9 +26,7 @@ export class BackupManager {
   }
 
   async getDownloadUrl(backupId: string): Promise<string> {
-    const result = await this.http.get<SignedUrl>(
-      `${this.base}/${backupId}/download`,
-    );
+    const result = await this.http.get<SignedUrl>(`${this.base}/${backupId}/download`);
     return result.url;
   }
 

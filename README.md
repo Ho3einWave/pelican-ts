@@ -134,7 +134,9 @@ ws.disconnect();
 import { PteroError, PteroValidationError, PteroRateLimitError } from '@ho3einwave/pterodactyl-ts';
 
 try {
-  await app.users.create({ /* ... */ });
+  await app.users.create({
+    /* ... */
+  });
 } catch (err) {
   if (err instanceof PteroValidationError) {
     console.log(err.fieldErrors); // { email: ['Must be valid email.'] }

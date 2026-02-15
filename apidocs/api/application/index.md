@@ -18,11 +18,13 @@ image: /img/netvpx-social-card.jpg
 The **Application API** provides administrative access to manage the entire Pterodactyl Panel. These endpoints require administrative privileges and are designed for panel automation, integration with external systems, and comprehensive server management.
 
 ## Base URL
+
 ```
 https://your-panel.com/api/application
 ```
 
 ## Authentication
+
 All Application API requests require an Application API key with administrative privileges:
 
 ```bash
@@ -38,6 +40,7 @@ These endpoints require administrative privileges and should only be used by tru
 ## API Sections
 
 ### User Management
+
 Complete user lifecycle management for the panel.
 
 - [List All Users](/docs/api/application/users) - Retrieve all panel users with filtering and pagination
@@ -46,8 +49,8 @@ Complete user lifecycle management for the panel.
 - [Update User](/docs/api/application/users#update-user) - Modify user information and permissions
 - [Delete User](/docs/api/application/users#delete-user) - Remove users from the panel
 
+### Server Management
 
-### Server Management  
 Administrative server operations and lifecycle management.
 
 - [List All Servers](/docs/api/application/servers) - View all servers in the panel
@@ -61,6 +64,7 @@ Administrative server operations and lifecycle management.
 - [Delete Server](/docs/api/application/servers#delete-server) - Remove servers from the panel
 
 ### Node Management
+
 Wings daemon node administration and configuration.
 
 - [List All Nodes](/docs/api/application/nodes) - View all Wings nodes
@@ -74,6 +78,7 @@ Wings daemon node administration and configuration.
 - [Delete Node](/docs/api/application/nodes#delete-node) - Remove nodes from the panel
 
 ### Location Management
+
 Geographic organization and data center management.
 
 - [List All Locations](/docs/api/application/locations) - View all configured locations
@@ -83,6 +88,7 @@ Geographic organization and data center management.
 - [Delete Location](/docs/api/application/locations#delete-location) - Remove locations from the panel
 
 ### Nests & Eggs Management
+
 Server type and configuration management for game servers and applications.
 
 - [List All Nests](/docs/api/application/nests-eggs) - View all server type categories
@@ -93,6 +99,7 @@ Server type and configuration management for game servers and applications.
 ## Common Features
 
 ### Filtering and Pagination
+
 Most list endpoints support advanced filtering and pagination:
 
 ```bash
@@ -107,6 +114,7 @@ GET /api/application/nodes?sort=-created_at
 ```
 
 ### Relationship Inclusion
+
 Include related data in responses:
 
 ```bash
@@ -118,12 +126,15 @@ GET /api/application/nodes/1?include=allocations,location
 ```
 
 ### Response Format
+
 All responses follow consistent formatting:
 
 ```json
 {
   "object": "list|resource_type",
-  "data": [ /* resource data */ ],
+  "data": [
+    /* resource data */
+  ],
   "meta": {
     "pagination": {
       "total": 50,
@@ -160,6 +171,7 @@ X-RateLimit-Reset: 1642686400
    - Optionally restrict by IP addresses
 
 2. **Make Your First Request**
+
    ```bash
    curl "https://your-panel.com/api/application/users" \
      -H "Authorization: Bearer ptla_YOUR_APPLICATION_API_KEY" \
@@ -195,4 +207,4 @@ For detailed source code references, see our [Source References Guide](/docs/sou
 - Start with [User Management](/docs/api/application/users) for basic administrative operations
 - Explore [Server Management](/docs/api/application/servers) for automated deployments
 - Configure [Node Management](/docs/api/application/nodes) for infrastructure scaling
-- Review [Authentication](/docs/authentication) for security best practices 
+- Review [Authentication](/docs/authentication) for security best practices

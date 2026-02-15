@@ -20,19 +20,20 @@ Most API endpoints documented in this guide includes references to the actual im
 ### 📂 **Repository Structure**
 
 The Pterodactyl Panel is open source and available on GitHub:
+
 - **Main Repository**: [pterodactyl/panel](https://github.com/pterodactyl/panel)
 - **Wings Daemon**: [pterodactyl/wings](https://github.com/pterodactyl/wings)
 
 ### 🗂️ **Key Directories**
 
-| Directory | Purpose | Contains |
-|-----------|---------|----------|
-| [`app/Http/Controllers/Api/Client/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Http/Controllers/Api/Client) | Client API Controllers | User-facing server management endpoints |
+| Directory                                                                                                                             | Purpose                     | Contains                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ----------------------------------------- |
+| [`app/Http/Controllers/Api/Client/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Http/Controllers/Api/Client)           | Client API Controllers      | User-facing server management endpoints   |
 | [`app/Http/Controllers/Api/Application/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Http/Controllers/Api/Application) | Application API Controllers | Administrative panel management endpoints |
-| [`routes/api-client.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php) | Client API Routes | Route definitions for client endpoints |
-| [`routes/api-application.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php) | Application API Routes | Route definitions for admin endpoints |
-| [`app/Models/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Models) | Data Models | Database models and relationships |
-| [`app/Services/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Services) | Business Logic | Complex operations and business rules |
+| [`routes/api-client.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php)                                | Client API Routes           | Route definitions for client endpoints    |
+| [`routes/api-application.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php)                      | Application API Routes      | Route definitions for admin endpoints     |
+| [`app/Models/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Models)                                                     | Data Models                 | Database models and relationships         |
+| [`app/Services/`](https://github.com/pterodactyl/panel/tree/1.0-develop/app/Services)                                                 | Business Logic              | Complex operations and business rules     |
 
 ## Understanding Source References
 
@@ -42,6 +43,7 @@ Each endpoint includes these source references:
 
 ```markdown
 ### Source Reference
+
 - **Method**: [`ControllerName@methodName`](link-to-github)
 - **Route**: [`HTTP_METHOD /api/path`](link-to-route-definition)
 - **Service**: [`ServiceClassName`](link-to-service-class)
@@ -53,11 +55,13 @@ For the "List Users" endpoint:
 
 ```markdown
 ### Source Reference
+
 - **Method**: [`UserController@index`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Users/UserController.php#L47)
 - **Route**: [`GET /api/application/users`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php#L45)
 ```
 
 This tells you:
+
 - **Controller Method**: The `index` method in `UserController` handles this request
 - **Route Definition**: Line 45 in `api-application.php` defines this route
 - **GitHub Links**: Direct links to the exact lines of code
@@ -66,13 +70,13 @@ This tells you:
 
 ### 🔄 **Common Controller Methods**
 
-| Method | Purpose | HTTP Verb |
-|--------|---------|-----------|
-| `index` | List resources | GET |
-| `show` / `view` | Get single resource | GET |
-| `store` | Create new resource | POST |
-| `update` | Update existing resource | PATCH/PUT |
-| `destroy` / `delete` | Delete resource | DELETE |
+| Method               | Purpose                  | HTTP Verb |
+| -------------------- | ------------------------ | --------- |
+| `index`              | List resources           | GET       |
+| `show` / `view`      | Get single resource      | GET       |
+| `store`              | Create new resource      | POST      |
+| `update`             | Update existing resource | PATCH/PUT |
+| `destroy` / `delete` | Delete resource          | DELETE    |
 
 ### 🛡️ **Authentication & Middleware**
 
@@ -115,22 +119,22 @@ graph LR
 
 ### 📋 **Client API Controllers**
 
-| Feature | Controller | GitHub Link |
-|---------|------------|-------------|
-| Server List | `ClientController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/ClientController.php) |
-| Server Details | `ServerController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/ServerController.php) |
-| Power Management | `PowerController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/PowerController.php) |
-| File Management | `FileController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/FileController.php) |
+| Feature             | Controller           | GitHub Link                                                                                                                       |
+| ------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Server List         | `ClientController`   | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/ClientController.php)           |
+| Server Details      | `ServerController`   | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/ServerController.php)   |
+| Power Management    | `PowerController`    | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/PowerController.php)    |
+| File Management     | `FileController`     | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/FileController.php)     |
 | Database Management | `DatabaseController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/DatabaseController.php) |
-| Backup Management | `BackupController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/BackupController.php) |
+| Backup Management   | `BackupController`   | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/BackupController.php)   |
 
 ### 🔧 **Application API Controllers**
 
-| Feature | Controller | GitHub Link |
-|---------|------------|-------------|
-| User Management | `UserController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Users/UserController.php) |
-| Server Management | `ServerController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Servers/ServerController.php) |
-| Node Management | `NodeController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Nodes/NodeController.php) |
+| Feature             | Controller           | GitHub Link                                                                                                                              |
+| ------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| User Management     | `UserController`     | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Users/UserController.php)         |
+| Server Management   | `ServerController`   | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Servers/ServerController.php)     |
+| Node Management     | `NodeController`     | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Nodes/NodeController.php)         |
 | Location Management | `LocationController` | [View Code](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Locations/LocationController.php) |
 
 ## Contributing to Pterodactyl
@@ -154,6 +158,7 @@ If you find issues or want to improve the Panel:
 ### 📅 **Current References**
 
 All source references in this documentation point to:
+
 - **Branch**: `1.0-develop` (Pterodactyl v1 stable development branch)
 - **Panel Version**: v1.11.x
 - **Wings Version**: v1.11.x
@@ -171,4 +176,4 @@ All source references in this documentation point to:
 - **[Error Handling](./error-handling)** - Common errors and solutions
 - **[Client API](./api/client)** - User-facing endpoints
 - **[Application API](./api/application)** - Administrative endpoints
-- **[WebSocket API](./api/websocket)** - Real-time communication 
+- **[WebSocket API](./api/websocket)** - Real-time communication

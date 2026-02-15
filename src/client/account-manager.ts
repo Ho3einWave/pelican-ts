@@ -54,10 +54,7 @@ export class AccountManager {
     return result.data;
   }
 
-  async createApiKey(
-    description: string,
-    allowedIps?: string[],
-  ): Promise<ApiKeyWithSecret> {
+  async createApiKey(description: string, allowedIps?: string[]): Promise<ApiKeyWithSecret> {
     const response = await this.http.raw('POST', `${BASE}/api-keys`, {
       description,
       allowed_ips: allowedIps ?? [],

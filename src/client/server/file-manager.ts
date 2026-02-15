@@ -49,10 +49,7 @@ export class FileManager {
     await this.http.post<void>(`${this.base}/copy`, { location });
   }
 
-  async rename(
-    root: string,
-    files: Array<{ from: string; to: string }>,
-  ): Promise<void> {
+  async rename(root: string, files: Array<{ from: string; to: string }>): Promise<void> {
     await this.http.put<void>(`${this.base}/rename`, { root, files });
   }
 
@@ -68,18 +65,11 @@ export class FileManager {
     await this.http.post<void>(`${this.base}/decompress`, { root, file });
   }
 
-  async chmod(
-    root: string,
-    files: Array<{ file: string; mode: string }>,
-  ): Promise<void> {
+  async chmod(root: string, files: Array<{ file: string; mode: string }>): Promise<void> {
     await this.http.post<void>(`${this.base}/chmod`, { root, files });
   }
 
-  async pull(
-    url: string,
-    directory: string,
-    filename?: string,
-  ): Promise<void> {
+  async pull(url: string, directory: string, filename?: string): Promise<void> {
     await this.http.post<void>(`${this.base}/pull`, {
       url,
       directory,

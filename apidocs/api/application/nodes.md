@@ -39,25 +39,24 @@ GET /api/application/nodes
 
 ### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `filter[name]` | string | Filter by node name | - |
-| `filter[uuid]` | string | Filter by node UUID | - |
-| `filter[fqdn]` | string | Filter by FQDN | - |
-| `sort` | string | Sort field (id, uuid, name, created_at, updated_at) | id |
-| `include` | string | Include relationships (allocations, location, servers) | - |
+| Parameter      | Type    | Description                                            | Default |
+| -------------- | ------- | ------------------------------------------------------ | ------- |
+| `page`         | integer | Page number for pagination                             | 1       |
+| `per_page`     | integer | Results per page (1-100)                               | 50      |
+| `filter[name]` | string  | Filter by node name                                    | -       |
+| `filter[uuid]` | string  | Filter by node UUID                                    | -       |
+| `filter[fqdn]` | string  | Filter by FQDN                                         | -       |
+| `sort`         | string  | Sort field (id, uuid, name, created_at, updated_at)    | id      |
+| `include`      | string  | Include relationships (allocations, location, servers) | -       |
 
 ### Example Request
-
-
 
 ```bash
 curl "https://your-panel.com/api/application/nodes?include=location,allocations&per_page=25" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -65,19 +64,20 @@ curl "https://your-panel.com/api/application/nodes?include=location,allocations&
 const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/application/nodes', {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'location,allocations',
-    per_page: 25,
-    'filter[name]': 'node'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'location,allocations',
+per_page: 25,
+'filter[name]': 'node'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -95,10 +95,11 @@ params = {
     'filter[name]': 'node'
 }
 
-response = requests.get('https://your-panel.com/api/application/nodes', 
+response = requests.get('https://your-panel.com/api/application/nodes',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -107,21 +108,22 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $response = $client->get('https://your-panel.com/api/application/nodes', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => [
-        'include' => 'location,allocations',
-        'per_page' => 25,
-        'filter' => ['name' => 'node']
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => [
+'include' => 'location,allocations',
+'per_page' => 25,
+'filter' => ['name' => 'node']
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -139,15 +141,16 @@ func main() {
     req, _ := http.NewRequest("GET", "https://your-panel.com/api/application/nodes?include=location,allocations&per_page=25", nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -159,15 +162,16 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/nodes?include=location,allocations&per_page=25"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/nodes?include=location,allocations&per_page=25"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -182,7 +186,8 @@ client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json"
 var response = await client.GetAsync("https://your-panel.com/api/application/nodes?include=location,allocations&per_page=25");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -192,8 +197,8 @@ require 'json'
 
 uri = URI('https://your-panel.com/api/application/nodes')
 uri.query = URI.encode_www_form({
-  include: 'location,allocations',
-  per_page: 25
+include: 'location,allocations',
+per_page: 25
 })
 
 http = Net::HTTP.new(uri.host, uri.port)
@@ -205,7 +210,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -286,7 +292,7 @@ puts JSON.parse(response.body)
     }
   }
 }
-```
+````
 
 ## Get Node Details
 
@@ -298,19 +304,17 @@ GET /api/application/nodes/{node}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `node` | integer | Node ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `node`    | integer | Node ID     |
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                                            |
+| --------- | ------ | ------------------------------------------------------ |
 | `include` | string | Include relationships (allocations, location, servers) |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -327,17 +331,18 @@ const axios = require('axios');
 
 const nodeId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/nodes/${nodeId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'allocations,location,servers'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'allocations,location,servers'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -352,10 +357,11 @@ headers = {
 
 params = {'include': 'allocations,location,servers'}
 
-response = requests.get(f'https://your-panel.com/api/application/nodes/{node_id}', 
+response = requests.get(f'https://your-panel.com/api/application/nodes/{node_id}',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -365,17 +371,18 @@ $client = new GuzzleHttp\Client();
 $nodeId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/nodes/{$nodeId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'allocations,location,servers']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'allocations,location,servers']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -391,20 +398,21 @@ import (
 func main() {
     nodeId := 1
     url := fmt.Sprintf("https://your-panel.com/api/application/nodes/%d?include=allocations,location,servers", nodeId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -419,15 +427,16 @@ String url = String.format("https://your-panel.com/api/application/nodes/%d?incl
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -443,7 +452,8 @@ int nodeId = 1;
 var response = await client.GetAsync($"https://your-panel.com/api/application/nodes/{nodeId}?include=allocations,location,servers");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -464,7 +474,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -475,65 +486,65 @@ Retrieve a list of nodes available for server deployment.
 
 ```http
 GET /api/application/nodes/deployable
-```
+````
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type    | Description                    |
+| ---------- | ------- | ------------------------------ |
 | `per_page` | integer | Results per page (default: 50) |
-| `page` | integer | Page number |
-| `memory` | integer | Required memory in MB |
-| `disk` | integer | Required disk space in MB |
+| `page`     | integer | Page number                    |
+| `memory`   | integer | Required memory in MB          |
+| `disk`     | integer | Required disk space in MB      |
 
 <CodeTabs
-  endpoint="/api/application/nodes/deployable"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/application/nodes/deployable?memory=1024&disk=5000" \\
+endpoint="/api/application/nodes/deployable"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/application/nodes/deployable?memory=1024&disk=5000" \\
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/application/nodes/deployable', {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    memory: 1024,
-    disk: 5000
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+memory: 1024,
+disk: 5000
+}
 });
 
 console.log(response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
 params = {
-    'memory': 1024,
-    'disk': 5000
+'memory': 1024,
+'disk': 5000
 }
 
-response = requests.get('https://your-panel.com/api/application/nodes/deployable', 
-                       headers=headers, params=params)
+response = requests.get('https://your-panel.com/api/application/nodes/deployable',
+headers=headers, params=params)
 print(response.json())`,
     php: `<?php
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get('https://your-panel.com/api/application/nodes/deployable', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => [
-        'memory' => 1024,
-        'disk' => 5000
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => [
+'memory' => 1024,
+'disk' => 5000
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -542,25 +553,26 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    url := "https://your-panel.com/api/application/nodes/deployable?memory=1024&disk=5000"
-    
+url := "https://your-panel.com/api/application/nodes/deployable?memory=1024&disk=5000"
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -569,11 +581,11 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/nodes/deployable?memory=1024&disk=5000"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/nodes/deployable?memory=1024&disk=5000"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
@@ -602,7 +614,7 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -663,28 +675,26 @@ POST /api/application/nodes
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | Yes | Node display name |
-| `description` | string | No | Node description |
-| `location_id` | integer | Yes | Location ID where node is located |
-| `fqdn` | string | Yes | Fully qualified domain name |
-| `scheme` | string | No | Connection scheme (http/https) |
-| `behind_proxy` | boolean | No | Whether node is behind a proxy |
-| `public` | boolean | No | Whether node is publicly accessible |
-| `daemon_base` | string | No | Base directory for daemon files |
-| `daemon_sftp` | integer | No | SFTP port (default: 2022) |
-| `daemon_listen` | integer | No | Daemon listen port (default: 8080) |
-| `memory` | integer | Yes | Total memory in MB |
-| `memory_overallocate` | integer | No | Memory overallocation percentage |
-| `disk` | integer | Yes | Total disk space in MB |
-| `disk_overallocate` | integer | No | Disk overallocation percentage |
-| `upload_size` | integer | No | Maximum upload size in MB (default: 100) |
-| `maintenance_mode` | boolean | No | Whether node is in maintenance mode |
+| Field                 | Type    | Required | Description                              |
+| --------------------- | ------- | -------- | ---------------------------------------- |
+| `name`                | string  | Yes      | Node display name                        |
+| `description`         | string  | No       | Node description                         |
+| `location_id`         | integer | Yes      | Location ID where node is located        |
+| `fqdn`                | string  | Yes      | Fully qualified domain name              |
+| `scheme`              | string  | No       | Connection scheme (http/https)           |
+| `behind_proxy`        | boolean | No       | Whether node is behind a proxy           |
+| `public`              | boolean | No       | Whether node is publicly accessible      |
+| `daemon_base`         | string  | No       | Base directory for daemon files          |
+| `daemon_sftp`         | integer | No       | SFTP port (default: 2022)                |
+| `daemon_listen`       | integer | No       | Daemon listen port (default: 8080)       |
+| `memory`              | integer | Yes      | Total memory in MB                       |
+| `memory_overallocate` | integer | No       | Memory overallocation percentage         |
+| `disk`                | integer | Yes      | Total disk space in MB                   |
+| `disk_overallocate`   | integer | No       | Disk overallocation percentage           |
+| `upload_size`         | integer | No       | Maximum upload size in MB (default: 100) |
+| `maintenance_mode`    | boolean | No       | Whether node is in maintenance mode      |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -719,34 +729,35 @@ curl -X POST "https://your-panel.com/api/application/nodes" \
 const axios = require('axios');
 
 const nodeData = {
-  name: 'Node 2',
-  description: 'Secondary node for testing',
-  location_id: 1,
-  fqdn: 'node2.example.com',
-  scheme: 'https',
-  behind_proxy: false,
-  public: true,
-  daemon_base: '/var/lib/pterodactyl/volumes',
-  daemon_sftp: 2022,
-  daemon_listen: 8080,
-  memory: 16384,
-  memory_overallocate: 0,
-  disk: 204800,
-  disk_overallocate: 0,
-  upload_size: 100,
-  maintenance_mode: false
+name: 'Node 2',
+description: 'Secondary node for testing',
+location_id: 1,
+fqdn: 'node2.example.com',
+scheme: 'https',
+behind_proxy: false,
+public: true,
+daemon_base: '/var/lib/pterodactyl/volumes',
+daemon_sftp: 2022,
+daemon_listen: 8080,
+memory: 16384,
+memory_overallocate: 0,
+disk: 204800,
+disk_overallocate: 0,
+upload_size: 100,
+maintenance_mode: false
 };
 
 const response = await axios.post('https://your-panel.com/api/application/nodes', nodeData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -779,10 +790,11 @@ node_data = {
     'maintenance_mode': False
 }
 
-response = requests.post('https://your-panel.com/api/application/nodes', 
+response = requests.post('https://your-panel.com/api/application/nodes',
                         headers=headers, json=node_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -791,37 +803,38 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $nodeData = [
-    'name' => 'Node 2',
-    'description' => 'Secondary node for testing',
-    'location_id' => 1,
-    'fqdn' => 'node2.example.com',
-    'scheme' => 'https',
-    'behind_proxy' => false,
-    'public' => true,
-    'daemon_base' => '/var/lib/pterodactyl/volumes',
-    'daemon_sftp' => 2022,
-    'daemon_listen' => 8080,
-    'memory' => 16384,
-    'memory_overallocate' => 0,
-    'disk' => 204800,
-    'disk_overallocate' => 0,
-    'upload_size' => 100,
-    'maintenance_mode' => false
+'name' => 'Node 2',
+'description' => 'Secondary node for testing',
+'location_id' => 1,
+'fqdn' => 'node2.example.com',
+'scheme' => 'https',
+'behind_proxy' => false,
+'public' => true,
+'daemon_base' => '/var/lib/pterodactyl/volumes',
+'daemon_sftp' => 2022,
+'daemon_listen' => 8080,
+'memory' => 16384,
+'memory_overallocate' => 0,
+'disk' => 204800,
+'disk_overallocate' => 0,
+'upload_size' => 100,
+'maintenance_mode' => false
 ];
 
 $response = $client->post('https://your-panel.com/api/application/nodes', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $nodeData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $nodeData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -854,23 +867,24 @@ func main() {
         "upload_size":          100,
         "maintenance_mode":     false,
     }
-    
+
     jsonData, _ := json.Marshal(nodeData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/application/nodes", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -882,37 +896,38 @@ import java.net.URI;
 
 String jsonBody = """
 {
-  "name": "Node 2",
-  "description": "Secondary node for testing",
-  "location_id": 1,
-  "fqdn": "node2.example.com",
-  "scheme": "https",
-  "behind_proxy": false,
-  "public": true,
-  "daemon_base": "/var/lib/pterodactyl/volumes",
-  "daemon_sftp": 2022,
-  "daemon_listen": 8080,
-  "memory": 16384,
-  "memory_overallocate": 0,
-  "disk": 204800,
-  "disk_overallocate": 0,
-  "upload_size": 100,
-  "maintenance_mode": false
+"name": "Node 2",
+"description": "Secondary node for testing",
+"location_id": 1,
+"fqdn": "node2.example.com",
+"scheme": "https",
+"behind_proxy": false,
+"public": true,
+"daemon_base": "/var/lib/pterodactyl/volumes",
+"daemon_sftp": 2022,
+"daemon_listen": 8080,
+"memory": 16384,
+"memory_overallocate": 0,
+"disk": 204800,
+"disk_overallocate": 0,
+"upload_size": 100,
+"maintenance_mode": false
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/nodes"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/nodes"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -950,7 +965,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync("https://your-panel.com/api/application/nodes", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -963,22 +979,22 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 node_data = {
-  name: 'Node 2',
-  description: 'Secondary node for testing',
-  location_id: 1,
-  fqdn: 'node2.example.com',
-  scheme: 'https',
-  behind_proxy: false,
-  public: true,
-  daemon_base: '/var/lib/pterodactyl/volumes',
-  daemon_sftp: 2022,
-  daemon_listen: 8080,
-  memory: 16384,
-  memory_overallocate: 0,
-  disk: 204800,
-  disk_overallocate: 0,
-  upload_size: 100,
-  maintenance_mode: false
+name: 'Node 2',
+description: 'Secondary node for testing',
+location_id: 1,
+fqdn: 'node2.example.com',
+scheme: 'https',
+behind_proxy: false,
+public: true,
+daemon_base: '/var/lib/pterodactyl/volumes',
+daemon_sftp: 2022,
+daemon_listen: 8080,
+memory: 16384,
+memory_overallocate: 0,
+disk: 204800,
+disk_overallocate: 0,
+upload_size: 100,
+maintenance_mode: false
 }
 
 request = Net::HTTP::Post.new(uri)
@@ -989,7 +1005,8 @@ request.body = node_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1029,7 +1046,7 @@ puts JSON.parse(response.body)
     }
   }
 }
-```
+````
 
 ## Update Node Configuration
 
@@ -1041,34 +1058,32 @@ PATCH /api/application/nodes/{node}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `node` | integer | Node ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `node`    | integer | Node ID     |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | No | Node display name |
-| `description` | string | No | Node description |
-| `location_id` | integer | No | Location ID |
-| `fqdn` | string | No | Fully qualified domain name |
-| `scheme` | string | No | Connection scheme |
-| `behind_proxy` | boolean | No | Whether node is behind a proxy |
-| `public` | boolean | No | Whether node is publicly accessible |
-| `daemon_base` | string | No | Base directory for daemon files |
-| `daemon_sftp` | integer | No | SFTP port |
-| `daemon_listen` | integer | No | Daemon listen port |
-| `memory` | integer | No | Total memory in MB |
-| `memory_overallocate` | integer | No | Memory overallocation percentage |
-| `disk` | integer | No | Total disk space in MB |
-| `disk_overallocate` | integer | No | Disk overallocation percentage |
-| `upload_size` | integer | No | Maximum upload size in MB |
-| `maintenance_mode` | boolean | No | Whether node is in maintenance mode |
+| Field                 | Type    | Required | Description                         |
+| --------------------- | ------- | -------- | ----------------------------------- |
+| `name`                | string  | No       | Node display name                   |
+| `description`         | string  | No       | Node description                    |
+| `location_id`         | integer | No       | Location ID                         |
+| `fqdn`                | string  | No       | Fully qualified domain name         |
+| `scheme`              | string  | No       | Connection scheme                   |
+| `behind_proxy`        | boolean | No       | Whether node is behind a proxy      |
+| `public`              | boolean | No       | Whether node is publicly accessible |
+| `daemon_base`         | string  | No       | Base directory for daemon files     |
+| `daemon_sftp`         | integer | No       | SFTP port                           |
+| `daemon_listen`       | integer | No       | Daemon listen port                  |
+| `memory`              | integer | No       | Total memory in MB                  |
+| `memory_overallocate` | integer | No       | Memory overallocation percentage    |
+| `disk`                | integer | No       | Total disk space in MB              |
+| `disk_overallocate`   | integer | No       | Disk overallocation percentage      |
+| `upload_size`         | integer | No       | Maximum upload size in MB           |
+| `maintenance_mode`    | boolean | No       | Whether node is in maintenance mode |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1092,22 +1107,23 @@ const axios = require('axios');
 
 const nodeId = 2;
 const updateData = {
-  name: 'Updated Node 2',
-  description: 'Updated description for node 2',
-  memory: 20480,
-  disk: 409600
+name: 'Updated Node 2',
+description: 'Updated description for node 2',
+memory: 20480,
+disk: 409600
 };
 
 const response = await axios.patch(`https://your-panel.com/api/application/nodes/${nodeId}`, updateData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1129,10 +1145,11 @@ update_data = {
     'disk': 409600
 }
 
-response = requests.patch(f'https://your-panel.com/api/application/nodes/{node_id}', 
+response = requests.patch(f'https://your-panel.com/api/application/nodes/{node_id}',
                          headers=headers, json=update_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1142,25 +1159,26 @@ $client = new GuzzleHttp\Client();
 $nodeId = 2;
 
 $updateData = [
-    'name' => 'Updated Node 2',
-    'description' => 'Updated description for node 2',
-    'memory' => 20480,
-    'disk' => 409600
+'name' => 'Updated Node 2',
+'description' => 'Updated description for node 2',
+'memory' => 20480,
+'disk' => 409600
 ];
 
 $response = $client->patch("https://your-panel.com/api/application/nodes/{$nodeId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $updateData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $updateData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1182,24 +1200,25 @@ func main() {
         "memory":      20480,
         "disk":        409600,
     }
-    
+
     jsonData, _ := json.Marshal(updateData)
     url := fmt.Sprintf("https://your-panel.com/api/application/nodes/%d", nodeId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1212,10 +1231,10 @@ import java.net.URI;
 int nodeId = 2;
 String jsonBody = """
 {
-  "name": "Updated Node 2",
-  "description": "Updated description for node 2",
-  "memory": 20480,
-  "disk": 409600
+"name": "Updated Node 2",
+"description": "Updated description for node 2",
+"memory": 20480,
+"disk": 409600
 }
 """;
 
@@ -1223,16 +1242,17 @@ String url = String.format("https://your-panel.com/api/application/nodes/%d", no
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1259,7 +1279,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PatchAsync($"https://your-panel.com/api/application/nodes/{nodeId}", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1273,10 +1294,10 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 update_data = {
-  name: 'Updated Node 2',
-  description: 'Updated description for node 2',
-  memory: 20480,
-  disk: 409600
+name: 'Updated Node 2',
+description: 'Updated description for node 2',
+memory: 20480,
+disk: 409600
 }
 
 request = Net::HTTP::Patch.new(uri)
@@ -1287,7 +1308,8 @@ request.body = update_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1299,19 +1321,17 @@ Get the Wings daemon configuration for a node.
 
 ```http
 GET /api/application/nodes/{node}/configuration
-```
+````
 
 This endpoint returns the complete Wings configuration that should be placed in the Wings configuration file.
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `node` | integer | Node ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `node`    | integer | Node ID     |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1328,14 +1348,15 @@ const axios = require('axios');
 
 const nodeId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/nodes/${nodeId}/configuration`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1348,10 +1369,11 @@ headers = {
     'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.get(f'https://your-panel.com/api/application/nodes/{node_id}/configuration', 
+response = requests.get(f'https://your-panel.com/api/application/nodes/{node_id}/configuration',
                        headers=headers)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1361,16 +1383,17 @@ $client = new GuzzleHttp\Client();
 $nodeId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/nodes/{$nodeId}/configuration", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1386,20 +1409,21 @@ import (
 func main() {
     nodeId := 1
     url := fmt.Sprintf("https://your-panel.com/api/application/nodes/%d/configuration", nodeId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1414,15 +1438,16 @@ String url = String.format("https://your-panel.com/api/application/nodes/%d/conf
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1438,7 +1463,8 @@ int nodeId = 1;
 var response = await client.GetAsync($"https://your-panel.com/api/application/nodes/{nodeId}/configuration");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1458,7 +1484,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1494,8 +1521,7 @@ Returns HTTP 200 OK with the Wings configuration.
   "allowed_mounts": [],
   "remote": "https://your-panel.com"
 }
-```
-
+````
 
 ## List Node Allocations
 
@@ -1507,14 +1533,12 @@ GET /api/application/nodes/{node}/allocations
 
 ### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
+| Parameter  | Type    | Description                | Default |
+| ---------- | ------- | -------------------------- | ------- |
+| `page`     | integer | Page number for pagination | 1       |
+| `per_page` | integer | Results per page (1-100)   | 50      |
 
 ### Example Request
-
-
 
 ```bash
 curl "https://your-panel.com/api/application/nodes/1/allocations?per_page=25" \
@@ -1522,27 +1546,25 @@ curl "https://your-panel.com/api/application/nodes/1/allocations?per_page=25" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
 
-
-
 ```javascript
 const axios = require('axios');
 
 const nodeId = 1;
-const response = await axios.get(`https://your-panel.com/api/application/nodes/${nodeId}/allocations`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+const response = await axios.get(
+  `https://your-panel.com/api/application/nodes/${nodeId}/allocations`,
+  {
+    headers: {
+      Authorization: 'Bearer ptla_YOUR_API_KEY',
+      Accept: 'Application/vnd.pterodactyl.v1+json',
+    },
+    params: {
+      per_page: 25,
+    },
   },
-  params: {
-    per_page: 25
-  }
-});
+);
 
 console.log(response.data);
 ```
-
-
-
 
 ### Example Response
 
@@ -1585,7 +1607,6 @@ console.log(response.data);
 }
 ```
 
-
 ## Create Node Allocations
 
 Create new allocations for a node.
@@ -1596,15 +1617,13 @@ POST /api/application/nodes/{node}/allocations
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `ip` | string | Yes | IP address for allocations |
-| `ip_alias` | string | No | IP alias for display |
-| `ports` | array | Yes | Array of ports or port ranges |
+| Field      | Type   | Required | Description                   |
+| ---------- | ------ | -------- | ----------------------------- |
+| `ip`       | string | Yes      | IP address for allocations    |
+| `ip_alias` | string | No       | IP alias for display          |
+| `ports`    | array  | Yes      | Array of ports or port ranges |
 
 ### Example Request
-
-
 
 ```bash
 curl -X POST "https://your-panel.com/api/application/nodes/1/allocations" \
@@ -1617,9 +1636,6 @@ curl -X POST "https://your-panel.com/api/application/nodes/1/allocations" \
     "ports": ["25567", "25568-25570", "30000"]
   }'
 ```
-
-
-
 
 ### Example Response
 
@@ -1653,7 +1669,6 @@ curl -X POST "https://your-panel.com/api/application/nodes/1/allocations" \
 }
 ```
 
-
 ## Delete Node Allocation
 
 Delete a specific allocation from a node.
@@ -1664,21 +1679,18 @@ DELETE /api/application/nodes/{node}/allocations/{allocation}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `node` | integer | Node ID |
+| Parameter    | Type    | Description   |
+| ------------ | ------- | ------------- |
+| `node`       | integer | Node ID       |
 | `allocation` | integer | Allocation ID |
 
 ### Example Request
-
-
 
 ```bash
 curl -X DELETE "https://your-panel.com/api/application/nodes/1/allocations/3" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
-
 
 ### Response
 
@@ -1694,9 +1706,9 @@ DELETE /api/application/nodes/{node}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `node` | integer | Node ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `node`    | integer | Node ID     |
 
 ### Example Request
 
@@ -1715,14 +1727,15 @@ const axios = require('axios');
 
 const nodeId = 2;
 const response = await axios.delete(`https://your-panel.com/api/application/nodes/${nodeId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log('Node deleted successfully');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1735,10 +1748,11 @@ headers = {
     'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.delete(f'https://your-panel.com/api/application/nodes/{node_id}', 
+response = requests.delete(f'https://your-panel.com/api/application/nodes/{node_id}',
                           headers=headers)
 print('Node deleted successfully' if response.status_code == 204 else 'Error deleting node')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1748,15 +1762,16 @@ $client = new GuzzleHttp\Client();
 $nodeId = 2;
 
 $response = $client->delete("https://your-panel.com/api/application/nodes/{$nodeId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 echo 'Node deleted successfully';
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1771,20 +1786,21 @@ import (
 func main() {
     nodeId := 2
     url := fmt.Sprintf("https://your-panel.com/api/application/nodes/%d", nodeId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Node deleted successfully")
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1799,17 +1815,18 @@ String url = String.format("https://your-panel.com/api/application/nodes/%d", no
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .DELETE()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 if (response.statusCode() == 204) {
-    System.out.println("Node deleted successfully");
+System.out.println("Node deleted successfully");
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1827,7 +1844,8 @@ var response = await client.DeleteAsync($"https://your-panel.com/api/application
 if (response.StatusCode == System.Net.HttpStatusCode.NoContent) {
     Console.WriteLine("Node deleted successfully");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1845,7 +1863,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts 'Node deleted successfully' if response.code == '204'
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1883,8 +1902,7 @@ Returns HTTP 204 No Content on successful deletion.
     }
   ]
 }
-```
-
+````
 
 ## Best Practices
 
@@ -1922,16 +1940,16 @@ class NodeService {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
     this.headers = {
-      'Authorization': `Bearer ${apiKey}`,
-      'Accept': 'Application/vnd.pterodactyl.v1+json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${apiKey}`,
+      Accept: 'Application/vnd.pterodactyl.v1+json',
+      'Content-Type': 'application/json',
     };
   }
 
   async getAllNodes(options = {}) {
     const params = new URLSearchParams(options);
     const response = await fetch(`${this.baseUrl}/api/application/nodes?${params}`, {
-      headers: this.headers
+      headers: this.headers,
     });
     return response.json();
   }
@@ -1940,14 +1958,14 @@ class NodeService {
     const response = await fetch(`${this.baseUrl}/api/application/nodes`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify(nodeData)
+      body: JSON.stringify(nodeData),
     });
     return response.json();
   }
 
   async getNodeConfiguration(nodeId) {
     const response = await fetch(`${this.baseUrl}/api/application/nodes/${nodeId}/configuration`, {
-      headers: this.headers
+      headers: this.headers,
     });
     return response.json();
   }
@@ -1956,7 +1974,7 @@ class NodeService {
     const response = await fetch(`${this.baseUrl}/api/application/nodes/${nodeId}/allocations`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify(allocationData)
+      body: JSON.stringify(allocationData),
     });
     return response.json();
   }
@@ -1964,13 +1982,12 @@ class NodeService {
   async deleteNode(nodeId) {
     const response = await fetch(`${this.baseUrl}/api/application/nodes/${nodeId}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
     });
     return response.status === 204;
   }
 }
 ```
-
 
 ## Rate Limiting
 
@@ -1985,8 +2002,6 @@ X-RateLimit-Limit: 240
 X-RateLimit-Remaining: 235
 X-RateLimit-Reset: 1642686400
 ```
-
-
 
 ## Source Code References
 
@@ -2046,4 +2061,4 @@ X-RateLimit-Reset: 1642686400
 
 **Application Routes**: [api-application.php](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php) - Lines 75-90
 
-For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel). 
+For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel).

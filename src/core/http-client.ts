@@ -76,7 +76,12 @@ export class HttpClient {
   }
 
   /** Make a raw request and return the Response (for non-JSON endpoints like file downloads). */
-  async raw(method: string, path: string, body?: unknown, options?: RequestOptions): Promise<Response> {
+  async raw(
+    method: string,
+    path: string,
+    body?: unknown,
+    options?: RequestOptions,
+  ): Promise<Response> {
     return this.request(method, path, body, options);
   }
 

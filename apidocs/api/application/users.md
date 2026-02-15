@@ -39,26 +39,25 @@ GET /api/application/users
 
 ### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `filter[email]` | string | Filter by email address | - |
-| `filter[uuid]` | string | Filter by user UUID | - |
-| `filter[username]` | string | Filter by username | - |
-| `filter[external_id]` | string | Filter by external ID | - |
-| `sort` | string | Sort field (id, uuid, username, email, created_at, updated_at) | id |
-| `include` | string | Include relationships (servers) | - |
+| Parameter             | Type    | Description                                                    | Default |
+| --------------------- | ------- | -------------------------------------------------------------- | ------- |
+| `page`                | integer | Page number for pagination                                     | 1       |
+| `per_page`            | integer | Results per page (1-100)                                       | 50      |
+| `filter[email]`       | string  | Filter by email address                                        | -       |
+| `filter[uuid]`        | string  | Filter by user UUID                                            | -       |
+| `filter[username]`    | string  | Filter by username                                             | -       |
+| `filter[external_id]` | string  | Filter by external ID                                          | -       |
+| `sort`                | string  | Sort field (id, uuid, username, email, created_at, updated_at) | id      |
+| `include`             | string  | Include relationships (servers)                                | -       |
 
 ### Example Request
-
-
 
 ```bash
 curl "https://your-panel.com/api/application/users?include=servers&per_page=25" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -66,19 +65,20 @@ curl "https://your-panel.com/api/application/users?include=servers&per_page=25" 
 const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/application/users', {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'servers',
-    per_page: 25,
-    'filter[email]': 'admin@example.com'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'servers',
+per_page: 25,
+'filter[email]': 'admin@example.com'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -96,10 +96,11 @@ params = {
     'filter[email]': 'admin@example.com'
 }
 
-response = requests.get('https://your-panel.com/api/application/users', 
+response = requests.get('https://your-panel.com/api/application/users',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -108,21 +109,22 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $response = $client->get('https://your-panel.com/api/application/users', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => [
-        'include' => 'servers',
-        'per_page' => 25,
-        'filter' => ['email' => 'admin@example.com']
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => [
+'include' => 'servers',
+'per_page' => 25,
+'filter' => ['email' => 'admin@example.com']
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -140,15 +142,16 @@ func main() {
     req, _ := http.NewRequest("GET", "https://your-panel.com/api/application/users?include=servers&per_page=25", nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -160,15 +163,16 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/users?include=servers&per_page=25"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/users?include=servers&per_page=25"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -183,7 +187,8 @@ client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json"
 var response = await client.GetAsync("https://your-panel.com/api/application/users?include=servers&per_page=25");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -193,8 +198,8 @@ require 'json'
 
 uri = URI('https://your-panel.com/api/application/users')
 uri.query = URI.encode_www_form({
-  include: 'servers',
-  per_page: 25
+include: 'servers',
+per_page: 25
 })
 
 http = Net::HTTP.new(uri.host, uri.port)
@@ -206,7 +211,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -255,7 +261,7 @@ puts JSON.parse(response.body)
     }
   }
 }
-```
+````
 
 ## Get User Details
 
@@ -267,38 +273,36 @@ GET /api/application/users/{user}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `user` | integer | User ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `user`    | integer | User ID     |
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                     |
+| --------- | ------ | ------------------------------- |
 | `include` | string | Include relationships (servers) |
 
 ### Example Request
 
-
-
 <CodeTabs
-  endpoint="/api/application/users/{user}"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/application/users/1?include=servers" \\
+endpoint="/api/application/users/{user}"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/application/users/1?include=servers" \\
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const userId = 1;
 const response = await axios.get(\`https://your-panel.com/api/application/users/\${userId}\`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'servers'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'servers'
+}
 });
 
 console.log(response.data);`,
@@ -306,25 +310,25 @@ console.log(response.data);`,
 
 user_id = 1
 headers = {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
 params = {'include': 'servers'}
 
-response = requests.get(f'https://your-panel.com/api/application/users/{user_id}', 
-                       headers=headers, params=params)
+response = requests.get(f'https://your-panel.com/api/application/users/{user_id}',
+headers=headers, params=params)
 print(response.json())`,
     php: `<?php
 $client = new GuzzleHttp\\Client();
 $userId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/users/{$userId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'servers']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'servers']
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -333,26 +337,27 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    userId := 1
-    url := fmt.Sprintf("https://your-panel.com/api/application/users/%d?include=servers", userId)
-    
+userId := 1
+url := fmt.Sprintf("https://your-panel.com/api/application/users/%d?include=servers", userId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -364,11 +369,11 @@ String url = String.format("https://your-panel.com/api/application/users/%d?incl
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
@@ -399,11 +404,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)`
-  }}
+}}
 />
-
-
-
 
 ### Example Response
 
@@ -443,31 +445,31 @@ GET /api/application/users/external/{external_id}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter     | Type   | Description             |
+| ------------- | ------ | ----------------------- |
 | `external_id` | string | External ID of the user |
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                     |
+| --------- | ------ | ------------------------------- |
 | `include` | string | Include relationships (servers) |
 
 <CodeTabs
-  endpoint="/api/application/users/external/{external_id}"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/application/users/external/ext-123456" \\
+endpoint="/api/application/users/external/{external_id}"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/application/users/external/ext-123456" \\
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const externalId = 'ext-123456';
 const response = await axios.get(\`https://your-panel.com/api/application/users/external/\${externalId}\`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log(response.data);`,
@@ -475,22 +477,22 @@ console.log(response.data);`,
 
 external_id = 'ext-123456'
 headers = {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.get(f'https://your-panel.com/api/application/users/external/{external_id}', 
-                       headers=headers)
+response = requests.get(f'https://your-panel.com/api/application/users/external/{external_id}',
+headers=headers)
 print(response.json())`,
     php: `<?php
 $client = new GuzzleHttp\\Client();
 $externalId = 'ext-123456';
 
 $response = $client->get("https://your-panel.com/api/application/users/external/{$externalId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -499,26 +501,27 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    externalId := "ext-123456"
-    url := fmt.Sprintf("https://your-panel.com/api/application/users/external/%s", externalId)
-    
+externalId := "ext-123456"
+url := fmt.Sprintf("https://your-panel.com/api/application/users/external/%s", externalId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -530,11 +533,11 @@ String url = String.format("https://your-panel.com/api/application/users/externa
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
@@ -563,7 +566,7 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -598,20 +601,18 @@ POST /api/application/users
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `email` | string | Yes | User's email address (must be unique) |
-| `username` | string | Yes | Username (must be unique) |
-| `first_name` | string | Yes | User's first name |
-| `last_name` | string | Yes | User's last name |
-| `password` | string | No | User's password (if not provided, user must reset) |
-| `language` | string | No | User's preferred language (default: en) |
-| `root_admin` | boolean | No | Whether user has administrative privileges |
-| `external_id` | string | No | External ID for integration purposes |
+| Field         | Type    | Required | Description                                        |
+| ------------- | ------- | -------- | -------------------------------------------------- |
+| `email`       | string  | Yes      | User's email address (must be unique)              |
+| `username`    | string  | Yes      | Username (must be unique)                          |
+| `first_name`  | string  | Yes      | User's first name                                  |
+| `last_name`   | string  | Yes      | User's last name                                   |
+| `password`    | string  | No       | User's password (if not provided, user must reset) |
+| `language`    | string  | No       | User's preferred language (default: en)            |
+| `root_admin`  | boolean | No       | Whether user has administrative privileges         |
+| `external_id` | string  | No       | External ID for integration purposes               |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -637,25 +638,26 @@ curl -X POST "https://your-panel.com/api/application/users" \
 const axios = require('axios');
 
 const userData = {
-  email: 'newuser@example.com',
-  username: 'newuser',
-  first_name: 'New',
-  last_name: 'User',
-  password: 'secure_password_123',
-  language: 'en',
-  root_admin: false
+email: 'newuser@example.com',
+username: 'newuser',
+first_name: 'New',
+last_name: 'User',
+password: 'secure_password_123',
+language: 'en',
+root_admin: false
 };
 
 const response = await axios.post('https://your-panel.com/api/application/users', userData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -679,10 +681,11 @@ user_data = {
     'root_admin': False
 }
 
-response = requests.post('https://your-panel.com/api/application/users', 
+response = requests.post('https://your-panel.com/api/application/users',
                         headers=headers, json=user_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -691,28 +694,29 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $userData = [
-    'email' => 'newuser@example.com',
-    'username' => 'newuser',
-    'first_name' => 'New',
-    'last_name' => 'User',
-    'password' => 'secure_password_123',
-    'language' => 'en',
-    'root_admin' => false
+'email' => 'newuser@example.com',
+'username' => 'newuser',
+'first_name' => 'New',
+'last_name' => 'User',
+'password' => 'secure_password_123',
+'language' => 'en',
+'root_admin' => false
 ];
 
 $response = $client->post('https://your-panel.com/api/application/users', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $userData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $userData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -736,23 +740,24 @@ func main() {
         "language":   "en",
         "root_admin": false,
     }
-    
+
     jsonData, _ := json.Marshal(userData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/application/users", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -764,28 +769,29 @@ import java.net.URI;
 
 String jsonBody = """
 {
-  "email": "newuser@example.com",
-  "username": "newuser",
-  "first_name": "New",
-  "last_name": "User",
-  "password": "secure_password_123",
-  "language": "en",
-  "root_admin": false
+"email": "newuser@example.com",
+"username": "newuser",
+"first_name": "New",
+"last_name": "User",
+"password": "secure_password_123",
+"language": "en",
+"root_admin": false
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/users"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/users"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -814,7 +820,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync("https://your-panel.com/api/application/users", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -827,13 +834,13 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 user_data = {
-  email: 'newuser@example.com',
-  username: 'newuser',
-  first_name: 'New',
-  last_name: 'User',
-  password: 'secure_password_123',
-  language: 'en',
-  root_admin: false
+email: 'newuser@example.com',
+username: 'newuser',
+first_name: 'New',
+last_name: 'User',
+password: 'secure_password_123',
+language: 'en',
+root_admin: false
 }
 
 request = Net::HTTP::Post.new(uri)
@@ -844,7 +851,8 @@ request.body = user_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -872,8 +880,7 @@ puts JSON.parse(response.body)
     "updated_at": "2024-01-20T14:30:45+00:00"
   }
 }
-```
-
+````
 
 ## Update User
 
@@ -885,26 +892,24 @@ PATCH /api/application/users/{user}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `user` | integer | User ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `user`    | integer | User ID     |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `email` | string | Yes | User's email address |
-| `username` | string | Yes | Username |
-| `first_name` | string | Yes | User's first name |
-| `last_name` | string | Yes | User's last name |
-| `password` | string | No | New password |
-| `language` | string | No | User's preferred language |
-| `root_admin` | boolean | No | Administrative privileges |
-| `external_id` | string | No | External ID for integration |
+| Field         | Type    | Required | Description                 |
+| ------------- | ------- | -------- | --------------------------- |
+| `email`       | string  | Yes      | User's email address        |
+| `username`    | string  | Yes      | Username                    |
+| `first_name`  | string  | Yes      | User's first name           |
+| `last_name`   | string  | Yes      | User's last name            |
+| `password`    | string  | No       | New password                |
+| `language`    | string  | No       | User's preferred language   |
+| `root_admin`  | boolean | No       | Administrative privileges   |
+| `external_id` | string  | No       | External ID for integration |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -927,21 +932,22 @@ const axios = require('axios');
 
 const userId = 2;
 const updateData = {
-  first_name: 'Updated',
-  last_name: 'Name',
-  language: 'fr'
+first_name: 'Updated',
+last_name: 'Name',
+language: 'fr'
 };
 
 const response = await axios.patch(`https://your-panel.com/api/application/users/${userId}`, updateData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -962,10 +968,11 @@ update_data = {
     'language': 'fr'
 }
 
-response = requests.patch(f'https://your-panel.com/api/application/users/{user_id}', 
+response = requests.patch(f'https://your-panel.com/api/application/users/{user_id}',
                          headers=headers, json=update_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -975,24 +982,25 @@ $client = new GuzzleHttp\Client();
 $userId = 2;
 
 $updateData = [
-    'first_name' => 'Updated',
-    'last_name' => 'Name',
-    'language' => 'fr'
+'first_name' => 'Updated',
+'last_name' => 'Name',
+'language' => 'fr'
 ];
 
 $response = $client->patch("https://your-panel.com/api/application/users/{$userId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $updateData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $updateData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1013,24 +1021,25 @@ func main() {
         "last_name":  "Name",
         "language":   "fr",
     }
-    
+
     jsonData, _ := json.Marshal(updateData)
     url := fmt.Sprintf("https://your-panel.com/api/application/users/%d", userId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1043,9 +1052,9 @@ import java.net.URI;
 int userId = 2;
 String jsonBody = """
 {
-  "first_name": "Updated",
-  "last_name": "Name",
-  "language": "fr"
+"first_name": "Updated",
+"last_name": "Name",
+"language": "fr"
 }
 """;
 
@@ -1053,16 +1062,17 @@ String url = String.format("https://your-panel.com/api/application/users/%d", us
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1088,7 +1098,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PatchAsync($"https://your-panel.com/api/application/users/{userId}", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1102,9 +1113,9 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 update_data = {
-  first_name: 'Updated',
-  last_name: 'Name',
-  language: 'fr'
+first_name: 'Updated',
+last_name: 'Name',
+language: 'fr'
 }
 
 request = Net::HTTP::Patch.new(uri)
@@ -1115,7 +1126,8 @@ request.body = update_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1143,8 +1155,7 @@ puts JSON.parse(response.body)
     "updated_at": "2024-01-20T15:45:30+00:00"
   }
 }
-```
-
+````
 
 ## Delete User
 
@@ -1156,13 +1167,11 @@ DELETE /api/application/users/{user}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `user` | integer | User ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `user`    | integer | User ID     |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1179,14 +1188,15 @@ const axios = require('axios');
 
 const userId = 2;
 const response = await axios.delete(`https://your-panel.com/api/application/users/${userId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log('User deleted successfully');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1199,10 +1209,11 @@ headers = {
     'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.delete(f'https://your-panel.com/api/application/users/{user_id}', 
+response = requests.delete(f'https://your-panel.com/api/application/users/{user_id}',
                           headers=headers)
 print('User deleted successfully' if response.status_code == 204 else 'Error deleting user')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1212,15 +1223,16 @@ $client = new GuzzleHttp\Client();
 $userId = 2;
 
 $response = $client->delete("https://your-panel.com/api/application/users/{$userId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 echo 'User deleted successfully';
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1235,20 +1247,21 @@ import (
 func main() {
     userId := 2
     url := fmt.Sprintf("https://your-panel.com/api/application/users/%d", userId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("User deleted successfully")
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1263,17 +1276,18 @@ String url = String.format("https://your-panel.com/api/application/users/%d", us
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .DELETE()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 if (response.statusCode() == 204) {
-    System.out.println("User deleted successfully");
+System.out.println("User deleted successfully");
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1291,7 +1305,8 @@ var response = await client.DeleteAsync($"https://your-panel.com/api/application
 if (response.StatusCode == System.Net.HttpStatusCode.NoContent) {
     Console.WriteLine("User deleted successfully");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1309,7 +1324,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts 'User deleted successfully' if response.code == '204'
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1350,8 +1366,7 @@ Returns HTTP 204 No Content on successful deletion.
     }
   ]
 }
-```
-
+````
 
 ## Best Practices
 
@@ -1380,16 +1395,16 @@ class UserService {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
     this.headers = {
-      'Authorization': `Bearer ${apiKey}`,
-      'Accept': 'Application/vnd.pterodactyl.v1+json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${apiKey}`,
+      Accept: 'Application/vnd.pterodactyl.v1+json',
+      'Content-Type': 'application/json',
     };
   }
 
   async getAllUsers(options = {}) {
     const params = new URLSearchParams(options);
     const response = await fetch(`${this.baseUrl}/api/application/users?${params}`, {
-      headers: this.headers
+      headers: this.headers,
     });
     return response.json();
   }
@@ -1398,7 +1413,7 @@ class UserService {
     const response = await fetch(`${this.baseUrl}/api/application/users`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     });
     return response.json();
   }
@@ -1407,7 +1422,7 @@ class UserService {
     const response = await fetch(`${this.baseUrl}/api/application/users/${userId}`, {
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify(updateData)
+      body: JSON.stringify(updateData),
     });
     return response.json();
   }
@@ -1415,13 +1430,12 @@ class UserService {
   async deleteUser(userId) {
     const response = await fetch(`${this.baseUrl}/api/application/users/${userId}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
     });
     return response.status === 204;
   }
 }
 ```
-
 
 ## Rate Limiting
 
@@ -1436,8 +1450,6 @@ X-RateLimit-Limit: 240
 X-RateLimit-Remaining: 235
 X-RateLimit-Reset: 1642686400
 ```
-
-
 
 ## Source Code References
 
@@ -1463,8 +1475,6 @@ X-RateLimit-Reset: 1642686400
 **Route**: `DELETE /api/application/users/{user}`  
 **Source**: [UserController.php](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Application/Users/UserController.php)
 
-
-
 ### Services
 
 **User Creation Service**: [UserCreationService.php](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Services/Users/UserCreationService.php)  
@@ -1481,4 +1491,4 @@ X-RateLimit-Reset: 1642686400
 
 **Application Routes**: [api-application.php](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php) - Lines 45-55
 
-For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel). 
+For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel).

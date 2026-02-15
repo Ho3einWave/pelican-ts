@@ -73,18 +73,10 @@ export type {
   UpdateScheduleTaskParams,
 } from './types/client/schedule.js';
 export type { Allocation } from './types/client/network.js';
-export type {
-  Subuser,
-  CreateSubuserParams,
-  UpdateSubuserParams,
-} from './types/client/subuser.js';
+export type { Subuser, CreateSubuserParams, UpdateSubuserParams } from './types/client/subuser.js';
 
 // Application types
-export type {
-  AdminUser,
-  CreateUserParams,
-  UpdateUserParams,
-} from './types/application/user.js';
+export type { AdminUser, CreateUserParams, UpdateUserParams } from './types/application/user.js';
 export type {
   AdminServer,
   AdminServerLimits,
@@ -95,19 +87,9 @@ export type {
   UpdateServerBuildParams,
   UpdateServerStartupParams,
 } from './types/application/server.js';
-export type {
-  AdminDatabase,
-  CreateAdminDatabaseParams,
-} from './types/application/database.js';
-export type {
-  Node,
-  CreateNodeParams,
-  UpdateNodeParams,
-} from './types/application/node.js';
-export type {
-  NodeAllocation,
-  CreateAllocationParams,
-} from './types/application/allocation.js';
+export type { AdminDatabase, CreateAdminDatabaseParams } from './types/application/database.js';
+export type { Node, CreateNodeParams, UpdateNodeParams } from './types/application/node.js';
+export type { NodeAllocation, CreateAllocationParams } from './types/application/allocation.js';
 export type {
   Location,
   CreateLocationParams,
@@ -118,7 +100,11 @@ export type { Egg, EggConfig, EggScript, EggVariable } from './types/application
 
 // WebSocket
 export { WebSocketManager } from './websocket/websocket-manager.js';
-export type { WebSocketEventMap, WebSocketEvent, WebSocketManagerOptions } from './websocket/websocket-manager.js';
+export type {
+  WebSocketEventMap,
+  WebSocketEvent,
+  WebSocketManagerOptions,
+} from './websocket/websocket-manager.js';
 
 // WebSocket types
 export type {

@@ -2,7 +2,8 @@
 sidebar_position: 5
 title: Nests & Eggs Management
 description: Complete Application API documentation for managing nests and eggs, including server types, configurations, and egg variables
-keywords: [pterodactyl, application api, nests, eggs, server types, game configurations, startup scripts]
+keywords:
+  [pterodactyl, application api, nests, eggs, server types, game configurations, startup scripts]
 ---
 
 import CodeTabs from '@site/src/components/CodeTabs';
@@ -43,11 +44,11 @@ GET /api/application/nests
 
 #### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `include` | string | Include relationships (eggs, servers) | - |
+| Parameter  | Type    | Description                           | Default |
+| ---------- | ------- | ------------------------------------- | ------- |
+| `page`     | integer | Page number for pagination            | 1       |
+| `per_page` | integer | Results per page (1-100)              | 50      |
+| `include`  | string  | Include relationships (eggs, servers) | -       |
 
 #### Example Request
 
@@ -65,17 +66,18 @@ curl "https://your-panel.com/api/application/nests?include=eggs" \
 const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/application/nests', {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'eggs'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'eggs'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -89,10 +91,11 @@ headers = {
 
 params = {'include': 'eggs'}
 
-response = requests.get('https://your-panel.com/api/application/nests', 
+response = requests.get('https://your-panel.com/api/application/nests',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -101,17 +104,18 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $response = $client->get('https://your-panel.com/api/application/nests', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'eggs']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'eggs']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -127,17 +131,18 @@ import (
 func main() {
     client := &http.Client{}
     req, _ := http.NewRequest("GET", "https://your-panel.com/api/application/nests?include=eggs", nil)
-    
+
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -145,20 +150,22 @@ func main() {
 import okhttp3.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        OkHttpClient client = new OkHttpClient();
-        
+public static void main(String[] args) throws Exception {
+OkHttpClient client = new OkHttpClient();
+
         Request request = new Request.Builder()
             .url("https://your-panel.com/api/application/nests?include=eggs")
             .addHeader("Authorization", "Bearer ptla_YOUR_API_KEY")
             .addHeader("Accept", "Application/vnd.pterodactyl.v1+json")
             .build();
-            
+
         Response response = client.newCall(request).execute();
         System.out.println(response.body().string());
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -167,21 +174,22 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-class Program 
+class Program
 {
     static async Task Main(string[] args)
     {
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", "Bearer ptla_YOUR_API_KEY");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         var response = await client.GetAsync("https://your-panel.com/api/application/nests?include=eggs");
         var content = await response.Content.ReadAsStringAsync();
-        
+
         Console.WriteLine(content);
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -199,7 +207,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts response.body
-```
+
+````
 </TabItem>
 </Tabs>
 
@@ -255,7 +264,7 @@ puts response.body
     }
   }
 }
-```
+````
 
 ### Get Nest Details
 
@@ -267,14 +276,14 @@ GET /api/application/nests/{nest}
 
 #### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `nest` | integer | Nest ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `nest`    | integer | Nest ID     |
 
 #### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                           |
+| --------- | ------ | ------------------------------------- |
 | `include` | string | Include relationships (eggs, servers) |
 
 #### Example Request
@@ -294,17 +303,18 @@ const axios = require('axios');
 
 const nestId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/nests/${nestId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'eggs'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'eggs'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -319,10 +329,11 @@ headers = {
 
 params = {'include': 'eggs'}
 
-response = requests.get(f'https://your-panel.com/api/application/nests/{nest_id}', 
+response = requests.get(f'https://your-panel.com/api/application/nests/{nest_id}',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -332,17 +343,18 @@ $client = new GuzzleHttp\Client();
 $nestId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/nests/{$nestId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'eggs']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'eggs']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -359,17 +371,18 @@ func main() {
     nestId := 1
     client := &http.Client{}
     req, _ := http.NewRequest("GET", fmt.Sprintf("https://your-panel.com/api/application/nests/%d?include=eggs", nestId), nil)
-    
+
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -377,21 +390,23 @@ func main() {
 import okhttp3.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        int nestId = 1;
-        OkHttpClient client = new OkHttpClient();
-        
+public static void main(String[] args) throws Exception {
+int nestId = 1;
+OkHttpClient client = new OkHttpClient();
+
         Request request = new Request.Builder()
             .url("https://your-panel.com/api/application/nests/" + nestId + "?include=eggs")
             .addHeader("Authorization", "Bearer ptla_YOUR_API_KEY")
             .addHeader("Accept", "Application/vnd.pterodactyl.v1+json")
             .build();
-            
+
         Response response = client.newCall(request).execute();
         System.out.println(response.body().string());
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -400,7 +415,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-class Program 
+class Program
 {
     static async Task Main(string[] args)
     {
@@ -408,14 +423,15 @@ class Program
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", "Bearer ptla_YOUR_API_KEY");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         var response = await client.GetAsync($"https://your-panel.com/api/application/nests/{nestId}?include=eggs");
         var content = await response.Content.ReadAsStringAsync();
-        
+
         Console.WriteLine(content);
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -434,7 +450,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts response.body
-```
+
+````
 </TabItem>
 </Tabs>
 
@@ -446,21 +463,21 @@ Retrieve all eggs within a specific nest.
 
 ```http
 GET /api/application/nests/{nest}/eggs
-```
+````
 
 #### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `nest` | integer | Nest ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `nest`    | integer | Nest ID     |
 
 #### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `include` | string | Include relationships (variables, nest) | - |
+| Parameter  | Type    | Description                             | Default |
+| ---------- | ------- | --------------------------------------- | ------- |
+| `page`     | integer | Page number for pagination              | 1       |
+| `per_page` | integer | Results per page (1-100)                | 50      |
+| `include`  | string  | Include relationships (variables, nest) | -       |
 
 #### Example Request
 
@@ -479,17 +496,18 @@ const axios = require('axios');
 
 const nestId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/nests/${nestId}/eggs`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'variables'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'variables'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -504,10 +522,11 @@ headers = {
 
 params = {'include': 'variables'}
 
-response = requests.get(f'https://your-panel.com/api/application/nests/{nest_id}/eggs', 
+response = requests.get(f'https://your-panel.com/api/application/nests/{nest_id}/eggs',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -517,17 +536,18 @@ $client = new GuzzleHttp\Client();
 $nestId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/nests/{$nestId}/eggs", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'variables']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'variables']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -544,17 +564,18 @@ func main() {
     nestId := 1
     client := &http.Client{}
     req, _ := http.NewRequest("GET", fmt.Sprintf("https://your-panel.com/api/application/nests/%d/eggs?include=variables", nestId), nil)
-    
+
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -562,21 +583,23 @@ func main() {
 import okhttp3.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        int nestId = 1;
-        OkHttpClient client = new OkHttpClient();
-        
+public static void main(String[] args) throws Exception {
+int nestId = 1;
+OkHttpClient client = new OkHttpClient();
+
         Request request = new Request.Builder()
             .url("https://your-panel.com/api/application/nests/" + nestId + "/eggs?include=variables")
             .addHeader("Authorization", "Bearer ptla_YOUR_API_KEY")
             .addHeader("Accept", "Application/vnd.pterodactyl.v1+json")
             .build();
-            
+
         Response response = client.newCall(request).execute();
         System.out.println(response.body().string());
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -585,7 +608,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-class Program 
+class Program
 {
     static async Task Main(string[] args)
     {
@@ -593,14 +616,15 @@ class Program
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", "Bearer ptla_YOUR_API_KEY");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         var response = await client.GetAsync($"https://your-panel.com/api/application/nests/{nestId}/eggs?include=variables");
         var content = await response.Content.ReadAsStringAsync();
-        
+
         Console.WriteLine(content);
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -619,7 +643,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts response.body
-```
+
+````
 </TabItem>
 </Tabs>
 
@@ -629,19 +654,19 @@ Retrieve detailed information about a specific egg within a nest.
 
 ```http
 GET /api/application/nests/{nest}/eggs/{egg}
-```
+````
 
 #### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `nest` | integer | Nest ID |
-| `egg` | integer | Egg ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `nest`    | integer | Nest ID     |
+| `egg`     | integer | Egg ID      |
 
 #### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                             |
+| --------- | ------ | --------------------------------------- |
 | `include` | string | Include relationships (variables, nest) |
 
 #### Example Request
@@ -662,17 +687,18 @@ const axios = require('axios');
 const nestId = 1;
 const eggId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/nests/${nestId}/eggs/${eggId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'variables,nest'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'variables,nest'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -688,10 +714,11 @@ headers = {
 
 params = {'include': 'variables,nest'}
 
-response = requests.get(f'https://your-panel.com/api/application/nests/{nest_id}/eggs/{egg_id}', 
+response = requests.get(f'https://your-panel.com/api/application/nests/{nest_id}/eggs/{egg_id}',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -702,17 +729,18 @@ $nestId = 1;
 $eggId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/nests/{$nestId}/eggs/{$eggId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'variables,nest']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'variables,nest']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -730,17 +758,18 @@ func main() {
 eggId := 1
 client := &http.Client{}
     req, _ := http.NewRequest("GET", fmt.Sprintf("https://your-panel.com/api/application/nests/%d/eggs/%d?include=variables,nest", nestId, eggId), nil)
-    
+
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -748,22 +777,24 @@ client := &http.Client{}
 import okhttp3.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        int nestId = 1;
+public static void main(String[] args) throws Exception {
+int nestId = 1;
 int eggId = 1;
 OkHttpClient client = new OkHttpClient();
-        
+
         Request request = new Request.Builder()
             .url("https://your-panel.com/api/application/nests/" + nestId + "/eggs/" + eggId + "?include=variables,nest")
             .addHeader("Authorization", "Bearer ptla_YOUR_API_KEY")
             .addHeader("Accept", "Application/vnd.pterodactyl.v1+json")
             .build();
-            
+
         Response response = client.newCall(request).execute();
         System.out.println(response.body().string());
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -772,7 +803,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-class Program 
+class Program
 {
     static async Task Main(string[] args)
     {
@@ -781,14 +812,15 @@ class Program
         var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", "Bearer ptla_YOUR_API_KEY");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         var response = await client.GetAsync($"https://your-panel.com/api/application/nests/{nestId}/eggs/{eggId}?include=variables,nest");
         var content = await response.Content.ReadAsStringAsync();
-        
+
         Console.WriteLine(content);
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -808,7 +840,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts response.body
-```
+
+````
 </TabItem>
 </Tabs>
 
@@ -863,17 +896,17 @@ puts response.body
     "updated_at": "2025-07-16T15:49:54+00:00"
   }
 }
-```
+````
 
 ## Common Response Codes
 
-| Status Code | Description |
-|-------------|-------------|
-| `200` | Request successful |
-| `404` | Nest or egg not found |
-| `422` | Validation errors in request data |
-| `403` | Insufficient permissions |
-| `429` | Rate limit exceeded |
+| Status Code | Description                       |
+| ----------- | --------------------------------- |
+| `200`       | Request successful                |
+| `404`       | Nest or egg not found             |
+| `422`       | Validation errors in request data |
+| `403`       | Insufficient permissions          |
+| `429`       | Rate limit exceeded               |
 
 ## Error Response Format
 
@@ -910,16 +943,19 @@ X-RateLimit-Reset: 1642686400
 ## Best Practices
 
 ### Efficient Querying
+
 - Use `include` parameter to fetch related data in a single request
 - Implement pagination for large datasets
 - Cache frequently accessed nest and egg information
 
 ### Performance Optimization
+
 - Limit the use of `include=servers` for nests with many servers
 - Use specific egg IDs when possible instead of listing all eggs
 - Consider implementing local caching for static data
 
 ### Error Handling
+
 ```javascript
 try {
   const response = await api.get('/api/application/nests');
@@ -927,7 +963,7 @@ try {
 } catch (error) {
   if (error.response?.status === 429) {
     // Handle rate limiting
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    await new Promise((resolve) => setTimeout(resolve, 60000));
     return retryRequest();
   }
   throw error;

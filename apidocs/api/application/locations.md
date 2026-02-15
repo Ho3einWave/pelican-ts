@@ -39,24 +39,23 @@ GET /api/application/locations
 
 ### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `filter[short]` | string | Filter by location short code | - |
-| `filter[long]` | string | Filter by location long name | - |
-| `sort` | string | Sort field (id, short, long, created_at, updated_at) | id |
-| `include` | string | Include relationships (nodes, servers) | - |
+| Parameter       | Type    | Description                                          | Default |
+| --------------- | ------- | ---------------------------------------------------- | ------- |
+| `page`          | integer | Page number for pagination                           | 1       |
+| `per_page`      | integer | Results per page (1-100)                             | 50      |
+| `filter[short]` | string  | Filter by location short code                        | -       |
+| `filter[long]`  | string  | Filter by location long name                         | -       |
+| `sort`          | string  | Sort field (id, short, long, created_at, updated_at) | id      |
+| `include`       | string  | Include relationships (nodes, servers)               | -       |
 
 ### Example Request
-
-
 
 ```bash
 curl "https://your-panel.com/api/application/locations?include=nodes&per_page=25" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -64,19 +63,20 @@ curl "https://your-panel.com/api/application/locations?include=nodes&per_page=25
 const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/application/locations', {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'nodes',
-    per_page: 25,
-    'filter[short]': 'us'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'nodes',
+per_page: 25,
+'filter[short]': 'us'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -94,10 +94,11 @@ params = {
     'filter[short]': 'us'
 }
 
-response = requests.get('https://your-panel.com/api/application/locations', 
+response = requests.get('https://your-panel.com/api/application/locations',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -106,21 +107,22 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $response = $client->get('https://your-panel.com/api/application/locations', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => [
-        'include' => 'nodes',
-        'per_page' => 25,
-        'filter' => ['short' => 'us']
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => [
+'include' => 'nodes',
+'per_page' => 25,
+'filter' => ['short' => 'us']
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -138,15 +140,16 @@ func main() {
     req, _ := http.NewRequest("GET", "https://your-panel.com/api/application/locations?include=nodes&per_page=25", nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -158,15 +161,16 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/locations?include=nodes&per_page=25"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/locations?include=nodes&per_page=25"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -181,7 +185,8 @@ client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json"
 var response = await client.GetAsync("https://your-panel.com/api/application/locations?include=nodes&per_page=25");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -191,8 +196,8 @@ require 'json'
 
 uri = URI('https://your-panel.com/api/application/locations')
 uri.query = URI.encode_www_form({
-  include: 'nodes',
-  per_page: 25
+include: 'nodes',
+per_page: 25
 })
 
 http = Net::HTTP.new(uri.host, uri.port)
@@ -204,7 +209,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -272,7 +278,7 @@ puts JSON.parse(response.body)
     }
   }
 }
-```
+````
 
 ## Get Location Details
 
@@ -284,19 +290,17 @@ GET /api/application/locations/{location}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type    | Description |
+| ---------- | ------- | ----------- |
 | `location` | integer | Location ID |
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                            |
+| --------- | ------ | -------------------------------------- |
 | `include` | string | Include relationships (nodes, servers) |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -313,17 +317,18 @@ const axios = require('axios');
 
 const locationId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/locations/${locationId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'nodes,servers'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'nodes,servers'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -338,10 +343,11 @@ headers = {
 
 params = {'include': 'nodes,servers'}
 
-response = requests.get(f'https://your-panel.com/api/application/locations/{location_id}', 
+response = requests.get(f'https://your-panel.com/api/application/locations/{location_id}',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -351,17 +357,18 @@ $client = new GuzzleHttp\Client();
 $locationId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/locations/{$locationId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'nodes,servers']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'nodes,servers']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -377,20 +384,21 @@ import (
 func main() {
     locationId := 1
     url := fmt.Sprintf("https://your-panel.com/api/application/locations/%d?include=nodes,servers", locationId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -405,15 +413,16 @@ String url = String.format("https://your-panel.com/api/application/locations/%d?
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -429,7 +438,8 @@ int locationId = 1;
 var response = await client.GetAsync($"https://your-panel.com/api/application/locations/{locationId}?include=nodes,servers");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -450,7 +460,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -503,7 +514,7 @@ puts JSON.parse(response.body)
     }
   }
 }
-```
+````
 
 ## Create New Location
 
@@ -515,14 +526,12 @@ POST /api/application/locations
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `short` | string | Yes | Short location code (3-60 characters) |
-| `long` | string | No | Long location name (3-191 characters) |
+| Field   | Type   | Required | Description                           |
+| ------- | ------ | -------- | ------------------------------------- |
+| `short` | string | Yes      | Short location code (3-60 characters) |
+| `long`  | string | No       | Long location name (3-191 characters) |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -543,20 +552,21 @@ curl -X POST "https://your-panel.com/api/application/locations" \
 const axios = require('axios');
 
 const locationData = {
-  short: 'ap-south',
-  long: 'Asia Pacific South'
+short: 'ap-south',
+long: 'Asia Pacific South'
 };
 
 const response = await axios.post('https://your-panel.com/api/application/locations', locationData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -575,10 +585,11 @@ location_data = {
     'long': 'Asia Pacific South'
 }
 
-response = requests.post('https://your-panel.com/api/application/locations', 
+response = requests.post('https://your-panel.com/api/application/locations',
                         headers=headers, json=location_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -587,23 +598,24 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $locationData = [
-    'short' => 'ap-south',
-    'long' => 'Asia Pacific South'
+'short' => 'ap-south',
+'long' => 'Asia Pacific South'
 ];
 
 $response = $client->post('https://your-panel.com/api/application/locations', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $locationData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $locationData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -622,23 +634,24 @@ func main() {
         "short": "ap-south",
         "long":  "Asia Pacific South",
     }
-    
+
     jsonData, _ := json.Marshal(locationData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/application/locations", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -650,23 +663,24 @@ import java.net.URI;
 
 String jsonBody = """
 {
-  "short": "ap-south",
-  "long": "Asia Pacific South"
+"short": "ap-south",
+"long": "Asia Pacific South"
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/locations"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/locations"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -690,7 +704,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync("https://your-panel.com/api/application/locations", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -703,8 +718,8 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 location_data = {
-  short: 'ap-south',
-  long: 'Asia Pacific South'
+short: 'ap-south',
+long: 'Asia Pacific South'
 }
 
 request = Net::HTTP::Post.new(uri)
@@ -715,7 +730,8 @@ request.body = location_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -736,8 +752,7 @@ puts JSON.parse(response.body)
     "updated_at": "2024-01-20T14:30:45+00:00"
   }
 }
-```
-
+````
 
 ## Update Location
 
@@ -749,20 +764,18 @@ PATCH /api/application/locations/{location}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type    | Description |
+| ---------- | ------- | ----------- |
 | `location` | integer | Location ID |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `short` | string | No | Short location code |
-| `long` | string | No | Long location name |
+| Field   | Type   | Required | Description         |
+| ------- | ------ | -------- | ------------------- |
+| `short` | string | No       | Short location code |
+| `long`  | string | No       | Long location name  |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -784,20 +797,21 @@ const axios = require('axios');
 
 const locationId = 3;
 const updateData = {
-  short: 'apac-south',
-  long: 'Asia Pacific South Region'
+short: 'apac-south',
+long: 'Asia Pacific South Region'
 };
 
 const response = await axios.patch(`https://your-panel.com/api/application/locations/${locationId}`, updateData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -817,10 +831,11 @@ update_data = {
     'long': 'Asia Pacific South Region'
 }
 
-response = requests.patch(f'https://your-panel.com/api/application/locations/{location_id}', 
+response = requests.patch(f'https://your-panel.com/api/application/locations/{location_id}',
                          headers=headers, json=update_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -830,23 +845,24 @@ $client = new GuzzleHttp\Client();
 $locationId = 3;
 
 $updateData = [
-    'short' => 'apac-south',
-    'long' => 'Asia Pacific South Region'
+'short' => 'apac-south',
+'long' => 'Asia Pacific South Region'
 ];
 
 $response = $client->patch("https://your-panel.com/api/application/locations/{$locationId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $updateData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $updateData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -866,24 +882,25 @@ func main() {
         "short": "apac-south",
         "long":  "Asia Pacific South Region",
     }
-    
+
     jsonData, _ := json.Marshal(updateData)
     url := fmt.Sprintf("https://your-panel.com/api/application/locations/%d", locationId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -896,8 +913,8 @@ import java.net.URI;
 int locationId = 3;
 String jsonBody = """
 {
-  "short": "apac-south",
-  "long": "Asia Pacific South Region"
+"short": "apac-south",
+"long": "Asia Pacific South Region"
 }
 """;
 
@@ -905,16 +922,17 @@ String url = String.format("https://your-panel.com/api/application/locations/%d"
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -939,7 +957,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PatchAsync($"https://your-panel.com/api/application/locations/{locationId}", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -953,8 +972,8 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 update_data = {
-  short: 'apac-south',
-  long: 'Asia Pacific South Region'
+short: 'apac-south',
+long: 'Asia Pacific South Region'
 }
 
 request = Net::HTTP::Patch.new(uri)
@@ -965,7 +984,8 @@ request.body = update_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -986,8 +1006,7 @@ puts JSON.parse(response.body)
     "updated_at": "2024-01-20T15:45:30+00:00"
   }
 }
-```
-
+````
 
 ## Delete Location
 
@@ -1003,13 +1022,11 @@ A location can only be deleted if it has no associated nodes. Move or delete all
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type    | Description |
+| ---------- | ------- | ----------- |
 | `location` | integer | Location ID |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1026,14 +1043,15 @@ const axios = require('axios');
 
 const locationId = 3;
 const response = await axios.delete(`https://your-panel.com/api/application/locations/${locationId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log('Location deleted successfully');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1046,10 +1064,11 @@ headers = {
     'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.delete(f'https://your-panel.com/api/application/locations/{location_id}', 
+response = requests.delete(f'https://your-panel.com/api/application/locations/{location_id}',
                           headers=headers)
 print('Location deleted successfully' if response.status_code == 204 else 'Error deleting location')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1059,15 +1078,16 @@ $client = new GuzzleHttp\Client();
 $locationId = 3;
 
 $response = $client->delete("https://your-panel.com/api/application/locations/{$locationId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 echo 'Location deleted successfully';
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1082,20 +1102,21 @@ import (
 func main() {
     locationId := 3
     url := fmt.Sprintf("https://your-panel.com/api/application/locations/%d", locationId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Location deleted successfully")
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1110,17 +1131,18 @@ String url = String.format("https://your-panel.com/api/application/locations/%d"
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .DELETE()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 if (response.statusCode() == 204) {
-    System.out.println("Location deleted successfully");
+System.out.println("Location deleted successfully");
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1138,7 +1160,8 @@ var response = await client.DeleteAsync($"https://your-panel.com/api/application
 if (response.StatusCode == System.Net.HttpStatusCode.NoContent) {
     Console.WriteLine("Location deleted successfully");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1156,7 +1179,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts 'Location deleted successfully' if response.code == '204'
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1194,8 +1218,7 @@ Returns HTTP 204 No Content on successful deletion.
     }
   ]
 }
-```
-
+````
 
 ## Best Practices
 
@@ -1214,6 +1237,7 @@ Returns HTTP 204 No Content on successful deletion.
 ### Organization Strategies
 
 1. **Geographic Organization**
+
    ```
    us-east    → United States East Coast
    us-west    → United States West Coast
@@ -1222,6 +1246,7 @@ Returns HTTP 204 No Content on successful deletion.
    ```
 
 2. **Provider-Based Organization**
+
    ```
    vultr-ny   → Vultr New York
    do-fra     → DigitalOcean Frankfurt
@@ -1252,16 +1277,16 @@ class LocationService {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
     this.headers = {
-      'Authorization': `Bearer ${apiKey}`,
-      'Accept': 'Application/vnd.pterodactyl.v1+json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${apiKey}`,
+      Accept: 'Application/vnd.pterodactyl.v1+json',
+      'Content-Type': 'application/json',
     };
   }
 
   async getAllLocations(options = {}) {
     const params = new URLSearchParams(options);
     const response = await fetch(`${this.baseUrl}/api/application/locations?${params}`, {
-      headers: this.headers
+      headers: this.headers,
     });
     return response.json();
   }
@@ -1270,7 +1295,7 @@ class LocationService {
     const response = await fetch(`${this.baseUrl}/api/application/locations`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify(locationData)
+      body: JSON.stringify(locationData),
     });
     return response.json();
   }
@@ -1279,7 +1304,7 @@ class LocationService {
     const response = await fetch(`${this.baseUrl}/api/application/locations/${locationId}`, {
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify(updateData)
+      body: JSON.stringify(updateData),
     });
     return response.json();
   }
@@ -1287,20 +1312,22 @@ class LocationService {
   async deleteLocation(locationId) {
     const response = await fetch(`${this.baseUrl}/api/application/locations/${locationId}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
     });
     return response.status === 204;
   }
 
   async getLocationWithNodes(locationId) {
-    const response = await fetch(`${this.baseUrl}/api/application/locations/${locationId}?include=nodes`, {
-      headers: this.headers
-    });
+    const response = await fetch(
+      `${this.baseUrl}/api/application/locations/${locationId}?include=nodes`,
+      {
+        headers: this.headers,
+      },
+    );
     return response.json();
   }
 }
 ```
-
 
 ## Rate Limiting
 
@@ -1315,8 +1342,6 @@ X-RateLimit-Limit: 240
 X-RateLimit-Remaining: 235
 X-RateLimit-Reset: 1642686400
 ```
-
-
 
 ## Source Code References
 
@@ -1358,4 +1383,4 @@ X-RateLimit-Reset: 1642686400
 
 **Application Routes**: [api-application.php](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php) - Lines 90-95
 
-For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel). 
+For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel).

@@ -12,34 +12,34 @@ Retrieve the contents of a server directory.
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter   | Type   | Description                           |
+| ----------- | ------ | ------------------------------------- |
 | `directory` | string | Directory path to list (default: `/`) |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/list"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/files/list?directory=%2F" \\
+endpoint="/api/client/servers/{server}/files/list"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/files/list?directory=%2F" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const directory = '/';
 
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/files/list\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  },
-  params: {
-    directory: directory
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+},
+params: {
+directory: directory
+}
 });
 
 console.log('Files:', response.data.data);`,
@@ -50,17 +50,17 @@ server_id = 'd3aac109'
 directory = '/'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 params = {
-    'directory': directory
+'directory': directory
 }
 
-response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/files/list', 
-                       headers=headers, params=params)
+response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/files/list',
+headers=headers, params=params)
 data = response.json()
 print('Files:', data['data'])`,
     php: `<?php
@@ -68,15 +68,15 @@ $serverId = 'd3aac109';
 $directory = '/';
 $ch = curl_init();
 
-$url = "https://your-panel.com/api/client/servers/{$serverId}/files/list?" . 
-       http_build_query(['directory' => $directory]);
+$url = "https://your-panel.com/api/client/servers/{$serverId}/files/list?" .
+http_build_query(['directory' => $directory]);
 
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -85,7 +85,7 @@ curl_close($ch);
 
 print_r($data['data']);
 ?>`
-  }}
+}}
 />
 
 ### Example Response
@@ -150,34 +150,34 @@ Read the contents of a specific file.
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `file` | string | Path to the file to read |
+| Parameter | Type   | Description              |
+| --------- | ------ | ------------------------ |
+| `file`    | string | Path to the file to read |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/contents"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/files/contents?file=%2Fserver.properties" \\
+endpoint="/api/client/servers/{server}/files/contents"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/files/contents?file=%2Fserver.properties" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const filePath = '/server.properties';
 
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/files/contents\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  },
-  params: {
-    file: filePath
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+},
+params: {
+file: filePath
+}
 });
 
 console.log('File contents:', response.data);`,
@@ -187,32 +187,32 @@ server_id = 'd3aac109'
 file_path = '/server.properties'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 params = {
-    'file': file_path
+'file': file_path
 }
 
-response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/files/contents', 
-                       headers=headers, params=params)
+response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/files/contents',
+headers=headers, params=params)
 print('File contents:', response.text)`,
     php: `<?php
 $serverId = 'd3aac109';
 $filePath = '/server.properties';
 $ch = curl_init();
 
-$url = "https://your-panel.com/api/client/servers/{$serverId}/files/contents?" . 
-       http_build_query(['file' => $filePath]);
+$url = "https://your-panel.com/api/client/servers/{$serverId}/files/contents?" .
+http_build_query(['file' => $filePath]);
 
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -220,7 +220,7 @@ curl_close($ch);
 
 echo "File contents: " . $response;
 ?>`
-  }}
+}}
 />
 
 ### Example Response (Plain Text)
@@ -248,9 +248,9 @@ Create or update a file with new content.
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `file` | string | Path to the file to write |
+| Parameter | Type   | Description               |
+| --------- | ------ | ------------------------- |
+| `file`    | string | Path to the file to write |
 
 ### Request Body
 
@@ -259,10 +259,10 @@ Send the file content as raw text in the request body.
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/write"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/write?file=%2Fserver.properties" \\
+endpoint="/api/client/servers/{server}/files/write"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/write?file=%2Fserver.properties" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: text/plain" \\
@@ -272,7 +272,7 @@ gamemode=survival
 max-players=30
 online-mode=true
 difficulty=hard"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const filePath = '/server.properties';
@@ -284,18 +284,18 @@ online-mode=true
 difficulty=hard\`;
 
 const response = await axios.post(
-  \`https://your-panel.com/api/client/servers/\${serverId}/files/write\`,
-  content,
-  {
-    headers: {
-      'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-      'Accept': 'Application/vnd.pterodactyl.v1+json',
-      'Content-Type': 'text/plain'
-    },
-    params: {
-      file: filePath
-    }
-  }
+\`https://your-panel.com/api/client/servers/\${serverId}/files/write\`,
+content,
+{
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'text/plain'
+},
+params: {
+file: filePath
+}
+}
 );
 
 console.log('File updated successfully');`,
@@ -311,20 +311,20 @@ online-mode=true
 difficulty=hard"""
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'text/plain'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'text/plain'
 }
 
 params = {
-    'file': file_path
+'file': file_path
 }
 
 response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/write',
-                        data=content, headers=headers, params=params)
+data=content, headers=headers, params=params)
 
 if response.status_code == 204:
-    print('File updated successfully')`,
+print('File updated successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $filePath = '/server.properties';
@@ -337,17 +337,17 @@ difficulty=hard";
 
 $ch = curl_init();
 
-$url = "https://your-panel.com/api/client/servers/{$serverId}/files/write?" . 
-       http_build_query(['file' => $filePath]);
+$url = "https://your-panel.com/api/client/servers/{$serverId}/files/write?" .
+http_build_query(['file' => $filePath]);
 
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: text/plain'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: text/plain'
 ]);
 
 $response = curl_exec($ch);
@@ -355,10 +355,10 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode === 204) {
-    echo "File updated successfully\\n";
+echo "File updated successfully\\n";
 }
 ?>`
-  }}
+}}
 />
 
 ### Success Response (204)
@@ -386,9 +386,9 @@ This approach ensures secure file uploads without exposing server credentials an
 
 #### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `directory` | string | No | Target directory for upload (default: `/`) |
+| Parameter   | Type   | Required | Description                                |
+| ----------- | ------ | -------- | ------------------------------------------ |
+| `directory` | string | No       | Target directory for upload (default: `/`) |
 
 #### Example Response
 
@@ -409,32 +409,33 @@ Use the signed URL from Step 1 to upload your file(s).
 
 #### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `directory` | string | No | Target directory (must match Step 1) |
+| Parameter   | Type   | Required | Description                          |
+| ----------- | ------ | -------- | ------------------------------------ |
+| `directory` | string | No       | Target directory (must match Step 1) |
 
 #### Form Data Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `files` | file | Yes | File to upload (use `files` as field name) |
+| Parameter | Type | Required | Description                                |
+| --------- | ---- | -------- | ------------------------------------------ |
+| `files`   | file | Yes      | File to upload (use `files` as field name) |
 
 ### Complete Example
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/upload"
-  method="GET + POST"
-  examples={{
-    curl: `# Step 1: Get signed upload URL
+endpoint="/api/client/servers/{server}/files/upload"
+method="GET + POST"
+examples={{
+curl: `# Step 1: Get signed upload URL
 signed_url=$(curl -s \\
-  -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
-  -H "Accept: Application/vnd.pterodactyl.v1+json" \\
-  "https://your-panel.com/api/client/servers/d3aac109/files/upload?directory=%2F" \\
-  | jq -r '.attributes.url')
+-H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
+-H "Accept: Application/vnd.pterodactyl.v1+json" \\
+"https://your-panel.com/api/client/servers/d3aac109/files/upload?directory=%2F" \\
+| jq -r '.attributes.url')
 
 # Step 2: Upload file to signed URL
+
 curl -X POST "$signed_url?directory=%2F" \\
-  -F "files=@/path/to/local/file.txt"`,
+-F "files=@/path/to/local/file.txt"`,
     javascript: `const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
@@ -445,16 +446,16 @@ const filePath = '/path/to/local/file.txt';
 
 // Step 1: Get signed upload URL
 const uploadUrlResponse = await axios.get(
-  \`https://your-panel.com/api/client/servers/\${serverId}/files/upload\`,
-  {
-    headers: {
-      'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-      'Accept': 'Application/vnd.pterodactyl.v1+json'
-    },
-    params: {
-      directory: directory
-    }
-  }
+\`https://your-panel.com/api/client/servers/\${serverId}/files/upload\`,
+{
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+directory: directory
+}
+}
 );
 
 const signedUrl = uploadUrlResponse.data.attributes.url;
@@ -465,7 +466,7 @@ formData.append('files', fs.createReadStream(filePath));
 formData.append('directory', directory);
 
 const uploadResponse = await axios.post(signedUrl, formData, {
-  headers: formData.getHeaders()
+headers: formData.getHeaders()
 });
 
 console.log('File uploaded successfully');`,
@@ -477,27 +478,29 @@ directory = '/'
 file_path = '/path/to/local/file.txt'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
 # Step 1: Get signed upload URL
+
 params = {'directory': directory}
 response = requests.get(
-    f'https://your-panel.com/api/client/servers/{server_id}/files/upload',
-    headers=headers,
-    params=params
+f'https://your-panel.com/api/client/servers/{server_id}/files/upload',
+headers=headers,
+params=params
 )
 signed_url = response.json()['attributes']['url']
 
 # Step 2: Upload file to signed URL
+
 with open(file_path, 'rb') as f:
-    files = {'files': f}
-    data = {'directory': directory}
-    upload_response = requests.post(signed_url, files=files, data=data)
+files = {'files': f}
+data = {'directory': directory}
+upload_response = requests.post(signed_url, files=files, data=data)
 
 if upload_response.status_code in [200, 204]:
-    print('File uploaded successfully')`,
+print('File uploaded successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $directory = '/';
@@ -505,14 +508,14 @@ $filePath = '/path/to/local/file.txt';
 
 // Step 1: Get signed upload URL
 $ch = curl_init();
-$url = "https://your-panel.com/api/client/servers/{$serverId}/files/upload?" . 
-       http_build_query(['directory' => $directory]);
+$url = "https://your-panel.com/api/client/servers/{$serverId}/files/upload?" .
+http_build_query(['directory' => $directory]);
 
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json'
 ]);
 
 $response = curl_exec($ch);
@@ -527,7 +530,7 @@ curl_setopt($ch, CURLOPT_URL, $signedUrl);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, [
     'files' => new CURLFile($filePath),
-    'directory' => $directory
+'directory' => $directory
 ]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -536,41 +539,41 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode === 200 || $httpCode === 204) {
-    echo "File uploaded successfully\\n";
+echo "File uploaded successfully\\n";
 }
 ?>`,
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "io"
-    "mime/multipart"
-    "net/http"
-    "net/url"
-    "os"
-    "path/filepath"
+"bytes"
+"encoding/json"
+"fmt"
+"io"
+"mime/multipart"
+"net/http"
+"net/url"
+"os"
+"path/filepath"
 )
 
 func main() {
-    serverId := "d3aac109"
-    directory := "/"
-    filePath := "/path/to/local/file.txt"
-    apiKey := "ptlc_YOUR_API_KEY"
+serverId := "d3aac109"
+directory := "/"
+filePath := "/path/to/local/file.txt"
+apiKey := "ptlc_YOUR_API_KEY"
 
     // Step 1: Get signed upload URL
     uploadUrl := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/files/upload?directory=%s",
         serverId, url.QueryEscape(directory))
-    
+
     req, _ := http.NewRequest("GET", uploadUrl, nil)
     req.Header.Set("Authorization", "Bearer " + apiKey)
     req.Header.Set("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     client := &http.Client{}
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var uploadData struct {
         Attributes struct {
             URL string \`json:"url"\`
@@ -585,55 +588,56 @@ func main() {
 
     body := &bytes.Buffer{}
     writer := multipart.NewWriter(body)
-    
+
     part, _ := writer.CreateFormFile("files", filepath.Base(filePath))
     io.Copy(part, file)
-    
+
     writer.WriteField("directory", directory)
     writer.Close()
 
     req, _ = http.NewRequest("POST", signedUrl, body)
     req.Header.Set("Content-Type", writer.FormDataContentType())
-    
+
     resp, _ = client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 200 || resp.StatusCode == 204 {
         fmt.Println("File uploaded successfully")
     }
+
 }`,
-    java: `import java.io.*;
-import java.net.*;
-import java.nio.file.*;
-import org.json.*;
-import okhttp3.*;
+    java: `import java.io._;
+import java.net._;
+import java.nio.file._;
+import org.json._;
+import okhttp3.\*;
 
 public class FileUpload {
-    public static void main(String[] args) throws IOException {
-        String serverId = "d3aac109";
-        String directory = "/";
-        String filePath = "/path/to/local/file.txt";
-        String apiKey = "ptlc_YOUR_API_KEY";
-        
+public static void main(String[] args) throws IOException {
+String serverId = "d3aac109";
+String directory = "/";
+String filePath = "/path/to/local/file.txt";
+String apiKey = "ptlc_YOUR_API_KEY";
+
         OkHttpClient client = new OkHttpClient();
-        
+
         // Step 1: Get signed upload URL
         String uploadUrl = String.format(
             "https://your-panel.com/api/client/servers/%s/files/upload?directory=%s",
             serverId, URLEncoder.encode(directory, "UTF-8")
         );
-        
+
         Request uploadRequest = new Request.Builder()
             .url(uploadUrl)
             .header("Authorization", "Bearer " + apiKey)
             .header("Accept", "Application/vnd.pterodactyl.v1+json")
             .build();
-        
+
         Response uploadResponse = client.newCall(uploadRequest).execute();
         JSONObject json = new JSONObject(uploadResponse.body().string());
         String signedUrl = json.getJSONObject("attributes").getString("url");
         uploadResponse.close();
-        
+
         // Step 2: Upload file to signed URL
         File file = new File(filePath);
         RequestBody requestBody = new MultipartBody.Builder()
@@ -642,18 +646,19 @@ public class FileUpload {
                 RequestBody.create(MediaType.parse("application/octet-stream"), file))
             .addFormDataPart("directory", directory)
             .build();
-        
+
         Request fileUploadRequest = new Request.Builder()
             .url(signedUrl)
             .post(requestBody)
             .build();
-        
+
         Response fileResponse = client.newCall(fileUploadRequest).execute();
         if (fileResponse.code() == 200 || fileResponse.code() == 204) {
             System.out.println("File uploaded successfully");
         }
         fileResponse.close();
     }
+
 }`,
     csharp: `using System;
 using System.IO;
@@ -663,31 +668,31 @@ using Newtonsoft.Json.Linq;
 
 class FileUpload
 {
-    static async Task Main(string[] args)
-    {
-        string serverId = "d3aac109";
-        string directory = "/";
-        string filePath = "/path/to/local/file.txt";
-        string apiKey = "ptlc_YOUR_API_KEY";
-        
+static async Task Main(string[] args)
+{
+string serverId = "d3aac109";
+string directory = "/";
+string filePath = "/path/to/local/file.txt";
+string apiKey = "ptlc_YOUR_API_KEY";
+
         using (var client = new HttpClient())
         {
             // Step 1: Get signed upload URL
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
             client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-            
+
             var uploadUrl = $"https://your-panel.com/api/client/servers/{serverId}/files/upload?directory={Uri.EscapeDataString(directory)}";
             var uploadResponse = await client.GetStringAsync(uploadUrl);
             var json = JObject.Parse(uploadResponse);
             var signedUrl = json["attributes"]["url"].ToString();
-            
+
             // Step 2: Upload file to signed URL
             using (var content = new MultipartFormDataContent())
             using (var fileStream = File.OpenRead(filePath))
             {
                 content.Add(new StreamContent(fileStream), "files", Path.GetFileName(filePath));
                 content.Add(new StringContent(directory), "directory");
-                
+
                 var fileResponse = await client.PostAsync(signedUrl, content);
                 if (fileResponse.IsSuccessStatusCode)
                 {
@@ -696,6 +701,7 @@ class FileUpload
             }
         }
     }
+
 }`,
     ruby: `require 'net/http'
 require 'uri'
@@ -707,6 +713,7 @@ file_path = '/path/to/local/file.txt'
 api_key = 'ptlc_YOUR_API_KEY'
 
 # Step 1: Get signed upload URL
+
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/files/upload")
 uri.query = URI.encode_www_form(directory: directory)
 
@@ -722,51 +729,53 @@ data = JSON.parse(response.body)
 signed_url = data['attributes']['url']
 
 # Step 2: Upload file to signed URL
+
 uri = URI(signed_url)
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 File.open(file_path, 'rb') do |file|
-  request = Net::HTTP::Post::Multipart.new(uri.path, {
-    'files' => UploadIO.new(file, 'application/octet-stream', File.basename(file_path)),
-    'directory' => directory
-  })
-  
-  response = http.request(request)
-  if response.code.to_i == 200 || response.code.to_i == 204
-    puts 'File uploaded successfully'
-  end
+request = Net::HTTP::Post::Multipart.new(uri.path, {
+'files' => UploadIO.new(file, 'application/octet-stream', File.basename(file_path)),
+'directory' => directory
+})
+
+response = http.request(request)
+if response.code.to_i == 200 || response.code.to_i == 204
+puts 'File uploaded successfully'
+end
 end`
-  }}
+}}
 />
 
 ### Upload Limits
 
-| Limit | Value |
-|-------|-------|
-| Maximum file size | 100 MB per file |
-| Maximum files per request | 10 files |
-| Allowed file types | All types (configurable by admin) |
+| Limit                     | Value                             |
+| ------------------------- | --------------------------------- |
+| Maximum file size         | 100 MB per file                   |
+| Maximum files per request | 10 files                          |
+| Allowed file types        | All types (configurable by admin) |
 
 ### Multiple File Upload Example
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/upload"
-  method="Multiple Files"
-  examples={{
-    curl: `# Step 1: Get signed upload URL (same as single file)
+endpoint="/api/client/servers/{server}/files/upload"
+method="Multiple Files"
+examples={{
+curl: `# Step 1: Get signed upload URL (same as single file)
 signed_url=$(curl -s \\
-  -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
-  -H "Accept: Application/vnd.pterodactyl.v1+json" \\
-  "https://your-panel.com/api/client/servers/d3aac109/files/upload?directory=%2F" \\
-  | jq -r '.attributes.url')
+-H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
+-H "Accept: Application/vnd.pterodactyl.v1+json" \\
+"https://your-panel.com/api/client/servers/d3aac109/files/upload?directory=%2F" \\
+| jq -r '.attributes.url')
 
 # Step 2: Upload multiple files to signed URL
+
 curl -X POST "$signed_url" \\
-  -F "files=@/path/to/file1.txt" \\
-  -F "files=@/path/to/file2.log" \\
-  -F "files=@/path/to/config.yml" \\
-  -F "directory=/"`,
+-F "files=@/path/to/file1.txt" \\
+-F "files=@/path/to/file2.log" \\
+-F "files=@/path/to/config.yml" \\
+-F "directory=/"`,
     javascript: `const axios = require('axios');
 const FormData = require('form-data');
 const fs = require('fs');
@@ -774,21 +783,21 @@ const fs = require('fs');
 const serverId = 'd3aac109';
 const directory = '/';
 const filePaths = [
-  '/path/to/file1.txt',
-  '/path/to/file2.log',
-  '/path/to/config.yml'
+'/path/to/file1.txt',
+'/path/to/file2.log',
+'/path/to/config.yml'
 ];
 
 // Step 1: Get signed upload URL
 const uploadUrlResponse = await axios.get(
-  \`https://your-panel.com/api/client/servers/\${serverId}/files/upload\`,
-  {
-    headers: {
-      'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-      'Accept': 'Application/vnd.pterodactyl.v1+json'
-    },
-    params: { directory }
-  }
+\`https://your-panel.com/api/client/servers/\${serverId}/files/upload\`,
+{
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: { directory }
+}
 );
 
 const signedUrl = uploadUrlResponse.data.attributes.url;
@@ -798,13 +807,13 @@ const formData = new FormData();
 
 // Add each file to the form
 filePaths.forEach(filePath => {
-  formData.append('files', fs.createReadStream(filePath));
+formData.append('files', fs.createReadStream(filePath));
 });
 
 formData.append('directory', directory);
 
 const uploadResponse = await axios.post(signedUrl, formData, {
-  headers: formData.getHeaders()
+headers: formData.getHeaders()
 });
 
 console.log('Multiple files uploaded successfully');`,
@@ -813,57 +822,60 @@ console.log('Multiple files uploaded successfully');`,
 server_id = 'd3aac109'
 directory = '/'
 file_paths = [
-    '/path/to/file1.txt',
-    '/path/to/file2.log',
-    '/path/to/config.yml'
+'/path/to/file1.txt',
+'/path/to/file2.log',
+'/path/to/config.yml'
 ]
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
 # Step 1: Get signed upload URL
+
 response = requests.get(
-    f'https://your-panel.com/api/client/servers/{server_id}/files/upload',
-    headers=headers,
-    params={'directory': directory}
+f'https://your-panel.com/api/client/servers/{server_id}/files/upload',
+headers=headers,
+params={'directory': directory}
 )
 signed_url = response.json()['attributes']['url']
 
 # Step 2: Upload multiple files
+
 files = []
 for file_path in file_paths:
-    files.append(('files', open(file_path, 'rb')))
+files.append(('files', open(file_path, 'rb')))
 
 data = {'directory': directory}
 upload_response = requests.post(signed_url, files=files, data=data)
 
 # Close file handles
-for _, file_handle in files:
-    file_handle.close()
+
+for \_, file_handle in files:
+file_handle.close()
 
 if upload_response.status_code in [200, 204]:
-    print('Multiple files uploaded successfully')`,
+print('Multiple files uploaded successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $directory = '/';
 $filePaths = [
-    '/path/to/file1.txt',
-    '/path/to/file2.log',
-    '/path/to/config.yml'
+'/path/to/file1.txt',
+'/path/to/file2.log',
+'/path/to/config.yml'
 ];
 
 // Step 1: Get signed upload URL
 $ch = curl_init();
-$url = "https://your-panel.com/api/client/servers/{$serverId}/files/upload?" . 
-       http_build_query(['directory' => $directory]);
+$url = "https://your-panel.com/api/client/servers/{$serverId}/files/upload?" .
+http_build_query(['directory' => $directory]);
 
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json'
 ]);
 
 $response = curl_exec($ch);
@@ -881,34 +893,35 @@ foreach ($filePaths as $filePath) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $signedUrl);
     curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, [
+curl_setopt($ch, CURLOPT_POSTFIELDS, [
         'files' => new CURLFile($filePath),
-        'directory' => $directory
+'directory' => $directory
     ]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
+
     $uploadResponse = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode !== 200 && $httpCode !== 204) {
         echo "Failed to upload: " . basename($filePath) . "\\n";
         break;
     }
+
 }
 
 echo "Files uploaded successfully\\n";
 
 // Option 2: Check if your panel accepts array notation
 // Some implementations may accept files[0], files[1], etc.
-/*
+/_
 $postFields = ['directory' => $directory];
 foreach ($filePaths as $index => $filePath) {
     $postFields["files[{$index}]"] = new CURLFile($filePath);
 }
-*/
+_/
 ?>`
-  }}
+}}
 />
 
 ### Important Notes
@@ -930,38 +943,38 @@ Download a file from the server.
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `file` | string | Path to the file to download |
+| Parameter | Type   | Description                  |
+| --------- | ------ | ---------------------------- |
+| `file`    | string | Path to the file to download |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/download"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/files/download?file=%2Fbackups%2Fworld.zip" \\
+endpoint="/api/client/servers/{server}/files/download"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/files/download?file=%2Fbackups%2Fworld.zip" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -o "world.zip"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 const fs = require('fs');
 
 const serverId = 'd3aac109';
 const filePath = '/backups/world.zip';
 
 const response = await axios.get(
-  \`https://your-panel.com/api/client/servers/\${serverId}/files/download\`,
-  {
-    headers: {
-      'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-      'Accept': 'Application/vnd.pterodactyl.v1+json'
-    },
-    params: {
-      file: filePath
-    },
-    responseType: 'stream'
-  }
+\`https://your-panel.com/api/client/servers/\${serverId}/files/download\`,
+{
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+file: filePath
+},
+responseType: 'stream'
+}
 );
 
 // Save to file
@@ -973,20 +986,20 @@ server_id = 'd3aac109'
 file_path = '/backups/world.zip'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
 params = {
-    'file': file_path
+'file': file_path
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/files/download',
-                       headers=headers, params=params, stream=True)
+headers=headers, params=params, stream=True)
 
 with open('world.zip', 'wb') as f:
-    for chunk in response.iter_content(chunk_size=8192):
-        f.write(chunk)
+for chunk in response.iter_content(chunk_size=8192):
+f.write(chunk)
 
 print('File downloaded successfully')`,
     php: `<?php
@@ -994,14 +1007,14 @@ $serverId = 'd3aac109';
 $filePath = '/backups/world.zip';
 $ch = curl_init();
 
-$url = "https://your-panel.com/api/client/servers/{$serverId}/files/download?" . 
-       http_build_query(['file' => $filePath]);
+$url = "https://your-panel.com/api/client/servers/{$serverId}/files/download?" .
+http_build_query(['file' => $filePath]);
 
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json'
 ]);
 
 $response = curl_exec($ch);
@@ -1010,7 +1023,7 @@ curl_close($ch);
 file_put_contents('world.zip', $response);
 echo "File downloaded successfully\\n";
 ?>`
-  }}
+}}
 />
 
 ---
@@ -1023,10 +1036,10 @@ Create a new directory on the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Parent directory path |
-| `name` | string | Yes | Directory name to create |
+| Field  | Type   | Required | Description              |
+| ------ | ------ | -------- | ------------------------ |
+| `root` | string | Yes      | Parent directory path    |
+| `name` | string | Yes      | Directory name to create |
 
 ### Example Request
 
@@ -1055,9 +1068,9 @@ Copy files or directories to a new location.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `location` | string | Yes | Source file/directory path |
+| Field      | Type   | Required | Description                |
+| ---------- | ------ | -------- | -------------------------- |
+| `location` | string | Yes      | Source file/directory path |
 
 ### Example Request
 
@@ -1071,7 +1084,7 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/copy" \
   }'
 ```
 
-Creates a copy of the file/directory with "_copy" appended to the name.
+Creates a copy of the file/directory with "\_copy" appended to the name.
 
 ### Success Response (204)
 
@@ -1087,17 +1100,17 @@ Rename or move files and directories.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Parent directory |
-| `files` | array | Yes | Array of rename operations |
+| Field   | Type   | Required | Description                |
+| ------- | ------ | -------- | -------------------------- |
+| `root`  | string | Yes      | Parent directory           |
+| `files` | array  | Yes      | Array of rename operations |
 
 ### Files Array Structure
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `from` | string | Yes | Current filename |
-| `to` | string | Yes | New filename |
+| Field  | Type   | Required | Description      |
+| ------ | ------ | -------- | ---------------- |
+| `from` | string | Yes      | Current filename |
+| `to`   | string | Yes      | New filename     |
 
 ### Example Request
 
@@ -1131,10 +1144,10 @@ Delete files or directories from the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Parent directory |
-| `files` | array | Yes | Array of filenames to delete |
+| Field   | Type   | Required | Description                  |
+| ------- | ------ | -------- | ---------------------------- |
+| `root`  | string | Yes      | Parent directory             |
+| `files` | array  | Yes      | Array of filenames to delete |
 
 ### Example Request
 
@@ -1170,10 +1183,10 @@ Create an archive (ZIP/TAR) from files and directories.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Root directory |
-| `files` | array | Yes | Files/directories to compress |
+| Field   | Type   | Required | Description                   |
+| ------- | ------ | -------- | ----------------------------- |
+| `root`  | string | Yes      | Root directory                |
+| `files` | array  | Yes      | Files/directories to compress |
 
 ### Example Request
 
@@ -1220,10 +1233,10 @@ Extract files from an archive.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Directory containing the archive |
-| `file` | string | Yes | Archive filename |
+| Field  | Type   | Required | Description                      |
+| ------ | ------ | -------- | -------------------------------- |
+| `root` | string | Yes      | Directory containing the archive |
+| `file` | string | Yes      | Archive filename                 |
 
 ### Example Request
 
@@ -1244,12 +1257,12 @@ Returns empty response body with status code 204.
 
 ### Supported Archive Types
 
-| Extension | Format | Description |
-|-----------|--------|-------------|
-| `.zip` | ZIP | Most common format |
-| `.tar` | TAR | Uncompressed tarball |
-| `.tar.gz` | TAR+GZIP | Compressed tarball |
-| `.tar.bz2` | TAR+BZIP2 | Compressed tarball |
+| Extension  | Format    | Description          |
+| ---------- | --------- | -------------------- |
+| `.zip`     | ZIP       | Most common format   |
+| `.tar`     | TAR       | Uncompressed tarball |
+| `.tar.gz`  | TAR+GZIP  | Compressed tarball   |
+| `.tar.bz2` | TAR+BZIP2 | Compressed tarball   |
 
 ---
 
@@ -1261,17 +1274,17 @@ Modify file or directory permissions (chmod).
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Parent directory |
-| `files` | array | Yes | Array of permission changes |
+| Field   | Type   | Required | Description                 |
+| ------- | ------ | -------- | --------------------------- |
+| `root`  | string | Yes      | Parent directory            |
+| `files` | array  | Yes      | Array of permission changes |
 
 ### Files Array Structure
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `file` | string | Yes | Filename |
-| `mode` | string | Yes | Octal permission mode (e.g., "755", "644") |
+| Field  | Type   | Required | Description                                |
+| ------ | ------ | -------- | ------------------------------------------ |
+| `file` | string | Yes      | Filename                                   |
+| `mode` | string | Yes      | Octal permission mode (e.g., "755", "644") |
 
 ### Example Request
 
@@ -1301,12 +1314,12 @@ Returns empty response body with status code 204.
 
 ### Common Permission Modes
 
-| Mode | Description | Symbolic |
-|------|-------------|----------|
-| `755` | rwxr-xr-x | Full access for owner, read+execute for others |
-| `644` | rw-r--r-- | Read+write for owner, read-only for others |
-| `600` | rw------- | Read+write for owner only |
-| `777` | rwxrwxrwx | Full access for everyone (not recommended) |
+| Mode  | Description | Symbolic                                       |
+| ----- | ----------- | ---------------------------------------------- |
+| `755` | rwxr-xr-x   | Full access for owner, read+execute for others |
+| `644` | rw-r--r--   | Read+write for owner, read-only for others     |
+| `600` | rw-------   | Read+write for owner only                      |
+| `777` | rwxrwxrwx   | Full access for everyone (not recommended)     |
 
 ---
 
@@ -1318,11 +1331,11 @@ Download a file from a URL directly to the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `url` | string | Yes | URL of the file to download |
-| `directory` | string | Yes | Directory to save the file |
-| `filename` | string | No | Custom filename (optional) |
+| Field       | Type   | Required | Description                 |
+| ----------- | ------ | -------- | --------------------------- |
+| `url`       | string | Yes      | URL of the file to download |
+| `directory` | string | Yes      | Directory to save the file  |
+| `filename`  | string | No       | Custom filename (optional)  |
 
 ### Example Request
 
@@ -1359,18 +1372,18 @@ Rename a file or directory on the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Directory containing the file |
-| `files` | array | Yes | Array containing old and new names |
+| Field   | Type   | Required | Description                        |
+| ------- | ------ | -------- | ---------------------------------- |
+| `root`  | string | Yes      | Directory containing the file      |
+| `files` | array  | Yes      | Array containing old and new names |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/rename"
-  method="PUT"
-  examples={{
-    curl: `curl -X PUT "https://your-panel.com/api/client/servers/d3aac109/files/rename" \\
+endpoint="/api/client/servers/{server}/files/rename"
+method="PUT"
+examples={{
+curl: `curl -X PUT "https://your-panel.com/api/client/servers/d3aac109/files/rename" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -1383,25 +1396,25 @@ Rename a file or directory on the server.
       }
     ]
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const renameData = {
-  root: '/',
-  files: [
-    {
-      from: 'old-name.txt',
-      to: 'new-name.txt'
-    }
-  ]
+root: '/',
+files: [
+{
+from: 'old-name.txt',
+to: 'new-name.txt'
+}
+]
 };
 
 const response = await axios.put(\`https://your-panel.com/api/client/servers/\${serverId}/files/rename\`, renameData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('File renamed successfully');`,
@@ -1409,45 +1422,45 @@ console.log('File renamed successfully');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 rename_data = {
-    'root': '/',
-    'files': [
-        {
-            'from': 'old-name.txt',
-            'to': 'new-name.txt'
-        }
-    ]
+'root': '/',
+'files': [
+{
+'from': 'old-name.txt',
+'to': 'new-name.txt'
+}
+]
 }
 
-response = requests.put(f'https://your-panel.com/api/client/servers/{server_id}/files/rename', 
-                        headers=headers, json=rename_data)
+response = requests.put(f'https://your-panel.com/api/client/servers/{server_id}/files/rename',
+headers=headers, json=rename_data)
 print('File renamed successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $renameData = [
-    'root' => '/',
-    'files' => [
-        [
-            'from' => 'old-name.txt',
-            'to' => 'new-name.txt'
-        ]
-    ]
+'root' => '/',
+'files' => [
+[
+'from' => 'old-name.txt',
+'to' => 'new-name.txt'
+]
+]
 ];
 
 $response = $client->put("https://your-panel.com/api/client/servers/{$serverId}/files/rename", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $renameData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $renameData
 ]);
 
 echo "File renamed successfully";
@@ -1455,36 +1468,37 @@ echo "File renamed successfully";
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    renameData := map[string]interface{}{
-        "root": "/",
-        "files": []map[string]string{
-            {
-                "from": "old-name.txt",
-                "to": "new-name.txt",
-            },
-        },
-    }
-    
+serverId := "d3aac109"
+renameData := map[string]interface{}{
+"root": "/",
+"files": []map[string]string{
+{
+"from": "old-name.txt",
+"to": "new-name.txt",
+},
+},
+}
+
     jsonData, _ := json.Marshal(renameData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("PUT", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/files/rename", serverId), bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("File renamed successfully")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1494,27 +1508,27 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "root": "/",
-  "files": [
-    {
-      "from": "old-name.txt",
-      "to": "new-name.txt"
-    }
-  ]
+"root": "/",
+"files": [
+{
+"from": "old-name.txt",
+"to": "new-name.txt"
+}
+]
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/rename"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .PUT(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/rename"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.PUT(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println("File renamed successfully");`,
     csharp: `using System.Net.Http;
 using System.Text;
@@ -1527,10 +1541,10 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var renameData = new {
-    root = "/",
-    files = new[] {
-        new { from = "old-name.txt", to = "new-name.txt" }
-    }
+root = "/",
+files = new[] {
+new { from = "old-name.txt", to = "new-name.txt" }
+}
 };
 
 var json = JsonSerializer.Serialize(renameData);
@@ -1543,13 +1557,13 @@ require 'json'
 
 server_id = 'd3aac109'
 rename_data = {
-  root: '/',
-  files: [
-    {
-      from: 'old-name.txt',
-      to: 'new-name.txt'
-    }
-  ]
+root: '/',
+files: [
+{
+from: 'old-name.txt',
+to: 'new-name.txt'
+}
+]
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/files/rename")
@@ -1564,7 +1578,7 @@ request.body = rename_data.to_json
 
 response = http.request(request)
 puts "File renamed successfully"`
-  }}
+}}
 />
 
 ### Success Response (204)
@@ -1581,36 +1595,36 @@ Copy files to another location on the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `location` | string | Yes | Source file path |
+| Field      | Type   | Required | Description      |
+| ---------- | ------ | -------- | ---------------- |
+| `location` | string | Yes      | Source file path |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/copy"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/copy" \\
+endpoint="/api/client/servers/{server}/files/copy"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/copy" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
   -d '{
     "location": "/config.yml"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const copyData = {
-  location: '/config.yml'
+location: '/config.yml'
 };
 
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/files/copy\`, copyData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('File copied successfully');`,
@@ -1618,33 +1632,33 @@ console.log('File copied successfully');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 copy_data = {
-    'location': '/config.yml'
+'location': '/config.yml'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/copy', 
-                        headers=headers, json=copy_data)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/copy',
+headers=headers, json=copy_data)
 print('File copied successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $copyData = [
-    'location' => '/config.yml'
+'location' => '/config.yml'
 ];
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/files/copy", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $copyData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $copyData
 ]);
 
 echo "File copied successfully";
@@ -1652,30 +1666,31 @@ echo "File copied successfully";
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    copyData := map[string]interface{}{
-        "location": "/config.yml",
-    }
-    
+serverId := "d3aac109"
+copyData := map[string]interface{}{
+"location": "/config.yml",
+}
+
     jsonData, _ := json.Marshal(copyData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/files/copy", serverId), bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("File copied successfully")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1685,21 +1700,21 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "location": "/config.yml"
+"location": "/config.yml"
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/copy"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/copy"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println("File copied successfully");`,
     csharp: `using System.Net.Http;
 using System.Text;
@@ -1712,7 +1727,7 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var copyData = new {
-    location = "/config.yml"
+location = "/config.yml"
 };
 
 var json = JsonSerializer.Serialize(copyData);
@@ -1725,7 +1740,7 @@ require 'json'
 
 server_id = 'd3aac109'
 copy_data = {
-  location: '/config.yml'
+location: '/config.yml'
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/files/copy")
@@ -1740,12 +1755,12 @@ request.body = copy_data.to_json
 
 response = http.request(request)
 puts "File copied successfully"`
-  }}
+}}
 />
 
 ### Success Response (204)
 
-Returns empty response body with status code 204. The file will be copied with "_copy" appended to the filename.
+Returns empty response body with status code 204. The file will be copied with "\_copy" appended to the filename.
 
 ---
 
@@ -1757,18 +1772,18 @@ Delete one or more files or directories.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Base directory path |
-| `files` | array | Yes | Array of files/directories to delete |
+| Field   | Type   | Required | Description                          |
+| ------- | ------ | -------- | ------------------------------------ |
+| `root`  | string | Yes      | Base directory path                  |
+| `files` | array  | Yes      | Array of files/directories to delete |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/delete"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/delete" \\
+endpoint="/api/client/servers/{server}/files/delete"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/delete" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -1776,20 +1791,20 @@ Delete one or more files or directories.
     "root": "/",
     "files": ["old-file.txt", "temp-folder"]
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const deleteData = {
-  root: '/',
-  files: ['old-file.txt', 'temp-folder']
+root: '/',
+files: ['old-file.txt', 'temp-folder']
 };
 
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/files/delete\`, deleteData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Files deleted successfully');`,
@@ -1797,35 +1812,35 @@ console.log('Files deleted successfully');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 delete_data = {
-    'root': '/',
-    'files': ['old-file.txt', 'temp-folder']
+'root': '/',
+'files': ['old-file.txt', 'temp-folder']
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/delete', 
-                        headers=headers, json=delete_data)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/delete',
+headers=headers, json=delete_data)
 print('Files deleted successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $deleteData = [
-    'root' => '/',
-    'files' => ['old-file.txt', 'temp-folder']
+'root' => '/',
+'files' => ['old-file.txt', 'temp-folder']
 ];
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/files/delete", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $deleteData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $deleteData
 ]);
 
 echo "Files deleted successfully";
@@ -1833,31 +1848,32 @@ echo "Files deleted successfully";
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    deleteData := map[string]interface{}{
-        "root": "/",
-        "files": []string{"old-file.txt", "temp-folder"},
-    }
-    
+serverId := "d3aac109"
+deleteData := map[string]interface{}{
+"root": "/",
+"files": []string{"old-file.txt", "temp-folder"},
+}
+
     jsonData, _ := json.Marshal(deleteData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/files/delete", serverId), bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("Files deleted successfully")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1867,22 +1883,22 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "root": "/",
-  "files": ["old-file.txt", "temp-folder"]
+"root": "/",
+"files": ["old-file.txt", "temp-folder"]
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/delete"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/delete"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println("Files deleted successfully");`,
     csharp: `using System.Net.Http;
 using System.Text;
@@ -1895,8 +1911,8 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var deleteData = new {
-    root = "/",
-    files = new[] { "old-file.txt", "temp-folder" }
+root = "/",
+files = new[] { "old-file.txt", "temp-folder" }
 };
 
 var json = JsonSerializer.Serialize(deleteData);
@@ -1909,8 +1925,8 @@ require 'json'
 
 server_id = 'd3aac109'
 delete_data = {
-  root: '/',
-  files: ['old-file.txt', 'temp-folder']
+root: '/',
+files: ['old-file.txt', 'temp-folder']
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/files/delete")
@@ -1925,7 +1941,7 @@ request.body = delete_data.to_json
 
 response = http.request(request)
 puts "Files deleted successfully"`
-  }}
+}}
 />
 
 ### Success Response (204)
@@ -1946,18 +1962,18 @@ Create a new directory on the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `root` | string | Yes | Parent directory path |
-| `name` | string | Yes | Name of the new folder |
+| Field  | Type   | Required | Description            |
+| ------ | ------ | -------- | ---------------------- |
+| `root` | string | Yes      | Parent directory path  |
+| `name` | string | Yes      | Name of the new folder |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/files/create-folder"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/create-folder" \\
+endpoint="/api/client/servers/{server}/files/create-folder"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/files/create-folder" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -1965,20 +1981,20 @@ Create a new directory on the server.
     "root": "/",
     "name": "new-folder"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const folderData = {
-  root: '/',
-  name: 'new-folder'
+root: '/',
+name: 'new-folder'
 };
 
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/files/create-folder\`, folderData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Folder created successfully');`,
@@ -1986,35 +2002,35 @@ console.log('Folder created successfully');`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 folder_data = {
-    'root': '/',
-    'name': 'new-folder'
+'root': '/',
+'name': 'new-folder'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/create-folder', 
-                        headers=headers, json=folder_data)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/files/create-folder',
+headers=headers, json=folder_data)
 print('Folder created successfully')`,
     php: `<?php
 $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $folderData = [
-    'root' => '/',
-    'name' => 'new-folder'
+'root' => '/',
+'name' => 'new-folder'
 ];
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/files/create-folder", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $folderData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $folderData
 ]);
 
 echo "Folder created successfully";
@@ -2022,31 +2038,32 @@ echo "Folder created successfully";
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    folderData := map[string]interface{}{
-        "root": "/",
-        "name": "new-folder",
-    }
-    
+serverId := "d3aac109"
+folderData := map[string]interface{}{
+"root": "/",
+"name": "new-folder",
+}
+
     jsonData, _ := json.Marshal(folderData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", fmt.Sprintf("https://your-panel.com/api/client/servers/%s/files/create-folder", serverId), bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("Folder created successfully")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -2056,22 +2073,22 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "root": "/",
-  "name": "new-folder"
+"root": "/",
+"name": "new-folder"
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/create-folder"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/servers/" + serverId + "/files/create-folder"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
-HttpResponse<String> response = client.send(request, 
-    HttpResponse.BodyHandlers.ofString());
+HttpResponse<String> response = client.send(request,
+HttpResponse.BodyHandlers.ofString());
 System.out.println("Folder created successfully");`,
     csharp: `using System.Net.Http;
 using System.Text;
@@ -2084,8 +2101,8 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var folderData = new {
-    root = "/",
-    name = "new-folder"
+root = "/",
+name = "new-folder"
 };
 
 var json = JsonSerializer.Serialize(folderData);
@@ -2098,8 +2115,8 @@ require 'json'
 
 server_id = 'd3aac109'
 folder_data = {
-  root: '/',
-  name: 'new-folder'
+root: '/',
+name: 'new-folder'
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/files/create-folder")
@@ -2114,7 +2131,7 @@ request.body = folder_data.to_json
 
 response = http.request(request)
 puts "Folder created successfully"`
-  }}
+}}
 />
 
 ### Success Response (204)
@@ -2125,15 +2142,15 @@ Returns empty response body with status code 204.
 
 ## Required Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `file.read` | View file contents and directory listings |
-| `file.read-content` | Read individual file contents |
-| `file.create` | Create new files and directories |
-| `file.update` | Modify existing files |
-| `file.delete` | Delete files and directories |
-| `file.archive` | Create and extract archives |
-| `file.sftp` | Access files via SFTP |
+| Permission          | Description                               |
+| ------------------- | ----------------------------------------- |
+| `file.read`         | View file contents and directory listings |
+| `file.read-content` | Read individual file contents             |
+| `file.create`       | Create new files and directories          |
+| `file.update`       | Modify existing files                     |
+| `file.delete`       | Delete files and directories              |
+| `file.archive`      | Create and extract archives               |
+| `file.sftp`         | Access files via SFTP                     |
 
 ## Security Best Practices
 
@@ -2151,6 +2168,6 @@ Returns empty response body with status code 204.
 
 ## Next Steps
 
-- Learn about [Database Management](./databases) for server databases  
+- Learn about [Database Management](./databases) for server databases
 - Explore [Backup Management](./backups) for automated backups
-- Check [Scheduled Tasks](./schedules) for automated file operations 
+- Check [Scheduled Tasks](./schedules) for automated file operations

@@ -14,31 +14,29 @@ Retrieve all network allocations assigned to a server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
-
-
 <CodeTabs
-  endpoint="/api/client/servers/{server}/network/allocations"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \\
+endpoint="/api/client/servers/{server}/network/allocations"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/network/allocations\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server allocations:', response.data.data);`,
@@ -46,9 +44,9 @@ console.log('Server allocations:', response.data.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations', headers=headers)
@@ -58,11 +56,11 @@ $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get("https://your-panel.com/api/client/servers/{$serverId}/network/allocations", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -71,27 +69,28 @@ print_r($data['data']);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/network/allocations", serverId)
-    
+serverId := "d3aac109"
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/network/allocations", serverId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Server allocations:", result["data"])
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -103,12 +102,12 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/network
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Server allocations: " + response.body());`,
@@ -139,15 +138,8 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "Server allocations: #{data['data']}"`
-  }}
+}}
 />
-
-
-
-
-
-
-
 
 ### Example Response
 
@@ -194,22 +186,14 @@ puts "Server allocations: #{data['data']}"`
 
 ### Allocation Object Attributes
 
-| Field | Description |
-|-------|-------------|
-| `id` | Unique allocation identifier |
-| `ip` | IP address of the allocation |
-| `ip_alias` | Friendly name/hostname for the IP |
-| `port` | Port number |
-| `notes` | User-defined notes for the allocation |
+| Field        | Description                            |
+| ------------ | -------------------------------------- |
+| `id`         | Unique allocation identifier           |
+| `ip`         | IP address of the allocation           |
+| `ip_alias`   | Friendly name/hostname for the IP      |
+| `port`       | Port number                            |
+| `notes`      | User-defined notes for the allocation  |
 | `is_default` | Whether this is the primary allocation |
-
-
-
-
-
-
-
-
 
 ---
 
@@ -221,18 +205,16 @@ Request assignment of an available allocation to the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `ip` | string | No | Specific IP address to assign |
-| `port` | integer | No | Specific port to assign |
+| Field  | Type    | Required | Description                   |
+| ------ | ------- | -------- | ----------------------------- |
+| `ip`   | string  | No       | Specific IP address to assign |
+| `port` | integer | No       | Specific port to assign       |
 
 :::info Note
 If no IP or port is specified, the system will automatically assign the next available allocation from the node's pool.
 :::
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -254,20 +236,21 @@ const axios = require('axios');
 
 const serverId = 'd3aac109';
 const allocationData = {
-  ip: '45.86.168.218',
-  port: 25568
+ip: '45.86.168.218',
+port: 25568
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/network/allocations`, allocationData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Allocation assigned:', response.data.attributes);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -287,10 +270,11 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations',
                         headers=headers, json=allocation_data)
 print('Allocation assigned:', response.json()['attributes'])
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -305,18 +289,19 @@ $allocationData = [
 $client = new GuzzleHttp\Client();
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/network/allocations", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $allocationData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $allocationData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data['attributes']);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -336,24 +321,25 @@ func main() {
         "ip":   "45.86.168.218",
         "port": 25568,
     }
-    
+
     jsonData, _ := json.Marshal(allocationData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/network/allocations", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Allocation assigned:", result["attributes"])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -366,8 +352,8 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "ip": "45.86.168.218",
-  "port": 25568
+"ip": "45.86.168.218",
+"port": 25568
 }
 """;
 
@@ -375,16 +361,17 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/network
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Allocation assigned: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -410,7 +397,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync($"https://your-panel.com/api/client/servers/{serverId}/network/allocations", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine("Allocation assigned: " + responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -420,8 +408,8 @@ require 'json'
 
 server_id = 'd3aac109'
 allocation_data = {
-  ip: '45.86.168.218',
-  port: 25568
+ip: '45.86.168.218',
+port: 25568
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/network/allocations")
@@ -437,7 +425,8 @@ request.body = allocation_data.to_json
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "Allocation assigned: #{data['attributes']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -463,14 +452,12 @@ puts "Allocation assigned: #{data['attributes']}"
     "is_default": false
   }
 }
-```
-
-
-
+````
 
 ### Error Responses
 
 **Allocation Limit Reached (400)**
+
 ```json
 {
   "errors": [
@@ -483,8 +470,8 @@ puts "Allocation assigned: #{data['attributes']}"
 }
 ```
 
-
 **Allocation Not Available (409)**
+
 ```json
 {
   "errors": [
@@ -497,8 +484,8 @@ puts "Allocation assigned: #{data['attributes']}"
 }
 ```
 
-
 **No Available Allocations (503)**
+
 ```json
 {
   "errors": [
@@ -511,15 +498,6 @@ puts "Allocation assigned: #{data['attributes']}"
 }
 ```
 
-
-
-
-
-
-
-
-
-
 ---
 
 ## Set Primary Allocation
@@ -530,14 +508,12 @@ Change which allocation is the primary (default) allocation for the server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `allocation` | integer | Allocation ID to set as primary |
+| Parameter    | Type    | Description                          |
+| ------------ | ------- | ------------------------------------ |
+| `server`     | string  | Server identifier (UUID or short ID) |
+| `allocation` | integer | Allocation ID to set as primary      |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -557,15 +533,16 @@ const serverId = 'd3aac109';
 const allocationId = 16;
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/network/allocations/${allocationId}/primary`, {}, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Primary allocation set:', response.data.attributes);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -581,10 +558,11 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations/{allocation_id}/primary', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations/{allocation_id}/primary',
                         headers=headers)
 print('Primary allocation set:', response.json()['attributes'])
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -595,17 +573,18 @@ $allocationId = 16;
 $client = new GuzzleHttp\Client();
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/network/allocations/{$allocationId}/primary", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data['attributes']);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -622,21 +601,22 @@ func main() {
     serverId := "d3aac109"
     allocationId := 16
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/network/allocations/%d/primary", serverId, allocationId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Primary allocation set:", result["attributes"])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -652,16 +632,17 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/network
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.noBody())
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.noBody())
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Primary allocation set: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -679,7 +660,8 @@ int allocationId = 16;
 var response = await client.PostAsync($"https://your-panel.com/api/client/servers/{serverId}/network/allocations/{allocationId}/primary", null);
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine("Primary allocation set: " + content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -701,7 +683,8 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "Primary allocation set: #{data['attributes']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -727,18 +710,16 @@ puts "Primary allocation set: #{data['attributes']}"
     "is_default": true
   }
 }
-```
-
+````
 
 :::info Primary Allocation
 The primary allocation is the main IP:Port combination used for server connections. Only one allocation can be primary at a time.
 :::
 
-
-
 ### Error Responses
 
 **Server Must Be Stopped (400)**
+
 ```json
 {
   "errors": [
@@ -751,15 +732,6 @@ The primary allocation is the main IP:Port combination used for server connectio
 }
 ```
 
-
-
-
-
-
-
-
-
-
 ---
 
 ## Update Allocation Notes
@@ -770,20 +742,18 @@ Add or modify notes for a specific allocation.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `allocation` | integer | Allocation ID |
+| Parameter    | Type    | Description                          |
+| ------------ | ------- | ------------------------------------ |
+| `server`     | string  | Server identifier (UUID or short ID) |
+| `allocation` | integer | Allocation ID                        |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `notes` | string | No | Notes for the allocation (max 255 characters) |
+| Field   | Type   | Required | Description                                   |
+| ------- | ------ | -------- | --------------------------------------------- |
+| `notes` | string | No       | Notes for the allocation (max 255 characters) |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -805,19 +775,20 @@ const axios = require('axios');
 const serverId = 'd3aac109';
 const allocationId = 17;
 const updateData = {
-  notes: 'Reserved for future web interface'
+notes: 'Reserved for future web interface'
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/network/allocations/${allocationId}`, updateData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Allocation notes updated:', response.data.attributes);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -836,10 +807,11 @@ update_data = {
     'notes': 'Reserved for future web interface'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations/{allocation_id}', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations/{allocation_id}',
                          headers=headers, json=update_data)
 print(f"Allocation notes updated: {response.json()['attributes']['notes']}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -854,18 +826,19 @@ $updateData = [
 $client = new GuzzleHttp\Client();
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/network/allocations/{$allocationId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $updateData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $updateData
 ]);
 
 $data = json_decode($response->getBody(), true);
 echo "Allocation notes updated: " . $data['attributes']['notes'] . "\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -885,26 +858,27 @@ func main() {
     updateData := map[string]string{
         "notes": "Reserved for future web interface",
     }
-    
+
     jsonData, _ := json.Marshal(updateData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/network/allocations/%d", serverId, allocationId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     attrs := result["attributes"].(map[string]interface{})
     fmt.Printf("Allocation notes updated: %s\n", attrs["notes"])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -918,22 +892,23 @@ String serverId = "d3aac109";
 int allocationId = 17;
 String jsonData = """
 {
-  "notes": "Reserved for future web interface"
+"notes": "Reserved for future web interface"
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/network/allocations/%d", serverId, allocationId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/network/allocations/%d", serverId, allocationId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Allocation notes updated: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -958,7 +933,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync($"https://your-panel.com/api/client/servers/{serverId}/network/allocations/{allocationId}", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine($"Allocation notes updated: {responseContent}");
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -969,7 +945,7 @@ require 'json'
 server_id = 'd3aac109'
 allocation_id = 17
 update_data = {
-  notes: 'Reserved for future web interface'
+notes: 'Reserved for future web interface'
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/network/allocations/#{allocation_id}")
@@ -985,7 +961,8 @@ request.body = update_data.to_json
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "Allocation notes updated: #{data['attributes']['notes']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1011,16 +988,7 @@ puts "Allocation notes updated: #{data['attributes']['notes']}"
     "is_default": false
   }
 }
-```
-
-
-
-
-
-
-
-
-
+````
 
 ---
 
@@ -1032,14 +1000,12 @@ Unassign an allocation from the server, making it available for other servers.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `allocation` | integer | Allocation ID to remove |
+| Parameter    | Type    | Description                          |
+| ------------ | ------- | ------------------------------------ |
+| `server`     | string  | Server identifier (UUID or short ID) |
+| `allocation` | integer | Allocation ID to remove              |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1059,19 +1025,20 @@ const serverId = 'd3aac109';
 const allocationId = 18;
 
 const response = await axios.delete(`https://your-panel.com/api/client/servers/${serverId}/network/allocations/${allocationId}`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-  console.log('Allocation removed successfully');
+console.log('Allocation removed successfully');
 } else {
-  console.error('Failed to remove allocation');
+console.error('Failed to remove allocation');
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1086,7 +1053,7 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.delete(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations/{allocation_id}', 
+response = requests.delete(f'https://your-panel.com/api/client/servers/{server_id}/network/allocations/{allocation_id}',
                           headers=headers)
 
 if response.status_code == 204:
@@ -1095,7 +1062,8 @@ else:
     print(f"Failed to remove allocation: {response.status_code}")
     if response.content:
         print(f"Error: {response.json()}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1107,23 +1075,25 @@ $allocationId = 18;
 $client = new GuzzleHttp\Client();
 
 try {
-    $response = $client->delete("https://your-panel.com/api/client/servers/{$serverId}/network/allocations/{$allocationId}", [
-        'headers' => [
-            'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-            'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type' => 'application/json'
-        ]
-    ]);
-    
+$response = $client->delete("https://your-panel.com/api/client/servers/{$serverId}/network/allocations/{$allocationId}", [
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
+]);
+
     if ($response->getStatusCode() === 204) {
         echo "Allocation removed successfully\n";
     }
+
 } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo "Failed to remove allocation: " . $e->getCode() . "\n";
-    echo "Error: " . $e->getResponse()->getBody() . "\n";
+echo "Failed to remove allocation: " . $e->getCode() . "\n";
+echo "Error: " . $e->getResponse()->getBody() . "\n";
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1139,27 +1109,28 @@ func main() {
     serverId := "d3aac109"
     allocationId := 18
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/network/allocations/%d", serverId, allocationId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Allocation removed successfully")
     } else {
         fmt.Printf("Failed to remove allocation: %d\n", resp.StatusCode)
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1174,24 +1145,25 @@ int allocationId = 18;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/network/allocations/%d", serverId, allocationId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .DELETE()
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/network/allocations/%d", serverId, allocationId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 if (response.statusCode() == 204) {
-    System.out.println("Allocation removed successfully");
+System.out.println("Allocation removed successfully");
 } else {
-    System.out.println("Failed to remove allocation: " + response.statusCode());
-    if (!response.body().isEmpty()) {
-        System.out.println("Error: " + response.body());
-    }
+System.out.println("Failed to remove allocation: " + response.statusCode());
+if (!response.body().isEmpty()) {
+System.out.println("Error: " + response.body());
 }
-```
+}
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1209,7 +1181,7 @@ int allocationId = 18;
 try
 {
     var response = await client.DeleteAsync($"https://your-panel.com/api/client/servers/{serverId}/network/allocations/{allocationId}");
-    
+
     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
     {
         Console.WriteLine("Allocation removed successfully");
@@ -1228,7 +1200,8 @@ catch (HttpRequestException ex)
 {
     Console.WriteLine($"Error removing allocation: {ex.Message}");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1252,12 +1225,13 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 
 if response.code == '204'
-  puts "Allocation removed successfully"
+puts "Allocation removed successfully"
 else
-  puts "Failed to remove allocation: #{response.code}"
-  puts "Error: #{response.body}" unless response.body.empty?
+puts "Failed to remove allocation: #{response.code}"
+puts "Error: #{response.body}" unless response.body.empty?
 end
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1288,10 +1262,10 @@ Returns empty response body with status code 204.
     }
   ]
 }
-```
-
+````
 
 **Server Must Be Stopped (400)**
+
 ```json
 {
   "errors": [
@@ -1304,15 +1278,6 @@ Returns empty response body with status code 204.
 }
 ```
 
-
-
-
-
-
-
-
-
-
 ---
 
 ## Network Configuration Examples
@@ -1322,6 +1287,7 @@ Returns empty response body with status code 204.
 Here's how to configure network allocations for different types of game servers:
 
 **Minecraft Server**
+
 ```bash
 # Add primary allocation for Minecraft
 curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \
@@ -1335,6 +1301,7 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocat
 ```
 
 **FiveM Server**
+
 ```bash
 # Add primary allocation for FiveM (30120)
 curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \
@@ -1348,6 +1315,7 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocat
 ```
 
 **CS:GO Server**
+
 ```bash
 # Add primary allocation for CS:GO (27015)
 curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \
@@ -1375,13 +1343,13 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocat
     "port": 8080
   }'
 
-# Add RCON allocation (25575) 
+# Add RCON allocation (25575)
 curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json" \
   -d '{
-    "ip": "45.86.168.218", 
+    "ip": "45.86.168.218",
     "port": 25575
   }'
 ```
@@ -1410,13 +1378,13 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocat
     "port": 8080
   }'
 
-# Add RCON allocation (25575) 
+# Add RCON allocation (25575)
 curl -X POST "https://your-panel.com/api/client/servers/d3aac109/network/allocations" \
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json" \
   -d '{
-    "ip": "45.86.168.218", 
+    "ip": "45.86.168.218",
     "port": 25575
   }'
 ```
@@ -1456,32 +1424,32 @@ curl -I http://45.86.168.218:8080
 
 ## Common Error Codes
 
-| Status | Code | Description |
-|--------|------|-------------|
-| 400 | `TooManyAllocationsException` | Allocation limit reached |
-| 400 | `CannotDeletePrimaryAllocationException` | Cannot remove primary allocation |
-| 400 | `ConflictingServerStateException` | Server state prevents operation |
-| 401 | `InvalidCredentialsException` | Invalid API key |
-| 403 | `InsufficientPermissionsException` | Missing required permissions |
-| 404 | `NotFoundHttpException` | Allocation not found |
-| 422 | `ValidationException` | Invalid request data |
+| Status | Code                                     | Description                      |
+| ------ | ---------------------------------------- | -------------------------------- |
+| 400    | `TooManyAllocationsException`            | Allocation limit reached         |
+| 400    | `CannotDeletePrimaryAllocationException` | Cannot remove primary allocation |
+| 400    | `ConflictingServerStateException`        | Server state prevents operation  |
+| 401    | `InvalidCredentialsException`            | Invalid API key                  |
+| 403    | `InsufficientPermissionsException`       | Missing required permissions     |
+| 404    | `NotFoundHttpException`                  | Allocation not found             |
+| 422    | `ValidationException`                    | Invalid request data             |
 
 ## Required Permissions
 
 Network allocation operations require specific permissions:
 
-| Permission | Description |
-|------------|-------------|
-| `allocation.read` | View server allocations |
-| `allocation.create` | Add new allocations |
+| Permission          | Description                |
+| ------------------- | -------------------------- |
+| `allocation.read`   | View server allocations    |
+| `allocation.create` | Add new allocations        |
 | `allocation.update` | Modify allocation settings |
-| `allocation.delete` | Remove allocations |
+| `allocation.delete` | Remove allocations         |
 
 ## Next Steps
 
 - Explore [Server Management](./servers) for server control and monitoring
 - Check [User Management](./users) for allocation access control
-- Review [Scheduled Tasks](./schedules) for automated network checks 
+- Review [Scheduled Tasks](./schedules) for automated network checks
 
 ## Source References
 

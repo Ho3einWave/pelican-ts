@@ -1,10 +1,6 @@
 import type { HttpClient } from '../core/http-client.js';
 import type { PaginatedResult, RequestOptions } from '../core/types.js';
-import type {
-  AdminUser,
-  CreateUserParams,
-  UpdateUserParams,
-} from '../types/application/user.js';
+import type { AdminUser, CreateUserParams, UpdateUserParams } from '../types/application/user.js';
 
 const BASE = '/api/application/users';
 

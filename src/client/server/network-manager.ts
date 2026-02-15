@@ -21,15 +21,10 @@ export class NetworkManager {
   }
 
   async setPrimary(allocationId: number): Promise<Allocation> {
-    return this.http.post<Allocation>(
-      `${this.base}/${allocationId}/primary`,
-    );
+    return this.http.post<Allocation>(`${this.base}/${allocationId}/primary`);
   }
 
-  async updateNotes(
-    allocationId: number,
-    notes: string,
-  ): Promise<Allocation> {
+  async updateNotes(allocationId: number, notes: string): Promise<Allocation> {
     return this.http.post<Allocation>(`${this.base}/${allocationId}`, {
       notes,
     });

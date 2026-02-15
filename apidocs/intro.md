@@ -23,7 +23,6 @@ You won't find any ads, tracking (except for a cookieless analytics tool), or ag
 
 If you're looking for hosting solutions for your Pterodactyl panel, feel free to check out [NETVPX hosting services](https://netvpx.com). We offer reliable infrastructure that we use to test and validate all the examples in this documentation.
 
-
 ## Usage of AI
 
 This documentation was partly written by AI. It has been done in such a way where it is safe and robust. This includes a testing framework against a live environment. On each update of the documentation, most API calls are tested against a live, updated Pterodactyl environment. This is done in Github Actions which is publicly accessible by everyone.
@@ -33,22 +32,28 @@ This documentation was partly written by AI. It has been done in such a way wher
 The Pterodactyl API consists of two main components:
 
 ### Client API
+
 The **Client API** allows users to perform actions on their own servers, such as:
+
 - Managing server power states
 - Accessing file management
 - Creating and managing databases
 - Setting up scheduled tasks
 - Managing server users and permissions
 
-### Application API  
+### Application API
+
 The **Application API** is designed for administrative tasks and integration with external systems, allowing:
+
 - Server creation and management
 - User management
 - Node management
 - Advanced administrative functions
 
 ### WebSocket API
+
 The **WebSocket API** provides real-time communication capabilities, enabling:
+
 - Live server console access
 - Real-time server statistics and monitoring
 - Server power state management
@@ -72,6 +77,7 @@ The **WebSocket API** provides real-time communication capabilities, enabling:
 ## Contributing & Feedback
 
 ### 🔧 Contributing to Documentation
+
 We welcome contributions from the community! Help improve this documentation for all developers:
 
 - **Quick Edits**: Click "Edit this page" on any documentation page
@@ -82,6 +88,7 @@ We welcome contributions from the community! Help improve this documentation for
 👉 **[Read our Contributing Guide](/docs/contributing)** for detailed instructions on how to contribute.
 
 ### Getting Help
+
 - **GitHub Discussions**: Ask questions and get community support
 - **GitHub Issues**: Report bugs, documentation errors, or request features
 - **Ask Questions**: If something is unclear, open an issue and we'll improve the documentation

@@ -14,31 +14,29 @@ Retrieve all users with access to the server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
-
-
 <CodeTabs
-  endpoint="/api/client/servers/{server}/users"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/users" \\
+endpoint="/api/client/servers/{server}/users"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/users" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/users\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server users:', response.data.data);`,
@@ -46,9 +44,9 @@ console.log('Server users:', response.data.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/users', headers=headers)
@@ -58,11 +56,11 @@ $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get("https://your-panel.com/api/client/servers/{$serverId}/users", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -71,27 +69,28 @@ print_r($data['data']);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users", serverId)
-    
+serverId := "d3aac109"
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users", serverId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Server users:", result["data"])
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -103,12 +102,12 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/users",
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Server users: " + response.body());`,
@@ -139,11 +138,8 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "Server users: #{data['data']}"`
-  }}
+}}
 />
-
-
-
 
 ### Example Response
 
@@ -219,17 +215,15 @@ puts "Server users: #{data['data']}"`
 
 ### Subuser Object Attributes
 
-| Field | Description |
-|-------|-------------|
-| `uuid` | Unique user identifier |
-| `username` | User's username |
-| `email` | User's email address |
-| `image` | User's avatar image URL (usually Gravatar) |
+| Field         | Description                                  |
+| ------------- | -------------------------------------------- |
+| `uuid`        | Unique user identifier                       |
+| `username`    | User's username                              |
+| `email`       | User's email address                         |
+| `image`       | User's avatar image URL (usually Gravatar)   |
 | `2fa_enabled` | Whether two-factor authentication is enabled |
-| `created_at` | When user was added to server |
-| `permissions` | Array of granted permissions |
-
-
+| `created_at`  | When user was added to server                |
+| `permissions` | Array of granted permissions                 |
 
 ---
 
@@ -241,32 +235,32 @@ Retrieve detailed information about a specific subuser.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `user` | string | User UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `user`    | string | User UUID                            |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/users/{user}"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/users/c4022c6c-9bf1-4a23-bff9-519cceb38335" \\
+endpoint="/api/client/servers/{server}/users/{user}"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/users/c4022c6c-9bf1-4a23-bff9-519cceb38335" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const userId = 'c4022c6c-9bf1-4a23-bff9-519cceb38335';
 
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/users/\${userId}\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('User details:', response.data.attributes);`,
@@ -276,9 +270,9 @@ server_id = 'd3aac109'
 user_id = 'c4022c6c-9bf1-4a23-bff9-519cceb38335'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/users/{user_id}', headers=headers)
@@ -289,11 +283,11 @@ $userId = 'c4022c6c-9bf1-4a23-bff9-519cceb38335';
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get("https://your-panel.com/api/client/servers/{$serverId}/users/{$userId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -302,28 +296,29 @@ print_r($data['attributes']);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    userId := "c4022c6c-9bf1-4a23-bff9-519cceb38335"
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users/%s", serverId, userId)
-    
+serverId := "d3aac109"
+userId := "c4022c6c-9bf1-4a23-bff9-519cceb38335"
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users/%s", serverId, userId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("User details:", result["attributes"])
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -336,12 +331,12 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/users/%
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("User details: " + response.body());`,
@@ -375,11 +370,8 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "User details: #{data['attributes']}"`
-  }}
+}}
 />
-
-
-
 
 ### Example Response
 
@@ -429,9 +421,6 @@ puts "User details: #{data['attributes']}"`
 }
 ```
 
-
-
-
 ---
 
 ## Create Subuser
@@ -442,14 +431,12 @@ Invite a new user to access the server with specific permissions.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `email` | string | Yes | Email address of user to invite |
-| `permissions` | array | Yes | Array of permission keys to grant |
+| Field         | Type   | Required | Description                       |
+| ------------- | ------ | -------- | --------------------------------- |
+| `email`       | string | Yes      | Email address of user to invite   |
+| `permissions` | array  | Yes      | Array of permission keys to grant |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -480,29 +467,30 @@ const axios = require('axios');
 
 const serverId = 'd3aac109';
 const userData = {
-  email: 'mike@example.com',
-  permissions: [
-    'control.console',
-    'control.start',
-    'control.stop',
-    'control.restart',
-    'file.read',
-    'file.create',
-    'file.update',
-    'backup.read'
-  ]
+email: 'mike@example.com',
+permissions: [
+'control.console',
+'control.start',
+'control.stop',
+'control.restart',
+'file.read',
+'file.create',
+'file.update',
+'backup.read'
+]
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/users`, userData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('User created:', response.data.attributes);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -531,10 +519,11 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/users', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/users',
                         headers=headers, json=user_data)
 print('User created:', response.json()['attributes'])
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -558,18 +547,19 @@ $userData = [
 $client = new GuzzleHttp\Client();
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/users", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $userData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $userData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data['attributes']);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -598,24 +588,25 @@ func main() {
             "backup.read",
         },
     }
-    
+
     jsonData, _ := json.Marshal(userData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("User created:", result["attributes"])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -628,17 +619,17 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "email": "mike@example.com",
-  "permissions": [
-    "control.console",
-    "control.start",
-    "control.stop",
-    "control.restart",
-    "file.read",
-    "file.create",
-    "file.update",
-    "backup.read"
-  ]
+"email": "mike@example.com",
+"permissions": [
+"control.console",
+"control.start",
+"control.stop",
+"control.restart",
+"file.read",
+"file.create",
+"file.update",
+"backup.read"
+]
 }
 """;
 
@@ -646,16 +637,17 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/users",
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("User created: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -690,7 +682,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync($"https://your-panel.com/api/client/servers/{serverId}/users", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine("User created: " + responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -700,17 +693,17 @@ require 'json'
 
 server_id = 'd3aac109'
 user_data = {
-  email: 'mike@example.com',
-  permissions: [
-    'control.console',
-    'control.start',
-    'control.stop',
-    'control.restart',
-    'file.read',
-    'file.create',
-    'file.update',
-    'backup.read'
-  ]
+email: 'mike@example.com',
+permissions: [
+'control.console',
+'control.start',
+'control.stop',
+'control.restart',
+'file.read',
+'file.create',
+'file.update',
+'backup.read'
+]
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/users")
@@ -726,7 +719,8 @@ request.body = user_data.to_json
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "User created: #{data['attributes']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -758,12 +752,12 @@ puts "User created: #{data['attributes']}"
     ]
   }
 }
-```
-
+````
 
 ### Error Responses
 
 **User Limit Reached (400)**
+
 ```json
 {
   "errors": [
@@ -776,8 +770,8 @@ puts "User created: #{data['attributes']}"
 }
 ```
 
-
 **User Already Has Access (409)**
+
 ```json
 {
   "errors": [
@@ -790,8 +784,8 @@ puts "User created: #{data['attributes']}"
 }
 ```
 
-
 **Invalid Email (422)**
+
 ```json
 {
   "errors": [
@@ -808,8 +802,8 @@ puts "User created: #{data['attributes']}"
 }
 ```
 
-
 **User Not Found (404)**
+
 ```json
 {
   "errors": [
@@ -822,9 +816,6 @@ puts "User created: #{data['attributes']}"
 }
 ```
 
-
-
-
 ---
 
 ## Update Subuser Permissions
@@ -835,20 +826,18 @@ Modify the permissions granted to an existing subuser.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `user` | string | User UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `user`    | string | User UUID                            |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `permissions` | array | Yes | Array of permission keys to grant |
+| Field         | Type  | Required | Description                       |
+| ------------- | ----- | -------- | --------------------------------- |
+| `permissions` | array | Yes      | Array of permission keys to grant |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -880,29 +869,30 @@ const axios = require('axios');
 const serverId = 'd3aac109';
 const userId = 'a8b2c3d4-e5f6-7890-1234-567890abcdef';
 const permissionsData = {
-  permissions: [
-    'control.console',
-    'control.start',
-    'control.stop',
-    'control.restart',
-    'file.read',
-    'file.update',
-    'backup.read',
-    'backup.create',
-    'database.read'
-  ]
+permissions: [
+'control.console',
+'control.start',
+'control.stop',
+'control.restart',
+'file.read',
+'file.update',
+'backup.read',
+'backup.create',
+'database.read'
+]
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/users/${userId}`, permissionsData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('User permissions updated:', response.data.attributes);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -932,10 +922,11 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/users/{user_id}', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/users/{user_id}',
                          headers=headers, json=permissions_data)
 print('User permissions updated:', response.json()['attributes'])
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -960,18 +951,19 @@ $permissionsData = [
 $client = new GuzzleHttp\Client();
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/users/{$userId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $permissionsData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $permissionsData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data['attributes']);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1001,24 +993,25 @@ func main() {
             "database.read",
         },
     }
-    
+
     jsonData, _ := json.Marshal(permissionsData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users/%s", serverId, userId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("User permissions updated:", result["attributes"])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1032,17 +1025,17 @@ String serverId = "d3aac109";
 String userId = "a8b2c3d4-e5f6-7890-1234-567890abcdef";
 String jsonData = """
 {
-  "permissions": [
-    "control.console",
-    "control.start",
-    "control.stop",
-    "control.restart",
-    "file.read",
-    "file.update",
-    "backup.read",
-    "backup.create",
-    "database.read"
-  ]
+"permissions": [
+"control.console",
+"control.start",
+"control.stop",
+"control.restart",
+"file.read",
+"file.update",
+"backup.read",
+"backup.create",
+"database.read"
+]
 }
 """;
 
@@ -1050,16 +1043,17 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/users/%
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .method("PATCH", HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.method("PATCH", HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("User permissions updated: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1095,7 +1089,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PatchAsync($"https://your-panel.com/api/client/servers/{serverId}/users/{userId}", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine("User permissions updated: " + responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1106,17 +1101,17 @@ require 'json'
 server_id = 'd3aac109'
 user_id = 'a8b2c3d4-e5f6-7890-1234-567890abcdef'
 permissions_data = {
-  permissions: [
-    'control.console',
-    'control.start',
-    'control.stop',
-    'control.restart',
-    'file.read',
-    'file.update',
-    'backup.read',
-    'backup.create',
-    'database.read'
-  ]
+permissions: [
+'control.console',
+'control.start',
+'control.stop',
+'control.restart',
+'file.read',
+'file.update',
+'backup.read',
+'backup.create',
+'database.read'
+]
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/users/#{user_id}")
@@ -1132,7 +1127,8 @@ request.body = permissions_data.to_json
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "User permissions updated: #{data['attributes']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1165,14 +1161,11 @@ puts "User permissions updated: #{data['attributes']}"
     ]
   }
 }
-```
-
+````
 
 :::info Permission Updates
 Permission updates completely replace the user's existing permissions. Include all permissions you want the user to have, not just the ones you're adding.
 :::
-
-
 
 ---
 
@@ -1184,14 +1177,12 @@ Remove a user's access to the server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `user` | string | User UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `user`    | string | User UUID                            |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1211,17 +1202,18 @@ const serverId = 'd3aac109';
 const userId = 'f1e2d3c4-b5a6-9897-8765-432109fedcba';
 
 const response = await axios.delete(`https://your-panel.com/api/client/servers/${serverId}/users/${userId}`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-  console.log('User access removed successfully');
+console.log('User access removed successfully');
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1241,7 +1233,8 @@ response = requests.delete(f'https://your-panel.com/api/client/servers/{server_i
 
 if response.status_code == 204:
     print('User access removed successfully')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1252,18 +1245,19 @@ $userId = 'f1e2d3c4-b5a6-9897-8765-432109fedcba';
 $client = new GuzzleHttp\Client();
 
 $response = $client->delete("https://your-panel.com/api/client/servers/{$serverId}/users/{$userId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 if ($response->getStatusCode() === 204) {
-    echo "User access removed successfully\n";
+echo "User access removed successfully\n";
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1279,21 +1273,22 @@ func main() {
     serverId := "d3aac109"
     userId := "f1e2d3c4-b5a6-9897-8765-432109fedcba"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/users/%s", serverId, userId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("User access removed successfully")
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1309,19 +1304,20 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/users/%
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .DELETE()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 if (response.statusCode() == 204) {
-    System.out.println("User access removed successfully");
+System.out.println("User access removed successfully");
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1338,11 +1334,12 @@ string userId = "f1e2d3c4-b5a6-9897-8765-432109fedcba";
 
 var response = await client.DeleteAsync($"https://your-panel.com/api/client/servers/{serverId}/users/{userId}");
 
-if (response.StatusCode == System.Net.HttpStatusCode.NoContent) 
+if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
 {
     Console.WriteLine("User access removed successfully");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1364,9 +1361,10 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 
 if response.code == '204'
-  puts 'User access removed successfully'
+puts 'User access removed successfully'
 end
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1395,10 +1393,7 @@ Removing a subuser immediately revokes all their access to the server. They will
     }
   ]
 }
-```
-
-
-
+````
 
 ---
 
@@ -1406,77 +1401,77 @@ Removing a subuser immediately revokes all their access to the server. They will
 
 ### Server Control Permissions
 
-| Permission | Description |
-|------------|-------------|
+| Permission        | Description                           |
+| ----------------- | ------------------------------------- |
 | `control.console` | View console output and send commands |
-| `control.start` | Start the server |
-| `control.stop` | Stop the server |
-| `control.restart` | Restart the server |
-| `control.kill` | Force kill the server process |
+| `control.start`   | Start the server                      |
+| `control.stop`    | Stop the server                       |
+| `control.restart` | Restart the server                    |
+| `control.kill`    | Force kill the server process         |
 
 ### File Management Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `file.create` | Create new files and directories |
-| `file.read` | View file contents and directory listings |
-| `file.update` | Modify existing files |
-| `file.delete` | Delete files and directories |
-| `file.archive` | Create and extract archives |
-| `file.sftp` | Access files via SFTP |
+| Permission     | Description                               |
+| -------------- | ----------------------------------------- |
+| `file.create`  | Create new files and directories          |
+| `file.read`    | View file contents and directory listings |
+| `file.update`  | Modify existing files                     |
+| `file.delete`  | Delete files and directories              |
+| `file.archive` | Create and extract archives               |
+| `file.sftp`    | Access files via SFTP                     |
 
 ### Backup Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `backup.create` | Create new backups |
-| `backup.read` | View backup list and details |
-| `backup.delete` | Delete backups |
-| `backup.download` | Download backup files |
-| `backup.restore` | Restore from backups |
+| Permission        | Description                  |
+| ----------------- | ---------------------------- |
+| `backup.create`   | Create new backups           |
+| `backup.read`     | View backup list and details |
+| `backup.delete`   | Delete backups               |
+| `backup.download` | Download backup files        |
+| `backup.restore`  | Restore from backups         |
 
 ### Network Allocation Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `allocation.read` | View server allocations |
-| `allocation.create` | Assign new allocations |
+| Permission          | Description                |
+| ------------------- | -------------------------- |
+| `allocation.read`   | View server allocations    |
+| `allocation.create` | Assign new allocations     |
 | `allocation.update` | Modify allocation settings |
-| `allocation.delete` | Remove allocations |
+| `allocation.delete` | Remove allocations         |
 
 ### Database Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `database.create` | Create new databases |
-| `database.read` | View database list and details |
-| `database.update` | Rotate database passwords |
-| `database.delete` | Delete databases |
+| Permission        | Description                    |
+| ----------------- | ------------------------------ |
+| `database.create` | Create new databases           |
+| `database.read`   | View database list and details |
+| `database.update` | Rotate database passwords      |
+| `database.delete` | Delete databases               |
 
 ### Schedule Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `schedule.create` | Create new schedules |
-| `schedule.read` | View schedules and tasks |
+| Permission        | Description               |
+| ----------------- | ------------------------- |
+| `schedule.create` | Create new schedules      |
+| `schedule.read`   | View schedules and tasks  |
 | `schedule.update` | Modify existing schedules |
-| `schedule.delete` | Delete schedules |
+| `schedule.delete` | Delete schedules          |
 
 ### User Management Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `user.create` | Invite new subusers |
-| `user.read` | View subuser list and details |
-| `user.update` | Modify subuser permissions |
-| `user.delete` | Remove subusers |
+| Permission    | Description                   |
+| ------------- | ----------------------------- |
+| `user.create` | Invite new subusers           |
+| `user.read`   | View subuser list and details |
+| `user.update` | Modify subuser permissions    |
+| `user.delete` | Remove subusers               |
 
 ### Startup Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `startup.read` | View startup configuration |
-| `startup.update` | Modify startup variables |
+| Permission       | Description                |
+| ---------------- | -------------------------- |
+| `startup.read`   | View startup configuration |
+| `startup.update` | Modify startup variables   |
 
 ---
 
@@ -1501,7 +1496,6 @@ Suitable for monitoring and viewing server status:
 }
 ```
 
-
 ### Moderator Access
 
 Basic server management without administrative functions:
@@ -1520,7 +1514,6 @@ Basic server management without administrative functions:
   ]
 }
 ```
-
 
 ### Administrator Access
 
@@ -1562,7 +1555,6 @@ Full server management capabilities:
 }
 ```
 
-
 ### Developer Access
 
 File management and deployment focused:
@@ -1588,9 +1580,6 @@ File management and deployment focused:
   ]
 }
 ```
-
-
-
 
 ---
 
@@ -1656,12 +1645,12 @@ For new users who don't have accounts:
 
 ### Common Problems
 
-| Issue | Cause | Solution |
-|-------|--------|---------|
-| **User can't access server** | Permissions not granted | Check and update permissions |
-| **Invitation failed** | Invalid email address | Verify email format and deliverability |
-| **User limit reached** | Too many subusers | Remove inactive users or upgrade plan |
-| **Permission denied errors** | Missing specific permission | Grant required permission |
+| Issue                        | Cause                       | Solution                               |
+| ---------------------------- | --------------------------- | -------------------------------------- |
+| **User can't access server** | Permissions not granted     | Check and update permissions           |
+| **Invitation failed**        | Invalid email address       | Verify email format and deliverability |
+| **User limit reached**       | Too many subusers           | Remove inactive users or upgrade plan  |
+| **Permission denied errors** | Missing specific permission | Grant required permission              |
 
 ### Diagnostic Steps
 
@@ -1678,7 +1667,6 @@ curl "https://your-panel.com/api/client/servers/{server}/users/{user}" \
 # Have user attempt the action and check error messages
 ```
 
-
 ### Permission Debugging
 
 - **Test with minimal permissions**: Start with basic permissions and add incrementally
@@ -1686,20 +1674,18 @@ curl "https://your-panel.com/api/client/servers/{server}/users/{user}" \
 - **Compare working users**: Look at permissions of users who can perform the action
 - **Verify permission names**: Ensure permission keys are spelled correctly
 
-
-
 ---
 
 ## User Limits and Quotas
 
 ### Default Limits
 
-| Resource | Default Limit | Description |
-|----------|---------------|-------------|
-| Subusers per server | 5-50 | Varies by hosting plan |
-| Permission combinations | Unlimited | Any combination of available permissions |
-| Invitation attempts | Rate limited | Limited to prevent abuse |
-| Access duration | Permanent | Until manually removed |
+| Resource                | Default Limit | Description                              |
+| ----------------------- | ------------- | ---------------------------------------- |
+| Subusers per server     | 5-50          | Varies by hosting plan                   |
+| Permission combinations | Unlimited     | Any combination of available permissions |
+| Invitation attempts     | Rate limited  | Limited to prevent abuse                 |
+| Access duration         | Permanent     | Until manually removed                   |
 
 ### Account Requirements
 
@@ -1712,27 +1698,27 @@ curl "https://your-panel.com/api/client/servers/{server}/users/{user}" \
 
 ## Common Error Codes
 
-| Status | Code | Description |
-|--------|------|-------------|
-| 400 | `TooManySubusersException` | Subuser limit reached |
-| 400 | `CannotRemoveServerOwnerException` | Cannot remove server owner |
-| 401 | `InvalidCredentialsException` | Invalid API key |
-| 403 | `InsufficientPermissionsException` | Missing required permissions |
-| 404 | `UserNotFoundException` | User not found |
-| 404 | `NotFoundHttpException` | Subuser not found |
-| 409 | `UserAlreadyHasAccessException` | User already has server access |
-| 422 | `ValidationException` | Invalid request data |
+| Status | Code                               | Description                    |
+| ------ | ---------------------------------- | ------------------------------ |
+| 400    | `TooManySubusersException`         | Subuser limit reached          |
+| 400    | `CannotRemoveServerOwnerException` | Cannot remove server owner     |
+| 401    | `InvalidCredentialsException`      | Invalid API key                |
+| 403    | `InsufficientPermissionsException` | Missing required permissions   |
+| 404    | `UserNotFoundException`            | User not found                 |
+| 404    | `NotFoundHttpException`            | Subuser not found              |
+| 409    | `UserAlreadyHasAccessException`    | User already has server access |
+| 422    | `ValidationException`              | Invalid request data           |
 
 ## Required Permissions
 
 User management operations require specific permissions:
 
-| Permission | Description |
-|------------|-------------|
-| `user.create` | Invite new subusers |
-| `user.read` | View subuser list and details |
-| `user.update` | Modify subuser permissions |
-| `user.delete` | Remove subusers |
+| Permission    | Description                   |
+| ------------- | ----------------------------- |
+| `user.create` | Invite new subusers           |
+| `user.read`   | View subuser list and details |
+| `user.update` | Modify subuser permissions    |
+| `user.delete` | Remove subusers               |
 
 :::info Server Owner Privileges
 Server owners automatically have all permissions and can perform all user management operations regardless of explicit permission grants.
@@ -1766,4 +1752,4 @@ Server owners automatically have all permissions and can perform all user manage
 
 - Explore [Server Management](./servers) for server control operations
 - Check [File Management](./files) for file permission details
-- Review [Database Management](./databases) for database access control 
+- Review [Database Management](./databases) for database access control

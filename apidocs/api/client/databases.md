@@ -13,22 +13,22 @@ Retrieve all databases associated with a server.
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/databases"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/databases" \\
+endpoint="/api/client/servers/{server}/databases"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/databases" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/databases\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Databases:', response.data.data);`,
@@ -36,9 +36,9 @@ console.log('Databases:', response.data.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/databases', headers=headers)
@@ -51,9 +51,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serverId}/databases");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -65,28 +65,29 @@ print_r($data['data']);
     go: `package main
 
 import (
-    "fmt"
-    "io"
-    "net/http"
+"fmt"
+"io"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    client := &http.Client{}
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/databases", serverId)
-    req, _ := http.NewRequest("GET", url, nil)
-    
+serverId := "d3aac109"
+client := &http.Client{}
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/databases", serverId)
+req, \_ := http.NewRequest("GET", url, nil)
+
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     body, _ := io.ReadAll(resp.Body)
     fmt.Println(string(body))
+
 }`
-  }}
+}}
 />
 
 ### Example Response
@@ -129,13 +130,13 @@ func main() {
 
 ### Database Fields
 
-| Field | Description |
-|-------|-------------|
-| `id` | Unique database identifier |
-| `host` | Database server connection details |
-| `name` | Database name |
-| `username` | Database username |
-| `remote` | Allowed remote connection pattern |
+| Field             | Description                                    |
+| ----------------- | ---------------------------------------------- |
+| `id`              | Unique database identifier                     |
+| `host`            | Database server connection details             |
+| `name`            | Database name                                  |
+| `username`        | Database username                              |
+| `remote`          | Allowed remote connection pattern              |
 | `max_connections` | Maximum concurrent connections (0 = unlimited) |
 
 ---
@@ -148,18 +149,18 @@ Create a new MySQL/MariaDB database for the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `database` | string | Yes | Database name (without server prefix) |
-| `remote` | string | Yes | Remote access pattern (`%` for all, specific IP, etc.) |
+| Field      | Type   | Required | Description                                            |
+| ---------- | ------ | -------- | ------------------------------------------------------ |
+| `database` | string | Yes      | Database name (without server prefix)                  |
+| `remote`   | string | Yes      | Remote access pattern (`%` for all, specific IP, etc.) |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/databases"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/databases" \\
+endpoint="/api/client/servers/{server}/databases"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/databases" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -167,18 +168,18 @@ Create a new MySQL/MariaDB database for the server.
     "database": "playerdata",
     "remote": "%"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.post(\`https://your-panel.com/api/client/servers/\${serverId}/databases\`, {
-  database: 'playerdata',
-  remote: '%'
+database: 'playerdata',
+remote: '%'
 }, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const db = response.data.attributes;
@@ -189,31 +190,31 @@ console.log(\`Password: \${db.relationships.password.attributes.password}\`);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 data = {
-    'database': 'playerdata',
-    'remote': '%'
+'database': 'playerdata',
+'remote': '%'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/databases', 
-                        json=data, headers=headers)
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/databases',
+json=data, headers=headers)
 
 if response.status_code == 201:
-    db = response.json()['attributes']
-    print(f"Database created: {db['name']}")
-    print(f"Username: {db['username']}")
-    print(f"Password: {db['relationships']['password']['attributes']['password']}")`,
+db = response.json()['attributes']
+print(f"Database created: {db['name']}")
+print(f"Username: {db['username']}")
+print(f"Password: {db['relationships']['password']['attributes']['password']}")`,
     php: `<?php
 $serverId = 'd3aac109';
 $ch = curl_init();
 
 $data = [
-    'database' => 'playerdata',
-    'remote' => '%'
+'database' => 'playerdata',
+'remote' => '%'
 ];
 
 curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serverId}/databases");
@@ -221,9 +222,9 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -232,12 +233,12 @@ curl_close($ch);
 
 if ($httpCode === 201) {
     $db = json_decode($response, true)['attributes'];
-    echo "Database created: " . $db['name'] . "\\n";
-    echo "Username: " . $db['username'] . "\\n";
-    echo "Password: " . $db['relationships']['password']['attributes']['password'] . "\\n";
+echo "Database created: " . $db['name'] . "\\n";
+echo "Username: " . $db['username'] . "\\n";
+echo "Password: " . $db['relationships']['password']['attributes']['password'] . "\\n";
 }
 ?>`
-  }}
+}}
 />
 
 ### Example Response
@@ -269,12 +270,12 @@ if ($httpCode === 201) {
 
 ### Remote Access Patterns
 
-| Pattern | Description | Example Use Case |
-|---------|-------------|------------------|
-| `%` | Allow from any IP | Development, web applications |
-| `127.0.0.1` | Local connections only | Same-server applications |
-| `192.168.1.%` | Specific subnet | Private network access |
-| `example.com` | Specific hostname | External web server |
+| Pattern       | Description            | Example Use Case              |
+| ------------- | ---------------------- | ----------------------------- |
+| `%`           | Allow from any IP      | Development, web applications |
+| `127.0.0.1`   | Local connections only | Same-server applications      |
+| `192.168.1.%` | Specific subnet        | Private network access        |
+| `example.com` | Specific hostname      | External web server           |
 
 ---
 
@@ -286,35 +287,35 @@ Generate a new password for an existing database.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type   | Description         |
+| ---------- | ------ | ------------------- |
 | `database` | string | Database identifier |
 
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/servers/{server}/databases/{database}/rotate-password"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/databases/s4_1/rotate-password" \\
+endpoint="/api/client/servers/{server}/databases/{database}/rotate-password"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/servers/d3aac109/databases/s4_1/rotate-password" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const databaseId = 's4_1';
 
 const response = await axios.post(
-  \`https://your-panel.com/api/client/servers/\${serverId}/databases/\${databaseId}/rotate-password\`,
-  {},
-  {
-    headers: {
-      'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-      'Accept': 'Application/vnd.pterodactyl.v1+json',
-      'Content-Type': 'application/json'
-    }
-  }
+\`https://your-panel.com/api/client/servers/\${serverId}/databases/\${databaseId}/rotate-password\`,
+{},
+{
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
+}
 );
 
 const newPassword = response.data.attributes.relationships.password.attributes.password;
@@ -325,19 +326,19 @@ server_id = 'd3aac109'
 database_id = 's4_1'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.post(
-    f'https://your-panel.com/api/client/servers/{server_id}/databases/{database_id}/rotate-password',
-    headers=headers
+f'https://your-panel.com/api/client/servers/{server_id}/databases/{database_id}/rotate-password',
+headers=headers
 )
 
 if response.status_code == 200:
-    new_password = response.json()['attributes']['relationships']['password']['attributes']['password']
-    print(f'New password: {new_password}')`,
+new_password = response.json()['attributes']['relationships']['password']['attributes']['password']
+print(f'New password: {new_password}')`,
     php: `<?php
 $serverId = 'd3aac109';
 $databaseId = 's4_1';
@@ -347,9 +348,9 @@ curl_setopt($ch, CURLOPT_URL, "https://your-panel.com/api/client/servers/{$serve
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer ptlc_YOUR_API_KEY',
-    'Accept: Application/vnd.pterodactyl.v1+json',
-    'Content-Type: application/json'
+'Authorization: Bearer ptlc_YOUR_API_KEY',
+'Accept: Application/vnd.pterodactyl.v1+json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -358,11 +359,11 @@ curl_close($ch);
 
 if ($httpCode === 200) {
     $data = json_decode($response, true);
-    $newPassword = $data['attributes']['relationships']['password']['attributes']['password'];
-    echo "New password: " . $newPassword . "\\n";
+$newPassword = $data['attributes']['relationships']['password']['attributes']['password'];
+echo "New password: " . $newPassword . "\\n";
 }
 ?>`
-  }}
+}}
 />
 
 ### Example Response
@@ -406,8 +407,8 @@ Permanently delete a database and all its data.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type   | Description         |
+| ---------- | ------ | ------------------- |
 | `database` | string | Database identifier |
 
 ### Example Request
@@ -434,58 +435,59 @@ Database deletion is irreversible and will permanently destroy all data. Always 
 ### PHP (PDO)
 
 <CodeTabs
-  defaultValue="php"
-  examples={{
-    php: `<?php
+defaultValue="php"
+examples={{
+php: `<?php
 try {
-    $host = 'mysql.example.com';
-    $port = 3306;
-    $dbname = 's4_gamedata';
-    $username = 'u4_gKGSzC8x9M';
-    $password = 'aP$9gH#x2Kw8';
-    
+$host = 'mysql.example.com';
+$port = 3306;
+$dbname = 's4_gamedata';
+$username = 'u4_gKGSzC8x9M';
+$password = 'aP$9gH#x2Kw8';
+
     $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4";
     $pdo = new PDO($dsn, $username, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
     ]);
-    
+
     echo "Connected successfully!\\n";
-    
+
     // Example query
     $stmt = $pdo->prepare("SELECT COUNT(*) as count FROM players");
     $stmt->execute();
     $result = $stmt->fetch();
     echo "Player count: " . $result['count'] . "\\n";
-    
+
 } catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage() . "\\n";
+echo "Connection failed: " . $e->getMessage() . "\\n";
 }
 ?>`,
     javascript: `const mysql = require('mysql2/promise');
 
 async function connectToDatabase() {
-  try {
-    const connection = await mysql.createConnection({
-      host: 'mysql.example.com',
-      port: 3306,
-      user: 'u4_gKGSzC8x9M',
-      password: 'aP$9gH#x2Kw8',
-      database: 's4_gamedata',
-      charset: 'utf8mb4'
-    });
-    
+try {
+const connection = await mysql.createConnection({
+host: 'mysql.example.com',
+port: 3306,
+user: 'u4_gKGSzC8x9M',
+password: 'aP$9gH#x2Kw8',
+database: 's4_gamedata',
+charset: 'utf8mb4'
+});
+
     console.log('Connected successfully!');
-    
+
     // Example query
     const [rows] = await connection.execute('SELECT COUNT(*) as count FROM players');
     console.log(\`Player count: \${rows[0].count}\`);
-    
+
     await connection.end();
-  } catch (error) {
-    console.error('Connection failed:', error.message);
-  }
+
+} catch (error) {
+console.error('Connection failed:', error.message);
+}
 }
 
 connectToDatabase();`,
@@ -493,30 +495,31 @@ connectToDatabase();`,
 from mysql.connector import Error
 
 try:
-    connection = mysql.connector.connect(
-        host='mysql.example.com',
-        port=3306,
-        database='s4_gamedata',
-        user='u4_gKGSzC8x9M',
-        password='aP$9gH#x2Kw8',
-        charset='utf8mb4'
-    )
-    
+connection = mysql.connector.connect(
+host='mysql.example.com',
+port=3306,
+database='s4_gamedata',
+user='u4_gKGSzC8x9M',
+password='aP$9gH#x2Kw8',
+charset='utf8mb4'
+)
+
     if connection.is_connected():
         print('Connected successfully!')
-        
+
         cursor = connection.cursor()
         cursor.execute("SELECT COUNT(*) as count FROM players")
         result = cursor.fetchone()
         print(f"Player count: {result[0]}")
-        
+
+
 except Error as e:
-    print(f"Connection failed: {e}")
-    
+print(f"Connection failed: {e}")
+
 finally:
-    if connection.is_connected():
-        cursor.close()
-        connection.close()`,
+if connection.is_connected():
+cursor.close()
+connection.close()`,
     java: `import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -524,30 +527,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://mysql.example.com:3306/s4_gamedata?useSSL=false&useUnicode=true&characterEncoding=utf8";
-        String username = "u4_gKGSzC8x9M";
-        String password = "aP$9gH#x2Kw8";
-        
+public static void main(String[] args) {
+String url = "jdbc:mysql://mysql.example.com:3306/s4_gamedata?useSSL=false&useUnicode=true&characterEncoding=utf8";
+String username = "u4_gKGSzC8x9M";
+String password = "aP$9gH#x2Kw8";
+
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             System.out.println("Connected successfully!");
-            
+
             // Example query
             String sql = "SELECT COUNT(*) as count FROM players";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             if (resultSet.next()) {
                 int count = resultSet.getInt("count");
                 System.out.println("Player count: " + count);
             }
-            
+
         } catch (SQLException e) {
             System.err.println("Connection failed: " + e.getMessage());
         }
     }
+
 }`
-  }}
+}}
 />
 
 ### MySQL CLI
@@ -561,12 +565,12 @@ mysql -h mysql.example.com -P 3306 -u u4_gKGSzC8x9M -p s4_gamedata
 
 ## Database Limits
 
-| Limit | Default | Description |
-|-------|---------|-------------|
-| Maximum databases per server | 5 | Configurable by admin |
-| Database name length | 48 characters | Including server prefix |
-| Username length | 16 characters | Including server prefix |
-| Password length | 32 characters | Auto-generated |
+| Limit                        | Default       | Description             |
+| ---------------------------- | ------------- | ----------------------- |
+| Maximum databases per server | 5             | Configurable by admin   |
+| Database name length         | 48 characters | Including server prefix |
+| Username length              | 16 characters | Including server prefix |
+| Password length              | 32 characters | Auto-generated          |
 
 ---
 
@@ -617,16 +621,19 @@ async function backupDatabase() {
 ### Connection Issues
 
 **"Access denied" errors**
+
 - Verify username and password
 - Check remote access pattern
 - Ensure database exists
 
 **"Can't connect to MySQL server"**
+
 - Verify host and port
 - Check firewall settings
 - Ensure database server is running
 
 **"Too many connections"**
+
 - Check max_connections limit
 - Implement connection pooling
 - Close unused connections
@@ -644,12 +651,12 @@ curl "https://your-panel.com/api/client/servers/d3aac109/databases" \
 
 ## Required Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `database.read` | View existing databases |
-| `database.create` | Create new databases |
+| Permission        | Description               |
+| ----------------- | ------------------------- |
+| `database.read`   | View existing databases   |
+| `database.create` | Create new databases      |
 | `database.update` | Rotate database passwords |
-| `database.delete` | Delete databases |
+| `database.delete` | Delete databases          |
 
 ## Source References
 
@@ -663,4 +670,4 @@ curl "https://your-panel.com/api/client/servers/d3aac109/databases" \
 
 - Explore [Backup Management](./backups) for database backup strategies
 - Learn about [Scheduled Tasks](./schedules) for automated database maintenance
-- Check [File Management](./files) for database dump file operations 
+- Check [File Management](./files) for database dump file operations

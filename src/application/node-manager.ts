@@ -39,7 +39,10 @@ export class NodeManager {
 
   // Allocation sub-operations
 
-  async listAllocations(nodeId: number, options?: RequestOptions): Promise<PaginatedResult<NodeAllocation>> {
+  async listAllocations(
+    nodeId: number,
+    options?: RequestOptions,
+  ): Promise<PaginatedResult<NodeAllocation>> {
     return this.http.getList<NodeAllocation>(`${BASE}/${nodeId}/allocations`, options);
   }
 

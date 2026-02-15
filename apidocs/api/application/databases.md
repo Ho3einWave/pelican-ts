@@ -25,45 +25,45 @@ GET /api/application/servers/{server}/databases
 
 ### Parameters
 
-| Parameter | Type | Location | Required | Description |
-|-----------|------|----------|----------|-------------|
-| `server` | string | path | Yes | The server's UUID or ID |
+| Parameter | Type   | Location | Required | Description             |
+| --------- | ------ | -------- | -------- | ----------------------- |
+| `server`  | string | path     | Yes      | The server's UUID or ID |
 
 ### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `include` | string | Include related resources (host, password) | - |
+| Parameter  | Type    | Description                                | Default |
+| ---------- | ------- | ------------------------------------------ | ------- |
+| `page`     | integer | Page number for pagination                 | 1       |
+| `per_page` | integer | Results per page (1-100)                   | 50      |
+| `include`  | string  | Include related resources (host, password) | -       |
 
 <CodeTabs
-  endpoint="/api/application/servers/{server}/databases"
-  method="GET"
-  examples={{
-    curl: `curl -X GET "https://panel.example.com/api/application/servers/{server}/databases" \\
+endpoint="/api/application/servers/{server}/databases"
+method="GET"
+examples={{
+curl: `curl -X GET "https://panel.example.com/api/application/servers/{server}/databases" \\
   -H "Authorization: Bearer YOUR_APPLICATION_API_KEY" \\
   -H "Accept: application/json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases', {
-  method: 'GET',
-  headers: {
-    'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases', {
+method: 'GET',
+headers: {
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 });
 
 const databases = await response.json();`,
     python: `import requests
 
 response = requests.get(
-    'https://panel.example.com/api/application/servers/{server}/databases',
-    headers={
-        'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
+'https://panel.example.com/api/application/servers/{server}/databases',
+headers={
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 )
 
 databases = response.json()`,
@@ -71,9 +71,9 @@ databases = response.json()`,
 $ch = curl_init('https://panel.example.com/api/application/servers/{server}/databases');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer YOUR_APPLICATION_API_KEY',
-    'Accept: application/json',
-    'Content-Type: application/json'
+'Authorization: Bearer YOUR_APPLICATION_API_KEY',
+'Accept: application/json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -82,20 +82,21 @@ curl_close($ch);`,
     go: `package main
 
 import (
-    "net/http"
-    "io/ioutil"
+"net/http"
+"io/ioutil"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://panel.example.com/api/application/servers/{server}/databases", nil)
-    req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    req.Header.Add("Accept", "application/json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://panel.example.com/api/application/servers/{server}/databases", nil)
+req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+req.Header.Add("Accept", "application/json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
     body, _ := ioutil.ReadAll(resp.Body)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -104,12 +105,12 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases"))
-    .header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    .header("Accept", "application/json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases"))
+.header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+.header("Accept", "application/json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());`,
     csharp: `using System.Net.Http;
@@ -135,7 +136,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 databases = JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -183,38 +184,38 @@ GET /api/application/servers/{server}/databases/{database}
 
 ### Parameters
 
-| Parameter | Type | Location | Required | Description |
-|-----------|------|----------|----------|-------------|
-| `server` | string | path | Yes | The server's UUID or ID |
-| `database` | integer | path | Yes | The database ID |
+| Parameter  | Type    | Location | Required | Description             |
+| ---------- | ------- | -------- | -------- | ----------------------- |
+| `server`   | string  | path     | Yes      | The server's UUID or ID |
+| `database` | integer | path     | Yes      | The database ID         |
 
 <CodeTabs
-  endpoint="/api/application/servers/{server}/databases/{database}"
-  method="GET"
-  examples={{
-    curl: `curl -X GET "https://panel.example.com/api/application/servers/{server}/databases/{database}" \\
+endpoint="/api/application/servers/{server}/databases/{database}"
+method="GET"
+examples={{
+curl: `curl -X GET "https://panel.example.com/api/application/servers/{server}/databases/{database}" \\
   -H "Authorization: Bearer YOUR_APPLICATION_API_KEY" \\
   -H "Accept: application/json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases/{database}', {
-  method: 'GET',
-  headers: {
-    'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases/{database}', {
+method: 'GET',
+headers: {
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 });
 
 const database = await response.json();`,
     python: `import requests
 
 response = requests.get(
-    'https://panel.example.com/api/application/servers/{server}/databases/{database}',
-    headers={
-        'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
+'https://panel.example.com/api/application/servers/{server}/databases/{database}',
+headers={
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 )
 
 database = response.json()`,
@@ -222,9 +223,9 @@ database = response.json()`,
 $ch = curl_init('https://panel.example.com/api/application/servers/{server}/databases/{database}');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer YOUR_APPLICATION_API_KEY',
-    'Accept: application/json',
-    'Content-Type: application/json'
+'Authorization: Bearer YOUR_APPLICATION_API_KEY',
+'Accept: application/json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -233,20 +234,21 @@ curl_close($ch);`,
     go: `package main
 
 import (
-    "net/http"
-    "io/ioutil"
+"net/http"
+"io/ioutil"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://panel.example.com/api/application/servers/{server}/databases/{database}", nil)
-    req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    req.Header.Add("Accept", "application/json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://panel.example.com/api/application/servers/{server}/databases/{database}", nil)
+req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+req.Header.Add("Accept", "application/json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
     body, _ := ioutil.ReadAll(resp.Body)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -255,12 +257,12 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases/{database}"))
-    .header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    .header("Accept", "application/json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases/{database}"))
+.header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+.header("Accept", "application/json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());`,
     csharp: `using System.Net.Http;
@@ -286,7 +288,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 database = JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -341,23 +343,23 @@ POST /api/application/servers/{server}/databases
 
 ### Parameters
 
-| Parameter | Type | Location | Required | Description |
-|-----------|------|----------|----------|-------------|
-| `server` | string | path | Yes | The server's UUID or ID |
+| Parameter | Type   | Location | Required | Description             |
+| --------- | ------ | -------- | -------- | ----------------------- |
+| `server`  | string | path     | Yes      | The server's UUID or ID |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `database` | string | Yes | Database name (will be prefixed with server ID) |
-| `remote` | string | Yes | Remote connection address (use % for any) |
-| `host` | integer | Yes | Database host ID |
+| Field      | Type    | Required | Description                                     |
+| ---------- | ------- | -------- | ----------------------------------------------- |
+| `database` | string  | Yes      | Database name (will be prefixed with server ID) |
+| `remote`   | string  | Yes      | Remote connection address (use % for any)       |
+| `host`     | integer | Yes      | Database host ID                                |
 
 <CodeTabs
-  endpoint="/api/application/servers/{server}/databases"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://panel.example.com/api/application/servers/{server}/databases" \\
+endpoint="/api/application/servers/{server}/databases"
+method="POST"
+examples={{
+curl: `curl -X POST "https://panel.example.com/api/application/servers/{server}/databases" \\
   -H "Authorization: Bearer YOUR_APPLICATION_API_KEY" \\
   -H "Accept: application/json" \\
   -H "Content-Type: application/json" \\
@@ -366,43 +368,43 @@ POST /api/application/servers/{server}/databases
     "remote": "%",
     "host": 1
   }'`,
-    javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    database: 'my_database',
-    remote: '%',
-    host: 1
-  })
+javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases', {
+method: 'POST',
+headers: {
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+database: 'my_database',
+remote: '%',
+host: 1
+})
 });
 
 const database = await response.json();`,
     python: `import requests
 
 response = requests.post(
-    'https://panel.example.com/api/application/servers/{server}/databases',
-    headers={
-        'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    json={
-        'database': 'my_database',
-        'remote': '%',
-        'host': 1
-    }
+'https://panel.example.com/api/application/servers/{server}/databases',
+headers={
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+},
+json={
+'database': 'my_database',
+'remote': '%',
+'host': 1
+}
 )
 
 database = response.json()`,
     php: `<?php
 $data = [
-    'database' => 'my_database',
-    'remote' => '%',
-    'host' => 1
+'database' => 'my_database',
+'remote' => '%',
+'host' => 1
 ];
 
 $ch = curl_init('https://panel.example.com/api/application/servers/{server}/databases');
@@ -410,9 +412,9 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer YOUR_APPLICATION_API_KEY',
-    'Accept: application/json',
-    'Content-Type: application/json'
+'Authorization: Bearer YOUR_APPLICATION_API_KEY',
+'Accept: application/json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -421,28 +423,29 @@ curl_close($ch);`,
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "net/http"
+"bytes"
+"encoding/json"
+"net/http"
 )
 
 func main() {
-    data := map[string]interface{}{
-        "database": "my_database",
-        "remote": "%",
-        "host": 1,
-    }
-    
+data := map[string]interface{}{
+"database": "my_database",
+"remote": "%",
+"host": 1,
+}
+
     jsonData, _ := json.Marshal(data)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://panel.example.com/api/application/servers/{server}/databases", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
     req.Header.Add("Accept", "application/json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -451,20 +454,20 @@ import java.net.URI;
 
 String requestBody = """
 {
-    "database": "my_database",
-    "remote": "%",
-    "host": 1
+"database": "my_database",
+"remote": "%",
+"host": 1
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases"))
-    .header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    .header("Accept", "application/json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-    .build();
+.uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases"))
+.header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+.header("Accept", "application/json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(requestBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());`,
     csharp: `using System.Net.Http;
@@ -476,9 +479,9 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_APPLICATION_API_K
 
 var data = new
 {
-    database = "my_database",
-    remote = "%",
-    host = 1
+database = "my_database",
+remote = "%",
+host = 1
 };
 
 var json = JsonSerializer.Serialize(data);
@@ -497,14 +500,14 @@ request['Authorization'] = 'Bearer YOUR_APPLICATION_API_KEY'
 request['Accept'] = 'application/json'
 request['Content-Type'] = 'application/json'
 request.body = {
-  database: 'my_database',
-  remote: '%',
-  host: 1
+database: 'my_database',
+remote: '%',
+host: 1
 }.to_json
 
 response = http.request(request)
 database = JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -546,38 +549,38 @@ POST /api/application/servers/{server}/databases/{database}/reset-password
 
 ### Parameters
 
-| Parameter | Type | Location | Required | Description |
-|-----------|------|----------|----------|-------------|
-| `server` | string | path | Yes | The server's UUID or ID |
-| `database` | integer | path | Yes | The database ID |
+| Parameter  | Type    | Location | Required | Description             |
+| ---------- | ------- | -------- | -------- | ----------------------- |
+| `server`   | string  | path     | Yes      | The server's UUID or ID |
+| `database` | integer | path     | Yes      | The database ID         |
 
 <CodeTabs
-  endpoint="/api/application/servers/{server}/databases/{database}/reset-password"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password" \\
+endpoint="/api/application/servers/{server}/databases/{database}/reset-password"
+method="POST"
+examples={{
+curl: `curl -X POST "https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password" \\
   -H "Authorization: Bearer YOUR_APPLICATION_API_KEY" \\
   -H "Accept: application/json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password', {
+method: 'POST',
+headers: {
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 });
 
 const result = await response.json();`,
     python: `import requests
 
 response = requests.post(
-    'https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password',
-    headers={
-        'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
+'https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password',
+headers={
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 )
 
 result = response.json()`,
@@ -586,9 +589,9 @@ $ch = curl_init('https://panel.example.com/api/application/servers/{server}/data
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer YOUR_APPLICATION_API_KEY',
-    'Accept: application/json',
-    'Content-Type: application/json'
+'Authorization: Bearer YOUR_APPLICATION_API_KEY',
+'Accept: application/json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -597,20 +600,21 @@ curl_close($ch);`,
     go: `package main
 
 import (
-    "net/http"
-    "io/ioutil"
+"net/http"
+"io/ioutil"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("POST", "https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password", nil)
-    req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    req.Header.Add("Accept", "application/json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("POST", "https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password", nil)
+req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+req.Header.Add("Accept", "application/json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
     body, _ := ioutil.ReadAll(resp.Body)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -619,12 +623,12 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password"))
-    .header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    .header("Accept", "application/json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.noBody())
-    .build();
+.uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases/{database}/reset-password"))
+.header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+.header("Accept", "application/json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.noBody())
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());`,
     csharp: `using System.Net.Http;
@@ -650,7 +654,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 result = JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -692,52 +696,52 @@ DELETE /api/application/servers/{server}/databases/{database}
 
 ### Parameters
 
-| Parameter | Type | Location | Required | Description |
-|-----------|------|----------|----------|-------------|
-| `server` | string | path | Yes | The server's UUID or ID |
-| `database` | integer | path | Yes | The database ID |
+| Parameter  | Type    | Location | Required | Description             |
+| ---------- | ------- | -------- | -------- | ----------------------- |
+| `server`   | string  | path     | Yes      | The server's UUID or ID |
+| `database` | integer | path     | Yes      | The database ID         |
 
 <CodeTabs
-  endpoint="/api/application/servers/{server}/databases/{database}"
-  method="DELETE"
-  examples={{
-    curl: `curl -X DELETE "https://panel.example.com/api/application/servers/{server}/databases/{database}" \\
+endpoint="/api/application/servers/{server}/databases/{database}"
+method="DELETE"
+examples={{
+curl: `curl -X DELETE "https://panel.example.com/api/application/servers/{server}/databases/{database}" \\
   -H "Authorization: Bearer YOUR_APPLICATION_API_KEY" \\
   -H "Accept: application/json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases/{database}', {
-  method: 'DELETE',
-  headers: {
-    'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+javascript: `const response = await fetch('https://panel.example.com/api/application/servers/{server}/databases/{database}', {
+method: 'DELETE',
+headers: {
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-  console.log('Database deleted successfully');
+console.log('Database deleted successfully');
 }`,
     python: `import requests
 
 response = requests.delete(
-    'https://panel.example.com/api/application/servers/{server}/databases/{database}',
-    headers={
-        'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
+'https://panel.example.com/api/application/servers/{server}/databases/{database}',
+headers={
+'Authorization': 'Bearer YOUR_APPLICATION_API_KEY',
+'Accept': 'application/json',
+'Content-Type': 'application/json'
+}
 )
 
 if response.status_code == 204:
-    print('Database deleted successfully')`,
+print('Database deleted successfully')`,
     php: `<?php
 $ch = curl_init('https://panel.example.com/api/application/servers/{server}/databases/{database}');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Authorization: Bearer YOUR_APPLICATION_API_KEY',
-    'Accept: application/json',
-    'Content-Type: application/json'
+'Authorization: Bearer YOUR_APPLICATION_API_KEY',
+'Accept: application/json',
+'Content-Type: application/json'
 ]);
 
 $response = curl_exec($ch);
@@ -745,28 +749,29 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode === 204) {
-    echo 'Database deleted successfully';
+echo 'Database deleted successfully';
 }`,
     go: `package main
 
 import (
-    "fmt"
-    "net/http"
+"fmt"
+"net/http"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("DELETE", "https://panel.example.com/api/application/servers/{server}/databases/{database}", nil)
-    req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    req.Header.Add("Accept", "application/json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("DELETE", "https://panel.example.com/api/application/servers/{server}/databases/{database}", nil)
+req.Header.Add("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+req.Header.Add("Accept", "application/json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Database deleted successfully")
     }
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -775,17 +780,17 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases/{database}"))
-    .header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
-    .header("Accept", "application/json")
-    .header("Content-Type", "application/json")
-    .DELETE()
-    .build();
+.uri(URI.create("https://panel.example.com/api/application/servers/{server}/databases/{database}"))
+.header("Authorization", "Bearer YOUR_APPLICATION_API_KEY")
+.header("Accept", "application/json")
+.header("Content-Type", "application/json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 if (response.statusCode() == 204) {
-    System.out.println("Database deleted successfully");
+System.out.println("Database deleted successfully");
 }`,
     csharp: `using System.Net.Http;
 using System.Net.Http.Headers;
@@ -798,7 +803,7 @@ var response = await client.DeleteAsync("https://panel.example.com/api/applicati
 
 if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
 {
-    Console.WriteLine("Database deleted successfully");
+Console.WriteLine("Database deleted successfully");
 }`,
     ruby: `require 'net/http'
 
@@ -814,9 +819,9 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 
 if response.code == '204'
-  puts 'Database deleted successfully'
+puts 'Database deleted successfully'
 end`
-  }}
+}}
 />
 
 ### Response
@@ -827,15 +832,15 @@ Returns `204 No Content` on successful deletion.
 
 All database management endpoints may return the following errors:
 
-| Status Code | Error | Description |
-|-------------|-------|-------------|
-| 400 | Bad Request | Invalid request parameters |
-| 401 | Unauthorized | Invalid or missing API key |
-| 403 | Forbidden | Insufficient permissions |
-| 404 | Not Found | Server or database not found |
-| 409 | Conflict | Database name already exists |
-| 422 | Unprocessable Entity | Validation errors |
-| 500 | Internal Server Error | Server error |
+| Status Code | Error                 | Description                  |
+| ----------- | --------------------- | ---------------------------- |
+| 400         | Bad Request           | Invalid request parameters   |
+| 401         | Unauthorized          | Invalid or missing API key   |
+| 403         | Forbidden             | Insufficient permissions     |
+| 404         | Not Found             | Server or database not found |
+| 409         | Conflict              | Database name already exists |
+| 422         | Unprocessable Entity  | Validation errors            |
+| 500         | Internal Server Error | Server error                 |
 
 ### Error Response Format
 

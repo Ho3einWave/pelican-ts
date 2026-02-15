@@ -22,10 +22,10 @@ export type WebSocketEvent = keyof WebSocketEventMap;
 type Handler<E extends WebSocketEvent> = (...args: WebSocketEventMap[E]) => void;
 
 export interface WebSocketManagerOptions {
-  /** Origin used to construct the WebSocket URL. Usually the node FQDN. */
+  /** Full WebSocket URL returned by the API (the `socket` field from credentials). */
+  socket: string;
+  /** Panel origin URL (e.g. "https://panel.example.com"). Sent as the Origin header. */
   origin: string;
-  /** Server UUID for the WebSocket path. */
-  serverUuid: string;
   /** Function that returns a fresh JWT token. Called on connect and token refresh. */
   getToken: () => Promise<string>;
   /** Maximum reconnect delay in ms. Default: 30000. */
@@ -41,21 +41,21 @@ export class WebSocketManager {
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
   private intentionalClose = false;
 
+  private readonly socket: string;
   private readonly origin: string;
-  private readonly serverUuid: string;
   private readonly getToken: () => Promise<string>;
   private readonly maxReconnectDelay: number;
   private readonly autoReconnect: boolean;
 
   constructor(options: WebSocketManagerOptions) {
+    this.socket = options.socket;
     this.origin = options.origin.replace(/\/+$/, '');
-    this.serverUuid = options.serverUuid;
     this.getToken = options.getToken;
     this.maxReconnectDelay = options.maxReconnectDelay ?? 30_000;
     this.autoReconnect = options.autoReconnect ?? true;
   }
 
-  /** Connect to the WebSocket server. */
+  /** Connect to the WebSocket server. Resolves once authenticated, rejects on error. */
   async connect(): Promise<void> {
     if (this.ws) {
       return;
@@ -63,31 +63,71 @@ export class WebSocketManager {
 
     this.intentionalClose = false;
     const token = await this.getToken();
-    const scheme = this.origin.startsWith('https') ? 'wss' : 'ws';
-    const host = this.origin.replace(/^https?:\/\//, '');
-    const url = `${scheme}://${host}/api/servers/${this.serverUuid}/ws`;
 
-    this.ws = new WebSocket(url);
+    return new Promise<void>((resolve, reject) => {
+      let settled = false;
 
-    this.ws.onopen = () => {
-      this.reconnectAttempts = 0;
-      this.sendAuth(token);
-    };
+      const cleanup = () => {
+        this.off('auth success', onAuth);
+        this.off('daemon error', onDaemonError);
+      };
 
-    this.ws.onmessage = (event) => {
-      this.handleMessage(event.data as string);
-    };
+      const onAuth = () => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        resolve();
+      };
 
-    this.ws.onclose = () => {
-      this.ws = null;
-      if (!this.intentionalClose && this.autoReconnect) {
-        this.scheduleReconnect();
-      }
-    };
+      const onDaemonError = (message: string) => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(new Error(`WebSocket authentication failed: ${message}`));
+      };
 
-    this.ws.onerror = () => {
-      // onclose will fire after onerror, reconnect handled there
-    };
+      this.on('auth success', onAuth);
+      this.on('daemon error', onDaemonError);
+
+      this.ws = new WebSocket(this.socket, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Origin: this.origin,
+        },
+      } as any);
+
+      this.ws.onopen = () => {
+        this.reconnectAttempts = 0;
+        this.sendAuth(token);
+      };
+
+      this.ws.onmessage = (event) => {
+        this.handleMessage(event.data as string);
+      };
+
+      this.ws.onclose = (event) => {
+        this.ws = null;
+        if (!settled) {
+          settled = true;
+          cleanup();
+          reject(
+            new Error(
+              `WebSocket closed before authentication completed (code: ${
+                event.code
+              }, reason: ${event.reason || 'none'})`,
+            ),
+          );
+          return;
+        }
+        if (!this.intentionalClose && this.autoReconnect) {
+          this.scheduleReconnect();
+        }
+      };
+
+      this.ws.onerror = () => {
+        // onclose will fire after onerror, rejection handled there
+      };
+    });
   }
 
   /** Disconnect from the WebSocket server. */
@@ -235,10 +275,7 @@ export class WebSocketManager {
   }
 
   private scheduleReconnect(): void {
-    const delay = Math.min(
-      1000 * Math.pow(2, this.reconnectAttempts),
-      this.maxReconnectDelay,
-    );
+    const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), this.maxReconnectDelay);
     this.reconnectAttempts++;
     this.reconnectTimer = setTimeout(() => {
       this.reconnectTimer = null;

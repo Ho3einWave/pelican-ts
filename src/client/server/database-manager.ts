@@ -1,8 +1,5 @@
 import type { HttpClient } from '../../core/http-client.js';
-import type {
-  CreateDatabaseParams,
-  Database,
-} from '../../types/client/database.js';
+import type { CreateDatabaseParams, Database } from '../../types/client/database.js';
 
 export class DatabaseManager {
   private readonly base: string;
@@ -24,9 +21,7 @@ export class DatabaseManager {
   }
 
   async rotatePassword(databaseId: string): Promise<Database> {
-    return this.http.post<Database>(
-      `${this.base}/${databaseId}/rotate-password`,
-    );
+    return this.http.post<Database>(`${this.base}/${databaseId}/rotate-password`);
   }
 
   async delete(databaseId: string): Promise<void> {

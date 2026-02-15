@@ -19,11 +19,11 @@ X-RateLimit-Reset: 1640995200
 
 ### Header Explanations
 
-| Header | Description |
-|--------|-------------|
-| `X-RateLimit-Limit` | Maximum number of requests allowed per minute |
+| Header                  | Description                                        |
+| ----------------------- | -------------------------------------------------- |
+| `X-RateLimit-Limit`     | Maximum number of requests allowed per minute      |
 | `X-RateLimit-Remaining` | Number of requests remaining in the current window |
-| `X-RateLimit-Reset` | Unix timestamp when the rate limit window resets |
+| `X-RateLimit-Reset`     | Unix timestamp when the rate limit window resets   |
 
 ## Rate Limit Exceeded Response
 
@@ -66,14 +66,15 @@ After making changes, restart your Pterodactyl panel for the new settings to tak
 ## Best Practices
 
 ### 1. Check Rate Limit Headers
+
 Always monitor the rate limit headers in your application:
 
 ```javascript
 const response = await fetch('https://your-panel.com/api/client', {
   headers: {
-    'Authorization': 'Bearer YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+    Authorization: 'Bearer YOUR_API_KEY',
+    Accept: 'Application/vnd.pterodactyl.v1+json',
+  },
 });
 
 const remaining = response.headers.get('X-RateLimit-Remaining');
@@ -84,23 +85,24 @@ console.log(`Rate limit resets at: ${new Date(reset * 1000)}`);
 ```
 
 ### 2. Implement Exponential Backoff
+
 When you receive a 429 response, implement exponential backoff:
 
 ```javascript
 async function makeRequest(url, options, retries = 3) {
   try {
     const response = await fetch(url, options);
-    
+
     if (response.status === 429 && retries > 0) {
       const retryAfter = response.headers.get('Retry-After') || 60;
-      await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+      await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
       return makeRequest(url, options, retries - 1);
     }
-    
+
     return response;
   } catch (error) {
     if (retries > 0) {
-      await new Promise(resolve => setTimeout(resolve, 1000 * (4 - retries)));
+      await new Promise((resolve) => setTimeout(resolve, 1000 * (4 - retries)));
       return makeRequest(url, options, retries - 1);
     }
     throw error;
@@ -109,9 +111,11 @@ async function makeRequest(url, options, retries = 3) {
 ```
 
 ### 3. Batch Operations
+
 When possible, batch multiple operations into single requests rather than making many individual requests.
 
 ### 4. Cache Responses
+
 Cache API responses when appropriate to reduce the number of requests needed.
 
 ## Rate Limiting by IP vs API Key
@@ -126,12 +130,13 @@ Rate limits are applied **per API key**, not per IP address. This means:
 If you consistently exceed rate limits, consider:
 
 1. **Optimizing your requests** - Only request the data you need
-2. **Implementing caching** - Store responses locally when possible  
+2. **Implementing caching** - Store responses locally when possible
 3. **Contacting support** - If you have legitimate high-volume needs
 
 ## Monitoring Rate Limits
 
 ### Response Header Example
+
 ```bash
 curl -I "https://your-panel.com/api/client" \
   -H "Authorization: Bearer YOUR_API_KEY" \
@@ -144,10 +149,11 @@ curl -I "https://your-panel.com/api/client" \
 ```
 
 ### Rate Limit Status Check
+
 You can check your current rate limit status without affecting your remaining requests by making a `HEAD` request to any endpoint.
 
 ## Next Steps
 
 - Learn about [Error Handling](./error-handling)
 - Explore the [Client API](./api/client) endpoints
-- Review [Authentication](./authentication) requirements 
+- Review [Authentication](./authentication) requirements

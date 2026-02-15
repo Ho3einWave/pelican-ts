@@ -39,26 +39,25 @@ GET /api/application/servers
 
 ### Query Parameters
 
-| Parameter | Type | Description | Default |
-|-----------|------|-------------|---------|
-| `page` | integer | Page number for pagination | 1 |
-| `per_page` | integer | Results per page (1-100) | 50 |
-| `filter[name]` | string | Filter by server name | - |
-| `filter[uuid]` | string | Filter by server UUID | - |
-| `filter[external_id]` | string | Filter by external ID | - |
-| `filter[image]` | string | Filter by Docker image | - |
-| `sort` | string | Sort field (id, uuid, name, created_at, updated_at) | id |
-| `include` | string | Include relationships (allocations, user, subusers, pack, nest, egg, variables, location, node, databases, backups) | - |
+| Parameter             | Type    | Description                                                                                                         | Default |
+| --------------------- | ------- | ------------------------------------------------------------------------------------------------------------------- | ------- |
+| `page`                | integer | Page number for pagination                                                                                          | 1       |
+| `per_page`            | integer | Results per page (1-100)                                                                                            | 50      |
+| `filter[name]`        | string  | Filter by server name                                                                                               | -       |
+| `filter[uuid]`        | string  | Filter by server UUID                                                                                               | -       |
+| `filter[external_id]` | string  | Filter by external ID                                                                                               | -       |
+| `filter[image]`       | string  | Filter by Docker image                                                                                              | -       |
+| `sort`                | string  | Sort field (id, uuid, name, created_at, updated_at)                                                                 | id      |
+| `include`             | string  | Include relationships (allocations, user, subusers, pack, nest, egg, variables, location, node, databases, backups) | -       |
 
 ### Example Request
-
-
 
 ```bash
 curl "https://your-panel.com/api/application/servers?include=user,node&per_page=25" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -66,19 +65,20 @@ curl "https://your-panel.com/api/application/servers?include=user,node&per_page=
 const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/application/servers', {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'user,node',
-    per_page: 25,
-    'filter[name]': 'minecraft'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'user,node',
+per_page: 25,
+'filter[name]': 'minecraft'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -96,10 +96,11 @@ params = {
     'filter[name]': 'minecraft'
 }
 
-response = requests.get('https://your-panel.com/api/application/servers', 
+response = requests.get('https://your-panel.com/api/application/servers',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -108,21 +109,22 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $response = $client->get('https://your-panel.com/api/application/servers', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => [
-        'include' => 'user,node',
-        'per_page' => 25,
-        'filter' => ['name' => 'minecraft']
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => [
+'include' => 'user,node',
+'per_page' => 25,
+'filter' => ['name' => 'minecraft']
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -140,15 +142,16 @@ func main() {
     req, _ := http.NewRequest("GET", "https://your-panel.com/api/application/servers?include=user,node&per_page=25", nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -160,15 +163,16 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/servers?include=user,node&per_page=25"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/servers?include=user,node&per_page=25"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -183,7 +187,8 @@ client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json"
 var response = await client.GetAsync("https://your-panel.com/api/application/servers?include=user,node&per_page=25");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -193,8 +198,8 @@ require 'json'
 
 uri = URI('https://your-panel.com/api/application/servers')
 uri.query = URI.encode_www_form({
-  include: 'user,node',
-  per_page: 25
+include: 'user,node',
+per_page: 25
 })
 
 http = Net::HTTP.new(uri.host, uri.port)
@@ -206,7 +211,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -295,7 +301,7 @@ puts JSON.parse(response.body)
     }
   }
 }
-```
+````
 
 ## Get Server Details
 
@@ -307,19 +313,17 @@ GET /api/application/servers/{server}
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | integer | Server ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `server`  | integer | Server ID   |
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                                                                                                         |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
 | `include` | string | Include relationships (allocations, user, subusers, pack, nest, egg, variables, location, node, databases, backups) |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -336,17 +340,18 @@ const axios = require('axios');
 
 const serverId = 1;
 const response = await axios.get(`https://your-panel.com/api/application/servers/${serverId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    include: 'allocations,user,node'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+include: 'allocations,user,node'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -361,10 +366,11 @@ headers = {
 
 params = {'include': 'allocations,user,node'}
 
-response = requests.get(f'https://your-panel.com/api/application/servers/{server_id}', 
+response = requests.get(f'https://your-panel.com/api/application/servers/{server_id}',
                        headers=headers, params=params)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -374,17 +380,18 @@ $client = new GuzzleHttp\Client();
 $serverId = 1;
 
 $response = $client->get("https://your-panel.com/api/application/servers/{$serverId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['include' => 'allocations,user,node']
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['include' => 'allocations,user,node']
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -400,20 +407,21 @@ import (
 func main() {
     serverId := 1
     url := fmt.Sprintf("https://your-panel.com/api/application/servers/%d?include=allocations,user,node", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -428,15 +436,16 @@ String url = String.format("https://your-panel.com/api/application/servers/%d?in
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -452,7 +461,8 @@ int serverId = 1;
 var response = await client.GetAsync($"https://your-panel.com/api/application/servers/{serverId}?include=allocations,user,node");
 var content = await response.Content.ReadAsStringAsync();
 Console.WriteLine(content);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -473,7 +483,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -484,35 +495,35 @@ Retrieve server details using an external ID.
 
 ```http
 GET /api/application/servers/external/{external_id}
-```
+````
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter     | Type   | Description               |
+| ------------- | ------ | ------------------------- |
 | `external_id` | string | External ID of the server |
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter | Type   | Description                                                                                                         |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
 | `include` | string | Include relationships (allocations, user, subusers, pack, nest, egg, variables, location, node, databases, backups) |
 
 <CodeTabs
-  endpoint="/api/application/servers/external/{external_id}"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/application/servers/external/srv-ext-123" \\
+endpoint="/api/application/servers/external/{external_id}"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/application/servers/external/srv-ext-123" \\
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const externalId = 'srv-ext-123';
 const response = await axios.get(\`https://your-panel.com/api/application/servers/external/\${externalId}\`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log(response.data);`,
@@ -520,22 +531,22 @@ console.log(response.data);`,
 
 external_id = 'srv-ext-123'
 headers = {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.get(f'https://your-panel.com/api/application/servers/external/{external_id}', 
-                       headers=headers)
+response = requests.get(f'https://your-panel.com/api/application/servers/external/{external_id}',
+headers=headers)
 print(response.json())`,
     php: `<?php
 $client = new GuzzleHttp\\Client();
 $externalId = 'srv-ext-123';
 
 $response = $client->get("https://your-panel.com/api/application/servers/external/{$externalId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -544,26 +555,27 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    externalId := "srv-ext-123"
-    url := fmt.Sprintf("https://your-panel.com/api/application/servers/external/%s", externalId)
-    
+externalId := "srv-ext-123"
+url := fmt.Sprintf("https://your-panel.com/api/application/servers/external/%s", externalId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -575,11 +587,11 @@ String url = String.format("https://your-panel.com/api/application/servers/exter
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());`,
@@ -608,7 +620,7 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts JSON.parse(response.body)`
-  }}
+}}
 />
 
 ### Response
@@ -668,49 +680,47 @@ POST /api/application/servers
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | Yes | Server name |
-| `user` | integer | Yes | User ID who owns the server |
-| `egg` | integer | Yes | Egg ID to use for the server |
-| `docker_image` | string | No | Override default Docker image |
-| `startup` | string | No | Override default startup command |
-| `environment` | object | No | Environment variables |
-| `limits` | object | Yes | Resource limits |
-| `feature_limits` | object | Yes | Feature limits |
-| `allocation` | object | Yes | Primary allocation configuration |
-| `deploy` | object | No | Deployment configuration |
+| Field            | Type    | Required | Description                      |
+| ---------------- | ------- | -------- | -------------------------------- |
+| `name`           | string  | Yes      | Server name                      |
+| `user`           | integer | Yes      | User ID who owns the server      |
+| `egg`            | integer | Yes      | Egg ID to use for the server     |
+| `docker_image`   | string  | No       | Override default Docker image    |
+| `startup`        | string  | No       | Override default startup command |
+| `environment`    | object  | No       | Environment variables            |
+| `limits`         | object  | Yes      | Resource limits                  |
+| `feature_limits` | object  | Yes      | Feature limits                   |
+| `allocation`     | object  | Yes      | Primary allocation configuration |
+| `deploy`         | object  | No       | Deployment configuration         |
 
 #### Limits Object
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `memory` | integer | Yes | Memory limit in MB |
-| `swap` | integer | Yes | Swap limit in MB (0 to disable) |
-| `disk` | integer | Yes | Disk space limit in MB |
-| `io` | integer | Yes | Block IO weight (10-1000) |
-| `cpu` | integer | Yes | CPU limit percentage |
-| `threads` | string | No | CPU thread pinning |
-| `oom_disabled` | boolean | No | Disable OOM killer |
+| Field          | Type    | Required | Description                     |
+| -------------- | ------- | -------- | ------------------------------- |
+| `memory`       | integer | Yes      | Memory limit in MB              |
+| `swap`         | integer | Yes      | Swap limit in MB (0 to disable) |
+| `disk`         | integer | Yes      | Disk space limit in MB          |
+| `io`           | integer | Yes      | Block IO weight (10-1000)       |
+| `cpu`          | integer | Yes      | CPU limit percentage            |
+| `threads`      | string  | No       | CPU thread pinning              |
+| `oom_disabled` | boolean | No       | Disable OOM killer              |
 
 #### Feature Limits Object
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `databases` | integer | Yes | Maximum databases allowed |
-| `allocations` | integer | Yes | Maximum allocations allowed |
-| `backups` | integer | Yes | Maximum backups allowed |
+| Field         | Type    | Required | Description                 |
+| ------------- | ------- | -------- | --------------------------- |
+| `databases`   | integer | Yes      | Maximum databases allowed   |
+| `allocations` | integer | Yes      | Maximum allocations allowed |
+| `backups`     | integer | Yes      | Maximum backups allowed     |
 
 #### Allocation Object
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `default` | integer | Yes | Primary allocation ID |
-| `additional` | array | No | Additional allocation IDs |
+| Field        | Type    | Required | Description               |
+| ------------ | ------- | -------- | ------------------------- |
+| `default`    | integer | Yes      | Primary allocation ID     |
+| `additional` | array   | No       | Additional allocation IDs |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -754,43 +764,44 @@ curl -X POST "https://your-panel.com/api/application/servers" \
 const axios = require('axios');
 
 const serverData = {
-  name: 'My New Server',
-  user: 1,
-  egg: 5,
-  docker_image: 'quay.io/pterodactyl/core:java',
-  startup: 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}',
-  environment: {
-    MINECRAFT_VERSION: 'latest',
-    SERVER_JARFILE: 'server.jar'
-  },
-  limits: {
-    memory: 1024,
-    swap: 0,
-    disk: 2048,
-    io: 500,
-    cpu: 100,
-    oom_disabled: false
-  },
-  feature_limits: {
-    databases: 2,
-    allocations: 1,
-    backups: 5
-  },
-  allocation: {
-    default: 1
-  }
+name: 'My New Server',
+user: 1,
+egg: 5,
+docker_image: 'quay.io/pterodactyl/core:java',
+startup: 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}',
+environment: {
+MINECRAFT_VERSION: 'latest',
+SERVER_JARFILE: 'server.jar'
+},
+limits: {
+memory: 1024,
+swap: 0,
+disk: 2048,
+io: 500,
+cpu: 100,
+oom_disabled: false
+},
+feature_limits: {
+databases: 2,
+allocations: 1,
+backups: 5
+},
+allocation: {
+default: 1
+}
 };
 
 const response = await axios.post('https://your-panel.com/api/application/servers', serverData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -832,10 +843,11 @@ server_data = {
     }
 }
 
-response = requests.post('https://your-panel.com/api/application/servers', 
+response = requests.post('https://your-panel.com/api/application/servers',
                         headers=headers, json=server_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -844,46 +856,47 @@ print(response.json())
 $client = new GuzzleHttp\Client();
 
 $serverData = [
-    'name' => 'My New Server',
-    'user' => 1,
-    'egg' => 5,
-    'docker_image' => 'quay.io/pterodactyl/core:java',
-    'startup' => 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}',
-    'environment' => [
-        'MINECRAFT_VERSION' => 'latest',
-        'SERVER_JARFILE' => 'server.jar'
-    ],
-    'limits' => [
-        'memory' => 1024,
-        'swap' => 0,
-        'disk' => 2048,
-        'io' => 500,
-        'cpu' => 100,
-        'oom_disabled' => false
-    ],
-    'feature_limits' => [
-        'databases' => 2,
-        'allocations' => 1,
-        'backups' => 5
-    ],
-    'allocation' => [
-        'default' => 1
-    ]
+'name' => 'My New Server',
+'user' => 1,
+'egg' => 5,
+'docker_image' => 'quay.io/pterodactyl/core:java',
+'startup' => 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}',
+'environment' => [
+'MINECRAFT_VERSION' => 'latest',
+'SERVER_JARFILE' => 'server.jar'
+],
+'limits' => [
+'memory' => 1024,
+'swap' => 0,
+'disk' => 2048,
+'io' => 500,
+'cpu' => 100,
+'oom_disabled' => false
+],
+'feature_limits' => [
+'databases' => 2,
+'allocations' => 1,
+'backups' => 5
+],
+'allocation' => [
+'default' => 1
+]
 ];
 
 $response = $client->post('https://your-panel.com/api/application/servers', [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $serverData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $serverData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -925,23 +938,24 @@ func main() {
             "default": 1,
         },
     }
-    
+
     jsonData, _ := json.Marshal(serverData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/application/servers", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -953,46 +967,47 @@ import java.net.URI;
 
 String jsonBody = """
 {
-  "name": "My New Server",
-  "user": 1,
-  "egg": 5,
-  "docker_image": "quay.io/pterodactyl/core:java",
-  "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
-  "environment": {
-    "MINECRAFT_VERSION": "latest",
-    "SERVER_JARFILE": "server.jar"
-  },
-  "limits": {
-    "memory": 1024,
-    "swap": 0,
-    "disk": 2048,
-    "io": 500,
-    "cpu": 100,
-    "oom_disabled": false
-  },
-  "feature_limits": {
-    "databases": 2,
-    "allocations": 1,
-    "backups": 5
-  },
-  "allocation": {
-    "default": 1
-  }
+"name": "My New Server",
+"user": 1,
+"egg": 5,
+"docker_image": "quay.io/pterodactyl/core:java",
+"startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+"environment": {
+"MINECRAFT_VERSION": "latest",
+"SERVER_JARFILE": "server.jar"
+},
+"limits": {
+"memory": 1024,
+"swap": 0,
+"disk": 2048,
+"io": 500,
+"cpu": 100,
+"oom_disabled": false
+},
+"feature_limits": {
+"databases": 2,
+"allocations": 1,
+"backups": 5
+},
+"allocation": {
+"default": 1
+}
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/application/servers"))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create("https://your-panel.com/api/application/servers"))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1039,7 +1054,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PostAsync("https://your-panel.com/api/application/servers", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1051,31 +1067,31 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 server_data = {
-  name: 'My New Server',
-  user: 1,
-  egg: 5,
-  docker_image: 'quay.io/pterodactyl/core:java',
-  startup: 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}',
-  environment: {
-    MINECRAFT_VERSION: 'latest',
-    SERVER_JARFILE: 'server.jar'
-  },
-  limits: {
-    memory: 1024,
-    swap: 0,
-    disk: 2048,
-    io: 500,
-    cpu: 100,
-    oom_disabled: false
-  },
-  feature_limits: {
-    databases: 2,
-    allocations: 1,
-    backups: 5
-  },
-  allocation: {
-    default: 1
-  }
+name: 'My New Server',
+user: 1,
+egg: 5,
+docker_image: 'quay.io/pterodactyl/core:java',
+startup: 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}',
+environment: {
+MINECRAFT_VERSION: 'latest',
+SERVER_JARFILE: 'server.jar'
+},
+limits: {
+memory: 1024,
+swap: 0,
+disk: 2048,
+io: 500,
+cpu: 100,
+oom_disabled: false
+},
+feature_limits: {
+databases: 2,
+allocations: 1,
+backups: 5
+},
+allocation: {
+default: 1
+}
 }
 
 request = Net::HTTP::Post.new(uri)
@@ -1086,7 +1102,8 @@ request.body = server_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1144,7 +1161,7 @@ puts JSON.parse(response.body)
     "updated_at": "2024-01-20T15:15:30+00:00"
   }
 }
-```
+````
 
 ## Update Server Details
 
@@ -1156,22 +1173,20 @@ PATCH /api/application/servers/{server}/details
 
 ### Path Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | integer | Server ID |
+| Parameter | Type    | Description |
+| --------- | ------- | ----------- |
+| `server`  | integer | Server ID   |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | No | Server name |
-| `user` | integer | No | Owner user ID |
-| `external_id` | string | No | External ID |
-| `description` | string | No | Server description |
+| Field         | Type    | Required | Description        |
+| ------------- | ------- | -------- | ------------------ |
+| `name`        | string  | No       | Server name        |
+| `user`        | integer | No       | Owner user ID      |
+| `external_id` | string  | No       | External ID        |
+| `description` | string  | No       | Server description |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1193,20 +1208,21 @@ const axios = require('axios');
 
 const serverId = 2;
 const updateData = {
-  name: 'Updated Server Name',
-  description: 'This is an updated description'
+name: 'Updated Server Name',
+description: 'This is an updated description'
 };
 
 const response = await axios.patch(`https://your-panel.com/api/application/servers/${serverId}/details`, updateData, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log(response.data);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1226,10 +1242,11 @@ update_data = {
     'description': 'This is an updated description'
 }
 
-response = requests.patch(f'https://your-panel.com/api/application/servers/{server_id}/details', 
+response = requests.patch(f'https://your-panel.com/api/application/servers/{server_id}/details',
                          headers=headers, json=update_data)
 print(response.json())
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1239,23 +1256,24 @@ $client = new GuzzleHttp\Client();
 $serverId = 2;
 
 $updateData = [
-    'name' => 'Updated Server Name',
-    'description' => 'This is an updated description'
+'name' => 'Updated Server Name',
+'description' => 'This is an updated description'
 ];
 
 $response = $client->patch("https://your-panel.com/api/application/servers/{$serverId}/details", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $updateData
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $updateData
 ]);
 
 $data = json_decode($response->getBody(), true);
 print_r($data);
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1275,24 +1293,25 @@ func main() {
         "name":        "Updated Server Name",
         "description": "This is an updated description",
     }
-    
+
     jsonData, _ := json.Marshal(updateData)
     url := fmt.Sprintf("https://your-panel.com/api/application/servers/%d/details", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("PATCH", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println(result)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1305,8 +1324,8 @@ import java.net.URI;
 int serverId = 2;
 String jsonBody = """
 {
-  "name": "Updated Server Name",
-  "description": "This is an updated description"
+"name": "Updated Server Name",
+"description": "This is an updated description"
 }
 """;
 
@@ -1314,16 +1333,17 @@ String url = String.format("https://your-panel.com/api/application/servers/%d/de
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.method("PATCH", HttpRequest.BodyPublishers.ofString(jsonBody))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println(response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1348,7 +1368,8 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 var response = await client.PatchAsync($"https://your-panel.com/api/application/servers/{serverId}/details", content);
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine(responseContent);
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1361,8 +1382,8 @@ http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 
 update_data = {
-  name: 'Updated Server Name',
-  description: 'This is an updated description'
+name: 'Updated Server Name',
+description: 'This is an updated description'
 }
 
 request = Net::HTTP::Patch.new(uri)
@@ -1373,7 +1394,8 @@ request.body = update_data.to_json
 
 response = http.request(request)
 puts JSON.parse(response.body)
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1385,27 +1407,25 @@ Update server resource limits and feature limits.
 
 ```http
 PATCH /api/application/servers/{server}/build
-```
+````
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `allocation` | integer | Yes | Primary allocation ID |
-| `memory` | integer | Yes | Memory limit in MB |
-| `swap` | integer | Yes | Swap limit in MB |
-| `disk` | integer | Yes | Disk space limit in MB |
-| `io` | integer | Yes | Block IO weight (10-1000) |
-| `cpu` | integer | Yes | CPU limit percentage |
-| `threads` | string | No | CPU thread pinning |
-| `feature_limits` | object | Yes | Feature limits object |
-| `add_allocations` | array | No | Additional allocation IDs to add |
-| `remove_allocations` | array | No | Allocation IDs to remove |
-| `oom_disabled` | boolean | No | Disable OOM killer |
+| Field                | Type    | Required | Description                      |
+| -------------------- | ------- | -------- | -------------------------------- |
+| `allocation`         | integer | Yes      | Primary allocation ID            |
+| `memory`             | integer | Yes      | Memory limit in MB               |
+| `swap`               | integer | Yes      | Swap limit in MB                 |
+| `disk`               | integer | Yes      | Disk space limit in MB           |
+| `io`                 | integer | Yes      | Block IO weight (10-1000)        |
+| `cpu`                | integer | Yes      | CPU limit percentage             |
+| `threads`            | string  | No       | CPU thread pinning               |
+| `feature_limits`     | object  | Yes      | Feature limits object            |
+| `add_allocations`    | array   | No       | Additional allocation IDs to add |
+| `remove_allocations` | array   | No       | Allocation IDs to remove         |
+| `oom_disabled`       | boolean | No       | Disable OOM killer               |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1428,9 +1448,6 @@ curl -X PATCH "https://your-panel.com/api/application/servers/2/build" \
     }
   }'
 ```
-
-
-
 
 ### Example Response
 
@@ -1471,7 +1488,6 @@ curl -X PATCH "https://your-panel.com/api/application/servers/2/build" \
 }
 ```
 
-
 ## Update Server Startup
 
 Update server startup command and environment variables.
@@ -1482,17 +1498,15 @@ PATCH /api/application/servers/{server}/startup
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `startup` | string | Yes | Server startup command |
-| `environment` | object | Yes | Environment variables |
-| `egg` | integer | Yes | Egg ID |
-| `image` | string | No | Docker image override |
-| `skip_scripts` | boolean | No | Skip install scripts |
+| Field          | Type    | Required | Description            |
+| -------------- | ------- | -------- | ---------------------- |
+| `startup`      | string  | Yes      | Server startup command |
+| `environment`  | object  | Yes      | Environment variables  |
+| `egg`          | integer | Yes      | Egg ID                 |
+| `image`        | string  | No       | Docker image override  |
+| `skip_scripts` | boolean | No       | Skip install scripts   |
 
 ### Example Request
-
-
 
 ```bash
 curl -X PATCH "https://your-panel.com/api/application/servers/2/startup" \
@@ -1511,9 +1525,6 @@ curl -X PATCH "https://your-panel.com/api/application/servers/2/startup" \
     "skip_scripts": false
   }'
 ```
-
-
-
 
 ### Example Response
 
@@ -1568,7 +1579,6 @@ curl -X PATCH "https://your-panel.com/api/application/servers/2/startup" \
 }
 ```
 
-
 ## Suspend Server
 
 Suspend a server to prevent it from starting.
@@ -1579,13 +1589,12 @@ POST /api/application/servers/{server}/suspend
 
 ### Example Request
 
-
-
 ```bash
 curl -X POST "https://your-panel.com/api/application/servers/2/suspend" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -1594,14 +1603,15 @@ const axios = require('axios');
 
 const serverId = 2;
 const response = await axios.post(`https://your-panel.com/api/application/servers/${serverId}/suspend`, {}, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 console.log('Server suspended successfully');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1614,10 +1624,11 @@ headers = {
     'Accept': 'Application/vnd.pterodactyl.v1+json'
 }
 
-response = requests.post(f'https://your-panel.com/api/application/servers/{server_id}/suspend', 
+response = requests.post(f'https://your-panel.com/api/application/servers/{server_id}/suspend',
                         headers=headers)
 print('Server suspended successfully' if response.status_code == 204 else 'Error suspending server')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1627,15 +1638,16 @@ $client = new GuzzleHttp\Client();
 $serverId = 2;
 
 $response = $client->post("https://your-panel.com/api/application/servers/{$serverId}/suspend", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 echo 'Server suspended successfully';
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1650,20 +1662,21 @@ import (
 func main() {
     serverId := 2
     url := fmt.Sprintf("https://your-panel.com/api/application/servers/%d/suspend", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Server suspended successfully")
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1678,17 +1691,18 @@ String url = String.format("https://your-panel.com/api/application/servers/%d/su
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .POST(HttpRequest.BodyPublishers.noBody())
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.POST(HttpRequest.BodyPublishers.noBody())
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 if (response.statusCode() == 204) {
-    System.out.println("Server suspended successfully");
+System.out.println("Server suspended successfully");
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1706,7 +1720,8 @@ var response = await client.PostAsync($"https://your-panel.com/api/application/s
 if (response.StatusCode == System.Net.HttpStatusCode.NoContent) {
     Console.WriteLine("Server suspended successfully");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1724,7 +1739,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts 'Server suspended successfully' if response.code == '204'
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1740,11 +1756,9 @@ Remove suspension from a server to allow it to start.
 
 ```http
 POST /api/application/servers/{server}/unsuspend
-```
+````
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1753,7 +1767,6 @@ curl -X POST "https://your-panel.com/api/application/servers/2/unsuspend" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
-
 
 ### Response
 
@@ -1769,14 +1782,11 @@ POST /api/application/servers/{server}/reinstall
 
 ### Example Request
 
-
-
 ```bash
 curl -X POST "https://your-panel.com/api/application/servers/2/reinstall" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
-
 
 ### Response
 
@@ -1792,19 +1802,18 @@ DELETE /api/application/servers/{server}
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `force` | boolean | Force deletion even if server is running |
+| Parameter | Type    | Description                              |
+| --------- | ------- | ---------------------------------------- |
+| `force`   | boolean | Force deletion even if server is running |
 
 ### Example Request
-
-
 
 ```bash
 curl -X DELETE "https://your-panel.com/api/application/servers/2?force=true" \
   -H "Authorization: Bearer ptla_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -1813,17 +1822,18 @@ const axios = require('axios');
 
 const serverId = 2;
 const response = await axios.delete(`https://your-panel.com/api/application/servers/${serverId}`, {
-  headers: {
-    'Authorization': 'Bearer ptla_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  },
-  params: {
-    force: true
-  }
+headers: {
+'Authorization': 'Bearer ptla_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+},
+params: {
+force: true
+}
 });
 
 console.log('Server deleted successfully');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1838,10 +1848,11 @@ headers = {
 
 params = {'force': True}
 
-response = requests.delete(f'https://your-panel.com/api/application/servers/{server_id}', 
+response = requests.delete(f'https://your-panel.com/api/application/servers/{server_id}',
                           headers=headers, params=params)
 print('Server deleted successfully' if response.status_code == 204 else 'Error deleting server')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1851,16 +1862,17 @@ $client = new GuzzleHttp\Client();
 $serverId = 2;
 
 $response = $client->delete("https://your-panel.com/api/application/servers/{$serverId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptla_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ],
-    'query' => ['force' => true]
+'headers' => [
+'Authorization' => 'Bearer ptla_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+],
+'query' => ['force' => true]
 ]);
 
 echo 'Server deleted successfully';
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1875,20 +1887,21 @@ import (
 func main() {
     serverId := 2
     url := fmt.Sprintf("https://your-panel.com/api/application/servers/%d?force=true", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptla_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Server deleted successfully")
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1903,17 +1916,18 @@ String url = String.format("https://your-panel.com/api/application/servers/%d?fo
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptla_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .DELETE()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptla_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 if (response.statusCode() == 204) {
-    System.out.println("Server deleted successfully");
+System.out.println("Server deleted successfully");
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1931,7 +1945,8 @@ var response = await client.DeleteAsync($"https://your-panel.com/api/application
 if (response.StatusCode == System.Net.HttpStatusCode.NoContent) {
     Console.WriteLine("Server deleted successfully");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1951,7 +1966,8 @@ request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
 
 response = http.request(request)
 puts 'Server deleted successfully' if response.code == '204'
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1989,8 +2005,7 @@ Returns HTTP 204 No Content on successful deletion.
     }
   ]
 }
-```
-
+````
 
 ## Best Practices
 
@@ -2019,16 +2034,16 @@ class ServerService {
     this.apiKey = apiKey;
     this.baseUrl = baseUrl;
     this.headers = {
-      'Authorization': `Bearer ${apiKey}`,
-      'Accept': 'Application/vnd.pterodactyl.v1+json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${apiKey}`,
+      Accept: 'Application/vnd.pterodactyl.v1+json',
+      'Content-Type': 'application/json',
     };
   }
 
   async getAllServers(options = {}) {
     const params = new URLSearchParams(options);
     const response = await fetch(`${this.baseUrl}/api/application/servers?${params}`, {
-      headers: this.headers
+      headers: this.headers,
     });
     return response.json();
   }
@@ -2037,7 +2052,7 @@ class ServerService {
     const response = await fetch(`${this.baseUrl}/api/application/servers`, {
       method: 'POST',
       headers: this.headers,
-      body: JSON.stringify(serverData)
+      body: JSON.stringify(serverData),
     });
     return response.json();
   }
@@ -2046,7 +2061,7 @@ class ServerService {
     const response = await fetch(`${this.baseUrl}/api/application/servers/${serverId}/details`, {
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify(updateData)
+      body: JSON.stringify(updateData),
     });
     return response.json();
   }
@@ -2054,7 +2069,7 @@ class ServerService {
   async suspendServer(serverId) {
     const response = await fetch(`${this.baseUrl}/api/application/servers/${serverId}/suspend`, {
       method: 'POST',
-      headers: this.headers
+      headers: this.headers,
     });
     return response.status === 204;
   }
@@ -2063,13 +2078,12 @@ class ServerService {
     const url = `${this.baseUrl}/api/application/servers/${serverId}${force ? '?force=true' : ''}`;
     const response = await fetch(url, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
     });
     return response.status === 204;
   }
 }
 ```
-
 
 ## Rate Limiting
 
@@ -2084,8 +2098,6 @@ X-RateLimit-Limit: 240
 X-RateLimit-Remaining: 235
 X-RateLimit-Reset: 1642686400
 ```
-
-
 
 ## Server Database Management
 
@@ -2166,11 +2178,11 @@ Create a new database for a server.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `database` | string | Yes | Database name (without prefix) |
-| `remote` | string | Yes | Remote connection string (% for all) |
-| `host` | integer | Yes | Database host ID |
+| Field      | Type    | Required | Description                          |
+| ---------- | ------- | -------- | ------------------------------------ |
+| `database` | string  | Yes      | Database name (without prefix)       |
+| `remote`   | string  | Yes      | Remote connection string (% for all) |
+| `host`     | integer | Yes      | Database host ID                     |
 
 #### Example Request
 
@@ -2194,9 +2206,9 @@ Update database configuration including remote connection settings.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `remote` | string | No | Remote connection string |
+| Field    | Type   | Required | Description              |
+| -------- | ------ | -------- | ------------------------ |
+| `remote` | string | No       | Remote connection string |
 
 #### Example Request
 
@@ -2329,4 +2341,4 @@ Database deletion is **permanent and irreversible**. All data will be lost.
 
 **Application Routes**: [api-application.php](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-application.php) - Lines 55-75
 
-For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel). 
+For detailed implementation and the latest updates, refer to the [Pterodactyl Panel repository](https://github.com/pterodactyl/panel).

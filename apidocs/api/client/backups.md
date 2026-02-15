@@ -14,32 +14,29 @@ Retrieve all backups for a server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
-
-
-
 <CodeTabs
-  endpoint="/api/client/servers/{server}/backups"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/backups" \\
+endpoint="/api/client/servers/{server}/backups"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/backups" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const serverId = 'd3aac109';
+javascript: `const serverId = 'd3aac109';
 
 const response = await fetch(\`https://your-panel.com/api/client/servers/\${serverId}/backups\`, {
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-        'Accept': 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'application/json'
-    }
+method: 'GET',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const data = await response.json();
@@ -50,19 +47,19 @@ server_id = 'd3aac109'
 url = f'https://your-panel.com/api/client/servers/{server_id}/backups'
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(url, headers=headers)
 data = response.json()
 
 for backup in data['data']:
-    print(f"Backup: {backup['attributes']['name']}")
-    print(f"Size: {backup['attributes']['bytes']} bytes")
-    print(f"Status: {'Successful' if backup['attributes']['is_successful'] else 'Failed'}")
-    print("---")`,
+print(f"Backup: {backup['attributes']['name']}")
+print(f"Size: {backup['attributes']['bytes']} bytes")
+print(f"Status: {'Successful' if backup['attributes']['is_successful'] else 'Failed'}")
+print("---")`,
     php: `<?php
 $serverId = 'd3aac109';
 $url = "https://your-panel.com/api/client/servers/{$serverId}/backups";
@@ -70,11 +67,11 @@ $url = "https://your-panel.com/api/client/servers/{$serverId}/backups";
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get($url, [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -82,34 +79,34 @@ $data = json_decode($response->getBody(), true);
 foreach ($data['data'] as $backup) {
     echo "Backup: " . $backup['attributes']['name'] . "\\n";
     echo "Size: " . number_format($backup['attributes']['bytes']) . " bytes\\n";
-    echo "Status: " . ($backup['attributes']['is_successful'] ? 'Successful' : 'Failed') . "\\n";
-    echo "---\\n";
+echo "Status: " . ($backup['attributes']['is_successful'] ? 'Successful' : 'Failed') . "\\n";
+echo "---\\n";
 }
 ?>`,
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups", serverId)
-    
+serverId := "d3aac109"
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups", serverId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     backups := result["data"].([]interface{})
     for _, backup := range backups {
         attrs := backup.(map[string]interface{})["attributes"].(map[string]interface{})
@@ -118,6 +115,7 @@ func main() {
         fmt.Printf("Status: %s\\n", map[bool]string{true: "Successful", false: "Failed"}[attrs["is_successful"].(bool)])
         fmt.Println("---")
     }
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -127,12 +125,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void listBackups(String serverId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups";
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -141,13 +139,13 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .GET()
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode data = mapper.readTree(response.body());
-        
+
         for (JsonNode backup : data.get("data")) {
             JsonNode attrs = backup.get("attributes");
             System.out.println("Backup: " + attrs.get("name").asText());
@@ -156,6 +154,7 @@ public class BackupManager {
             System.out.println("---");
         }
     }
+
 }`,
     csharp: `using System;
 using System.Net.Http;
@@ -164,21 +163,21 @@ using Newtonsoft.Json.Linq;
 
 public class BackupManager
 {
-    private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
-    private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
+private static readonly string BaseUrl = "https://your-panel.com/api/client";
+
     public async Task ListBackupsAsync(string serverId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups";
         HttpResponseMessage response = await client.GetAsync(url);
         string content = await response.Content.ReadAsStringAsync();
-        
+
         JObject data = JObject.Parse(content);
-        
+
         foreach (var backup in data["data"])
         {
             var attrs = backup["attributes"];
@@ -188,29 +187,30 @@ public class BackupManager
             Console.WriteLine("---");
         }
     }
+
 }`,
     ruby: `require 'net/http'
 require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.list_backups(server_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.list_backups(server_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups")
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Get.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
-    
+
     response = http.request(request)
     data = JSON.parse(response.body)
-    
+
     data['data'].each do |backup|
       attrs = backup['attributes']
       puts "Backup: #{attrs['name']}"
@@ -218,16 +218,15 @@ class BackupManager
       puts "Status: #{attrs['is_successful'] ? 'Successful' : 'Failed'}"
       puts "---"
     end
-  end
+
+end
 end
 
 # Usage
+
 BackupManager.list_backups('d3aac109')`
-  }}
+}}
 />
-
-
-
 
 ### Example Response
 
@@ -240,11 +239,7 @@ BackupManager.list_backups('d3aac109')`
       "attributes": {
         "uuid": "a4962fe6-90c8-4b89-ba62-a5d3b06426c0",
         "name": "Weekly Backup - 2023-10-20",
-        "ignored_files": [
-          "*.log",
-          "cache/*",
-          "temp/*"
-        ],
+        "ignored_files": ["*.log", "cache/*", "temp/*"],
         "sha256_hash": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
         "bytes": 1073741824,
         "created_at": "2023-10-20T14:30:00+00:00",
@@ -297,19 +292,17 @@ BackupManager.list_backups('d3aac109')`
 
 ### Backup Object Attributes
 
-| Field | Description |
-|-------|-------------|
-| `uuid` | Unique backup identifier |
-| `name` | Backup name/description |
-| `ignored_files` | Array of file patterns excluded from backup |
-| `sha256_hash` | SHA256 hash of backup file (null for failed backups) |
-| `bytes` | Backup file size in bytes |
-| `created_at` | Backup creation start time |
-| `completed_at` | Backup completion time (null for failed/in-progress) |
-| `is_successful` | Whether backup completed successfully |
-| `is_locked` | Whether backup is locked from deletion |
-
-
+| Field           | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `uuid`          | Unique backup identifier                             |
+| `name`          | Backup name/description                              |
+| `ignored_files` | Array of file patterns excluded from backup          |
+| `sha256_hash`   | SHA256 hash of backup file (null for failed backups) |
+| `bytes`         | Backup file size in bytes                            |
+| `created_at`    | Backup creation start time                           |
+| `completed_at`  | Backup completion time (null for failed/in-progress) |
+| `is_successful` | Whether backup completed successfully                |
+| `is_locked`     | Whether backup is locked from deletion               |
 
 ---
 
@@ -321,15 +314,12 @@ Retrieve detailed information about a specific backup.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `backup` | string | Backup UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `backup`  | string | Backup UUID                          |
 
 ### Example Request
-
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -347,19 +337,20 @@ const serverId = 'd3aac109';
 const backupId = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0';
 
 const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups/${backupId}`, {
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-        'Accept': 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'application/json'
-    }
+method: 'GET',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const backup = await response.json();
 console.log('Backup details:', backup.attributes);
 console.log(`Status: ${backup.attributes.is_successful ? 'Successful' : 'Failed'}`);
 console.log(`Size: ${(backup.attributes.bytes / 1024 / 1024).toFixed(2)} MB`);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -385,7 +376,8 @@ print(f"Size: {backup['attributes']['bytes'] / 1024 / 1024:.2f} MB")
 print(f"Created: {backup['attributes']['created_at']}")
 print(f"Completed: {backup['attributes']['completed_at']}")
 print(f"Locked: {backup['attributes']['is_locked']}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -398,11 +390,11 @@ $url = "https://your-panel.com/api/client/servers/{$serverId}/backups/{$backupId
 $client = new GuzzleHttp\Client();
 
 $response = $client->get($url, [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $backup = json_decode($response->getBody(), true);
@@ -415,7 +407,8 @@ echo "Created: " . $attrs['created_at'] . "\n";
 echo "Completed: " . $attrs['completed_at'] . "\n";
 echo "Locked: " . ($attrs['is_locked'] ? 'Yes' : 'No') . "\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -432,19 +425,19 @@ func main() {
     serverId := "d3aac109"
     backupId := "a4962fe6-90c8-4b89-ba62-a5d3b06426c0"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups/%s", serverId, backupId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     attrs := result["attributes"].(map[string]interface{})
     fmt.Printf("Backup Name: %s\n", attrs["name"])
     fmt.Printf("Status: %s\n", map[bool]string{true: "Successful", false: "Failed"}[attrs["is_successful"].(bool)])
@@ -453,7 +446,8 @@ func main() {
     fmt.Printf("Completed: %s\n", attrs["completed_at"])
     fmt.Printf("Locked: %s\n", map[bool]string{true: "Yes", false: "No"}[attrs["is_locked"].(bool)])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -466,12 +460,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void getBackupDetails(String serverId, String backupId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups/" + backupId;
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -480,14 +474,14 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .GET()
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode backup = mapper.readTree(response.body());
         JsonNode attrs = backup.get("attributes");
-        
+
         System.out.println("Backup Name: " + attrs.get("name").asText());
         System.out.println("Status: " + (attrs.get("is_successful").asBoolean() ? "Successful" : "Failed"));
         System.out.println("Size: " + String.format("%.2f MB", attrs.get("bytes").asDouble() / 1024 / 1024));
@@ -495,8 +489,10 @@ public class BackupManager {
         System.out.println("Completed: " + attrs.get("completed_at").asText());
         System.out.println("Locked: " + (attrs.get("is_locked").asBoolean() ? "Yes" : "No"));
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -510,20 +506,20 @@ public class BackupManager
 {
     private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
     private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+
     public async Task GetBackupDetailsAsync(string serverId, string backupId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups/{backupId}";
         HttpResponseMessage response = await client.GetAsync(url);
         string content = await response.Content.ReadAsStringAsync();
-        
+
         JObject backup = JObject.Parse(content);
         var attrs = backup["attributes"];
-        
+
         Console.WriteLine($"Backup Name: {attrs["name"]}");
         Console.WriteLine($"Status: {(attrs["is_successful"].Value<bool>() ? "Successful" : "Failed")}");
         Console.WriteLine($"Size: {attrs["bytes"].Value<long>() / 1024.0 / 1024.0:F2} MB");
@@ -532,7 +528,8 @@ public class BackupManager
         Console.WriteLine($"Locked: {(attrs["is_locked"].Value<bool>() ? "Yes" : "No")}");
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -542,36 +539,39 @@ require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.get_backup_details(server_id, backup_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.get_backup_details(server_id, backup_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}")
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Get.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
-    
+
     response = http.request(request)
     backup = JSON.parse(response.body)
     attrs = backup['attributes']
-    
+
     puts "Backup Name: #{attrs['name']}"
     puts "Status: #{attrs['is_successful'] ? 'Successful' : 'Failed'}"
     puts "Size: #{'%.2f' % (attrs['bytes'].to_f / 1024 / 1024)} MB"
     puts "Created: #{attrs['created_at']}"
     puts "Completed: #{attrs['completed_at']}"
     puts "Locked: #{attrs['is_locked'] ? 'Yes' : 'No'}"
-  end
+
+end
 end
 
 # Usage
+
 BackupManager.get_backup_details('d3aac109', 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0')
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -600,9 +600,7 @@ BackupManager.get_backup_details('d3aac109', 'a4962fe6-90c8-4b89-ba62-a5d3b06426
     "is_locked": false
   }
 }
-```
-
-
+````
 
 ---
 
@@ -614,16 +612,13 @@ Create a new backup of the server.
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | No | Backup name (auto-generated if not provided) |
-| `ignored` | string | No | File patterns to exclude (one per line) |
-| `is_locked` | boolean | No | Whether to lock backup from deletion (default: false) |
+| Field       | Type    | Required | Description                                           |
+| ----------- | ------- | -------- | ----------------------------------------------------- |
+| `name`      | string  | No       | Backup name (auto-generated if not provided)          |
+| `ignored`   | string  | No       | File patterns to exclude (one per line)               |
+| `is_locked` | boolean | No       | Whether to lock backup from deletion (default: false) |
 
 ### Example Request
-
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -645,26 +640,27 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/backups" \
 const serverId = 'd3aac109';
 
 const backupData = {
-    name: 'Pre-maintenance backup',
-    ignored: '*.log\ncache/*\ntemp/*\n*.tmp',
-    is_locked: true
+name: 'Pre-maintenance backup',
+ignored: '_.log\ncache/_\ntemp/_\n_.tmp',
+is_locked: true
 };
 
 const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups`, {
-    method: 'POST',
-    headers: {
-        'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-        'Accept': 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(backupData)
+method: 'POST',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(backupData)
 });
 
 const backup = await response.json();
 console.log('Backup created:', backup.attributes.uuid);
 console.log('Backup name:', backup.attributes.name);
 console.log('Status: Initiated - check progress with backup UUID');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -693,7 +689,8 @@ print(f"Backup created: {backup['attributes']['uuid']}")
 print(f"Backup name: {backup['attributes']['name']}")
 print(f"Locked: {backup['attributes']['is_locked']}")
 print("Status: Initiated - backup is now being created")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -703,20 +700,20 @@ $serverId = 'd3aac109';
 $url = "https://your-panel.com/api/client/servers/{$serverId}/backups";
 
 $backupData = [
-    'name' => 'Pre-maintenance backup',
-    'ignored' => "*.log\ncache/*\ntemp/*\n*.tmp",
-    'is_locked' => true
+'name' => 'Pre-maintenance backup',
+'ignored' => "*.log\ncache/*\ntemp/*\n*.tmp",
+'is_locked' => true
 ];
 
 $client = new GuzzleHttp\Client();
 
 $response = $client->post($url, [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $backupData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $backupData
 ]);
 
 $backup = json_decode($response->getBody(), true);
@@ -727,7 +724,8 @@ echo "Backup name: " . $attrs['name'] . "\n";
 echo "Locked: " . ($attrs['is_locked'] ? 'Yes' : 'No') . "\n";
 echo "Status: Initiated - backup is now being created\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -744,34 +742,35 @@ import (
 func main() {
     serverId := "d3aac109"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups", serverId)
-    
+
     backupData := map[string]interface{}{
         "name":      "Pre-maintenance backup",
         "ignored":   "*.log\ncache/*\ntemp/*\n*.tmp",
         "is_locked": true,
     }
-    
+
     jsonData, _ := json.Marshal(backupData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     attrs := result["attributes"].(map[string]interface{})
     fmt.Printf("Backup created: %s\n", attrs["uuid"])
     fmt.Printf("Backup name: %s\n", attrs["name"])
     fmt.Printf("Locked: %s\n", map[bool]string{true: "Yes", false: "No"}[attrs["is_locked"].(bool)])
     fmt.Println("Status: Initiated - backup is now being created")
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -786,20 +785,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void createBackup(String serverId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups";
-        
+
         Map<String, Object> backupData = new HashMap<>();
         backupData.put("name", "Pre-maintenance backup");
         backupData.put("ignored", "*.log\ncache/*\ntemp/*\n*.tmp");
         backupData.put("is_locked", true);
-        
+
         ObjectMapper mapper = new ObjectMapper();
         String jsonData = mapper.writeValueAsString(backupData);
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -808,20 +807,22 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(jsonData))
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         JsonNode backup = mapper.readTree(response.body());
         JsonNode attrs = backup.get("attributes");
-        
+
         System.out.println("Backup created: " + attrs.get("uuid").asText());
         System.out.println("Backup name: " + attrs.get("name").asText());
         System.out.println("Locked: " + (attrs.get("is_locked").asBoolean() ? "Yes" : "No"));
         System.out.println("Status: Initiated - backup is now being created");
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -837,37 +838,38 @@ public class BackupManager
 {
     private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
     private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+
     public async Task CreateBackupAsync(string serverId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         var backupData = new
         {
             name = "Pre-maintenance backup",
             ignored = "*.log\ncache/*\ntemp/*\n*.tmp",
             is_locked = true
         };
-        
+
         string jsonData = JsonConvert.SerializeObject(backupData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups";
         HttpResponseMessage response = await client.PostAsync(url, content);
         string responseContent = await response.Content.ReadAsStringAsync();
-        
+
         JObject backup = JObject.Parse(responseContent);
         var attrs = backup["attributes"];
-        
+
         Console.WriteLine($"Backup created: {attrs["uuid"]}");
         Console.WriteLine($"Backup name: {attrs["name"]}");
         Console.WriteLine($"Locked: {(attrs["is_locked"].Value<bool>() ? "Yes" : "No")}");
         Console.WriteLine("Status: Initiated - backup is now being created");
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -877,41 +879,44 @@ require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.create_backup(server_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.create_backup(server_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups")
+
     backup_data = {
       name: 'Pre-maintenance backup',
       ignored: "*.log\ncache/*\ntemp/*\n*.tmp",
       is_locked: true
     }
-    
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Post.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
     request.body = backup_data.to_json
-    
+
     response = http.request(request)
     backup = JSON.parse(response.body)
     attrs = backup['attributes']
-    
+
     puts "Backup created: #{attrs['uuid']}"
     puts "Backup name: #{attrs['name']}"
     puts "Locked: #{attrs['is_locked'] ? 'Yes' : 'No'}"
     puts "Status: Initiated - backup is now being created"
-  end
+
+end
 end
 
 # Usage
+
 BackupManager.create_backup('d3aac109')
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -941,7 +946,7 @@ BackupManager.create_backup('d3aac109')
     "is_locked": true
   }
 }
-```
+````
 
 ### Ignored Files Format
 
@@ -969,6 +974,7 @@ backups/*
 ### Error Responses
 
 **Backup Limit Reached (400)**
+
 ```json
 {
   "errors": [
@@ -982,6 +988,7 @@ backups/*
 ```
 
 **Server Busy (409)**
+
 ```json
 {
   "errors": [
@@ -995,6 +1002,7 @@ backups/*
 ```
 
 **Insufficient Storage (507)**
+
 ```json
 {
   "errors": [
@@ -1007,8 +1015,6 @@ backups/*
 }
 ```
 
-
-
 ---
 
 ## Download Backup
@@ -1019,15 +1025,12 @@ Get a download URL for a backup file.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `backup` | string | Backup UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `backup`  | string | Backup UUID                          |
 
 ### Example Request
-
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1045,12 +1048,12 @@ const serverId = 'd3aac109';
 const backupId = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0';
 
 const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups/${backupId}/download`, {
-    method: 'GET',
-    headers: {
-        'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-        'Accept': 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'application/json'
-    }
+method: 'GET',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const downloadData = await response.json();
@@ -1063,7 +1066,8 @@ console.log('URL expires in 1 hour');
 const downloadResponse = await fetch(downloadUrl);
 const backup = await downloadResponse.blob();
 console.log('Backup downloaded, size:', backup.size, 'bytes');
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1099,7 +1103,8 @@ with open(filename, 'wb') as f:
 
 print(f"Backup downloaded as: {filename}")
 print(f"File size: {os.path.getsize(filename)} bytes")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1113,11 +1118,11 @@ $client = new GuzzleHttp\Client();
 
 // Get download URL
 $response = $client->get($url, [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $downloadData = json_decode($response->getBody(), true);
@@ -1129,13 +1134,14 @@ echo "URL expires in 1 hour\n";
 // Download the backup file
 $filename = "backup_{$backupId}.tar.gz";
 $downloadResponse = $client->get($downloadUrl, [
-    'sink' => $filename
+'sink' => $filename
 ]);
 
 echo "Backup downloaded as: " . $filename . "\n";
 echo "File size: " . filesize($filename) . " bytes\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1154,37 +1160,38 @@ func main() {
     serverId := "d3aac109"
     backupId := "a4962fe6-90c8-4b89-ba62-a5d3b06426c0"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups/%s/download", serverId, backupId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     // Get download URL
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     downloadUrl := result["attributes"].(map[string]interface{})["url"].(string)
     fmt.Printf("Download URL generated: %s\n", downloadUrl)
     fmt.Println("URL expires in 1 hour")
-    
+
     // Download the backup file
     downloadResp, _ := http.Get(downloadUrl)
     defer downloadResp.Body.Close()
-    
+
     filename := fmt.Sprintf("backup_%s.tar.gz", backupId)
     file, _ := os.Create(filename)
     defer file.Close()
-    
+
     size, _ := io.Copy(file, downloadResp.Body)
     fmt.Printf("Backup downloaded as: %s\n", filename)
     fmt.Printf("File size: %d bytes\n", size)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1198,12 +1205,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void downloadBackup(String serverId, String backupId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups/" + backupId + "/download";
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -1212,33 +1219,35 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .GET()
             .build();
-        
+
         // Get download URL
-        HttpResponse<String> response = client.send(request, 
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         ObjectMapper mapper = new ObjectMapper();
         JsonNode downloadData = mapper.readTree(response.body());
         String downloadUrl = downloadData.get("attributes").get("url").asText();
-        
+
         System.out.println("Download URL generated: " + downloadUrl);
         System.out.println("URL expires in 1 hour");
-        
+
         // Download the backup file
         String filename = "backup_" + backupId + ".tar.gz";
         HttpRequest downloadRequest = HttpRequest.newBuilder()
             .uri(URI.create(downloadUrl))
             .GET()
             .build();
-        
+
         HttpResponse<java.nio.file.Path> downloadResponse = client.send(downloadRequest,
             HttpResponse.BodyHandlers.ofFile(Paths.get(filename)));
-        
+
         System.out.println("Backup downloaded as: " + filename);
         System.out.println("File size: " + java.nio.file.Files.size(downloadResponse.body()) + " bytes");
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1253,35 +1262,36 @@ public class BackupManager
 {
     private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
     private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+
     public async Task DownloadBackupAsync(string serverId, string backupId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         // Get download URL
         string url = $"{BaseUrl}/servers/{serverId}/backups/{backupId}/download";
         HttpResponseMessage response = await client.GetAsync(url);
         string content = await response.Content.ReadAsStringAsync();
-        
+
         JObject downloadData = JObject.Parse(content);
         string downloadUrl = downloadData["attributes"]["url"].ToString();
-        
+
         Console.WriteLine($"Download URL generated: {downloadUrl}");
         Console.WriteLine("URL expires in 1 hour");
-        
+
         // Download the backup file
         string filename = $"backup_{backupId}.tar.gz";
         using var downloadResponse = await client.GetAsync(downloadUrl);
         using var fileStream = File.Create(filename);
         await downloadResponse.Content.CopyToAsync(fileStream);
-        
+
         Console.WriteLine($"Backup downloaded as: {filename}");
         Console.WriteLine($"File size: {new FileInfo(filename).Length} bytes");
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1291,32 +1301,32 @@ require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.download_backup(server_id, backup_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/download")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.download_backup(server_id, backup_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/download")
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     # Get download URL
     request = Net::HTTP::Get.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
-    
+
     response = http.request(request)
     download_data = JSON.parse(response.body)
     download_url = download_data['attributes']['url']
-    
+
     puts "Download URL generated: #{download_url}"
     puts "URL expires in 1 hour"
-    
+
     # Download the backup file
     download_uri = URI(download_url)
     filename = "backup_#{backup_id}.tar.gz"
-    
+
     Net::HTTP.start(download_uri.host, download_uri.port, use_ssl: true) do |http|
       request = Net::HTTP::Get.new(download_uri)
       http.request(request) do |response|
@@ -1327,15 +1337,18 @@ class BackupManager
         end
       end
     end
-    
+
     puts "Backup downloaded as: #{filename}"
     puts "File size: #{File.size(filename)} bytes"
-  end
+
+end
 end
 
 # Usage
+
 BackupManager.download_backup('d3aac109', 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0')
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1352,7 +1365,7 @@ BackupManager.download_backup('d3aac109', 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0'
     "url": "https://s3.amazonaws.com/backups/servers/d3aac109/backup_a4962fe6.tar.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20231020%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231020T143000Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=abcd1234..."
   }
 }
-```
+````
 
 ### Download URL Properties
 
@@ -1370,8 +1383,10 @@ BackupManager.download_backup('d3aac109', 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0'
 curl -L "https://s3.amazonaws.com/backups/..." -o backup.tar.gz
 
 # Download using wget
+
 wget "https://s3.amazonaws.com/backups/..." -O backup.tar.gz
-```
+
+````
 
 ### Error Responses
 
@@ -1386,9 +1401,10 @@ wget "https://s3.amazonaws.com/backups/..." -O backup.tar.gz
     }
   ]
 }
-```
+````
 
 **Backup Failed (400)**
+
 ```json
 {
   "errors": [
@@ -1401,8 +1417,6 @@ wget "https://s3.amazonaws.com/backups/..." -O backup.tar.gz
 }
 ```
 
-
-
 ---
 
 ## Delete Backup
@@ -1413,15 +1427,12 @@ Permanently delete a backup file.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `backup` | string | Backup UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `backup`  | string | Backup UUID                          |
 
 ### Example Request
-
-
-
 
 ```bash
 curl -X DELETE "https://your-panel.com/api/client/servers/d3aac109/backups/c3948f1a-67b2-4d89-8c45-a1b2c3d4e5f6" \
@@ -1429,6 +1440,7 @@ curl -X DELETE "https://your-panel.com/api/client/servers/d3aac109/backups/c3948
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json"
 ```
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -1437,20 +1449,21 @@ const serverId = 'd3aac109';
 const backupId = 'c3948f1a-67b2-4d89-8c45-a1b2c3d4e5f6';
 
 const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups/${backupId}`, {
-    method: 'DELETE',
-    headers: {
-        'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-        'Accept': 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'application/json'
-    }
+method: 'DELETE',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-    console.log('Backup successfully deleted');
+console.log('Backup successfully deleted');
 } else {
-    console.error('Failed to delete backup:', response.status);
+console.error('Failed to delete backup:', response.status);
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1475,7 +1488,8 @@ else:
     print(f"Failed to delete backup: {response.status_code}")
     if response.content:
         print(f"Error: {response.json()}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1488,23 +1502,25 @@ $url = "https://your-panel.com/api/client/servers/{$serverId}/backups/{$backupId
 $client = new GuzzleHttp\Client();
 
 try {
-    $response = $client->delete($url, [
-        'headers' => [
-            'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-            'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type' => 'application/json'
-        ]
-    ]);
-    
+$response = $client->delete($url, [
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
+]);
+
     if ($response->getStatusCode() === 204) {
         echo "Backup successfully deleted\n";
     }
+
 } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo "Failed to delete backup: " . $e->getCode() . "\n";
-    echo "Error: " . $e->getResponse()->getBody() . "\n";
+echo "Failed to delete backup: " . $e->getCode() . "\n";
+echo "Error: " . $e->getResponse()->getBody() . "\n";
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1520,27 +1536,28 @@ func main() {
     serverId := "d3aac109"
     backupId := "c3948f1a-67b2-4d89-8c45-a1b2c3d4e5f6"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups/%s", serverId, backupId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Backup successfully deleted")
     } else {
         fmt.Printf("Failed to delete backup: %d\n", resp.StatusCode)
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1551,12 +1568,12 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void deleteBackup(String serverId, String backupId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups/" + backupId;
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -1565,10 +1582,10 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .DELETE()
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         if (response.statusCode() == 204) {
             System.out.println("Backup successfully deleted");
         } else {
@@ -1578,8 +1595,10 @@ public class BackupManager {
             }
         }
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1592,19 +1611,19 @@ public class BackupManager
 {
     private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
     private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+
     public async Task DeleteBackupAsync(string serverId, string backupId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups/{backupId}";
-        
+
         try
         {
             HttpResponseMessage response = await client.DeleteAsync(url);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 Console.WriteLine("Backup successfully deleted");
@@ -1625,7 +1644,8 @@ public class BackupManager
         }
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1635,36 +1655,39 @@ require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.delete_backup(server_id, backup_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.delete_backup(server_id, backup_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}")
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Delete.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
-    
+
     response = http.request(request)
-    
+
     if response.code == '204'
       puts "Backup successfully deleted"
     else
       puts "Failed to delete backup: #{response.code}"
       puts "Error: #{response.body}" unless response.body.empty?
     end
-  rescue StandardError => e
-    puts "Error deleting backup: #{e.message}"
-  end
+
+rescue StandardError => e
+puts "Error deleting backup: #{e.message}"
+end
 end
 
 # Usage
+
 BackupManager.delete_backup('d3aac109', 'c3948f1a-67b2-4d89-8c45-a1b2c3d4e5f6')
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1693,9 +1716,10 @@ Backup deletion is **permanent and irreversible**. Deleted backups cannot be rec
     }
   ]
 }
-```
+````
 
 **Backup In Progress (409)**
+
 ```json
 {
   "errors": [
@@ -1708,8 +1732,6 @@ Backup deletion is **permanent and irreversible**. Deleted backups cannot be rec
 }
 ```
 
-
-
 ---
 
 ## Restore Backup
@@ -1720,21 +1742,18 @@ Restore a server from a backup file. This operation will replace all current ser
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `backup` | string | Backup UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `backup`  | string | Backup UUID                          |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `truncate` | boolean | No | Whether to delete existing files before restore (default: true) |
+| Field      | Type    | Required | Description                                                     |
+| ---------- | ------- | -------- | --------------------------------------------------------------- |
+| `truncate` | boolean | No       | Whether to delete existing files before restore (default: true) |
 
 ### Example Request
-
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1755,26 +1774,27 @@ const serverId = 'd3aac109';
 const backupId = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0';
 
 const restoreData = {
-    truncate: true  // Delete existing files before restore
+truncate: true // Delete existing files before restore
 };
 
 const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups/${backupId}/restore`, {
-    method: 'POST',
-    headers: {
-        'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-        'Accept': 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(restoreData)
+method: 'POST',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+},
+body: JSON.stringify(restoreData)
 });
 
 if (response.status === 202) {
-    console.log('Backup restoration initiated');
-    console.log('Server will be restored from backup - this may take several minutes');
+console.log('Backup restoration initiated');
+console.log('Server will be restored from backup - this may take several minutes');
 } else {
-    console.error('Failed to initiate restore:', response.status);
+console.error('Failed to initiate restore:', response.status);
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1804,7 +1824,8 @@ else:
     print(f"Failed to initiate restore: {response.status_code}")
     if response.content:
         print(f"Error: {response.json()}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1815,31 +1836,33 @@ $backupId = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0';
 $url = "https://your-panel.com/api/client/servers/{$serverId}/backups/{$backupId}/restore";
 
 $restoreData = [
-    'truncate' => true  // Delete existing files before restore
+'truncate' => true // Delete existing files before restore
 ];
 
 $client = new GuzzleHttp\Client();
 
 try {
-    $response = $client->post($url, [
-        'headers' => [
-            'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-            'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type' => 'application/json'
-        ],
-        'json' => $restoreData
-    ]);
-    
+$response = $client->post($url, [
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $restoreData
+]);
+
     if ($response->getStatusCode() === 202) {
         echo "Backup restoration initiated\n";
         echo "Server will be restored from backup - this may take several minutes\n";
     }
+
 } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo "Failed to initiate restore: " . $e->getCode() . "\n";
-    echo "Error: " . $e->getResponse()->getBody() . "\n";
+echo "Failed to initiate restore: " . $e->getCode() . "\n";
+echo "Error: " . $e->getResponse()->getBody() . "\n";
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1857,26 +1880,26 @@ func main() {
     serverId := "d3aac109"
     backupId := "a4962fe6-90c8-4b89-ba62-a5d3b06426c0"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups/%s/restore", serverId, backupId)
-    
+
     restoreData := map[string]interface{}{
         "truncate": true,  // Delete existing files before restore
     }
-    
+
     jsonData, _ := json.Marshal(restoreData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 202 {
         fmt.Println("Backup restoration initiated")
         fmt.Println("Server will be restored from backup - this may take several minutes")
@@ -1884,7 +1907,8 @@ func main() {
         fmt.Printf("Failed to initiate restore: %d\n", resp.StatusCode)
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1898,18 +1922,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void restoreBackup(String serverId, String backupId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups/" + backupId + "/restore";
-        
+
         Map<String, Object> restoreData = new HashMap<>();
         restoreData.put("truncate", true);  // Delete existing files before restore
-        
+
         ObjectMapper mapper = new ObjectMapper();
         String jsonData = mapper.writeValueAsString(restoreData);
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -1918,10 +1942,10 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.ofString(jsonData))
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         if (response.statusCode() == 202) {
             System.out.println("Backup restoration initiated");
             System.out.println("Server will be restored from backup - this may take several minutes");
@@ -1932,8 +1956,10 @@ public class BackupManager {
             }
         }
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1948,27 +1974,27 @@ public class BackupManager
 {
     private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
     private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+
     public async Task RestoreBackupAsync(string serverId, string backupId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         var restoreData = new
         {
             truncate = true  // Delete existing files before restore
         };
-        
+
         string jsonData = JsonConvert.SerializeObject(restoreData);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups/{backupId}/restore";
-        
+
         try
         {
             HttpResponseMessage response = await client.PostAsync(url, content);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
                 Console.WriteLine("Backup restoration initiated");
@@ -1990,7 +2016,8 @@ public class BackupManager
         }
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -2000,27 +2027,27 @@ require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.restore_backup(server_id, backup_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/restore")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.restore_backup(server_id, backup_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/restore")
+
     restore_data = {
       truncate: true  # Delete existing files before restore
     }
-    
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Post.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
     request.body = restore_data.to_json
-    
+
     response = http.request(request)
-    
+
     if response.code == '202'
       puts "Backup restoration initiated"
       puts "Server will be restored from backup - this may take several minutes"
@@ -2028,14 +2055,17 @@ class BackupManager
       puts "Failed to initiate restore: #{response.code}"
       puts "Error: #{response.body}" unless response.body.empty?
     end
-  rescue StandardError => e
-    puts "Error restoring backup: #{e.message}"
-  end
+
+rescue StandardError => e
+puts "Error restoring backup: #{e.message}"
+end
 end
 
 # Usage
+
 BackupManager.restore_backup('d3aac109', 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0')
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -2071,9 +2101,10 @@ Backup restoration will **permanently replace all server files** with the backup
     }
   ]
 }
-```
+````
 
 **Server Installing (409)**
+
 ```json
 {
   "errors": [
@@ -2086,8 +2117,6 @@ Backup restoration will **permanently replace all server files** with the backup
 }
 ```
 
-
-
 ---
 
 ## Toggle Backup Lock
@@ -2098,10 +2127,10 @@ Toggle backup lock status to prevent accidental deletion. This endpoint toggles 
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `backup` | string | Backup UUID |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
+| `backup`  | string | Backup UUID                          |
 
 ### Example Request
 
@@ -2123,25 +2152,27 @@ const backupId = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0';
 
 // Toggle backup lock status
 async function toggleBackupLock() {
-    const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups/${backupId}/lock`, {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-            'Accept': 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type': 'application/json'
-        }
-    });
+const response = await fetch(`https://your-panel.com/api/client/servers/${serverId}/backups/${backupId}/lock`, {
+method: 'POST',
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
+});
 
     if (response.status === 204) {
         console.log('Backup lock status toggled successfully');
     } else {
         console.error('Failed to toggle backup lock:', response.status);
     }
+
 }
 
 // Usage
 await toggleBackupLock(); // Toggle lock status
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -2161,7 +2192,7 @@ def lock_backup():
     """Lock a backup to prevent deletion"""
     url = f'https://your-panel.com/api/client/servers/{server_id}/backups/{backup_id}/lock'
     response = requests.post(url, headers=headers)
-    
+
     if response.status_code == 204:
         print("Backup locked successfully")
     else:
@@ -2173,7 +2204,7 @@ def unlock_backup():
     """Unlock a backup to allow deletion"""
     url = f'https://your-panel.com/api/client/servers/{server_id}/backups/{backup_id}/unlock'
     response = requests.post(url, headers=headers)
-    
+
     if response.status_code == 204:
         print("Backup unlocked successfully")
     else:
@@ -2184,7 +2215,8 @@ def unlock_backup():
 # Usage
 lock_backup()    # Lock the backup
 unlock_backup()  # Unlock the backup
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -2195,17 +2227,17 @@ $backupId = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0';
 
 $client = new GuzzleHttp\Client();
 $headers = [
-    'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-    'Accept' => 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type' => 'application/json'
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
 ];
 
 function lockBackup($client, $serverId, $backupId, $headers) {
     $url = "https://your-panel.com/api/client/servers/{$serverId}/backups/{$backupId}/lock";
-    
+
     try {
         $response = $client->post($url, ['headers' => $headers]);
-        
+
         if ($response->getStatusCode() === 204) {
             echo "Backup locked successfully\n";
         }
@@ -2213,14 +2245,15 @@ function lockBackup($client, $serverId, $backupId, $headers) {
         echo "Failed to lock backup: " . $e->getCode() . "\n";
         echo "Error: " . $e->getResponse()->getBody() . "\n";
     }
+
 }
 
 function unlockBackup($client, $serverId, $backupId, $headers) {
     $url = "https://your-panel.com/api/client/servers/{$serverId}/backups/{$backupId}/unlock";
-    
+
     try {
         $response = $client->post($url, ['headers' => $headers]);
-        
+
         if ($response->getStatusCode() === 204) {
             echo "Backup unlocked successfully\n";
         }
@@ -2228,13 +2261,15 @@ function unlockBackup($client, $serverId, $backupId, $headers) {
         echo "Failed to unlock backup: " . $e->getCode() . "\n";
         echo "Error: " . $e->getResponse()->getBody() . "\n";
     }
+
 }
 
 // Usage
 lockBackup($client, $serverId, $backupId, $headers);    // Lock the backup
-unlockBackup($client, $serverId, $backupId, $headers);  // Unlock the backup
+unlockBackup($client, $serverId, $backupId, $headers); // Unlock the backup
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -2248,20 +2283,20 @@ import (
 
 func lockBackup(serverId, backupId string) {
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups/%s/lock", serverId, backupId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error locking backup: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Backup locked successfully")
     } else {
@@ -2271,20 +2306,20 @@ func lockBackup(serverId, backupId string) {
 
 func unlockBackup(serverId, backupId string) {
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/backups/%s/unlock", serverId, backupId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error unlocking backup: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Backup unlocked successfully")
     } else {
@@ -2295,11 +2330,12 @@ func unlockBackup(serverId, backupId string) {
 func main() {
     serverId := "d3aac109"
     backupId := "a4962fe6-90c8-4b89-ba62-a5d3b06426c0"
-    
+
     lockBackup(serverId, backupId)    // Lock the backup
     unlockBackup(serverId, backupId)  // Unlock the backup
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -2310,12 +2346,12 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 
 public class BackupManager {
-    private static final String API_KEY = "ptlc_YOUR_API_KEY";
-    private static final String BASE_URL = "https://your-panel.com/api/client";
-    
+private static final String API_KEY = "ptlc_YOUR_API_KEY";
+private static final String BASE_URL = "https://your-panel.com/api/client";
+
     public void lockBackup(String serverId, String backupId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups/" + backupId + "/lock";
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -2324,20 +2360,20 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.noBody())
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         if (response.statusCode() == 204) {
             System.out.println("Backup locked successfully");
         } else {
             System.out.println("Failed to lock backup: " + response.statusCode());
         }
     }
-    
+
     public void unlockBackup(String serverId, String backupId) throws Exception {
         String url = BASE_URL + "/servers/" + serverId + "/backups/" + backupId + "/unlock";
-        
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
@@ -2346,18 +2382,20 @@ public class BackupManager {
             .header("Content-Type", "application/json")
             .POST(HttpRequest.BodyPublishers.noBody())
             .build();
-        
-        HttpResponse<String> response = client.send(request, 
+
+        HttpResponse<String> response = client.send(request,
             HttpResponse.BodyHandlers.ofString());
-        
+
         if (response.statusCode() == 204) {
             System.out.println("Backup unlocked successfully");
         } else {
             System.out.println("Failed to unlock backup: " + response.statusCode());
         }
     }
+
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -2370,19 +2408,19 @@ public class BackupManager
 {
     private static readonly string ApiKey = "ptlc_YOUR_API_KEY";
     private static readonly string BaseUrl = "https://your-panel.com/api/client";
-    
+
     public async Task LockBackupAsync(string serverId, string backupId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups/{backupId}/lock";
-        
+
         try
         {
             HttpResponseMessage response = await client.PostAsync(url, null);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 Console.WriteLine("Backup locked successfully");
@@ -2397,19 +2435,19 @@ public class BackupManager
             Console.WriteLine($"Error locking backup: {ex.Message}");
         }
     }
-    
+
     public async Task UnlockBackupAsync(string serverId, string backupId)
     {
         using var client = new HttpClient();
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
-        
+
         string url = $"{BaseUrl}/servers/{serverId}/backups/{backupId}/unlock";
-        
+
         try
         {
             HttpResponseMessage response = await client.PostAsync(url, null);
-            
+
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 Console.WriteLine("Backup unlocked successfully");
@@ -2425,7 +2463,8 @@ public class BackupManager
         }
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -2435,62 +2474,66 @@ require 'uri'
 require 'json'
 
 class BackupManager
-  API_KEY = 'ptlc_YOUR_API_KEY'
-  BASE_URL = 'https://your-panel.com/api/client'
-  
-  def self.lock_backup(server_id, backup_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/lock")
-    
+API_KEY = 'ptlc_YOUR_API_KEY'
+BASE_URL = 'https://your-panel.com/api/client'
+
+def self.lock_backup(server_id, backup_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/lock")
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Post.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
-    
+
     response = http.request(request)
-    
+
     if response.code == '204'
       puts "Backup locked successfully"
     else
       puts "Failed to lock backup: #{response.code}"
       puts "Error: #{response.body}" unless response.body.empty?
     end
-  rescue StandardError => e
-    puts "Error locking backup: #{e.message}"
-  end
-  
-  def self.unlock_backup(server_id, backup_id)
-    uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/unlock")
-    
+
+rescue StandardError => e
+puts "Error locking backup: #{e.message}"
+end
+
+def self.unlock_backup(server_id, backup_id)
+uri = URI("#{BASE_URL}/servers/#{server_id}/backups/#{backup_id}/unlock")
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    
+
     request = Net::HTTP::Post.new(uri)
     request['Authorization'] = "Bearer #{API_KEY}"
     request['Accept'] = 'Application/vnd.pterodactyl.v1+json'
     request['Content-Type'] = 'application/json'
-    
+
     response = http.request(request)
-    
+
     if response.code == '204'
       puts "Backup unlocked successfully"
     else
       puts "Failed to unlock backup: #{response.code}"
       puts "Error: #{response.body}" unless response.body.empty?
     end
-  rescue StandardError => e
-    puts "Error unlocking backup: #{e.message}"
-  end
+
+rescue StandardError => e
+puts "Error unlocking backup: #{e.message}"
+end
 end
 
 # Usage
+
 server_id = 'd3aac109'
 backup_id = 'a4962fe6-90c8-4b89-ba62-a5d3b06426c0'
 
-BackupManager.lock_backup(server_id, backup_id)    # Lock the backup
-BackupManager.unlock_backup(server_id, backup_id)  # Unlock the backup
+BackupManager.lock_backup(server_id, backup_id) # Lock the backup
+BackupManager.unlock_backup(server_id, backup_id) # Unlock the backup
+
 ```
 </TabItem>
 
@@ -2606,14 +2649,15 @@ Monitor backup creation progress by polling the backup details endpoint. The `co
 
 ## Source References
 
-**Controller**: [`BackupController`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/BackupController.php)  
-**Routes**: [`api-client.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php) - Backup endpoints  
-**Backup Model**: [`Backup.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Models/Backup.php)  
-**Backup Service**: [`BackupService`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Services/Backups/BackupService.php)  
+**Controller**: [`BackupController`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Http/Controllers/Api/Client/Servers/BackupController.php)
+**Routes**: [`api-client.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php) - Backup endpoints
+**Backup Model**: [`Backup.php`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Models/Backup.php)
+**Backup Service**: [`BackupService`](https://github.com/pterodactyl/panel/blob/1.0-develop/app/Services/Backups/BackupService.php)
 **Wings Integration**: [Wings Server Code](https://github.com/pterodactyl/wings/tree/develop/server) - Backup creation
 
 ## Next Steps
 
 - Explore [Scheduled Tasks](./schedules) for automated backup creation
 - Check [File Management](./files) for manual file operations
-- Review [Server Management](./servers) for server control during backups 
+- Review [Server Management](./servers) for server control during backups
+```

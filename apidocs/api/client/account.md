@@ -13,30 +13,30 @@ Retrieve information about the authenticated account.
 ### Example Request
 
 <CodeTabs
-  endpoint="/api/client/account"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/account" \\
+endpoint="/api/client/account"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/account" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/client/account', {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Account details:', response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get('https://your-panel.com/api/client/account', headers=headers)
@@ -45,11 +45,11 @@ print('Account details:', response.json())`,
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get('https://your-panel.com/api/client/account', [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -58,24 +58,25 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://your-panel.com/api/client/account", nil)
-    req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://your-panel.com/api/client/account", nil)
+req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
+req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Account details:", result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -84,12 +85,12 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/account"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/account"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Account details: " + response.body());`,
@@ -117,7 +118,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 puts "Account details: #{JSON.parse(response.body)}"`
-  }}
+}}
 />
 
 ### Example Response
@@ -136,11 +137,6 @@ puts "Account details: #{JSON.parse(response.body)}"`
   }
 }
 ```
-
-
-
-
-
 
 ---
 
@@ -161,7 +157,6 @@ curl "https://your-panel.com/api/client/account/two-factor" \
   -H "Content-Type: application/json"
 ```
 
-
 #### Example Response
 
 ```json
@@ -173,7 +168,6 @@ curl "https://your-panel.com/api/client/account/two-factor" \
 }
 ```
 
-
 ### Enable 2FA
 
 Enable TOTP two-factor authentication using the code from your authenticator app.
@@ -182,13 +176,11 @@ Enable TOTP two-factor authentication using the code from your authenticator app
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `code` | string | Yes | 6-digit TOTP code from authenticator app |
+| Field  | Type   | Required | Description                              |
+| ------ | ------ | -------- | ---------------------------------------- |
+| `code` | string | Yes      | 6-digit TOTP code from authenticator app |
 
 #### Example Request
-
-
 
 ```bash
 curl -X POST "https://your-panel.com/api/client/account/two-factor" \
@@ -200,27 +192,27 @@ curl -X POST "https://your-panel.com/api/client/account/two-factor" \
   }'
 ```
 
-
-
 ```javascript
 const axios = require('axios');
 
 const twoFactorData = {
-  code: '123456'
+  code: '123456',
 };
 
-const response = await axios.post('https://your-panel.com/api/client/account/two-factor', twoFactorData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
-});
+const response = await axios.post(
+  'https://your-panel.com/api/client/account/two-factor',
+  twoFactorData,
+  {
+    headers: {
+      Authorization: 'Bearer ptlc_YOUR_API_KEY',
+      Accept: 'Application/vnd.pterodactyl.v1+json',
+      'Content-Type': 'application/json',
+    },
+  },
+);
 
 console.log('2FA enabled successfully:', response.data);
 ```
-
-
 
 ```python
 import requests
@@ -235,12 +227,10 @@ two_factor_data = {
     'code': '123456'
 }
 
-response = requests.post('https://your-panel.com/api/client/account/two-factor', 
+response = requests.post('https://your-panel.com/api/client/account/two-factor',
                         headers=headers, json=two_factor_data)
 print('2FA enabled successfully:', response.json())
 ```
-
-
 
 ```php
 <?php
@@ -264,8 +254,6 @@ print_r($data);
 ?>
 ```
 
-
-
 ```go
 package main
 
@@ -280,25 +268,23 @@ func main() {
     twoFactorData := map[string]interface{}{
         "code": "123456",
     }
-    
+
     jsonData, _ := json.Marshal(twoFactorData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/client/account/two-factor", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("2FA enabled successfully:", result)
 }
 ```
-
-
 
 ```java
 import java.net.http.HttpClient;
@@ -325,8 +311,6 @@ HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.o
 System.out.println("2FA enabled successfully: " + response.body());
 ```
 
-
-
 ```csharp
 using System.Net.Http;
 using System.Text;
@@ -348,8 +332,6 @@ var response = await client.PostAsync("https://your-panel.com/api/client/account
 var responseContent = await response.Content.ReadAsStringAsync();
 Console.WriteLine("2FA enabled successfully: " + responseContent);
 ```
-
-
 
 ```ruby
 require 'net/http'
@@ -373,7 +355,6 @@ response = http.request(request)
 puts "2FA enabled successfully: #{JSON.parse(response.body)}"
 ```
 
-
 #### Example Response
 
 ```json
@@ -382,7 +363,7 @@ puts "2FA enabled successfully: #{JSON.parse(response.body)}"
   "attributes": {
     "tokens": [
       "MpBjHH8O08",
-      "D9H0hktN6L", 
+      "D9H0hktN6L",
       "ho8KiUpeV8",
       "06vZEfrYPf",
       "nFRySZ2ryh",
@@ -395,7 +376,6 @@ puts "2FA enabled successfully: #{JSON.parse(response.body)}"
   }
 }
 ```
-
 
 #### Error Response (400)
 
@@ -411,7 +391,6 @@ puts "2FA enabled successfully: #{JSON.parse(response.body)}"
 }
 ```
 
-
 ### Disable 2FA
 
 Disable two-factor authentication on the account.
@@ -420,9 +399,9 @@ Disable two-factor authentication on the account.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `password` | string | Yes | Current account password |
+| Field      | Type   | Required | Description              |
+| ---------- | ------ | -------- | ------------------------ |
+| `password` | string | Yes      | Current account password |
 
 #### Example Request
 
@@ -435,7 +414,6 @@ curl -X POST "https://your-panel.com/api/client/account/two-factor/disable" \
     "password": "your-current-password"
   }'
 ```
-
 
 #### Success Response (204)
 
@@ -455,11 +433,6 @@ Returns empty response body with status code 204.
 }
 ```
 
-
-
-
-
-
 ---
 
 ## Email Management
@@ -472,10 +445,10 @@ Update the email address associated with your account.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `email` | string | Yes | New email address |
-| `password` | string | Yes | Current account password |
+| Field      | Type   | Required | Description              |
+| ---------- | ------ | -------- | ------------------------ |
+| `email`    | string | Yes      | New email address        |
+| `password` | string | Yes      | Current account password |
 
 #### Example Request
 
@@ -490,7 +463,6 @@ curl -X PUT "https://your-panel.com/api/client/account/email" \
   }'
 ```
 
-
 #### Success Response (201)
 
 Returns empty response body with status code 201.
@@ -498,6 +470,7 @@ Returns empty response body with status code 201.
 #### Error Responses
 
 **Invalid Email Format (400)**
+
 ```json
 {
   "errors": [
@@ -512,8 +485,8 @@ Returns empty response body with status code 201.
 }
 ```
 
-
 **Invalid Password (400)**
+
 ```json
 {
   "errors": [
@@ -525,15 +498,6 @@ Returns empty response body with status code 201.
   ]
 }
 ```
-
-
-
-
-
-
-
-
-
 
 ---
 
@@ -547,11 +511,11 @@ Change your account password.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `current_password` | string | Yes | Current account password |
-| `password` | string | Yes | New password |
-| `password_confirmation` | string | Yes | Confirm new password |
+| Field                   | Type   | Required | Description              |
+| ----------------------- | ------ | -------- | ------------------------ |
+| `current_password`      | string | Yes      | Current account password |
+| `password`              | string | Yes      | New password             |
+| `password_confirmation` | string | Yes      | Confirm new password     |
 
 #### Example Request
 
@@ -567,18 +531,9 @@ curl -X PUT "https://your-panel.com/api/client/account/password" \
   }'
 ```
 
-
 #### Success Response (204)
 
 Returns empty response body with status code 204.
-
-
-
-
-
-
-
-
 
 ---
 
@@ -598,7 +553,6 @@ curl "https://your-panel.com/api/client/account/api-keys" \
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json"
 ```
-
 
 #### Example Response
 
@@ -620,7 +574,6 @@ curl "https://your-panel.com/api/client/account/api-keys" \
 }
 ```
 
-
 ### Create API Key
 
 Generate a new API key with optional IP restrictions.
@@ -629,10 +582,10 @@ Generate a new API key with optional IP restrictions.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `description` | string | Yes | Description/note for the API key |
-| `allowed_ips` | array | No | List of allowed IP addresses |
+| Field         | Type   | Required | Description                      |
+| ------------- | ------ | -------- | -------------------------------- |
+| `description` | string | Yes      | Description/note for the API key |
+| `allowed_ips` | array  | No       | List of allowed IP addresses     |
 
 #### Example Request
 
@@ -647,7 +600,6 @@ curl -X POST "https://your-panel.com/api/client/account/api-keys" \
   }'
 ```
 
-
 #### Example Response
 
 ```json
@@ -656,10 +608,7 @@ curl -X POST "https://your-panel.com/api/client/account/api-keys" \
   "attributes": {
     "identifier": "yjAZbHMyKrv9YRZ0",
     "description": "My Application API Key",
-    "allowed_ips": [
-      "127.0.0.1",
-      "192.168.1.100"
-    ],
+    "allowed_ips": ["127.0.0.1", "192.168.1.100"],
     "last_used_at": null,
     "created_at": "2020-08-17T04:44:42+01:00"
   },
@@ -668,7 +617,6 @@ curl -X POST "https://your-panel.com/api/client/account/api-keys" \
   }
 }
 ```
-
 
 :::warning Important
 The `secret_token` in the `meta` object is only returned once during creation. Store it securely as it cannot be retrieved again.
@@ -682,8 +630,8 @@ Delete a specific API key by its identifier.
 
 #### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter    | Type   | Description            |
+| ------------ | ------ | ---------------------- |
 | `identifier` | string | The API key identifier |
 
 #### Example Request
@@ -694,7 +642,6 @@ curl -X DELETE "https://your-panel.com/api/client/account/api-keys/yjAZbHMyKrv9Y
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json"
 ```
-
 
 #### Success Response (204)
 
@@ -714,15 +661,6 @@ Returns empty response body with status code 204.
 }
 ```
 
-
-
-
-
-
-
-
-
-
 ---
 
 ## Activity Logs
@@ -736,30 +674,30 @@ Retrieve a list of recent account activity and audit logs.
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/account/activity"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/account/activity" \\
+endpoint="/api/client/account/activity"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/account/activity" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/client/account/activity', {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Activity logs:', response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get('https://your-panel.com/api/client/account/activity', headers=headers)
@@ -768,11 +706,11 @@ print('Activity logs:', response.json())`,
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get('https://your-panel.com/api/client/account/activity', [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -781,24 +719,25 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://your-panel.com/api/client/account/activity", nil)
-    req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://your-panel.com/api/client/account/activity", nil)
+req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
+req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Activity logs:", result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -807,12 +746,12 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/account/activity"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/account/activity"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Activity logs: " + response.body());`,
@@ -840,7 +779,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 puts "Activity logs: #{JSON.parse(response.body)}"`
-  }}
+}}
 />
 
 #### Example Response
@@ -907,30 +846,30 @@ Retrieve a list of SSH public keys associated with your account.
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/account/ssh-keys"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/account/ssh-keys" \\
+endpoint="/api/client/account/ssh-keys"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/account/ssh-keys" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const response = await axios.get('https://your-panel.com/api/client/account/ssh-keys', {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('SSH keys:', response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get('https://your-panel.com/api/client/account/ssh-keys', headers=headers)
@@ -939,11 +878,11 @@ print('SSH keys:', response.json())`,
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get('https://your-panel.com/api/client/account/ssh-keys', [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -952,24 +891,25 @@ print_r($data);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    client := &http.Client{}
-    req, _ := http.NewRequest("GET", "https://your-panel.com/api/client/account/ssh-keys", nil)
-    req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    req.Header.Add("Content-Type", "application/json")
-    
+client := &http.Client{}
+req, \_ := http.NewRequest("GET", "https://your-panel.com/api/client/account/ssh-keys", nil)
+req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
+req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
+req.Header.Add("Content-Type", "application/json")
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("SSH keys:", result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -978,12 +918,12 @@ import java.net.URI;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/account/ssh-keys"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/account/ssh-keys"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("SSH keys: " + response.body());`,
@@ -1011,7 +951,7 @@ request['Content-Type'] = 'application/json'
 
 response = http.request(request)
 puts "SSH keys: #{JSON.parse(response.body)}"`
-  }}
+}}
 />
 
 #### Example Response
@@ -1050,18 +990,18 @@ Add a new SSH public key to your account.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | Yes | Descriptive name for the SSH key |
-| `public_key` | string | Yes | SSH public key content |
+| Field        | Type   | Required | Description                      |
+| ------------ | ------ | -------- | -------------------------------- |
+| `name`       | string | Yes      | Descriptive name for the SSH key |
+| `public_key` | string | Yes      | SSH public key content           |
 
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/account/ssh-keys"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/account/ssh-keys" \\
+endpoint="/api/client/account/ssh-keys"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/account/ssh-keys" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
@@ -1069,53 +1009,53 @@ Add a new SSH public key to your account.
     "name": "My New Key",
     "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC..."
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const sshKeyData = {
-  name: 'My New Key',
-  public_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
+name: 'My New Key',
+public_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
 };
 
 const response = await axios.post('https://your-panel.com/api/client/account/ssh-keys', sshKeyData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('SSH key added:', response.data);`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 ssh_key_data = {
-    'name': 'My New Key',
-    'public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
+'name': 'My New Key',
+'public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
 }
 
-response = requests.post('https://your-panel.com/api/client/account/ssh-keys', 
-                        headers=headers, json=ssh_key_data)
+response = requests.post('https://your-panel.com/api/client/account/ssh-keys',
+headers=headers, json=ssh_key_data)
 print('SSH key added:', response.json())`,
     php: `<?php
 $client = new GuzzleHttp\\Client();
 
 $sshKeyData = [
-    'name' => 'My New Key',
-    'public_key' => 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
+'name' => 'My New Key',
+'public_key' => 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
 ];
 
 $response = $client->post('https://your-panel.com/api/client/account/ssh-keys', [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $sshKeyData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $sshKeyData
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -1124,32 +1064,33 @@ print_r($data);
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    sshKeyData := map[string]interface{}{
-        "name": "My New Key",
-        "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...",
-    }
-    
+sshKeyData := map[string]interface{}{
+"name": "My New Key",
+"public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...",
+}
+
     jsonData, _ := json.Marshal(sshKeyData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/client/account/ssh-keys", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("SSH key added:", result)
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1158,19 +1099,19 @@ import java.net.URI;
 
 String jsonData = """
 {
-  "name": "My New Key",
-  "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC..."
+"name": "My New Key",
+"public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC..."
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/account/ssh-keys"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/account/ssh-keys"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("SSH key added: " + response.body());`,
@@ -1184,8 +1125,8 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var sshKeyData = new {
-    name = "My New Key",
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC..."
+name = "My New Key",
+public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC..."
 };
 
 var json = JsonSerializer.Serialize(sshKeyData);
@@ -1198,8 +1139,8 @@ Console.WriteLine("SSH key added: " + responseContent);`,
 require 'json'
 
 ssh_key_data = {
-  name: 'My New Key',
-  public_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
+name: 'My New Key',
+public_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC...'
 }
 
 uri = URI('https://your-panel.com/api/client/account/ssh-keys')
@@ -1214,7 +1155,7 @@ request.body = ssh_key_data.to_json
 
 response = http.request(request)
 puts "SSH key added: #{JSON.parse(response.body)}"`
-  }}
+}}
 />
 
 #### Example Response
@@ -1239,67 +1180,67 @@ Remove an SSH public key from your account.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `fingerprint` | string | Yes | SSH key fingerprint to remove |
+| Field         | Type   | Required | Description                   |
+| ------------- | ------ | -------- | ----------------------------- |
+| `fingerprint` | string | Yes      | SSH key fingerprint to remove |
 
 #### Example Request
 
 <CodeTabs
-  endpoint="/api/client/account/ssh-keys/remove"
-  method="POST"
-  examples={{
-    curl: `curl -X POST "https://your-panel.com/api/client/account/ssh-keys/remove" \\
+endpoint="/api/client/account/ssh-keys/remove"
+method="POST"
+examples={{
+curl: `curl -X POST "https://your-panel.com/api/client/account/ssh-keys/remove" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json" \\
   -d '{
     "fingerprint": "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx"
   }'`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const removeData = {
-  fingerprint: 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
+fingerprint: 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
 };
 
 const response = await axios.post('https://your-panel.com/api/client/account/ssh-keys/remove', removeData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('SSH key removed');`,
     python: `import requests
 
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 remove_data = {
-    'fingerprint': 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
+'fingerprint': 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
 }
 
-response = requests.post('https://your-panel.com/api/client/account/ssh-keys/remove', 
-                        headers=headers, json=remove_data)
+response = requests.post('https://your-panel.com/api/client/account/ssh-keys/remove',
+headers=headers, json=remove_data)
 print('SSH key removed')`,
     php: `<?php
 $client = new GuzzleHttp\\Client();
 
 $removeData = [
-    'fingerprint' => 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
+'fingerprint' => 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
 ];
 
 $response = $client->post('https://your-panel.com/api/client/account/ssh-keys/remove', [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $removeData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $removeData
 ]);
 
 echo "SSH key removed";
@@ -1307,29 +1248,30 @@ echo "SSH key removed";
     go: `package main
 
 import (
-    "bytes"
-    "encoding/json"
-    "fmt"
-    "net/http"
+"bytes"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    removeData := map[string]interface{}{
-        "fingerprint": "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx",
-    }
-    
+removeData := map[string]interface{}{
+"fingerprint": "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx",
+}
+
     jsonData, _ := json.Marshal(removeData)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", "https://your-panel.com/api/client/account/ssh-keys/remove", bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     fmt.Println("SSH key removed")
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -1338,18 +1280,18 @@ import java.net.URI;
 
 String jsonData = """
 {
-  "fingerprint": "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx"
+"fingerprint": "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx"
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create("https://your-panel.com/api/client/account/ssh-keys/remove"))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create("https://your-panel.com/api/client/account/ssh-keys/remove"))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("SSH key removed");`,
@@ -1363,7 +1305,7 @@ client.DefaultRequestHeaders.Add("Authorization", "Bearer ptlc_YOUR_API_KEY");
 client.DefaultRequestHeaders.Add("Accept", "Application/vnd.pterodactyl.v1+json");
 
 var removeData = new {
-    fingerprint = "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx"
+fingerprint = "SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx"
 };
 
 var json = JsonSerializer.Serialize(removeData);
@@ -1375,7 +1317,7 @@ Console.WriteLine("SSH key removed");`,
 require 'json'
 
 remove_data = {
-  fingerprint: 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
+fingerprint: 'SHA256:abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx'
 }
 
 uri = URI('https://your-panel.com/api/client/account/ssh-keys/remove')
@@ -1390,7 +1332,7 @@ request.body = remove_data.to_json
 
 response = http.request(request)
 puts "SSH key removed"`
-  }}
+}}
 />
 
 #### Success Response (204)
@@ -1401,12 +1343,12 @@ Returns empty response body with status code 204.
 
 ## Common Error Codes
 
-| Status | Code | Description |
-|--------|------|-------------|
-| 400 | `ValidationException` | Request validation failed |
-| 401 | `InvalidCredentialsException` | Invalid API key |
-| 403 | `InsufficientPermissionsException` | Insufficient permissions |
-| 422 | `UnprocessableEntityHttpException` | Invalid request data |
+| Status | Code                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| 400    | `ValidationException`              | Request validation failed |
+| 401    | `InvalidCredentialsException`      | Invalid API key           |
+| 403    | `InsufficientPermissionsException` | Insufficient permissions  |
+| 422    | `UnprocessableEntityHttpException` | Invalid request data      |
 
 ## Source References
 
@@ -1420,4 +1362,4 @@ Returns empty response body with status code 204.
 
 - Explore [Server Management](./servers) endpoints
 - Review [Authentication](../../authentication) for API key security
-- Check [Rate Limiting](../../rate-limiting) guidelines 
+- Check [Rate Limiting](../../rate-limiting) guidelines

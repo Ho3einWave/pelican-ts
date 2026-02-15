@@ -1,9 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  PteroError,
-  PteroRateLimitError,
-  PteroValidationError,
-} from '../src/core/errors.js';
+import { PteroError, PteroRateLimitError, PteroValidationError } from '../src/core/errors.js';
 
 describe('PteroError', () => {
   it('should set status, code, and message from first error', () => {
@@ -25,9 +21,7 @@ describe('PteroError', () => {
   });
 
   it('should be an instance of Error', () => {
-    const err = new PteroError(400, [
-      { code: 'Bad', status: '400', detail: 'bad request' },
-    ]);
+    const err = new PteroError(400, [{ code: 'Bad', status: '400', detail: 'bad request' }]);
     expect(err).toBeInstanceOf(Error);
     expect(err).toBeInstanceOf(PteroError);
   });

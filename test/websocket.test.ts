@@ -4,8 +4,8 @@ import { WebSocketManager } from '../src/websocket/websocket-manager.js';
 describe('WebSocketManager', () => {
   it('should create with valid options', () => {
     const ws = new WebSocketManager({
-      origin: 'https://node1.example.com',
-      serverUuid: 'abc-123-def',
+      socket: 'wss://node1.example.com:8080/api/servers/abc-123-def/ws',
+      origin: 'https://panel.example.com',
       getToken: async () => 'test-token',
     });
     expect(ws).toBeDefined();
@@ -14,8 +14,8 @@ describe('WebSocketManager', () => {
 
   it('should support on/off event handlers', () => {
     const ws = new WebSocketManager({
-      origin: 'https://node1.example.com',
-      serverUuid: 'abc-123-def',
+      socket: 'wss://node1.example.com:8080/api/servers/abc-123-def/ws',
+      origin: 'https://panel.example.com',
       getToken: async () => 'test-token',
     });
 
@@ -26,8 +26,8 @@ describe('WebSocketManager', () => {
 
   it('should be chainable with on()', () => {
     const ws = new WebSocketManager({
-      origin: 'https://node1.example.com',
-      serverUuid: 'abc-123-def',
+      socket: 'wss://node1.example.com:8080/api/servers/abc-123-def/ws',
+      origin: 'https://panel.example.com',
       getToken: async () => 'test-token',
     });
 
@@ -41,8 +41,8 @@ describe('WebSocketManager', () => {
 
   it('should not throw when sending commands while disconnected', () => {
     const ws = new WebSocketManager({
-      origin: 'https://node1.example.com',
-      serverUuid: 'abc-123-def',
+      socket: 'wss://node1.example.com:8080/api/servers/abc-123-def/ws',
+      origin: 'https://panel.example.com',
       getToken: async () => 'test-token',
     });
 

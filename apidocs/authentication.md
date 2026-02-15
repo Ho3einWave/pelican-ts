@@ -22,17 +22,21 @@ The Pterodactyl API uses **Bearer Token** authentication for all requests. There
 ## API Key Types
 
 ### Client API Keys
+
 Client API keys are created by users for accessing the **Client API**. These keys have access only to resources that the user creating them has access to.
 
 **Where to generate:**
+
 - Navigate to `https://your-panel.com/account/api`
 - Click "Create API Key"
 - Optionally restrict by IP addresses
 
-### Application API Keys  
+### Application API Keys
+
 Application API keys are created by administrators for accessing the **Application API**. These keys have full administrative access to the panel.
 
 **Where to generate:**
+
 - Navigate to `https://your-panel.com/admin/api` (admin only)
 - Click "Create API Key"
 - Optionally restrict by IP addresses
@@ -51,16 +55,19 @@ curl "https://your-panel.com/api/client" \
 ## Required Headers
 
 ### Authorization Header
+
 ```
 Authorization: Bearer YOUR_API_KEY_HERE
 ```
 
-### Content-Type Header  
+### Content-Type Header
+
 ```
 Content-Type: application/json
 ```
 
 ### Accept Header
+
 ```
 Accept: Application/vnd.pterodactyl.v1+json
 ```
@@ -68,6 +75,7 @@ Accept: Application/vnd.pterodactyl.v1+json
 ## Example Requests
 
 ### Client API Example
+
 ```bash
 # Get list of servers for the authenticated user
 curl "https://your-panel.com/api/client" \
@@ -76,7 +84,8 @@ curl "https://your-panel.com/api/client" \
   -H "Accept: Application/vnd.pterodactyl.v1+json"
 ```
 
-### Application API Example  
+### Application API Example
+
 ```bash
 # Get list of all users (admin only)
 curl "https://your-panel.com/api/application/users" \
@@ -88,27 +97,30 @@ curl "https://your-panel.com/api/application/users" \
 ## API Key Security
 
 :::warning Security Best Practices
+
 - **Never expose your API keys** in client-side code or public repositories
 - **Use IP restrictions** when possible to limit key usage
 - **Rotate keys regularly** for enhanced security
 - **Use the principle of least privilege** - only grant necessary permissions
-:::
+  :::
 
 ## Key Naming Convention
 
 Pterodactyl API keys follow this naming pattern:
+
 - **Client API keys**: `ptlc_` followed by the key
 - **Application API keys**: `ptla_` followed by the key
 
 ## Common Authentication Errors
 
 ### 401 Unauthorized
+
 ```json
 {
   "errors": [
     {
       "code": "InvalidCredentialsException",
-      "status": "401", 
+      "status": "401",
       "detail": "The credentials provided were invalid."
     }
   ]
@@ -116,6 +128,7 @@ Pterodactyl API keys follow this naming pattern:
 ```
 
 ### 403 Forbidden
+
 ```json
 {
   "errors": [
@@ -131,5 +144,5 @@ Pterodactyl API keys follow this naming pattern:
 ## Next Steps
 
 - Review [Rate Limiting](./rate-limiting) information
-- Explore the [Client API](./api/client) documentation  
-- Check out the [Application API](./api/application) documentation (Coming Soon) 
+- Explore the [Client API](./api/client) documentation
+- Check out the [Application API](./api/application) documentation (Coming Soon)

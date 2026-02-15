@@ -14,31 +14,29 @@ Retrieve all scheduled tasks for a server.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| `server`  | string | Server identifier (UUID or short ID) |
 
 ### Example Request
 
-
-
 <CodeTabs
-  endpoint="/api/client/servers/{server}/schedules"
-  method="GET"
-  examples={{
-    curl: `curl "https://your-panel.com/api/client/servers/d3aac109/schedules" \\
+endpoint="/api/client/servers/{server}/schedules"
+method="GET"
+examples={{
+curl: `curl "https://your-panel.com/api/client/servers/d3aac109/schedules" \\
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \\
   -H "Accept: Application/vnd.pterodactyl.v1+json" \\
   -H "Content-Type: application/json"`,
-    javascript: `const axios = require('axios');
+javascript: `const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(\`https://your-panel.com/api/client/servers/\${serverId}/schedules\`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 console.log('Server schedules:', response.data.data);`,
@@ -46,9 +44,9 @@ console.log('Server schedules:', response.data.data);`,
 
 server_id = 'd3aac109'
 headers = {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
 }
 
 response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/schedules', headers=headers)
@@ -58,11 +56,11 @@ $serverId = 'd3aac109';
 $client = new GuzzleHttp\\Client();
 
 $response = $client->get("https://your-panel.com/api/client/servers/{$serverId}/schedules", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true);
@@ -71,27 +69,28 @@ print_r($data['data']);
     go: `package main
 
 import (
-    "encoding/json"
-    "fmt"
-    "net/http"
+"encoding/json"
+"fmt"
+"net/http"
 )
 
 func main() {
-    serverId := "d3aac109"
-    url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules", serverId)
-    
+serverId := "d3aac109"
+url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules", serverId)
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
     fmt.Println("Server schedules:", result["data"])
+
 }`,
     java: `import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -103,12 +102,12 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/schedul
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Server schedules: " + response.body());`,
@@ -139,17 +138,8 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 data = JSON.parse(response.body)
 puts "Server schedules: #{data['data']}"`
-  }}
+}}
 />
-
-
-
-
-
-
-
-
-
 
 ---
 
@@ -161,14 +151,12 @@ Retrieve detailed information about a specific schedule including all tasks.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `schedule` | integer | Schedule ID |
+| Parameter  | Type    | Description                          |
+| ---------- | ------- | ------------------------------------ |
+| `server`   | string  | Server identifier (UUID or short ID) |
+| `schedule` | integer | Schedule ID                          |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -188,11 +176,11 @@ const serverId = 'd3aac109';
 const scheduleId = 2;
 
 const response = await axios.get(`https://your-panel.com/api/client/servers/${serverId}/schedules/${scheduleId}`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const schedule = response.data.attributes;
@@ -200,7 +188,8 @@ console.log(`Schedule: ${schedule.name}`);
 console.log(`Cron: ${schedule.cron.minute} ${schedule.cron.hour} ${schedule.cron.day_of_month} ${schedule.cron.month} ${schedule.cron.day_of_week}`);
 console.log(`Active: ${schedule.is_active}`);
 console.log(`Tasks: ${schedule.relationships.tasks.data.length}`);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -216,7 +205,7 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}', 
+response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}',
                        headers=headers)
 schedule = response.json()['attributes']
 
@@ -226,7 +215,8 @@ print(f"Active: {schedule['is_active']}")
 print(f"Processing: {schedule['is_processing']}")
 print(f"Last run: {schedule['last_run_at']}")
 print(f"Next run: {schedule['next_run_at']}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -237,11 +227,11 @@ $scheduleId = 2;
 $client = new GuzzleHttp\Client();
 
 $response = $client->get("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
 ]);
 
 $schedule = json_decode($response->getBody(), true)['attributes'];
@@ -253,7 +243,8 @@ echo "Processing: " . ($schedule['is_processing'] ? 'Yes' : 'No') . "\n";
 echo "Last run: " . $schedule['last_run_at'] . "\n";
 echo "Next run: " . $schedule['next_run_at'] . "\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -270,31 +261,32 @@ func main() {
     serverId := "d3aac109"
     scheduleId := 2
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     schedule := result["attributes"].(map[string]interface{})
     cron := schedule["cron"].(map[string]interface{})
-    
+
     fmt.Printf("Schedule: %s\n", schedule["name"])
-    fmt.Printf("Cron: %s %s %s %s %s\n", 
+    fmt.Printf("Cron: %s %s %s %s %s\n",
         cron["minute"], cron["hour"], cron["day_of_month"], cron["month"], cron["day_of_week"])
     fmt.Printf("Active: %t\n", schedule["is_active"])
     fmt.Printf("Processing: %t\n", schedule["is_processing"])
     fmt.Printf("Last run: %s\n", schedule["last_run_at"])
     fmt.Printf("Next run: %s\n", schedule["next_run_at"])
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -312,12 +304,12 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/schedul
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -328,16 +320,17 @@ JsonNode cron = schedule.get("cron");
 
 System.out.println("Schedule: " + schedule.get("name").asText());
 System.out.printf("Cron: %s %s %s %s %s\n",
-    cron.get("minute").asText(),
-    cron.get("hour").asText(), 
-    cron.get("day_of_month").asText(),
-    cron.get("month").asText(),
-    cron.get("day_of_week").asText());
+cron.get("minute").asText(),
+cron.get("hour").asText(),
+cron.get("day_of_month").asText(),
+cron.get("month").asText(),
+cron.get("day_of_week").asText());
 System.out.println("Active: " + schedule.get("is_active").asBoolean());
 System.out.println("Processing: " + schedule.get("is_processing").asBoolean());
 System.out.println("Last run: " + schedule.get("last_run_at").asText());
 System.out.println("Next run: " + schedule.get("next_run_at").asText());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -367,7 +360,8 @@ Console.WriteLine($"Active: {schedule["is_active"]}");
 Console.WriteLine($"Processing: {schedule["is_processing"]}");
 Console.WriteLine($"Last run: {schedule["last_run_at"]}");
 Console.WriteLine($"Next run: {schedule["next_run_at"]}");
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -398,7 +392,8 @@ puts "Active: #{schedule['is_active']}"
 puts "Processing: #{schedule['is_processing']}"
 puts "Last run: #{schedule['last_run_at']}"
 puts "Next run: #{schedule['next_run_at']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -454,7 +449,8 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/schedules" \
     "is_active": true,
     "only_when_online": false
   }'
-```
+````
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -463,28 +459,29 @@ const axios = require('axios');
 
 const serverId = 'd3aac109';
 const scheduleData = {
-  name: 'Daily Backup',
-  minute: '0',
-  hour: '3',
-  day_of_month: '*',
-  month: '*',
-  day_of_week: '*',
-  is_active: true,
-  only_when_online: false
+name: 'Daily Backup',
+minute: '0',
+hour: '3',
+day_of_month: '_',
+month: '_',
+day_of_week: '\*',
+is_active: true,
+only_when_online: false
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/schedules`, scheduleData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const schedule = response.data.attributes;
 console.log(`Created schedule: ${schedule.name} (ID: ${schedule.id})`);
 console.log(`Next run: ${schedule.next_run_at}`);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -509,14 +506,15 @@ schedule_data = {
     'only_when_online': False
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules',
                         headers=headers, json=schedule_data)
 schedule = response.json()['attributes']
 
 print(f"Created schedule: {schedule['name']} (ID: {schedule['id']})")
 print(f"Cron expression: {schedule['cron']['minute']} {schedule['cron']['hour']} {schedule['cron']['day_of_month']} {schedule['cron']['month']} {schedule['cron']['day_of_week']}")
 print(f"Next run: {schedule['next_run_at']}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -526,23 +524,23 @@ $serverId = 'd3aac109';
 $client = new GuzzleHttp\Client();
 
 $scheduleData = [
-    'name' => 'Daily Backup',
-    'minute' => '0',
-    'hour' => '3',
-    'day_of_month' => '*',
-    'month' => '*',
-    'day_of_week' => '*',
-    'is_active' => true,
-    'only_when_online' => false
+'name' => 'Daily Backup',
+'minute' => '0',
+'hour' => '3',
+'day_of_month' => '*',
+'month' => '*',
+'day_of_week' => '*',
+'is_active' => true,
+'only_when_online' => false
 ];
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/schedules", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $scheduleData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $scheduleData
 ]);
 
 $schedule = json_decode($response->getBody(), true)['attributes'];
@@ -551,7 +549,8 @@ echo "Created schedule: " . $schedule['name'] . " (ID: " . $schedule['id'] . ")\
 echo "Cron: " . implode(' ', $schedule['cron']) . "\n";
 echo "Next run: " . $schedule['next_run_at'] . "\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -577,31 +576,32 @@ func main() {
         "is_active":      true,
         "only_when_online": false,
     }
-    
+
     jsonData, _ := json.Marshal(scheduleData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     schedule := result["attributes"].(map[string]interface{})
     id := schedule["id"].(float64)
     name := schedule["name"].(string)
     nextRun := schedule["next_run_at"].(string)
-    
+
     fmt.Printf("Created schedule: %s (ID: %.0f)\n", name, id)
     fmt.Printf("Next run: %s\n", nextRun)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -614,29 +614,30 @@ import java.net.URI;
 String serverId = "d3aac109";
 String jsonData = """
 {
-  "name": "Daily Backup",
-  "minute": "0",
-  "hour": "3",
-  "day_of_month": "*",
-  "month": "*",
-  "day_of_week": "*",
-  "is_active": true,
-  "only_when_online": false
+"name": "Daily Backup",
+"minute": "0",
+"hour": "3",
+"day_of_month": "_",
+"month": "_",
+"day_of_week": "\*",
+"is_active": true,
+"only_when_online": false
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules", serverId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules", serverId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Schedule created: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -673,7 +674,8 @@ var schedule = data["attributes"];
 
 Console.WriteLine($"Created schedule: {schedule["name"]} (ID: {schedule["id"]})");
 Console.WriteLine($"Next run: {schedule["next_run_at"]}");
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -683,14 +685,14 @@ require 'json'
 
 server_id = 'd3aac109'
 schedule_data = {
-  name: 'Daily Backup',
-  minute: '0',
-  hour: '3',
-  day_of_month: '*',
-  month: '*',
-  day_of_week: '*',
-  is_active: true,
-  only_when_online: false
+name: 'Daily Backup',
+minute: '0',
+hour: '3',
+day_of_month: '_',
+month: '_',
+day_of_week: '\*',
+is_active: true,
+only_when_online: false
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/schedules")
@@ -708,7 +710,8 @@ schedule = JSON.parse(response.body)['attributes']
 
 puts "Created schedule: #{schedule['name']} (ID: #{schedule['id']})"
 puts "Next run: #{schedule['next_run_at']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -750,24 +753,23 @@ puts "Next run: #{schedule['next_run_at']}"
     }
   }
 }
-```
+````
 
 ### Cron Expression Examples
 
-| Schedule | Minute | Hour | Day Month | Month | Day Week | Description |
-|----------|--------|------|-----------|-------|----------|-------------|
-| Every hour | `0` | `*` | `*` | `*` | `*` | Run at minute 0 of every hour |
-| Daily at 3 AM | `0` | `3` | `*` | `*` | `*` | Run daily at 3:00 AM |
-| Weekly on Sunday | `0` | `2` | `*` | `*` | `0` | Run Sundays at 2:00 AM |
-| Monthly on 1st | `30` | `4` | `1` | `*` | `*` | Run 1st of month at 4:30 AM |
-| Every 15 minutes | `*/15` | `*` | `*` | `*` | `*` | Run every 15 minutes |
-| Weekdays only | `0` | `8` | `*` | `*` | `1-5` | Run weekdays at 8:00 AM |
-
-
+| Schedule         | Minute | Hour | Day Month | Month | Day Week | Description                   |
+| ---------------- | ------ | ---- | --------- | ----- | -------- | ----------------------------- |
+| Every hour       | `0`    | `*`  | `*`       | `*`   | `*`      | Run at minute 0 of every hour |
+| Daily at 3 AM    | `0`    | `3`  | `*`       | `*`   | `*`      | Run daily at 3:00 AM          |
+| Weekly on Sunday | `0`    | `2`  | `*`       | `*`   | `0`      | Run Sundays at 2:00 AM        |
+| Monthly on 1st   | `30`   | `4`  | `1`       | `*`   | `*`      | Run 1st of month at 4:30 AM   |
+| Every 15 minutes | `*/15` | `*`  | `*`       | `*`   | `*`      | Run every 15 minutes          |
+| Weekdays only    | `0`    | `8`  | `*`       | `*`   | `1-5`    | Run weekdays at 8:00 AM       |
 
 ### Error Responses
 
 **Schedule Limit Reached (400)**
+
 ```json
 {
   "errors": [
@@ -780,8 +782,8 @@ puts "Next run: #{schedule['next_run_at']}"
 }
 ```
 
-
 **Invalid Cron Expression (422)**
+
 ```json
 {
   "errors": [
@@ -798,15 +800,6 @@ puts "Next run: #{schedule['next_run_at']}"
 }
 ```
 
-
-
-
-
-
-
-
-
-
 ---
 
 ## Update Schedule
@@ -817,27 +810,25 @@ Modify an existing schedule's configuration.
 
 ### URL Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `server` | string | Server identifier (UUID or short ID) |
-| `schedule` | integer | Schedule ID |
+| Parameter  | Type    | Description                          |
+| ---------- | ------- | ------------------------------------ |
+| `server`   | string  | Server identifier (UUID or short ID) |
+| `schedule` | integer | Schedule ID                          |
 
 ### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | No | Schedule name |
-| `minute` | string | No | Cron minute |
-| `hour` | string | No | Cron hour |
-| `day_of_month` | string | No | Cron day of month |
-| `month` | string | No | Cron month |
-| `day_of_week` | string | No | Cron day of week |
-| `is_active` | boolean | No | Enable/disable schedule |
-| `only_when_online` | boolean | No | Only run when server is online |
+| Field              | Type    | Required | Description                    |
+| ------------------ | ------- | -------- | ------------------------------ |
+| `name`             | string  | No       | Schedule name                  |
+| `minute`           | string  | No       | Cron minute                    |
+| `hour`             | string  | No       | Cron hour                      |
+| `day_of_month`     | string  | No       | Cron day of month              |
+| `month`            | string  | No       | Cron month                     |
+| `day_of_week`      | string  | No       | Cron day of week               |
+| `is_active`        | boolean | No       | Enable/disable schedule        |
+| `only_when_online` | boolean | No       | Only run when server is online |
 
 ### Example Request
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -861,25 +852,26 @@ const axios = require('axios');
 const serverId = 'd3aac109';
 const scheduleId = 12;
 const updateData = {
-  name: 'Updated Daily Backup',
-  hour: '2',
-  is_active: false
+name: 'Updated Daily Backup',
+hour: '2',
+is_active: false
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/schedules/${scheduleId}`, updateData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-  console.log('Schedule updated successfully');
+console.log('Schedule updated successfully');
 } else {
-  console.error('Failed to update schedule');
+console.error('Failed to update schedule');
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -900,7 +892,7 @@ update_data = {
     'is_active': False
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}',
                          headers=headers, json=update_data)
 
 if response.status_code == 204:
@@ -909,7 +901,8 @@ else:
     print(f"Failed to update schedule: {response.status_code}")
     if response.content:
         print(f"Error: {response.json()}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -920,30 +913,32 @@ $scheduleId = 12;
 $client = new GuzzleHttp\Client();
 
 $updateData = [
-    'name' => 'Updated Daily Backup',
-    'hour' => '2',
-    'is_active' => false
+'name' => 'Updated Daily Backup',
+'hour' => '2',
+'is_active' => false
 ];
 
 try {
-    $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}", [
-        'headers' => [
-            'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-            'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type' => 'application/json'
-        ],
-        'json' => $updateData
-    ]);
-    
+$response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}", [
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $updateData
+]);
+
     if ($response->getStatusCode() === 204) {
         echo "Schedule updated successfully\n";
     }
+
 } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo "Failed to update schedule: " . $e->getCode() . "\n";
-    echo "Error: " . $e->getResponse()->getBody() . "\n";
+echo "Failed to update schedule: " . $e->getCode() . "\n";
+echo "Error: " . $e->getResponse()->getBody() . "\n";
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -965,30 +960,31 @@ func main() {
         "hour":      "2",
         "is_active": false,
     }
-    
+
     jsonData, _ := json.Marshal(updateData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Schedule updated successfully")
     } else {
         fmt.Printf("Failed to update schedule: %d\n", resp.StatusCode)
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1002,32 +998,33 @@ String serverId = "d3aac109";
 int scheduleId = 12;
 String jsonData = """
 {
-  "name": "Updated Daily Backup",
-  "hour": "2",
-  "is_active": false
+"name": "Updated Daily Backup",
+"hour": "2",
+"is_active": false
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 if (response.statusCode() == 204) {
-    System.out.println("Schedule updated successfully");
+System.out.println("Schedule updated successfully");
 } else {
-    System.out.println("Failed to update schedule: " + response.statusCode());
-    if (!response.body().isEmpty()) {
-        System.out.println("Error: " + response.body());
-    }
+System.out.println("Failed to update schedule: " + response.statusCode());
+if (!response.body().isEmpty()) {
+System.out.println("Error: " + response.body());
 }
-```
+}
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1054,7 +1051,7 @@ var content = new StringContent(json, Encoding.UTF8, "application/json");
 try
 {
     var response = await client.PostAsync($"https://your-panel.com/api/client/servers/{serverId}/schedules/{scheduleId}", content);
-    
+
     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
     {
         Console.WriteLine("Schedule updated successfully");
@@ -1073,7 +1070,8 @@ catch (HttpRequestException ex)
 {
     Console.WriteLine($"Error updating schedule: {ex.Message}");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1084,9 +1082,9 @@ require 'json'
 server_id = 'd3aac109'
 schedule_id = 12
 update_data = {
-  name: 'Updated Daily Backup',
-  hour: '2',
-  is_active: false
+name: 'Updated Daily Backup',
+hour: '2',
+is_active: false
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/schedules/#{schedule_id}")
@@ -1102,12 +1100,13 @@ request.body = update_data.to_json
 response = http.request(request)
 
 if response.code == '204'
-  puts "Schedule updated successfully"
+puts "Schedule updated successfully"
 else
-  puts "Failed to update schedule: #{response.code}"
-  puts "Error: #{response.body}" unless response.body.empty?
+puts "Failed to update schedule: #{response.code}"
+puts "Error: #{response.body}" unless response.body.empty?
 end
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1157,7 +1156,8 @@ curl -X DELETE "https://your-panel.com/api/client/servers/d3aac109/schedules/12"
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json"
-```
+````
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -1168,19 +1168,20 @@ const serverId = 'd3aac109';
 const scheduleId = 12;
 
 const response = await axios.delete(`https://your-panel.com/api/client/servers/${serverId}/schedules/${scheduleId}`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-  console.log('Schedule deleted successfully');
+console.log('Schedule deleted successfully');
 } else {
-  console.error('Failed to delete schedule');
+console.error('Failed to delete schedule');
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1195,7 +1196,7 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.delete(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}', 
+response = requests.delete(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}',
                           headers=headers)
 
 if response.status_code == 204:
@@ -1204,7 +1205,8 @@ else:
     print(f"Failed to delete schedule: {response.status_code}")
     if response.content:
         print(f"Error: {response.json()}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1215,23 +1217,25 @@ $scheduleId = 12;
 $client = new GuzzleHttp\Client();
 
 try {
-    $response = $client->delete("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}", [
-        'headers' => [
-            'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-            'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type' => 'application/json'
-        ]
-    ]);
-    
+$response = $client->delete("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}", [
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
+]);
+
     if ($response->getStatusCode() === 204) {
         echo "Schedule deleted successfully\n";
     }
+
 } catch (GuzzleHttp\Exception\ClientException $e) {
-    echo "Failed to delete schedule: " . $e->getCode() . "\n";
-    echo "Error: " . $e->getResponse()->getBody() . "\n";
+echo "Failed to delete schedule: " . $e->getCode() . "\n";
+echo "Error: " . $e->getResponse()->getBody() . "\n";
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1247,27 +1251,28 @@ func main() {
     serverId := "d3aac109"
     scheduleId := 12
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("DELETE", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     if resp.StatusCode == 204 {
         fmt.Println("Schedule deleted successfully")
     } else {
         fmt.Printf("Failed to delete schedule: %d\n", resp.StatusCode)
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1282,24 +1287,25 @@ int scheduleId = 12;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .DELETE()
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d", serverId, scheduleId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.DELETE()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 if (response.statusCode() == 204) {
-    System.out.println("Schedule deleted successfully");
+System.out.println("Schedule deleted successfully");
 } else {
-    System.out.println("Failed to delete schedule: " + response.statusCode());
-    if (!response.body().isEmpty()) {
-        System.out.println("Error: " + response.body());
-    }
+System.out.println("Failed to delete schedule: " + response.statusCode());
+if (!response.body().isEmpty()) {
+System.out.println("Error: " + response.body());
 }
-```
+}
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1317,7 +1323,7 @@ int scheduleId = 12;
 try
 {
     var response = await client.DeleteAsync($"https://your-panel.com/api/client/servers/{serverId}/schedules/{scheduleId}");
-    
+
     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
     {
         Console.WriteLine("Schedule deleted successfully");
@@ -1336,7 +1342,8 @@ catch (HttpRequestException ex)
 {
     Console.WriteLine($"Error deleting schedule: {ex.Message}");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1360,12 +1367,13 @@ request['Content-Type'] = 'application/json'
 response = http.request(request)
 
 if response.code == '204'
-  puts "Schedule deleted successfully"
+puts "Schedule deleted successfully"
 else
-  puts "Failed to delete schedule: #{response.code}"
-  puts "Error: #{response.body}" unless response.body.empty?
+puts "Failed to delete schedule: #{response.code}"
+puts "Error: #{response.body}" unless response.body.empty?
 end
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1419,7 +1427,8 @@ curl -X POST "https://your-panel.com/api/client/servers/d3aac109/schedules/2/exe
   -H "Authorization: Bearer ptlc_YOUR_API_KEY" \
   -H "Accept: Application/vnd.pterodactyl.v1+json" \
   -H "Content-Type: application/json"
-```
+````
+
 </TabItem>
 
 <TabItem value="javascript" label="JavaScript">
@@ -1430,19 +1439,20 @@ const serverId = 'd3aac109';
 const scheduleId = 2;
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/schedules/${scheduleId}/execute`, {}, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 if (response.status === 204) {
-  console.log('Schedule executed successfully');
+console.log('Schedule executed successfully');
 } else {
-  console.error('Failed to execute schedule');
+console.error('Failed to execute schedule');
 }
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1457,7 +1467,7 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}/execute', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}/execute',
                         headers=headers)
 
 if response.status_code == 204:
@@ -1470,7 +1480,8 @@ else:
     print(f"Failed to execute schedule: {response.status_code}")
     if response.content:
         print(f"Error: {response.json()}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1481,30 +1492,32 @@ $scheduleId = 2;
 $client = new GuzzleHttp\Client();
 
 try {
-    $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}/execute", [
-        'headers' => [
-            'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-            'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            'Content-Type' => 'application/json'
-        ]
-    ]);
-    
+$response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}/execute", [
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+]
+]);
+
     if ($response->getStatusCode() === 204) {
         echo "Schedule executed successfully\n";
     }
+
 } catch (GuzzleHttp\Exception\ClientException $e) {
     $statusCode = $e->getCode();
     if ($statusCode === 409) {
-        echo "Schedule is already running\n";
-    } elseif ($statusCode === 400) {
-        echo "Cannot execute inactive schedule\n";
-    } else {
-        echo "Failed to execute schedule: " . $statusCode . "\n";
-        echo "Error: " . $e->getResponse()->getBody() . "\n";
-    }
+echo "Schedule is already running\n";
+} elseif ($statusCode === 400) {
+echo "Cannot execute inactive schedule\n";
+} else {
+echo "Failed to execute schedule: " . $statusCode . "\n";
+echo "Error: " . $e->getResponse()->getBody() . "\n";
+}
 }
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1520,20 +1533,20 @@ func main() {
     serverId := "d3aac109"
     scheduleId := 2
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules/%d/execute", serverId, scheduleId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, err := client.Do(req)
     if err != nil {
         fmt.Printf("Error: %v\n", err)
         return
     }
     defer resp.Body.Close()
-    
+
     switch resp.StatusCode {
     case 204:
         fmt.Println("Schedule executed successfully")
@@ -1545,7 +1558,8 @@ func main() {
         fmt.Printf("Failed to execute schedule: %d\n", resp.StatusCode)
     }
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1560,32 +1574,33 @@ int scheduleId = 2;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d/execute", serverId, scheduleId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.noBody())
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d/execute", serverId, scheduleId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.noBody())
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 switch (response.statusCode()) {
-    case 204:
-        System.out.println("Schedule executed successfully");
-        break;
-    case 409:
-        System.out.println("Schedule is already running");
-        break;
-    case 400:
-        System.out.println("Cannot execute inactive schedule");
-        break;
-    default:
-        System.out.println("Failed to execute schedule: " + response.statusCode());
-        if (!response.body().isEmpty()) {
-            System.out.println("Error: " + response.body());
-        }
+case 204:
+System.out.println("Schedule executed successfully");
+break;
+case 409:
+System.out.println("Schedule is already running");
+break;
+case 400:
+System.out.println("Cannot execute inactive schedule");
+break;
+default:
+System.out.println("Failed to execute schedule: " + response.statusCode());
+if (!response.body().isEmpty()) {
+System.out.println("Error: " + response.body());
 }
-```
+}
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1603,7 +1618,7 @@ int scheduleId = 2;
 try
 {
     var response = await client.PostAsync($"https://your-panel.com/api/client/servers/{serverId}/schedules/{scheduleId}/execute", new StringContent(""));
-    
+
     switch ((int)response.StatusCode)
     {
         case 204:
@@ -1629,7 +1644,8 @@ catch (HttpRequestException ex)
 {
     Console.WriteLine($"Error executing schedule: {ex.Message}");
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1654,16 +1670,17 @@ response = http.request(request)
 
 case response.code
 when '204'
-  puts "Schedule executed successfully"
+puts "Schedule executed successfully"
 when '409'
-  puts "Schedule is already running"
+puts "Schedule is already running"
 when '400'
-  puts "Cannot execute inactive schedule"
+puts "Cannot execute inactive schedule"
 else
-  puts "Failed to execute schedule: #{response.code}"
-  puts "Error: #{response.body}" unless response.body.empty?
+puts "Failed to execute schedule: #{response.code}"
+puts "Error: #{response.body}" unless response.body.empty?
 end
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -1694,10 +1711,10 @@ Returns empty response body with status code 204.
     }
   ]
 }
-```
-
+````
 
 **Schedule Inactive (400)**
+
 ```json
 {
   "errors": [
@@ -1709,15 +1726,6 @@ Returns empty response body with status code 204.
   ]
 }
 ```
-
-
-
-
-
-
-
-
-
 
 ---
 
@@ -1733,24 +1741,22 @@ Returns empty response body with status code 204.
 
 #### Request Body
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `action` | string | Yes | Task action: `command`, `power`, `backup` |
-| `payload` | string | Yes | Action payload (command text, power action, etc.) |
-| `time_offset` | integer | Yes | Delay in seconds from previous task |
-| `continue_on_failure` | boolean | No | Continue if task fails (default: false) |
+| Field                 | Type    | Required | Description                                       |
+| --------------------- | ------- | -------- | ------------------------------------------------- |
+| `action`              | string  | Yes      | Task action: `command`, `power`, `backup`         |
+| `payload`             | string  | Yes      | Action payload (command text, power action, etc.) |
+| `time_offset`         | integer | Yes      | Delay in seconds from previous task               |
+| `continue_on_failure` | boolean | No       | Continue if task fails (default: false)           |
 
 #### Task Actions
 
-| Action | Payload | Description |
-|--------|---------|-------------|
-| `command` | Command string | Execute console command |
-| `power` | `start`, `stop`, `restart`, `kill` | Power management action |
-| `backup` | Empty string or backup name | Create server backup |
+| Action    | Payload                            | Description             |
+| --------- | ---------------------------------- | ----------------------- |
+| `command` | Command string                     | Execute console command |
+| `power`   | `start`, `stop`, `restart`, `kill` | Power management action |
+| `backup`  | Empty string or backup name        | Create server backup    |
 
 ### Example Create Task
-
-
 
 <Tabs>
 <TabItem value="curl" label="cURL">
@@ -1775,24 +1781,25 @@ const axios = require('axios');
 const serverId = 'd3aac109';
 const scheduleId = 12;
 const taskData = {
-  action: 'backup',
-  payload: 'Scheduled backup',
-  time_offset: 0,
-  continue_on_failure: false
+action: 'backup',
+payload: 'Scheduled backup',
+time_offset: 0,
+continue_on_failure: false
 };
 
 const response = await axios.post(`https://your-panel.com/api/client/servers/${serverId}/schedules/${scheduleId}/tasks`, taskData, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json',
-    'Content-Type': 'application/json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json',
+'Content-Type': 'application/json'
+}
 });
 
 const task = response.data.attributes;
 console.log(`Created task: ${task.action} (ID: ${task.id})`);
 console.log(`Sequence: ${task.sequence_id}, Offset: ${task.time_offset}s`);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -1814,14 +1821,15 @@ task_data = {
     'continue_on_failure': False
 }
 
-response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}/tasks', 
+response = requests.post(f'https://your-panel.com/api/client/servers/{server_id}/schedules/{schedule_id}/tasks',
                         headers=headers, json=task_data)
 task = response.json()['attributes']
 
 print(f"Created task: {task['action']} (ID: {task['id']})")
 print(f"Sequence: {task['sequence_id']}, Offset: {task['time_offset']}s")
 print(f"Payload: {task['payload']}")
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -1832,19 +1840,19 @@ $scheduleId = 12;
 $client = new GuzzleHttp\Client();
 
 $taskData = [
-    'action' => 'backup',
-    'payload' => 'Scheduled backup',
-    'time_offset' => 0,
-    'continue_on_failure' => false
+'action' => 'backup',
+'payload' => 'Scheduled backup',
+'time_offset' => 0,
+'continue_on_failure' => false
 ];
 
 $response = $client->post("https://your-panel.com/api/client/servers/{$serverId}/schedules/{$scheduleId}/tasks", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type' => 'application/json'
-    ],
-    'json' => $taskData
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json',
+'Content-Type' => 'application/json'
+],
+'json' => $taskData
 ]);
 
 $task = json_decode($response->getBody(), true)['attributes'];
@@ -1853,7 +1861,8 @@ echo "Created task: " . $task['action'] . " (ID: " . $task['id'] . ")\n";
 echo "Sequence: " . $task['sequence_id'] . ", Offset: " . $task['time_offset'] . "s\n";
 echo "Payload: " . $task['payload'] . "\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -1876,32 +1885,33 @@ func main() {
         "time_offset":          0,
         "continue_on_failure":  false,
     }
-    
+
     jsonData, _ := json.Marshal(taskData)
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/schedules/%d/tasks", serverId, scheduleId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
     req.Header.Add("Content-Type", "application/json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result map[string]interface{}
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     task := result["attributes"].(map[string]interface{})
     id := task["id"].(float64)
     action := task["action"].(string)
     sequenceId := task["sequence_id"].(float64)
     timeOffset := task["time_offset"].(float64)
-    
+
     fmt.Printf("Created task: %s (ID: %.0f)\n", action, id)
     fmt.Printf("Sequence: %.0f, Offset: %.0fs\n", sequenceId, timeOffset)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -1915,25 +1925,26 @@ String serverId = "d3aac109";
 int scheduleId = 12;
 String jsonData = """
 {
-  "action": "backup",
-  "payload": "Scheduled backup",
-  "time_offset": 0,
-  "continue_on_failure": false
+"action": "backup",
+"payload": "Scheduled backup",
+"time_offset": 0,
+"continue_on_failure": false
 }
 """;
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d/tasks", serverId, scheduleId)))
-    .header("Authorization", "Bearer ptlc_YOUR_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .header("Content-Type", "application/json")
-    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
-    .build();
+.uri(URI.create(String.format("https://your-panel.com/api/client/servers/%s/schedules/%d/tasks", serverId, scheduleId)))
+.header("Authorization", "Bearer ptlc_YOUR_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.header("Content-Type", "application/json")
+.POST(HttpRequest.BodyPublishers.ofString(jsonData))
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 System.out.println("Schedule task created: " + response.body());
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -1967,7 +1978,8 @@ var task = data["attributes"];
 
 Console.WriteLine($"Created task: {task["action"]} (ID: {task["id"]})");
 Console.WriteLine($"Sequence: {task["sequence_id"]}, Offset: {task["time_offset"]}s");
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -1978,10 +1990,10 @@ require 'json'
 server_id = 'd3aac109'
 schedule_id = 12
 task_data = {
-  action: 'backup',
-  payload: 'Scheduled backup',
-  time_offset: 0,
-  continue_on_failure: false
+action: 'backup',
+payload: 'Scheduled backup',
+time_offset: 0,
+continue_on_failure: false
 }
 
 uri = URI("https://your-panel.com/api/client/servers/#{server_id}/schedules/#{schedule_id}/tasks")
@@ -2000,7 +2012,8 @@ task = JSON.parse(response.body)['attributes']
 puts "Created task: #{task['action']} (ID: #{task['id']})"
 puts "Sequence: #{task['sequence_id']}, Offset: #{task['time_offset']}s"
 puts "Payload: #{task['payload']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -2049,8 +2062,7 @@ puts "Payload: #{task['payload']}"
     }
   ]
 }
-```
-
+````
 
 ### Weekly Backup with Cleanup
 
@@ -2082,7 +2094,6 @@ puts "Payload: #{task['payload']}"
 }
 ```
 
-
 ### Hourly Resource Check
 
 ```json
@@ -2108,15 +2119,6 @@ puts "Payload: #{task['payload']}"
   ]
 }
 ```
-
-
-
-
-
-
-
-
-
 
 ---
 
@@ -2150,24 +2152,18 @@ puts "Payload: #{task['payload']}"
 - **Monitor execution**: Review schedule logs regularly
 - **Disable unused**: Deactivate schedules that are no longer needed
 
-
-
-
-
-
-
 ---
 
 ## Schedule Limits and Quotas
 
 ### Default Limits
 
-| Resource | Default Limit | Description |
-|----------|---------------|-------------|
-| Schedules per server | 10-50 | Varies by hosting plan |
-| Tasks per schedule | 20 | Maximum tasks in one schedule |
-| Execution timeout | 900 seconds | Maximum task execution time |
-| Concurrent schedules | 3 | Maximum simultaneous executions |
+| Resource             | Default Limit | Description                     |
+| -------------------- | ------------- | ------------------------------- |
+| Schedules per server | 10-50         | Varies by hosting plan          |
+| Tasks per schedule   | 20            | Maximum tasks in one schedule   |
+| Execution timeout    | 900 seconds   | Maximum task execution time     |
+| Concurrent schedules | 3             | Maximum simultaneous executions |
 
 ### Performance Considerations
 
@@ -2176,36 +2172,30 @@ puts "Payload: #{task['payload']}"
 - **Schedule overlap**: Prevent schedules from overlapping execution
 - **Resource monitoring**: Monitor CPU and memory during scheduled tasks
 
-
-
-
-
-
-
 ---
 
 ## Common Error Codes
 
-| Status | Code | Description |
-|--------|------|-------------|
-| 400 | `TooManySchedulesException` | Schedule limit reached |
-| 400 | `BadRequestHttpException` | Invalid schedule configuration |
-| 401 | `InvalidCredentialsException` | Invalid API key |
-| 403 | `InsufficientPermissionsException` | Missing required permissions |
-| 404 | `NotFoundHttpException` | Schedule not found |
-| 409 | `ConflictingServerStateException` | Schedule already running |
-| 422 | `ValidationException` | Invalid request data |
+| Status | Code                               | Description                    |
+| ------ | ---------------------------------- | ------------------------------ |
+| 400    | `TooManySchedulesException`        | Schedule limit reached         |
+| 400    | `BadRequestHttpException`          | Invalid schedule configuration |
+| 401    | `InvalidCredentialsException`      | Invalid API key                |
+| 403    | `InsufficientPermissionsException` | Missing required permissions   |
+| 404    | `NotFoundHttpException`            | Schedule not found             |
+| 409    | `ConflictingServerStateException`  | Schedule already running       |
+| 422    | `ValidationException`              | Invalid request data           |
 
 ## Required Permissions
 
 Schedule operations require specific permissions:
 
-| Permission | Description |
-|------------|-------------|
-| `schedule.read` | View schedules and tasks |
-| `schedule.create` | Create new schedules |
-| `schedule.update` | Modify existing schedules |
-| `schedule.delete` | Delete schedules |
+| Permission         | Description                |
+| ------------------ | -------------------------- |
+| `schedule.read`    | View schedules and tasks   |
+| `schedule.create`  | Create new schedules       |
+| `schedule.update`  | Modify existing schedules  |
+| `schedule.delete`  | Delete schedules           |
 | `schedule.execute` | Manually trigger schedules |
 
 ## Monitoring Schedule Execution
@@ -2241,4 +2231,4 @@ Common schedule issues:
 
 - Explore [Backup Management](./backups) for automated backup creation
 - Check [Server Management](./servers) for power and command operations
-- Review [File Management](./files) for scheduled file operations 
+- Review [File Management](./files) for scheduled file operations

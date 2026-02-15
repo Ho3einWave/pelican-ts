@@ -2,7 +2,8 @@
 sidebar_position: 9
 title: WebSocket API - Real-time Server Communication
 description: Complete WebSocket API documentation for real-time server communication, including console access, log streaming, and power management
-keywords: [pterodactyl, websocket api, real-time communication, server console, live logs, power management]
+keywords:
+  [pterodactyl, websocket api, real-time communication, server console, live logs, power management]
 ---
 
 import CodeTabs from '@site/src/components/CodeTabs';
@@ -49,8 +50,6 @@ GET /api/client/servers/{server}/websocket
 
 **Example Request**
 
-
-
 <Tabs>
 <TabItem value="curl" label="cURL">
 ```bash
@@ -66,16 +65,17 @@ const axios = require('axios');
 
 const serverId = 'd3aac109';
 const response = await axios.get(`https://your-panel.com/api/client/servers/${serverId}/websocket`, {
-  headers: {
-    'Authorization': 'Bearer ptlc_YOUR_CLIENT_API_KEY',
-    'Accept': 'Application/vnd.pterodactyl.v1+json'
-  }
+headers: {
+'Authorization': 'Bearer ptlc_YOUR_CLIENT_API_KEY',
+'Accept': 'Application/vnd.pterodactyl.v1+json'
+}
 });
 
 const { token, socket } = response.data.data;
 console.log('WebSocket URL:', socket);
 console.log('JWT Token:', token);
-```
+
+````
 </TabItem>
 
 <TabItem value="python" label="Python">
@@ -88,7 +88,7 @@ headers = {
 }
 
 server_id = 'd3aac109'
-response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/websocket', 
+response = requests.get(f'https://your-panel.com/api/client/servers/{server_id}/websocket',
                        headers=headers)
 
 data = response.json()['data']
@@ -97,7 +97,8 @@ jwt_token = data['token']
 
 print(f'WebSocket URL: {socket_url}')
 print(f'JWT Token: {jwt_token}')
-```
+````
+
 </TabItem>
 
 <TabItem value="php" label="PHP">
@@ -107,10 +108,10 @@ $client = new GuzzleHttp\Client();
 $serverId = 'd3aac109';
 
 $response = $client->get("https://your-panel.com/api/client/servers/{$serverId}/websocket", [
-    'headers' => [
-        'Authorization' => 'Bearer ptlc_YOUR_CLIENT_API_KEY',
-        'Accept' => 'Application/vnd.pterodactyl.v1+json'
-    ]
+'headers' => [
+'Authorization' => 'Bearer ptlc_YOUR_CLIENT_API_KEY',
+'Accept' => 'Application/vnd.pterodactyl.v1+json'
+]
 ]);
 
 $data = json_decode($response->getBody(), true)['data'];
@@ -120,7 +121,8 @@ $jwtToken = $data['token'];
 echo "WebSocket URL: {$socketUrl}\n";
 echo "JWT Token: {$jwtToken}\n";
 ?>
-```
+
+````
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -143,22 +145,23 @@ type WebSocketResponse struct {
 func main() {
     serverId := "d3aac109"
     url := fmt.Sprintf("https://your-panel.com/api/client/servers/%s/websocket", serverId)
-    
+
     client := &http.Client{}
     req, _ := http.NewRequest("GET", url, nil)
     req.Header.Add("Authorization", "Bearer ptlc_YOUR_CLIENT_API_KEY")
     req.Header.Add("Accept", "Application/vnd.pterodactyl.v1+json")
-    
+
     resp, _ := client.Do(req)
     defer resp.Body.Close()
-    
+
     var result WebSocketResponse
     json.NewDecoder(resp.Body).Decode(&result)
-    
+
     fmt.Printf("WebSocket URL: %s\n", result.Data.Socket)
     fmt.Printf("JWT Token: %s\n", result.Data.Token)
 }
-```
+````
+
 </TabItem>
 
 <TabItem value="java" label="Java">
@@ -170,12 +173,12 @@ import java.net.URI;
 import com.google.gson.Gson;
 
 class WebSocketData {
-    String token;
-    String socket;
+String token;
+String socket;
 }
 
 class WebSocketResponse {
-    WebSocketData data;
+WebSocketData data;
 }
 
 String serverId = "d3aac109";
@@ -183,18 +186,19 @@ String url = String.format("https://your-panel.com/api/client/servers/%s/websock
 
 HttpClient client = HttpClient.newHttpClient();
 HttpRequest request = HttpRequest.newBuilder()
-    .uri(URI.create(url))
-    .header("Authorization", "Bearer ptlc_YOUR_CLIENT_API_KEY")
-    .header("Accept", "Application/vnd.pterodactyl.v1+json")
-    .GET()
-    .build();
+.uri(URI.create(url))
+.header("Authorization", "Bearer ptlc_YOUR_CLIENT_API_KEY")
+.header("Accept", "Application/vnd.pterodactyl.v1+json")
+.GET()
+.build();
 
 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 WebSocketResponse wsResponse = new Gson().fromJson(response.body(), WebSocketResponse.class);
 
 System.out.println("WebSocket URL: " + wsResponse.data.socket);
 System.out.println("JWT Token: " + wsResponse.data.token);
-```
+
+````
 </TabItem>
 
 <TabItem value="csharp" label="C#">
@@ -225,7 +229,8 @@ var content = await response.Content.ReadAsStringAsync();
 var wsResponse = JsonSerializer.Deserialize<WebSocketResponse>(content);
 Console.WriteLine($"WebSocket URL: {wsResponse.data.socket}");
 Console.WriteLine($"JWT Token: {wsResponse.data.token}");
-```
+````
+
 </TabItem>
 
 <TabItem value="ruby" label="Ruby">
@@ -247,7 +252,8 @@ data = JSON.parse(response.body)['data']
 
 puts "WebSocket URL: #{data['socket']}"
 puts "JWT Token: #{data['token']}"
-```
+
+````
 </TabItem>
 
 </Tabs>
@@ -265,7 +271,7 @@ puts "JWT Token: #{data['token']}"
     "socket": "wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws"
   }
 }
-```
+````
 
 ## WebSocket Connection
 
@@ -274,80 +280,89 @@ puts "JWT Token: #{data['token']}"
 Connect to the WebSocket URL using the JWT token for authentication:
 
 **JavaScript (Browser)**
+
 ```javascript
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...';
-const socketUrl = 'wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws';
+const socketUrl =
+  'wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws';
 
 const socket = new WebSocket(socketUrl, [], {
   headers: {
-    'Authorization': `Bearer ${token}`,
-    'Origin': 'https://your-panel.com'
-  }
+    Authorization: `Bearer ${token}`,
+    Origin: 'https://your-panel.com',
+  },
 });
 
-socket.onopen = function(event) {
+socket.onopen = function (event) {
   console.log('WebSocket connection established');
-  
+
   // Authenticate with the server
-  socket.send(JSON.stringify({
-    event: 'auth',
-    args: [token]
-  }));
+  socket.send(
+    JSON.stringify({
+      event: 'auth',
+      args: [token],
+    }),
+  );
 };
 
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
   const message = JSON.parse(event.data);
   console.log('Received:', message);
 };
 
-socket.onclose = function(event) {
+socket.onclose = function (event) {
   console.log('WebSocket connection closed:', event.code, event.reason);
 };
 
-socket.onerror = function(error) {
+socket.onerror = function (error) {
   console.error('WebSocket error:', error);
 };
 ```
 
 **Node.js (with ws library)**
+
 ```javascript
 const WebSocket = require('ws');
 
 const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...';
-const socketUrl = 'wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws';
+const socketUrl =
+  'wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws';
 
 const socket = new WebSocket(socketUrl, {
   headers: {
-    'Authorization': `Bearer ${token}`,
-    'Origin': 'https://your-panel.com'
-  }
+    Authorization: `Bearer ${token}`,
+    Origin: 'https://your-panel.com',
+  },
 });
 
-socket.on('open', function() {
+socket.on('open', function () {
   console.log('WebSocket connection established');
-  
+
   // Authenticate with the server
-  socket.send(JSON.stringify({
-    event: 'auth',
-    args: [token]
-  }));
+  socket.send(
+    JSON.stringify({
+      event: 'auth',
+      args: [token],
+    }),
+  );
 });
 
-socket.on('message', function(data) {
+socket.on('message', function (data) {
   const message = JSON.parse(data.toString());
   console.log('Received:', message);
 });
 
-socket.on('close', function(code, reason) {
+socket.on('close', function (code, reason) {
   console.log('WebSocket connection closed:', code, reason.toString());
 });
 
-socket.on('error', function(error) {
+socket.on('error', function (error) {
   console.error('WebSocket error:', error);
 });
 ```
 
 **Python (with websockets library)**
+
 ```python
 import asyncio
 import websockets
@@ -356,21 +371,21 @@ import json
 async def connect_websocket():
     token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'
     socket_url = 'wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws'
-    
+
     extra_headers = {
         'Authorization': f'Bearer {token}'
     }
-    
+
     async with websockets.connect(socket_url, extra_headers=extra_headers) as websocket:
         print('WebSocket connection established')
-        
+
         # Authenticate with the server
         auth_message = {
             'event': 'auth',
             'args': [token]
         }
         await websocket.send(json.dumps(auth_message))
-        
+
         # Listen for messages
         async for message in websocket:
             data = json.loads(message)
@@ -381,6 +396,7 @@ asyncio.run(connect_websocket())
 ```
 
 **PHP (with ReactPHP)**
+
 ```php
 <?php
 require 'vendor/autoload.php';
@@ -397,19 +413,19 @@ $connector($socketUrl, ['Sec-WebSocket-Protocol' => 'pterodactyl'], [
 ])
 ->then(function (WebSocket $conn) use ($token) {
     echo "WebSocket connection established\n";
-    
+
     // Authenticate with the server
     $authMessage = json_encode([
         'event' => 'auth',
         'args' => [$token]
     ]);
     $conn->send($authMessage);
-    
+
     $conn->on('message', function ($msg) {
         $data = json_decode($msg->getPayload(), true);
         echo "Received: " . print_r($data, true) . "\n";
     });
-    
+
     $conn->on('close', function ($code = null, $reason = null) {
         echo "Connection closed ({$code} - {$reason})\n";
     });
@@ -420,6 +436,7 @@ $connector($socketUrl, ['Sec-WebSocket-Protocol' => 'pterodactyl'], [
 ```
 
 **Go (with gorilla/websocket)**
+
 ```go
 package main
 
@@ -438,30 +455,30 @@ type Message struct {
 func main() {
     token := "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9..."
     socketURL := "wss://node1.example.com:8080/api/servers/d3aac109-e5e0-4331-b03e-3454f7e02bbe/ws"
-    
+
     headers := http.Header{}
     headers.Add("Authorization", "Bearer "+token)
-    
+
     conn, _, err := websocket.DefaultDialer.Dial(socketURL, headers)
     if err != nil {
         fmt.Printf("Error connecting: %v\n", err)
         return
     }
     defer conn.Close()
-    
+
     fmt.Println("WebSocket connection established")
-    
+
     // Authenticate with the server
     authMessage := Message{
         Event: "auth",
         Args:  []string{token},
     }
-    
+
     if err := conn.WriteJSON(authMessage); err != nil {
         fmt.Printf("Error sending auth: %v\n", err)
         return
     }
-    
+
     // Listen for messages
     for {
         var message map[string]interface{}
@@ -470,7 +487,7 @@ func main() {
             fmt.Printf("Error reading message: %v\n", err)
             break
         }
-        
+
         fmt.Printf("Received: %+v\n", message)
     }
 }
@@ -489,16 +506,16 @@ All WebSocket messages use JSON format with the following structure:
 
 ### Common Events
 
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `auth` | Client → Server | Authenticate with JWT token |
-| `send command` | Client → Server | Send console command |
-| `set state` | Client → Server | Change server power state |
-| `console output` | Server → Client | Console output/logs |
-| `status` | Server → Client | Server status updates |
-| `stats` | Server → Client | Resource usage statistics |
-| `jwt error` | Server → Client | Authentication error |
-| `daemon message` | Server → Client | System messages |
+| Event            | Direction       | Description                 |
+| ---------------- | --------------- | --------------------------- |
+| `auth`           | Client → Server | Authenticate with JWT token |
+| `send command`   | Client → Server | Send console command        |
+| `set state`      | Client → Server | Change server power state   |
+| `console output` | Server → Client | Console output/logs         |
+| `status`         | Server → Client | Server status updates       |
+| `stats`          | Server → Client | Resource usage statistics   |
+| `jwt error`      | Server → Client | Authentication error        |
+| `daemon message` | Server → Client | System messages             |
 
 ## Console Access
 
@@ -507,27 +524,36 @@ All WebSocket messages use JSON format with the following structure:
 Send commands to the server console:
 
 **Example: Start Server**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'send command',
-  args: ['start']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'send command',
+    args: ['start'],
+  }),
+);
 ```
 
 **Example: Execute Game Command**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'send command',
-  args: ['say Hello, players!']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'send command',
+    args: ['say Hello, players!'],
+  }),
+);
 ```
 
 **Example: Stop Server**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'send command',
-  args: ['stop']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'send command',
+    args: ['stop'],
+  }),
+);
 ```
 
 ### Receiving Console Output
@@ -535,10 +561,10 @@ socket.send(JSON.stringify({
 Listen for console output and logs:
 
 ```javascript
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
   const message = JSON.parse(event.data);
-  
-  switch(message.event) {
+
+  switch (message.event) {
     case 'console output':
       console.log('Console:', message.args[0]);
       break;
@@ -569,35 +595,47 @@ socket.onmessage = function(event) {
 Change server power state through WebSocket:
 
 **Start Server**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'set state',
-  args: ['start']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'set state',
+    args: ['start'],
+  }),
+);
 ```
 
 **Stop Server**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'set state',
-  args: ['stop']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'set state',
+    args: ['stop'],
+  }),
+);
 ```
 
 **Restart Server**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'set state',
-  args: ['restart']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'set state',
+    args: ['restart'],
+  }),
+);
 ```
 
 **Kill Server (Force Stop)**
+
 ```javascript
-socket.send(JSON.stringify({
-  event: 'set state',
-  args: ['kill']
-}));
+socket.send(
+  JSON.stringify({
+    event: 'set state',
+    args: ['kill'],
+  }),
+);
 ```
 
 ### Power State Events
@@ -605,13 +643,13 @@ socket.send(JSON.stringify({
 Monitor server power state changes:
 
 ```javascript
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
   const message = JSON.parse(event.data);
-  
+
   if (message.event === 'status') {
     const status = message.args[0];
-    
-    switch(status) {
+
+    switch (status) {
       case 'running':
         console.log('Server is now running');
         break;
@@ -645,12 +683,12 @@ socket.onmessage = function(event) {
 Receive real-time resource usage statistics:
 
 ```javascript
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
   const message = JSON.parse(event.data);
-  
+
   if (message.event === 'stats') {
     const stats = JSON.parse(message.args[0]);
-    
+
     console.log('CPU Usage:', stats.cpu_absolute, '%');
     console.log('Memory Usage:', stats.memory_bytes, 'bytes');
     console.log('Memory Limit:', stats.memory_limit_bytes, 'bytes');
@@ -666,7 +704,9 @@ socket.onmessage = function(event) {
 ```json
 {
   "event": "stats",
-  "args": ["{\"memory_bytes\":134217728,\"memory_limit_bytes\":1073741824,\"cpu_absolute\":2.5,\"network\":{\"rx_bytes\":1024,\"tx_bytes\":2048},\"uptime\":3600,\"state\":\"running\",\"disk_bytes\":50331648}"]
+  "args": [
+    "{\"memory_bytes\":134217728,\"memory_limit_bytes\":1073741824,\"cpu_absolute\":2.5,\"network\":{\"rx_bytes\":1024,\"tx_bytes\":2048},\"uptime\":3600,\"state\":\"running\",\"disk_bytes\":50331648}"
+  ]
 }
 ```
 
@@ -677,24 +717,24 @@ socket.onmessage = function(event) {
 Handle authentication errors and token expiration:
 
 ```javascript
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
   const message = JSON.parse(event.data);
-  
+
   if (message.event === 'jwt error') {
     console.error('JWT Error:', message.args[0]);
-    
+
     // Common JWT error scenarios:
     // - Token expired (after 10 minutes)
     // - Invalid token signature
     // - Insufficient permissions
-    
+
     // Token expired or invalid - refresh token
     refreshWebSocketToken()
-      .then(newToken => {
+      .then((newToken) => {
         // Reconnect with new token
         connectWebSocket(newToken);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Failed to refresh token:', error);
       });
   }
@@ -706,11 +746,11 @@ socket.onmessage = function(event) {
 Handle connection issues:
 
 ```javascript
-socket.onclose = function(event) {
+socket.onclose = function (event) {
   console.log(`WebSocket closed: ${event.code} - ${event.reason}`);
-  
+
   // Common close codes
-  switch(event.code) {
+  switch (event.code) {
     case 1000:
       console.log('Normal closure');
       break;
@@ -731,7 +771,7 @@ socket.onclose = function(event) {
   }
 };
 
-socket.onerror = function(error) {
+socket.onerror = function (error) {
   console.error('WebSocket error:', error);
 };
 ```
@@ -743,6 +783,7 @@ socket.onerror = function(error) {
 Here's a complete React hook for managing WebSocket connections:
 
 **useWebSocket.js**
+
 ```javascript
 import { useEffect, useRef, useState, useCallback } from 'react';
 
@@ -757,15 +798,15 @@ export function useWebSocket(serverId, apiKey) {
   const getWebSocketToken = useCallback(async () => {
     const response = await fetch(`/api/client/servers/${serverId}/websocket`, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Accept': 'Application/vnd.pterodactyl.v1+json'
-      }
+        Authorization: `Bearer ${apiKey}`,
+        Accept: 'Application/vnd.pterodactyl.v1+json',
+      },
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to get WebSocket token');
     }
-    
+
     const data = await response.json();
     return data.data;
   }, [serverId, apiKey]);
@@ -777,28 +818,30 @@ export function useWebSocket(serverId, apiKey) {
 
       const socket = new WebSocket(socketUrl, {
         headers: {
-          'Origin': 'https://your-panel.com'
-        }
+          Origin: 'https://your-panel.com',
+        },
       });
       socketRef.current = socket;
 
       socket.onopen = () => {
         console.log('WebSocket connected');
         setIsConnected(true);
-        
+
         // Authenticate
-        socket.send(JSON.stringify({
-          event: 'auth',
-          args: [token]
-        }));
+        socket.send(
+          JSON.stringify({
+            event: 'auth',
+            args: [token],
+          }),
+        );
       };
 
       socket.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        
+
         switch (message.event) {
           case 'console output':
-            setConsole(prev => [...prev, message.args[0]]);
+            setConsole((prev) => [...prev, message.args[0]]);
             break;
           case 'status':
             setServerStatus(message.args[0]);
@@ -817,7 +860,7 @@ export function useWebSocket(serverId, apiKey) {
       socket.onclose = (event) => {
         console.log('WebSocket disconnected:', event.code);
         setIsConnected(false);
-        
+
         // Attempt to reconnect after 5 seconds
         if (event.code !== 1000) {
           setTimeout(connect, 5000);
@@ -827,7 +870,6 @@ export function useWebSocket(serverId, apiKey) {
       socket.onerror = (error) => {
         console.error('WebSocket error:', error);
       };
-
     } catch (error) {
       console.error('Failed to connect WebSocket:', error);
       setTimeout(connect, 5000);
@@ -836,25 +878,29 @@ export function useWebSocket(serverId, apiKey) {
 
   const sendCommand = useCallback((command) => {
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        event: 'send command',
-        args: [command]
-      }));
+      socketRef.current.send(
+        JSON.stringify({
+          event: 'send command',
+          args: [command],
+        }),
+      );
     }
   }, []);
 
   const setPowerState = useCallback((state) => {
     if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        event: 'set state',
-        args: [state]
-      }));
+      socketRef.current.send(
+        JSON.stringify({
+          event: 'set state',
+          args: [state],
+        }),
+      );
     }
   }, []);
 
   useEffect(() => {
     connect();
-    
+
     return () => {
       if (socketRef.current) {
         socketRef.current.close(1000, 'Component unmounting');
@@ -869,26 +915,23 @@ export function useWebSocket(serverId, apiKey) {
     stats,
     sendCommand,
     setPowerState,
-    reconnect: connect
+    reconnect: connect,
   };
 }
 ```
 
 **ServerConsole.jsx**
+
 ```javascript
 import React, { useState } from 'react';
 import { useWebSocket } from './useWebSocket';
 
 export function ServerConsole({ serverId, apiKey }) {
   const [command, setCommand] = useState('');
-  const {
-    isConnected,
-    console,
-    serverStatus,
-    stats,
-    sendCommand,
-    setPowerState
-  } = useWebSocket(serverId, apiKey);
+  const { isConnected, console, serverStatus, stats, sendCommand, setPowerState } = useWebSocket(
+    serverId,
+    apiKey,
+  );
 
   const handleSendCommand = (e) => {
     e.preventDefault();
@@ -901,9 +944,7 @@ export function ServerConsole({ serverId, apiKey }) {
   return (
     <div className="server-console">
       <div className="server-status">
-        <span className={`status ${serverStatus}`}>
-          {serverStatus.toUpperCase()}
-        </span>
+        <span className={`status ${serverStatus}`}>{serverStatus.toUpperCase()}</span>
         <span className={`connection ${isConnected ? 'connected' : 'disconnected'}`}>
           {isConnected ? 'Connected' : 'Disconnected'}
         </span>
@@ -952,6 +993,7 @@ export function ServerConsole({ serverId, apiKey }) {
 ### Vue.js Composable Example
 
 **useWebSocket.js (Vue 3)**
+
 ```javascript
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 
@@ -966,15 +1008,15 @@ export function useWebSocket(serverId, apiKey) {
   const getWebSocketToken = async () => {
     const response = await fetch(`/api/client/servers/${serverId}/websocket`, {
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Accept': 'Application/vnd.pterodactyl.v1+json'
-      }
+        Authorization: `Bearer ${apiKey}`,
+        Accept: 'Application/vnd.pterodactyl.v1+json',
+      },
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to get WebSocket token');
     }
-    
+
     const data = await response.json();
     return data.data;
   };
@@ -986,23 +1028,25 @@ export function useWebSocket(serverId, apiKey) {
 
       socket.value = new WebSocket(socketUrl, {
         headers: {
-          'Origin': 'https://your-panel.com'
-        }
+          Origin: 'https://your-panel.com',
+        },
       });
 
       socket.value.onopen = () => {
         console.log('WebSocket connected');
         isConnected.value = true;
-        
-        socket.value.send(JSON.stringify({
-          event: 'auth',
-          args: [wsToken]
-        }));
+
+        socket.value.send(
+          JSON.stringify({
+            event: 'auth',
+            args: [wsToken],
+          }),
+        );
       };
 
       socket.value.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        
+
         switch (message.event) {
           case 'console output':
             console.value.push(message.args[0]);
@@ -1023,7 +1067,7 @@ export function useWebSocket(serverId, apiKey) {
       socket.value.onclose = (event) => {
         console.log('WebSocket disconnected:', event.code);
         isConnected.value = false;
-        
+
         if (event.code !== 1000) {
           setTimeout(connect, 5000);
         }
@@ -1032,7 +1076,6 @@ export function useWebSocket(serverId, apiKey) {
       socket.value.onerror = (error) => {
         console.error('WebSocket error:', error);
       };
-
     } catch (error) {
       console.error('Failed to connect WebSocket:', error);
       setTimeout(connect, 5000);
@@ -1041,19 +1084,23 @@ export function useWebSocket(serverId, apiKey) {
 
   const sendCommand = (command) => {
     if (socket.value && socket.value.readyState === WebSocket.OPEN) {
-      socket.value.send(JSON.stringify({
-        event: 'send command',
-        args: [command]
-      }));
+      socket.value.send(
+        JSON.stringify({
+          event: 'send command',
+          args: [command],
+        }),
+      );
     }
   };
 
   const setPowerState = (state) => {
     if (socket.value && socket.value.readyState === WebSocket.OPEN) {
-      socket.value.send(JSON.stringify({
-        event: 'set state',
-        args: [state]
-      }));
+      socket.value.send(
+        JSON.stringify({
+          event: 'set state',
+          args: [state],
+        }),
+      );
     }
   };
 
@@ -1062,7 +1109,7 @@ export function useWebSocket(serverId, apiKey) {
     return {
       used: Math.round(stats.value.memory_bytes / 1024 / 1024),
       total: Math.round(stats.value.memory_limit_bytes / 1024 / 1024),
-      percentage: Math.round((stats.value.memory_bytes / stats.value.memory_limit_bytes) * 100)
+      percentage: Math.round((stats.value.memory_bytes / stats.value.memory_limit_bytes) * 100),
     };
   });
 
@@ -1084,7 +1131,7 @@ export function useWebSocket(serverId, apiKey) {
     memoryUsage,
     sendCommand,
     setPowerState,
-    reconnect: connect
+    reconnect: connect,
   };
 }
 ```
@@ -1107,16 +1154,14 @@ export function useWebSocket(serverId, apiKey) {
 
 ### Security Considerations
 
-1. **Token Security**: 
+1. **Token Security**:
    - Never expose JWT tokens in logs or client-side storage
    - Tokens expire after 10 minutes for security
    - Each token is signed with node-specific keys
-   
 2. **Permission Validation**:
    - Users must have `websocket.connect` permission
    - Tokens contain user-specific permissions
    - Server access is validated during token generation
-   
 3. **Command Validation**: Validate commands before sending to prevent injection
 4. **Rate Limiting**: Implement client-side rate limiting for commands
 5. **Connection Monitoring**: Monitor for unusual connection patterns
@@ -1135,12 +1180,12 @@ class PterodactylWebSocket {
     this.maxReconnectAttempts = 5;
     this.reconnectDelay = 1000;
     this.isConnecting = false;
-    
+
     this.eventHandlers = {
       'console output': [],
-      'status': [],
-      'stats': [],
-      'jwt error': []
+      status: [],
+      stats: [],
+      'jwt error': [],
     };
   }
 
@@ -1154,11 +1199,10 @@ class PterodactylWebSocket {
 
       this.socket = new WebSocket(tokenData.socket, {
         headers: {
-          'Origin': 'https://your-panel.com'
-        }
+          Origin: 'https://your-panel.com',
+        },
       });
       this.setupEventHandlers();
-      
     } catch (error) {
       console.error('Failed to connect:', error);
       this.scheduleReconnect();
@@ -1170,9 +1214,9 @@ class PterodactylWebSocket {
   async getWebSocketToken() {
     const response = await fetch(`/api/client/servers/${this.serverId}/websocket`, {
       headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Accept': 'Application/vnd.pterodactyl.v1+json'
-      }
+        Authorization: `Bearer ${this.apiKey}`,
+        Accept: 'Application/vnd.pterodactyl.v1+json',
+      },
     });
 
     if (!response.ok) {
@@ -1187,11 +1231,13 @@ class PterodactylWebSocket {
     this.socket.onopen = () => {
       console.log('WebSocket connected');
       this.reconnectAttempts = 0;
-      
-      this.socket.send(JSON.stringify({
-        event: 'auth',
-        args: [this.token]
-      }));
+
+      this.socket.send(
+        JSON.stringify({
+          event: 'auth',
+          args: [this.token],
+        }),
+      );
     };
 
     this.socket.onmessage = (event) => {
@@ -1201,7 +1247,7 @@ class PterodactylWebSocket {
 
     this.socket.onclose = (event) => {
       console.log('WebSocket closed:', event.code);
-      
+
       if (event.code !== 1000 && this.reconnectAttempts < this.maxReconnectAttempts) {
         this.scheduleReconnect();
       }
@@ -1215,7 +1261,7 @@ class PterodactylWebSocket {
   handleMessage(message) {
     const handlers = this.eventHandlers[message.event];
     if (handlers) {
-      handlers.forEach(handler => handler(message.args));
+      handlers.forEach((handler) => handler(message.args));
     }
 
     // Handle JWT errors
@@ -1235,7 +1281,9 @@ class PterodactylWebSocket {
     this.reconnectAttempts++;
 
     setTimeout(() => {
-      console.log(`Attempting to reconnect (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+      console.log(
+        `Attempting to reconnect (${this.reconnectAttempts}/${this.maxReconnectAttempts})`,
+      );
       this.connect();
     }, delay);
   }
@@ -1257,10 +1305,12 @@ class PterodactylWebSocket {
 
   sendCommand(command) {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(JSON.stringify({
-        event: 'send command',
-        args: [command]
-      }));
+      this.socket.send(
+        JSON.stringify({
+          event: 'send command',
+          args: [command],
+        }),
+      );
     } else {
       console.warn('WebSocket not connected');
     }
@@ -1268,10 +1318,12 @@ class PterodactylWebSocket {
 
   setPowerState(state) {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      this.socket.send(JSON.stringify({
-        event: 'set state',
-        args: [state]
-      }));
+      this.socket.send(
+        JSON.stringify({
+          event: 'set state',
+          args: [state],
+        }),
+      );
     } else {
       console.warn('WebSocket not connected');
     }
@@ -1308,16 +1360,14 @@ ws.connect();
 
 ### Common Issues
 
-1. **Authentication Failed**: 
+1. **Authentication Failed**:
    - Ensure JWT token is valid and not expired (10-minute limit)
    - Verify user has `websocket.connect` permission
    - Check token format and signature
-   
-2. **Token Expired**: 
+2. **Token Expired**:
    - Tokens automatically expire after 10 minutes
    - Implement automatic refresh before expiration
    - Handle `jwt error` events for expired tokens
-   
 3. **Connection Refused**: Check Wings daemon is running and accessible
 4. **Permission Denied**: Ensure user has `websocket.connect` permission on the server
 5. **CORS Errors**: WebSocket connections bypass CORS, but initial token request may fail
@@ -1332,19 +1382,19 @@ Enable debug logging to troubleshoot connection issues:
 const debug = true;
 
 if (debug) {
-  socket.onopen = function(event) {
+  socket.onopen = function (event) {
     console.debug('WebSocket opened:', event);
   };
 
-  socket.onmessage = function(event) {
+  socket.onmessage = function (event) {
     console.debug('WebSocket message:', event.data);
   };
 
-  socket.onclose = function(event) {
+  socket.onclose = function (event) {
     console.debug('WebSocket closed:', event.code, event.reason);
   };
 
-  socket.onerror = function(error) {
+  socket.onerror = function (error) {
     console.debug('WebSocket error:', error);
   };
 }
@@ -1383,4 +1433,4 @@ if (debug) {
 
 **Client Routes**: [api-client.php](https://github.com/pterodactyl/panel/blob/1.0-develop/routes/api-client.php) - WebSocket endpoints
 
-For detailed implementation and the latest updates, refer to the [Pterodactyl Panel](https://github.com/pterodactyl/panel) and [Wings](https://github.com/pterodactyl/wings) repositories. 
+For detailed implementation and the latest updates, refer to the [Pterodactyl Panel](https://github.com/pterodactyl/panel) and [Wings](https://github.com/pterodactyl/wings) repositories.

@@ -22,11 +22,13 @@ image: /img/netvpx-social-card.jpg
 The **Client API** allows users to perform actions on servers they have access to. This includes server management, file operations, database management, and more.
 
 ## Base URL
+
 ```
 https://your-panel.com/api/client
 ```
 
 ## Authentication
+
 All Client API requests require a Client API key passed in the Authorization header:
 
 ```bash
@@ -39,6 +41,7 @@ curl "https://your-panel.com/api/client" \
 ## API Sections
 
 ### Account Management
+
 Manage your account details, API keys, and authentication settings.
 
 - [Account Details](/docs/api/client/account) - View and update account information
@@ -47,6 +50,7 @@ Manage your account details, API keys, and authentication settings.
 - [Password Management](/docs/api/client/account#password-management) - Update account password
 
 ### Server Management
+
 Core server operations and information.
 
 - [List Servers](/docs/api/client/servers) - Get all servers you have access to
@@ -57,6 +61,7 @@ Core server operations and information.
 - [Send Commands](/docs/api/client/servers#send-console-command) - Execute server commands
 
 ### File Management
+
 Complete file system operations for your servers.
 
 - [List Files](/docs/api/client/files) - Browse server files and directories
@@ -70,6 +75,7 @@ Complete file system operations for your servers.
 - [Compress Files](/docs/api/client/files#compress-files) - Create archives
 
 ### Database Management
+
 Manage server databases and users.
 
 - [List Databases](/docs/api/client/databases) - View all server databases
@@ -78,6 +84,7 @@ Manage server databases and users.
 - [Delete Database](/docs/api/client/databases#delete-database) - Remove databases
 
 ### Scheduled Tasks
+
 Automate server operations with schedules.
 
 - [List Schedules](/docs/api/client/schedules) - View all scheduled tasks
@@ -88,6 +95,7 @@ Automate server operations with schedules.
 - [Execute Schedule](/docs/api/client/schedules#execute-schedule) - Manually trigger schedules
 
 ### Network & Allocations
+
 Manage server network allocations and ports.
 
 - [List Allocations](/docs/api/client/network) - View server allocations
@@ -96,6 +104,7 @@ Manage server network allocations and ports.
 - [Allocation Notes](/docs/api/client/network#update-allocation-notes) - Add notes to allocations
 
 ### User Management
+
 Manage subusers and permissions on servers.
 
 - [List Users](/docs/api/client/users) - View server subusers
@@ -104,7 +113,8 @@ Manage subusers and permissions on servers.
 - [Remove Subuser](/docs/api/client/users#remove-subuser) - Remove subusers
 
 ### Backups
-*(Available in some Pterodactyl installations)*
+
+_(Available in some Pterodactyl installations)_
 
 - [List Backups](/docs/api/client/backups) - View server backups
 - [Create Backup](/docs/api/client/backups#create-backup) - Generate new backups
@@ -116,25 +126,33 @@ Manage subusers and permissions on servers.
 Many endpoints support these optional parameters:
 
 ### Include Parameters
+
 Expand related resources in the response:
+
 ```
 ?include=egg,subusers,allocations
 ```
 
 ### Pagination
+
 For list endpoints:
+
 ```
 ?page=2&per_page=50
 ```
 
 ### Filtering
+
 Filter results by specific criteria:
+
 ```
 ?filter[name]=minecraft&filter[uuid]=1a7ce997
 ```
 
 ### Sorting
+
 Sort results by specific fields:
+
 ```
 ?sort=-created_at&sort=name
 ```
@@ -144,6 +162,7 @@ Sort results by specific fields:
 All API responses follow this structure:
 
 ### Single Resource
+
 ```json
 {
   "object": "server",
@@ -157,9 +176,10 @@ All API responses follow this structure:
 ```
 
 ### Resource Collection
+
 ```json
 {
-  "object": "list", 
+  "object": "list",
   "data": [
     {
       "object": "server",
@@ -189,6 +209,7 @@ All API responses follow this structure:
    - Copy the generated key
 
 2. **Make Your First Request**
+
    ```bash
    curl "https://your-panel.com/api/client" \
      -H "Authorization: Bearer YOUR_CLIENT_API_KEY" \
@@ -224,4 +245,4 @@ For detailed source code references, see our [Source References Guide](/docs/sou
 
 - Start with [Account Management](/docs/api/client/account) to test your API key
 - Explore [Server Management](/docs/api/client/servers) for basic server operations
-- Review [Authentication](/docs/authentication) for security best practices 
+- Review [Authentication](/docs/authentication) for security best practices

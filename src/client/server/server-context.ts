@@ -54,20 +54,17 @@ export class ServerContext {
   }
 
   async getWebSocketCredentials(): Promise<WebSocketCredentials> {
-    return this.http.get<WebSocketCredentials>(`${this.base}/websocket`);
+    const response = await this.http.raw('GET', `${this.base}/websocket`);
+    const json = (await response.json()) as { data: WebSocketCredentials };
+    return json.data;
   }
 
   async listStartupVariables(): Promise<StartupVariable[]> {
-    const result = await this.http.getList<StartupVariable>(
-      `${this.base}/startup`,
-    );
+    const result = await this.http.getList<StartupVariable>(`${this.base}/startup`);
     return result.data;
   }
 
-  async updateStartupVariable(
-    key: string,
-    value: string,
-  ): Promise<StartupVariable> {
+  async updateStartupVariable(key: string, value: string): Promise<StartupVariable> {
     return this.http.put<StartupVariable>(`${this.base}/startup/variable`, {
       key,
       value,
