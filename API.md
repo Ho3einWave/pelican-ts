@@ -1,11 +1,11 @@
-# pterodactyl-ts API Reference
+# pelican-ts API Reference
 
-TypeScript SDK for the Pterodactyl panel. Two entry points: `PteroClient` (user API, `ptlc_` key) and `PteroApplication` (admin API, `ptla_` key). Plus `WebSocketManager` for real-time console/stats.
+TypeScript SDK for the Pelican panel. Two entry points: `PteroClient` (user API, `ptlc_` key) and `PteroApplication` (admin API, `ptla_` key). Plus `WebSocketManager` for real-time console/stats.
 
 ## Quick Start
 
 ```ts
-import { PteroClient, PteroApplication, WebSocketManager } from "pterodactyl-ts";
+import { PteroClient, PteroApplication, WebSocketManager } from "pelican-ts";
 
 // Client API
 const client = new PteroClient({ baseUrl: "https://panel.example.com", apiKey: "ptlc_..." });

@@ -1,23 +1,23 @@
 {
-  "name": "@ho3einwave/pterodactyl-ts",
+  "name": "@ho3einwave/pelican-ts",
   "type": "module",
   "version": "0.1.1",
-  "description": "Type-safe TypeScript library for the Pterodactyl Panel API. Covers Client API, Application API, and WebSocket API with zero dependencies.",
+  "description": "Type-safe TypeScript library for the Pelican Panel API. Covers Client API, Application API, and WebSocket API with zero dependencies.",
   "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ho3einWave/pterodactyl-ts"
+    "url": "https://github.com/Ho3einWave/pelican-ts"
   },
   "keywords": [
-    "pterodactyl",
+    "pelican",
     "panel",
     "api",
     "typescript",
     "game-server",
     "websocket",
-    "pterodactyl-api",
-    "pterodactyl-panel"
+    "pelican-api",
+    "pelican-panel"
   ],
   "engines": {
     "node": ">=20.0.0"
