@@ -6,8 +6,8 @@
 
 Type-safe TypeScript library for the [Pelican Panel](https://pelican.dev/) API. Zero dependencies.
 
-- **Client API** (`PteroClient`) - Account, servers, files, databases, backups, schedules, network, subusers
-- **Application API** (`PteroApplication`) - Users, servers, nodes, locations, nests/eggs (admin)
+- **Client API** (`PelicanClient`) - Account, servers, files, databases, backups, schedules, network, subusers
+- **Application API** (`PelicanApplication`) - Users, servers, nodes, eggs, database hosts, mounts, roles (admin)
 - **WebSocket API** (`WebSocketManager`) - Real-time console, stats, status with auto-reconnect
 
 ## Install
@@ -16,12 +16,16 @@ Type-safe TypeScript library for the [Pelican Panel](https://pelican.dev/) API. 
 npm install @ho3einwave/pelican-ts
 ```
 
-## Client API
+## Quick Start
+
+### Client API
+
+The Client API uses a **client API key** (prefix `ptlc_`) and gives access to the user-facing endpoints: account management, server operations, files, databases, backups, schedules, etc.
 
 ```ts
-import { PteroClient } from '@ho3einwave/pelican-ts';
+import { PelicanClient } from '@ho3einwave/pelican-ts';
 
-const client = new PteroClient({
+const client = new PelicanClient({
   baseUrl: 'https://panel.example.com',
   apiKey: 'ptlc_...',
 });
@@ -56,14 +60,19 @@ const newDb = await srv.databases.create({ database: 'mydb', remote: '%' });
 
 // Schedules
 const schedules = await srv.schedules.list();
+
+// Permissions
+const permissions = await client.getPermissions();
 ```
 
-## Application API
+### Application API
+
+The Application API uses an **application API key** (prefix `ptla_`) and provides admin-level access: managing users, servers, nodes, eggs, database hosts, mounts, and roles.
 
 ```ts
-import { PteroApplication } from '@ho3einwave/pelican-ts';
+import { PelicanApplication } from '@ho3einwave/pelican-ts';
 
-const app = new PteroApplication({
+const app = new PelicanApplication({
   baseUrl: 'https://panel.example.com',
   apiKey: 'ptla_...',
 });
@@ -73,8 +82,6 @@ const { data: users } = await app.users.list();
 const user = await app.users.create({
   email: 'user@example.com',
   username: 'newuser',
-  first_name: 'New',
-  last_name: 'User',
 });
 
 // Servers
@@ -85,20 +92,25 @@ await app.servers.unsuspend(1);
 // Nodes
 const { data: nodes } = await app.nodes.list();
 
-// Locations
-const { data: locations } = await app.locations.list();
+// Eggs (top-level in Pelican)
+const { data: eggs } = await app.eggs.list();
 
-// Nests & Eggs
-const { data: nests } = await app.nests.list();
-const { data: eggs } = await app.nests.listEggs(1);
+// Database Hosts
+const { data: dbHosts } = await app.databaseHosts.list();
+
+// Mounts
+const { data: mounts } = await app.mounts.list();
+
+// Roles
+const { data: roles } = await app.roles.list();
 ```
 
-## WebSocket
+### WebSocket
 
 ```ts
-import { PteroClient, WebSocketManager } from '@ho3einwave/pelican-ts';
+import { PelicanClient, WebSocketManager } from '@ho3einwave/pelican-ts';
 
-const client = new PteroClient({
+const client = new PelicanClient({
   baseUrl: 'https://panel.example.com',
   apiKey: 'ptlc_...',
 });
@@ -131,18 +143,18 @@ ws.disconnect();
 ## Error Handling
 
 ```ts
-import { PteroError, PteroValidationError, PteroRateLimitError } from '@ho3einwave/pelican-ts';
+import { PelicanError, PelicanValidationError, PelicanRateLimitError } from '@ho3einwave/pelican-ts';
 
 try {
   await app.users.create({
     /* ... */
   });
 } catch (err) {
-  if (err instanceof PteroValidationError) {
+  if (err instanceof PelicanValidationError) {
     console.log(err.fieldErrors); // { email: ['Must be valid email.'] }
-  } else if (err instanceof PteroRateLimitError) {
+  } else if (err instanceof PelicanRateLimitError) {
     console.log(`Retry after ${err.retryAfter}s`);
-  } else if (err instanceof PteroError) {
+  } else if (err instanceof PelicanError) {
     console.log(err.status, err.code, err.message);
   }
 }
@@ -161,6 +173,10 @@ const { data, pagination } = await app.servers.list({
 
 console.log(`Page ${pagination.currentPage} of ${pagination.totalPages}`);
 ```
+
+## API Reference
+
+See [API.md](API.md) for the full API reference with all managers, methods, types, and parameters.
 
 ## License
 
