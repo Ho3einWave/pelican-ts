@@ -247,7 +247,7 @@ interface UpdateUserParams { email?: string; username?: string; password?: strin
 ```ts
 interface CreateServerParams {
   name: string; user: number; egg: number; docker_image?: string; startup?: string;
-  environment: string[];
+  environment: Record<string, string>;
   limits: { memory: number; swap: number; disk: number; io: number; cpu: number; threads?: string };
   feature_limits: { databases: number; allocations: number; backups: number };
   allocation: { default: string; additional?: string[] };
@@ -434,7 +434,7 @@ interface Subuser { uuid: string; username: string; email: string; image: string
 
 // Application
 interface AdminUser { id: number; external_id: string|null; uuid: string; username: string; email: string; language: string; timezone: string; '2fa': boolean; created_at: string; updated_at: string }
-interface AdminServer { id: number; external_id: string|null; uuid: string; identifier: string; name: string; description: string; status: string|null; suspended: boolean; limits: AdminServerLimits; feature_limits: AdminFeatureLimits; user: number; node: number; allocation: number; egg: number; container: {startup_command:string;image:string;installed:boolean;environment:string[]}; created_at: string; updated_at: string }
+interface AdminServer { id: number; external_id: string|null; uuid: string; identifier: string; name: string; description: string; status: string|null; suspended: boolean; limits: AdminServerLimits; feature_limits: AdminFeatureLimits; user: number; node: number; allocation: number; egg: number; container: {startup_command:string;image:string;installed:boolean;environment:Record<string,string>}; created_at: string; updated_at: string }
 interface AdminServerLimits { memory: number; swap: number; disk: number; io: number; cpu: number; threads: string|null; oom_killer: boolean }
 interface Node { id: number; uuid: string; public: boolean; name: string; description: string; fqdn: string; scheme: string; behind_proxy: boolean; maintenance_mode: boolean; memory: number; memory_overallocate: number; disk: number; disk_overallocate: number; cpu: number; cpu_overallocate: number; upload_size: number; daemon_listen: number; daemon_sftp: number; daemon_connect: number; daemon_sftp_alias: string|null; daemon_base: string; tags: string[]; created_at: string; updated_at: string; allocated_resources: {memory:number;disk:number} }
 interface NodeAllocation { id: number; ip: string; ip_alias: string|null; port: number; notes: string|null; assigned: boolean }

@@ -38,7 +38,7 @@ export interface AdminServerContainer {
   startup_command: string;
   image: string;
   installed: boolean;
-  environment: string[];
+  environment: Record<string, string>;
 }
 
 export interface CreateServerParams {
@@ -47,7 +47,7 @@ export interface CreateServerParams {
   egg: number;
   docker_image?: string;
   startup?: string;
-  environment: string[];
+  environment: Record<string, string>;
   limits: {
     memory: number;
     swap: number;
@@ -106,7 +106,7 @@ export interface UpdateServerBuildParams {
 
 export interface UpdateServerStartupParams {
   startup: string;
-  environment: string[];
+  environment: Record<string, string>;
   egg: number;
   image?: string;
   skip_scripts: boolean;
