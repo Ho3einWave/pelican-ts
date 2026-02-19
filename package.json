@@ -1,7 +1,7 @@
 {
   "name": "@ho3einwave/pelican-ts",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Type-safe TypeScript library for the Pelican Panel API. Covers Client API, Application API, and WebSocket API with zero dependencies.",
   "author": "",
   "license": "MIT",
