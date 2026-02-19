@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { PteroClient } from '../src/client/index.js';
+import { PelicanClient } from '../src/client/index.js';
 
-describe('PteroClient', () => {
+describe('PelicanClient', () => {
   it('should create with valid options', () => {
-    const client = new PteroClient({
+    const client = new PelicanClient({
       baseUrl: 'https://panel.example.com',
       apiKey: 'ptlc_testkey',
     });
@@ -13,7 +13,7 @@ describe('PteroClient', () => {
   });
 
   it('should create a server context', () => {
-    const client = new PteroClient({
+    const client = new PelicanClient({
       baseUrl: 'https://panel.example.com',
       apiKey: 'ptlc_testkey',
     });
@@ -28,7 +28,7 @@ describe('PteroClient', () => {
   });
 
   it('should return null rateLimit initially', () => {
-    const client = new PteroClient({
+    const client = new PelicanClient({
       baseUrl: 'https://panel.example.com',
       apiKey: 'ptlc_testkey',
     });

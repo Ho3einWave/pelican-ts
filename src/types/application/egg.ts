@@ -2,7 +2,6 @@ export interface Egg {
   id: number;
   uuid: string;
   name: string;
-  nest: number;
   author: string;
   description: string;
   docker_image: string;

@@ -5,9 +5,7 @@ import type {
   ActivityLog,
   ApiKey,
   ApiKeyWithSecret,
-  RecoveryTokens,
   SSHKey,
-  TwoFactorSetup,
 } from '../types/client/account.js';
 
 const BASE = '/api/client/account';
@@ -19,31 +17,16 @@ export class AccountManager {
     return this.http.get<Account>(BASE);
   }
 
-  async get2FASetup(): Promise<TwoFactorSetup> {
-    const response = await this.http.raw('GET', `${BASE}/two-factor`);
-    const json = (await response.json()) as { data: TwoFactorSetup };
-    return json.data;
+  async updateUsername(username: string): Promise<void> {
+    await this.http.put<void>(`${BASE}/username`, { username });
   }
 
-  async enable2FA(code: string): Promise<RecoveryTokens> {
-    return this.http.post<RecoveryTokens>(`${BASE}/two-factor`, { code });
+  async updateEmail(email: string): Promise<void> {
+    await this.http.put<void>(`${BASE}/email`, { email });
   }
 
-  async disable2FA(password: string): Promise<void> {
-    await this.http.post<void>(`${BASE}/two-factor/disable`, { password });
-  }
-
-  async updateEmail(email: string, password: string): Promise<void> {
-    await this.http.put<void>(`${BASE}/email`, { email, password });
-  }
-
-  async updatePassword(
-    currentPassword: string,
-    password: string,
-    passwordConfirmation: string,
-  ): Promise<void> {
+  async updatePassword(password: string, passwordConfirmation: string): Promise<void> {
     await this.http.put<void>(`${BASE}/password`, {
-      current_password: currentPassword,
       password,
       password_confirmation: passwordConfirmation,
     });

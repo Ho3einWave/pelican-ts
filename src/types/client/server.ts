@@ -32,7 +32,7 @@ export interface ServerLimits {
   io: number;
   cpu: number;
   threads: string | null;
-  oom_disabled?: boolean;
+  oom_killer?: boolean;
 }
 
 export interface FeatureLimits {

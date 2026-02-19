@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { HttpClient } from '../src/core/http-client.js';
-import { PteroError, PteroRateLimitError, PteroValidationError } from '../src/core/errors.js';
+import { PelicanError, PelicanRateLimitError, PelicanValidationError } from '../src/core/errors.js';
 
 function mockFetch(body: unknown, status = 200, headers: Record<string, string> = {}) {
   return vi.fn().mockResolvedValue({
@@ -48,7 +48,7 @@ describe('HttpClient', () => {
           method: 'GET',
           headers: expect.objectContaining({
             Authorization: 'Bearer ptlc_testkey123',
-            Accept: 'Application/vnd.pterodactyl.v1+json',
+            Accept: 'application/json',
           }),
         }),
       );
@@ -155,7 +155,7 @@ describe('HttpClient', () => {
   });
 
   describe('error handling', () => {
-    it('should throw PteroValidationError on 422', async () => {
+    it('should throw PelicanValidationError on 422', async () => {
       globalThis.fetch = mockFetch(
         {
           errors: [
@@ -170,10 +170,10 @@ describe('HttpClient', () => {
         422,
       );
 
-      await expect(client.get('/test')).rejects.toThrow(PteroValidationError);
+      await expect(client.get('/test')).rejects.toThrow(PelicanValidationError);
     });
 
-    it('should throw PteroRateLimitError on 429', async () => {
+    it('should throw PelicanRateLimitError on 429', async () => {
       globalThis.fetch = vi.fn().mockResolvedValue({
         ok: false,
         status: 429,
@@ -191,12 +191,12 @@ describe('HttpClient', () => {
         await client.get('/test');
         expect.unreachable('Should have thrown');
       } catch (err) {
-        expect(err).toBeInstanceOf(PteroRateLimitError);
-        expect((err as PteroRateLimitError).retryAfter).toBe(30);
+        expect(err).toBeInstanceOf(PelicanRateLimitError);
+        expect((err as PelicanRateLimitError).retryAfter).toBe(30);
       }
     });
 
-    it('should throw PteroError on other errors', async () => {
+    it('should throw PelicanError on other errors', async () => {
       globalThis.fetch = mockFetch(
         {
           errors: [{ code: 'NotFound', status: '404', detail: 'Not found' }],
@@ -204,7 +204,7 @@ describe('HttpClient', () => {
         404,
       );
 
-      await expect(client.get('/test')).rejects.toThrow(PteroError);
+      await expect(client.get('/test')).rejects.toThrow(PelicanError);
     });
   });
 

@@ -1,6 +1,6 @@
 import type { HttpClient } from '../../core/http-client.js';
 import type { PaginatedResult, RequestOptions } from '../../core/types.js';
-import type { Backup, CreateBackupParams } from '../../types/client/backup.js';
+import type { Backup, CreateBackupParams, RestoreBackupParams } from '../../types/client/backup.js';
 import type { SignedUrl } from '../../types/client/file.js';
 
 export class BackupManager {
@@ -34,8 +34,12 @@ export class BackupManager {
     await this.http.delete(`${this.base}/${backupId}`);
   }
 
-  async restore(backupId: string): Promise<void> {
-    await this.http.post<void>(`${this.base}/${backupId}/restore`);
+  async restore(backupId: string, params: RestoreBackupParams): Promise<void> {
+    await this.http.post<void>(`${this.base}/${backupId}/restore`, params);
+  }
+
+  async rename(backupId: string, name: string): Promise<void> {
+    await this.http.put<void>(`${this.base}/${backupId}/rename`, { name });
   }
 
   async toggleLock(backupId: string): Promise<void> {

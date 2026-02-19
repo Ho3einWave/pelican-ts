@@ -1,5 +1,5 @@
 // Client API
-export { PteroClient } from './client/index.js';
+export { PelicanClient } from './client/index.js';
 export { AccountManager } from './client/account-manager.js';
 export { ServersManager } from './client/servers-manager.js';
 export { ServerContext } from './client/server/server-context.js';
@@ -11,16 +11,18 @@ export { NetworkManager } from './client/server/network-manager.js';
 export { SubuserManager } from './client/server/subuser-manager.js';
 
 // Application API
-export { PteroApplication } from './application/index.js';
+export { PelicanApplication } from './application/index.js';
 export { UserManager } from './application/user-manager.js';
 export { ServerManager } from './application/server-manager.js';
 export { NodeManager } from './application/node-manager.js';
-export { LocationManager } from './application/location-manager.js';
-export { NestManager } from './application/nest-manager.js';
+export { EggManager } from './application/egg-manager.js';
+export { DatabaseHostManager } from './application/database-host-manager.js';
+export { MountManager } from './application/mount-manager.js';
+export { RoleManager } from './application/role-manager.js';
 
 // Core
 export { HttpClient } from './core/http-client.js';
-export { PteroError, PteroValidationError, PteroRateLimitError } from './core/errors.js';
+export { PelicanError, PelicanValidationError, PelicanRateLimitError } from './core/errors.js';
 export type {
   ClientOptions,
   RequestOptions,
@@ -36,8 +38,6 @@ export type {
 // Client types
 export type {
   Account,
-  TwoFactorSetup,
-  RecoveryTokens,
   ApiKey,
   ApiKeyWithSecret,
   SSHKey,
@@ -54,14 +54,14 @@ export type {
   PowerAction,
   WebSocketCredentials,
 } from './types/client/server.js';
-export type { FileObject, SignedUrl } from './types/client/file.js';
+export type { FileObject, SignedUrl, CompressionExtension } from './types/client/file.js';
 export type {
   Database,
   DatabaseHost,
   DatabaseRelationships,
   CreateDatabaseParams,
 } from './types/client/database.js';
-export type { Backup, CreateBackupParams } from './types/client/backup.js';
+export type { Backup, CreateBackupParams, RestoreBackupParams } from './types/client/backup.js';
 export type {
   Schedule,
   CronExpression,
@@ -86,17 +86,27 @@ export type {
   UpdateServerDetailsParams,
   UpdateServerBuildParams,
   UpdateServerStartupParams,
+  TransferServerParams,
 } from './types/application/server.js';
 export type { AdminDatabase, CreateAdminDatabaseParams } from './types/application/database.js';
 export type { Node, CreateNodeParams, UpdateNodeParams } from './types/application/node.js';
 export type { NodeAllocation, CreateAllocationParams } from './types/application/allocation.js';
-export type {
-  Location,
-  CreateLocationParams,
-  UpdateLocationParams,
-} from './types/application/location.js';
-export type { Nest } from './types/application/nest.js';
 export type { Egg, EggConfig, EggScript, EggVariable } from './types/application/egg.js';
+export type {
+  AdminDatabaseHost,
+  CreateDatabaseHostParams,
+  UpdateDatabaseHostParams,
+} from './types/application/database-host.js';
+export type {
+  Mount,
+  CreateMountParams,
+  UpdateMountParams,
+} from './types/application/mount.js';
+export type {
+  Role,
+  CreateRoleParams,
+  UpdateRoleParams,
+} from './types/application/role.js';
 
 // WebSocket
 export { WebSocketManager } from './websocket/websocket-manager.js';

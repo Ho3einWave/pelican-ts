@@ -1,7 +1,7 @@
 import type { RawApiError } from './types.js';
 
-/** Base error for all Pterodactyl API errors. */
-export class PteroError extends Error {
+/** Base error for all Pelican API errors. */
+export class PelicanError extends Error {
   /** HTTP status code. */
   readonly status: number;
   /** Machine-readable error code from the API. */
@@ -12,7 +12,7 @@ export class PteroError extends Error {
   constructor(status: number, errors: RawApiError[]) {
     const first = errors[0];
     super(first?.detail ?? `API error ${status}`);
-    this.name = 'PteroError';
+    this.name = 'PelicanError';
     this.status = status;
     this.code = first?.code ?? 'UnknownError';
     this.errors = errors;
@@ -20,13 +20,13 @@ export class PteroError extends Error {
 }
 
 /** Thrown on 422 validation errors. Includes per-field error details. */
-export class PteroValidationError extends PteroError {
+export class PelicanValidationError extends PelicanError {
   /** Map of field name to error messages. */
   readonly fieldErrors: Record<string, string[]>;
 
   constructor(errors: RawApiError[]) {
     super(422, errors);
-    this.name = 'PteroValidationError';
+    this.name = 'PelicanValidationError';
     this.fieldErrors = {};
     for (const err of errors) {
       if (err.source?.field) {
@@ -41,13 +41,13 @@ export class PteroValidationError extends PteroError {
 }
 
 /** Thrown on 429 rate limit errors. Includes retry timing info. */
-export class PteroRateLimitError extends PteroError {
+export class PelicanRateLimitError extends PelicanError {
   /** Seconds to wait before retrying (from Retry-After header). */
   readonly retryAfter: number;
 
   constructor(errors: RawApiError[], retryAfter: number) {
     super(429, errors);
-    this.name = 'PteroRateLimitError';
+    this.name = 'PelicanRateLimitError';
     this.retryAfter = retryAfter;
   }
 }

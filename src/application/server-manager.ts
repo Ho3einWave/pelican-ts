@@ -4,6 +4,7 @@ import type { AdminDatabase, CreateAdminDatabaseParams } from '../types/applicat
 import type {
   AdminServer,
   CreateServerParams,
+  TransferServerParams,
   UpdateServerBuildParams,
   UpdateServerDetailsParams,
   UpdateServerStartupParams,
@@ -60,6 +61,14 @@ export class ServerManager {
 
   async forceDelete(serverId: number): Promise<void> {
     await this.http.delete(`${BASE}/${serverId}/force`);
+  }
+
+  async transfer(serverId: number, params: TransferServerParams): Promise<void> {
+    await this.http.post<void>(`${BASE}/${serverId}/transfer`, params);
+  }
+
+  async cancelTransfer(serverId: number): Promise<void> {
+    await this.http.post<void>(`${BASE}/${serverId}/transfer/cancel`);
   }
 
   // Database sub-operations

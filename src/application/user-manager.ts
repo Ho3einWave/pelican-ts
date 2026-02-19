@@ -30,4 +30,12 @@ export class UserManager {
   async delete(userId: number): Promise<void> {
     await this.http.delete(`${BASE}/${userId}`);
   }
+
+  async assignRoles(userId: number, roles: number[]): Promise<void> {
+    await this.http.patch<void>(`${BASE}/${userId}/roles/assign`, { roles });
+  }
+
+  async removeRoles(userId: number, roles: number[]): Promise<void> {
+    await this.http.patch<void>(`${BASE}/${userId}/roles/remove`, { roles });
+  }
 }

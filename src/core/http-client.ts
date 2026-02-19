@@ -1,4 +1,4 @@
-import { PteroError, PteroRateLimitError, PteroValidationError } from './errors.js';
+import { PelicanError, PelicanRateLimitError, PelicanValidationError } from './errors.js';
 import type {
   ClientOptions,
   PaginatedResult,
@@ -85,24 +85,6 @@ export class HttpClient {
     return this.request(method, path, body, options);
   }
 
-  /** Make a request with a raw text body (Content-Type: text/plain). */
-  async postText(path: string, text: string, options?: RequestOptions): Promise<void> {
-    const url = this.buildUrl(path, options);
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${this.apiKey}`,
-        Accept: 'Application/vnd.pterodactyl.v1+json',
-        'Content-Type': 'text/plain',
-      },
-      body: text,
-    });
-    this.trackRateLimit(response);
-    if (!response.ok) {
-      await this.handleError(response);
-    }
-  }
-
   private async request(
     method: string,
     path: string,
@@ -112,7 +94,7 @@ export class HttpClient {
     const url = this.buildUrl(path, options);
     const headers: Record<string, string> = {
       Authorization: `Bearer ${this.apiKey}`,
-      Accept: 'Application/vnd.pterodactyl.v1+json',
+      Accept: 'application/json',
     };
 
     const init: RequestInit = { method, headers };
@@ -192,15 +174,15 @@ export class HttpClient {
     }
 
     if (response.status === 422) {
-      throw new PteroValidationError(errors);
+      throw new PelicanValidationError(errors);
     }
 
     if (response.status === 429) {
       const retryAfter = Number(response.headers.get('Retry-After') ?? '60');
-      throw new PteroRateLimitError(errors, retryAfter);
+      throw new PelicanRateLimitError(errors, retryAfter);
     }
 
-    throw new PteroError(response.status, errors);
+    throw new PelicanError(response.status, errors);
   }
 
   private unwrapList<T>(raw: RawList<T>): PaginatedResult<T> {

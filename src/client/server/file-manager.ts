@@ -1,5 +1,5 @@
 import type { HttpClient } from '../../core/http-client.js';
-import type { FileObject, SignedUrl } from '../../types/client/file.js';
+import type { CompressionExtension, FileObject, SignedUrl } from '../../types/client/file.js';
 
 export class FileManager {
   private readonly base: string;
@@ -25,8 +25,7 @@ export class FileManager {
   }
 
   async writeFile(file: string, content: string): Promise<void> {
-    const path = `${this.base}/write?file=${encodeURIComponent(file)}`;
-    await this.http.postText(path, content);
+    await this.http.post<void>(`${this.base}/write`, { file, content });
   }
 
   async getUploadUrl(directory = '/'): Promise<string> {
@@ -57,8 +56,16 @@ export class FileManager {
     await this.http.post<void>(`${this.base}/delete`, { root, files });
   }
 
-  async compress(root: string, files: string[]): Promise<FileObject> {
-    return this.http.post<FileObject>(`${this.base}/compress`, { root, files });
+  async compress(
+    root: string,
+    files: string[],
+    options?: { extension?: CompressionExtension; name?: string },
+  ): Promise<FileObject> {
+    return this.http.post<FileObject>(`${this.base}/compress`, {
+      root,
+      files,
+      ...options,
+    });
   }
 
   async decompress(root: string, file: string): Promise<void> {

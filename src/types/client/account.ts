@@ -3,18 +3,7 @@ export interface Account {
   admin: boolean;
   username: string;
   email: string;
-  first_name: string;
-  last_name: string;
   language: string;
-}
-
-export interface TwoFactorSetup {
-  image_url_data: string;
-  secret: string;
-}
-
-export interface RecoveryTokens {
-  tokens: string[];
 }
 
 export interface ApiKey {

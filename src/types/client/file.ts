@@ -13,3 +13,12 @@ export interface FileObject {
 export interface SignedUrl {
   url: string;
 }
+
+export type CompressionExtension =
+  | 'zip'
+  | 'tgz'
+  | 'tar.gz'
+  | 'txz'
+  | 'tar.xz'
+  | 'tbz2'
+  | 'tar.bz2';

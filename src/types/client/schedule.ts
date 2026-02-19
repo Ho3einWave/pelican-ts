@@ -34,7 +34,7 @@ export interface ScheduleTask {
   continue_on_failure: boolean;
 }
 
-export type ScheduleTaskAction = 'command' | 'power' | 'backup';
+export type ScheduleTaskAction = 'command' | 'power' | 'backup' | 'delete_files';
 
 export interface CreateScheduleParams {
   name: string;

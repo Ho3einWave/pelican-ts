@@ -12,7 +12,6 @@ export interface AdminServer {
   user: number;
   node: number;
   allocation: number;
-  nest: number;
   egg: number;
   container: AdminServerContainer;
   created_at: string;
@@ -26,7 +25,7 @@ export interface AdminServerLimits {
   io: number;
   cpu: number;
   threads: string | null;
-  oom_disabled: boolean;
+  oom_killer: boolean;
 }
 
 export interface AdminFeatureLimits {
@@ -39,7 +38,7 @@ export interface AdminServerContainer {
   startup_command: string;
   image: string;
   installed: boolean;
-  environment: Record<string, string>;
+  environment: string[];
 }
 
 export interface CreateServerParams {
@@ -48,7 +47,7 @@ export interface CreateServerParams {
   egg: number;
   docker_image?: string;
   startup?: string;
-  environment?: Record<string, string>;
+  environment: string[];
   limits: {
     memory: number;
     swap: number;
@@ -56,7 +55,6 @@ export interface CreateServerParams {
     io: number;
     cpu: number;
     threads?: string;
-    oom_disabled?: boolean;
   };
   feature_limits: {
     databases: number;
@@ -64,33 +62,38 @@ export interface CreateServerParams {
     backups: number;
   };
   allocation: {
-    default: number;
-    additional?: number[];
+    default: string;
+    additional?: string[];
   };
   deploy?: {
-    locations: number[];
     dedicated_ip: boolean;
     port_range: string[];
+    tags?: string[];
   };
   description?: string;
   external_id?: string;
+  skip_scripts?: boolean;
+  oom_killer?: boolean;
+  start_on_completion?: boolean;
 }
 
 export interface UpdateServerDetailsParams {
-  name?: string;
-  user?: number;
+  name: string;
+  user: number;
   external_id?: string;
   description?: string;
 }
 
 export interface UpdateServerBuildParams {
-  allocation: number;
-  memory: number;
-  swap: number;
-  disk: number;
-  io: number;
-  cpu: number;
-  threads?: string;
+  allocation?: number | null;
+  limits?: {
+    memory: number;
+    swap: number;
+    disk: number;
+    io: number;
+    cpu: number;
+    threads?: string;
+  };
   feature_limits: {
     databases: number;
     allocations: number;
@@ -98,13 +101,19 @@ export interface UpdateServerBuildParams {
   };
   add_allocations?: number[];
   remove_allocations?: number[];
-  oom_disabled?: boolean;
+  oom_killer?: boolean;
 }
 
 export interface UpdateServerStartupParams {
   startup: string;
-  environment: Record<string, string>;
+  environment: string[];
   egg: number;
   image?: string;
-  skip_scripts?: boolean;
+  skip_scripts: boolean;
+}
+
+export interface TransferServerParams {
+  node_id: number;
+  allocation_id: number;
+  allocation_additional?: number[];
 }

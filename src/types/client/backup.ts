@@ -15,3 +15,7 @@ export interface CreateBackupParams {
   ignored?: string;
   is_locked?: boolean;
 }
+
+export interface RestoreBackupParams {
+  truncate: boolean;
+}

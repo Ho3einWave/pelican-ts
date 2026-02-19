@@ -1,5 +1,6 @@
 import type { HttpClient } from '../../core/http-client.js';
-import type { RequestOptions } from '../../core/types.js';
+import type { PaginatedResult, RequestOptions } from '../../core/types.js';
+import type { ActivityLog } from '../../types/client/account.js';
 import type {
   PowerAction,
   Server,
@@ -45,6 +46,13 @@ export class ServerContext {
     return this.http.get<ServerResources>(`${this.base}/resources`);
   }
 
+  async getActivity(options?: {
+    page?: number;
+    perPage?: number;
+  }): Promise<PaginatedResult<ActivityLog>> {
+    return this.http.getList<ActivityLog>(`${this.base}/activity`, options);
+  }
+
   async sendCommand(command: string): Promise<void> {
     await this.http.post<void>(`${this.base}/command`, { command });
   }
@@ -73,6 +81,16 @@ export class ServerContext {
 
   async rename(name: string): Promise<void> {
     await this.http.post<void>(`${this.base}/settings/rename`, { name });
+  }
+
+  async updateDescription(description: string): Promise<void> {
+    await this.http.post<void>(`${this.base}/settings/description`, { description });
+  }
+
+  async setDockerImage(dockerImage: string): Promise<void> {
+    await this.http.put<void>(`${this.base}/settings/docker-image`, {
+      docker_image: dockerImage,
+    });
   }
 
   async reinstall(): Promise<void> {
