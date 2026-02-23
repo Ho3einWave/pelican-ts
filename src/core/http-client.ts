@@ -100,8 +100,13 @@ export class HttpClient {
     const init: RequestInit = { method, headers };
 
     if (body !== undefined) {
-      headers['Content-Type'] = 'application/json';
-      init.body = JSON.stringify(body);
+      if (options?.contentType) {
+        headers['Content-Type'] = options.contentType;
+        init.body = typeof body === 'string' ? body : JSON.stringify(body);
+      } else {
+        headers['Content-Type'] = 'application/json';
+        init.body = JSON.stringify(body);
+      }
     }
 
     const response = await fetch(url, init);

@@ -18,6 +18,8 @@ export interface RequestOptions {
   page?: number;
   /** Number of items per page. */
   perPage?: number;
+  /** Override the Content-Type header. When set, string bodies are sent as-is without JSON serialization. */
+  contentType?: string;
 }
 
 /** Raw API envelope for a single object. */

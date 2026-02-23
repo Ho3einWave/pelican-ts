@@ -12,9 +12,8 @@ export class FileManager {
   }
 
   async list(directory = '/'): Promise<FileObject[]> {
-    const result = await this.http.getList<FileObject>(`${this.base}/list`, {
-      filters: { directory },
-    });
+    const path = `${this.base}/list?directory=${encodeURIComponent(directory)}`;
+    const result = await this.http.getList<FileObject>(path);
     return result.data;
   }
 
@@ -25,7 +24,8 @@ export class FileManager {
   }
 
   async writeFile(file: string, content: string): Promise<void> {
-    await this.http.post<void>(`${this.base}/write`, { file, content });
+    const path = `${this.base}/write?file=${encodeURIComponent(file)}`;
+    await this.http.raw('POST', path, content, { contentType: 'text/plain' });
   }
 
   async getUploadUrl(directory = '/'): Promise<string> {
