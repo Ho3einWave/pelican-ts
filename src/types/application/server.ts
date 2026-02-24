@@ -5,7 +5,7 @@ export interface AdminServer {
   identifier: string;
   name: string;
   description: string;
-  status: string | null;
+  status: ('installing' | 'suspended' | 'restoring_backup' | 'transferring') | null;
   suspended: boolean;
   limits: AdminServerLimits;
   feature_limits: AdminFeatureLimits;

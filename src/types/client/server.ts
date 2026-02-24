@@ -13,7 +13,7 @@ export interface Server {
   docker_image: string;
   egg_features: string[];
   feature_limits: FeatureLimits;
-  status: string | null;
+  status: ('installing' | 'suspended' | 'restoring_backup' | 'transferring') | null;
   is_suspended: boolean;
   is_installing: boolean;
   is_transferring: boolean;
